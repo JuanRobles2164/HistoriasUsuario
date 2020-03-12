@@ -11,13 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+use Illuminate\Support\Facades\Route;
+
+Route::get('/login', 'Login@onGetLogin')->name('getLogin');
+Route::post('/login', 'Login@onPostLogin')->name('postLogin');
+Route::prefix('welcome')->group(function() {
+    Route::get('/','Welcome@onGetWelcome')->name('getWelcome');
 });
-
-// {CONTROLLER}/{METHOD}/{ID?}
-
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

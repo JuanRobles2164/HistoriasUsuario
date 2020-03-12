@@ -13,22 +13,26 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('role', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('abreviatura', 15)->unique();
             $table->string('nombre');
+            $table->string('descripcion',1024);
+            $table->dateTime('creado_en');
+            $table->dateTime('modificado_en');
+            $table->dateTime('eliminado_en');
+            $table->tinyInteger('estado_eliminado');
         });
-        Schema::create('users', function (Blueprint $table) {
+
+        Schema::create('usuarios', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('email', 50)->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->unsignedBigInteger('user_role_fk');
-            $table->rememberToken();
-            $table->timestamps();
-            
-            $table->foreign('user_role_fk')
-                ->references('id')->on('role');
+            $table->string('nombre')->unique();
+            $table->string('contrasenia');
+            $table->string('e_mail')->unique();
+            $table->dateTime('creado_en');
+            $table->dateTime('modificado_en');
+            $table->dateTime('eliminado_en');
+            $table->tinyInteger('estado_eliminado');
         });
     }
 
@@ -39,6 +43,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('roles');
+        Schema::dropIfExists('usuarios');
     }
 }

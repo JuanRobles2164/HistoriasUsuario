@@ -2,6 +2,9 @@
 
 return [
 
+    /* Custom Items */
+    'session-time-minutes' => 30,
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
