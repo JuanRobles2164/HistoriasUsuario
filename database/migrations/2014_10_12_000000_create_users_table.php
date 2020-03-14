@@ -30,11 +30,14 @@ class CreateUsersTable extends Migration
 
         Schema::create('usuarios', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre')->unique();
+            $table->string('nombres');
+            $table->string('apellidos');
+            $table->string('username', 50)->unique();
             $table->string('contrasenia');
-            $table->string('e_mail')->unique();
+            $table->string('identificacion', 50)->unique();
+            $table->string('e_mail', 50)->unique();
             $table->unsignedBigInteger('rol_id');
-            $table->unsignedBigInteger('usuario_crea');
+            //$table->unsignedBigInteger('usuario_crea');
             $table->dateTime('creado_en')->default(new Expression('CURRENT_TIMESTAMP'));
             $table->unsignedBigInteger('usuario_modifica');
             $table->dateTime('modificado_en')->default(new Expression('CURRENT_TIMESTAMP'));
@@ -43,8 +46,8 @@ class CreateUsersTable extends Migration
             $table->foreign('rol_id')->references('id')->on('roles');
         });
 
-        DB::insert("INSERT INTO `historiasusuario`.`roles`(`abreviatura`, `nombre`, `descripcion`, `usuario_crea`, `creado_en`, `usuario_modifica`, `modificado_en`, `eliminado_en`, `estado_eliminado`) VALUES ('SAMD', 'SUPER ADMIN', 'ROL SUPREMO', 0, '2020-03-11 21:55:29', 0, '2020-03-11 21:55:29', NULL, 0);");
-        DB::insert("INSERT INTO `historiasusuario`.`usuarios`(`nombre`, `contrasenia`, `e_mail`, `rol_id`, `usuario_crea`, `creado_en`, `usuario_modifica`, `modificado_en`, `eliminado_en`, `estado_eliminado`) VALUES ('JUANROBLES', 'ek0fJgfe1Y0APDAncbPjzsPMgL8PLphypGNStDzeYhBQ/Y4W0sAbSTdQLhMbmvgCb9rrB9vZkGZZP9z20aOQ31', 'jrobles4@udi.edu.co', 1, 0, '2020-03-11 22:00:46', 0, '2020-03-11 22:00:46', NULL, 0);");
+        /*DB::insert("INSERT INTO `historiasusuario`.`roles`(`abreviatura`, `nombre`, `descripcion`, `usuario_crea`, `creado_en`, `usuario_modifica`, `modificado_en`, `eliminado_en`, `estado_eliminado`) VALUES ('SAMD', 'SUPER ADMIN', 'ROL SUPREMO', 0, '2020-03-11 21:55:29', 0, '2020-03-11 21:55:29', NULL, 0);");
+        DB::insert("INSERT INTO `historiasusuario`.`usuarios`(`nombre`, `contrasenia`, `e_mail`, `rol_id`, `usuario_crea`, `creado_en`, `usuario_modifica`, `modificado_en`, `eliminado_en`, `estado_eliminado`) VALUES ('JUANROBLES', 'ek0fJgfe1Y0APDAncbPjzsPMgL8PLphypGNStDzeYhBQ/Y4W0sAbSTdQLhMbmvgCb9rrB9vZkGZZP9z20aOQ31', 'jrobles4@udi.edu.co', 1, 0, '2020-03-11 22:00:46', 0, '2020-03-11 22:00:46', NULL, 0);");*/
     }
 
     /**
