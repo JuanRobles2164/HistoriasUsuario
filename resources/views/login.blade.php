@@ -51,12 +51,13 @@
                             @csrf
                             <div class="form-group">
                                 <label for="nombre">Nombre De Usuario</label>
-                                <input type="text" name="nombre" id="nombre" class="form-control">
+                                <input type="text" name="username" id="username" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="contrasenia">Contraseña de usuario</label>
                                 <input type="password" name="contrasenia" id="contrasenia" class="form-control">
                             </div>
+                            <a href="{{route('registro')}}" class="btn btn-info float-left">Registrarse</a>
                             <button type="submit" class="btn btn-primary float-right">Ingresar</button>
                         </form>
                     </div>

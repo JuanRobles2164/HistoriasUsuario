@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Logeado!</h2>
+    <h1>Plantilla de registro</h1>
 </body>
 </html>
