@@ -38,7 +38,7 @@ class Authenticate extends Middleware
         $tologin = false;
         try {
             if ($usuario) {
-                $usuario = Crypt::decryptString($usuario);
+                //$usuario = Crypt::decryptString($usuario);
                 if (strpos($usuario, ":123")) {
                     $usuario = substr($usuario, 7, -2);
                 }
@@ -57,7 +57,7 @@ class Authenticate extends Middleware
                 }
             }
         } catch (Exception $e) {
-            $tologin = true;
+            $tologin = false;
         }
         if ($tologin) {
             return redirect()->route('getLogin')->cookie(cookie('initSession', true))->cookie(cookie('usuario', null));
@@ -65,7 +65,7 @@ class Authenticate extends Middleware
             if ($usuario) {
                 $usuario->token = Str::random(80);
                 Cache::put($usuario->nombre, $usuario, $time*60);
-                return $next($request)->cookie(cookie('usuario', Crypt::encrypt(json_encode($usuario))));
+                return $next($request)->cookie(cookie('usuario', json_encode($usuario)));
             } else {
                 $response = $next($request);
                 return $response->cookie(cookie('initSession', null));
