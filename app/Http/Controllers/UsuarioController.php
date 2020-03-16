@@ -14,12 +14,17 @@ use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
 {
+    /**Devuelve la vista de Login */
     public function onGetLogin(Request $request){
         return view('Login');
     }
+    /**Devuelve la vista de registro */
     public function index(){
         return view('Contents/Registro');
     }
+    /**Prepara todos los datos que se necesitan de los usuarios
+     * para poder registrarlos en el sistema
+     */
     public function registrar(Request $request){
         $usuario = new usuario();
         $usuario->nombres = $request->nombres;
@@ -28,16 +33,23 @@ class UsuarioController extends Controller
         $usuario->email = $request->email;
         $usuario->contrasenia = Funciones::cifrarClave($request->clave);
         $usuario->identificacion = $request->identificacion;
+        $usuario->rol_id = $request->rol;
         UsuarioDao::registrar($usuario);
-        return view('AwaitingConfirmation');
+        return back();
     }
+    /**Recoje todos los datos de un usuario para poder darle
+     * acceso al sistema
+     * Y redirije de acuerdo a la view 
+     * que le corresponda
+     */
     public function onPostLogin(Request $request){
+        return $request;
         $usuario = new usuario();
         $usuario->email = $request->username;
         $usuario->username = $request->username;
         $usuario->contrasenia = $request->contrasenia;
 
-        $usuarioAuth = loginDao::validaUsuario($usuario);
+        $usuarioAuth = UsuarioDao::validaUsuario($usuario);
         if($usuarioAuth != null){
             $time = config()->get('app')['session-time-minutes'];
             Cache::put($usuarioAuth->nombres, $usuarioAuth, $time*60);
