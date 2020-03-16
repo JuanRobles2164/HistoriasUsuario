@@ -13,8 +13,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/login', 'Login@onGetLogin')->name('getLogin');
-Route::post('/login', 'Login@onPostLogin')->name('postLogin');
+Route::get('/login', 'UsuarioController@onGetLogin')->name('getLogin');
+Route::post('/login', 'UsuarioController@onPostLogin')->name('postLogin');
 
 Route::get('/layout', function(){
     return view('AwaitingConfirmation');

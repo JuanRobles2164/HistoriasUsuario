@@ -3,7 +3,6 @@
 namespace App\Http\Daos;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\usuario;
 
@@ -21,4 +20,5 @@ class UsuarioDao extends Controller
         ."'$usuario->e_mail')";
         DB::insert($SQL);
     }
+
 }
