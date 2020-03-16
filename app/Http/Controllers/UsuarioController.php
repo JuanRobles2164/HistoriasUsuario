@@ -43,7 +43,6 @@ class UsuarioController extends Controller
      * que le corresponda
      */
     public function onPostLogin(Request $request){
-        return $request;
         $usuario = new usuario();
         $usuario->email = $request->username;
         $usuario->username = $request->username;
