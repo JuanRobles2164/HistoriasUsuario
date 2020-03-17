@@ -71,4 +71,16 @@ class UsuarioController extends Controller
             return view('Login');
         }
     }
+    public function editar(Request $request){
+        $usuario = new usuario();
+        $usuario->id = $request->id;
+        $usuario->nombres = $request->nombres;
+        $usuario->apellidos = $request->apellidos;
+        $usuario->identificacion = $request->identificacion;
+        $usuario->email = $request->e_mail;
+        $usuario->username = $request->username;
+        $usuario->contrasenia = Funciones::cifrarClave($request->contrasenia);
+        UsuarioDao::editarUsuario($usuario);
+        return back();
+    }
 }

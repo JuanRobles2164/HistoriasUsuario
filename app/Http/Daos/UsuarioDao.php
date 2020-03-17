@@ -14,7 +14,8 @@ class UsuarioDao extends Controller
      */
     public static function getByRole($rol){
         $usuarios = DB::table('usuarios')
-        ->where('rol_id', $rol);
+        ->where('rol_id', $rol)
+        ->orderBy('estado_eliminado');
         return $usuarios;
     }
     /**Obtiene el usuario que posea
@@ -23,6 +24,15 @@ class UsuarioDao extends Controller
     public static function getById($id){
         $usuario = DB::table('usuarios')
         ->where('id', $id)
+        ->first();
+        return $usuario;
+    }
+    /**Obtiene el usuario 
+     * asociado al correo
+     */
+    public static function getByEmail($email){
+        $usuario = DB::table('usuarios')
+        ->where('e_mail', $email)
         ->first();
         return $usuario;
     }
@@ -56,6 +66,19 @@ class UsuarioDao extends Controller
             return $usuarioQuery;
         }
         return null;
+    }
+    public static function editarUsuario(usuario $usuario){
+        $SQL = "UPDATE usuarios "
+        ."SET "
+        ."nombres='$usuario->nombres', "
+        ."apellidos='$usuario->apellidos', "
+        ."username='$usuario->username', "
+        ."contrasenia='$usuario->contrasenia', "
+        ."identificacion='$usuario->identificacion', "
+        ."e_mail='$usuario->email', "
+        ."modificado_en=CURRENT_TIMESTAMP "
+        ."WHERE id='$usuario->id' ";
+        DB::update($SQL);
     }
 
 }

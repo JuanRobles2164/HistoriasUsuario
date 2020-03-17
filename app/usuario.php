@@ -28,6 +28,7 @@ class usuario extends Model
         $this->username = $username;
         $this->contrasenia = $contrasenia;
         $this->email = $email;
+        $this->rol_id = $rol_id;
     }
 
 
