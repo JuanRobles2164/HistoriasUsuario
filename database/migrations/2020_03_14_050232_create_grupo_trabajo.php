@@ -17,7 +17,7 @@ class CreateGrupoTrabajo extends Migration
             $table->bigIncrements('id');
             $table->string('nombre');
             $table->string('descripcion');
-            $table->string('estado');
+            $table->tinyInteger('estado_activo');
             $table->unsignedBigInteger('id_proyecto');
             $table->timestamps();
 

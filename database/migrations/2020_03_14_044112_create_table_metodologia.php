@@ -17,6 +17,7 @@ class CreateTableMetodologia extends Migration
             $table->bigIncrements('id');
             $table->string('nombre');
             $table->string('descripcion');
+            $table->tinyInteger('estado_eliminado');
             $table->timestamps();
         });
     }
