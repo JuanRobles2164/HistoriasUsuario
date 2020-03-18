@@ -11,7 +11,7 @@
 	<img class="wave" src="{{URL::asset('Images/Backgrounds/wave.jpg')}}">
 	<div class="container">
 		<div class="img">
-        <img src="{{URL::asset('Images/Resources/logo-udi-web.png')}}">
+        	<img src="{{URL::asset('Images/Resources/logo-udi-web.png')}}">
 		</div>
 		<div class="login-content">
             <form action="{{route('postLogin')}}" method="POST">
