@@ -26,8 +26,12 @@ Route::prefix('welcome')->group(function() {
     Route::get('/','Welcome@onGetWelcome')->name('getWelcome');
 });
 
+Route::get('/administrador', 'AdministradorController@index')->name('admin.getIndex');
+Route::get('/administrador/crear_usuario', 'AdministradorController@getCreate')->name('admin.getCreate');
+Route::post('/administrador/crear_usuario', 'AdministradorController@postCreate')->name('admin.postCreate');
+
 
 //Enrutado para hacer pruebas con las vistas, puede cambiarse cuando desee
 Route::get('/test', function(){
-    return view('Home-admin');
+    return view('Contents/Admin/indexAdmin');
 })->name('test');

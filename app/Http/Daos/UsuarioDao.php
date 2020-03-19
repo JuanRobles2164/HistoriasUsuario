@@ -18,15 +18,17 @@ class UsuarioDao extends Controller
     /**Registra un usuario */
     public static function registrar(usuario $usuario){
         $SQL = "INSERT INTO "
-        ."usuarios(nombres, apellidos, username, contrasenia, identificacion, e_mail, rol_id) "
+        ."usuarios(nombres, apellidos, username, contrasenia, identificacion, e_mail, rol_id, usuario_modifica, estado_eliminado) "
         ."VALUES "
         ."('$usuario->nombres', "
         ."'$usuario->apellidos', "
         ."'$usuario->username', "
         ."'$usuario->contrasenia', "
         ."'$usuario->identificacion',"
-        ."'$usuario->e_mail',"
-        ."'$usuario->rol_id')";
+        ."'$usuario->email',"
+        ."'$usuario->rol_id',"
+        ."'$usuario->usuario_modifica',"
+        ."'$usuario->estado_eliminado')";
         DB::insert($SQL);
     }
     /**Verifica la existencia de un usuario 

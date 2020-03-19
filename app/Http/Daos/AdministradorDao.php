@@ -32,5 +32,9 @@ class AdministradorDao extends Controller
         ->orderBy('estado_eliminado');
         return $usuarios;
     }
+    public static function getRoles(){
+        $roles = DB::table('roles')->get();
+        return $roles;
+    }
 
 }

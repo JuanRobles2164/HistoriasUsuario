@@ -55,13 +55,10 @@
 							<a href="#" class="nav-btn-submenu"><i class="fas fa-users"></i> &nbsp; Usuarios <i class="fas fa-chevron-down"></i></a>
 							<ul>
 								<li>
-									<a href="user-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo usuario</a>
+								<a href="{{route('admin.getCreate')}}"><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo usuario</a>
 								</li>
 								<li>
 									<a href="user-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de usuarios</a>
-								</li>
-								<li>
-									<a href="user-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar usuario</a>
 								</li>
 							</ul>
 						</li>
@@ -84,15 +81,10 @@
 				</a>
 			</nav>
 
-			<!-- cabezera de pagina -->
-			<div class="full-box page-header">
-				<h3 class="text-left">
-					<i class="fas fa-store-alt"></i> INICIO
-				</h3>
-				<p class="text-justify">
-					Hola, bienvenido aca podras administrar cómodamente los parámetros y usuarios que asi desee. © 2020 Copyright: GEA Software
-				</p>
+			<div class="container">
+				@yield('contenido')
 			</div>
+			
 			
 			<!-- Contenido -->
 			<div class="full-box tile-container">
