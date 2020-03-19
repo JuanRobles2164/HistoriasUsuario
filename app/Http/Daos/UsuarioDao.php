@@ -14,7 +14,10 @@ class UsuarioDao extends Controller
      * asociado al correo
      */
 
-
+    public static function getAllRoles(){
+        $roles = DB::table('roles')->get();
+        return $roles;
+    }
     /**Registra un usuario */
     public static function registrar(usuario $usuario){
         $SQL = "INSERT INTO "

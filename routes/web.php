@@ -19,7 +19,7 @@ Route::post('/login', 'UsuarioController@onPostLogin')->name('postLogin');
 Route::get('/layout', function(){
     return view('AwaitingConfirmation');
 })->name('LA');
-Route::get('/registro', 'UsuarioController@index')->name('registro');
+Route::get('/registro', 'UsuarioController@getRegistro')->name('registro');
 
 
 Route::prefix('welcome')->group(function() {
@@ -29,6 +29,7 @@ Route::prefix('welcome')->group(function() {
 Route::get('/administrador', 'AdministradorController@index')->name('admin.getIndex');
 Route::get('/administrador/crear_usuario', 'AdministradorController@getCreate')->name('admin.getCreate');
 Route::post('/administrador/crear_usuario', 'AdministradorController@postCreate')->name('admin.postCreate');
+Route::get('/administrador/usuarios', 'AdministradorController@getListUsuarios')->name('admin.getListUsuarios');
 
 
 //Enrutado para hacer pruebas con las vistas, puede cambiarse cuando desee

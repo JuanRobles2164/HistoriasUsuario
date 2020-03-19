@@ -19,8 +19,9 @@ class UsuarioController extends Controller
         return view('Login');
     }
     /**Devuelve la vista de registro */
-    public function index(){
-        return view('Contents/Registro');
+    public function getRegistro(Request $request){
+        $roles = UsuarioDao::getAllRoles();
+        return view('Contents/Registro')->with(compact('roles'));
     }
     /**Prepara todos los datos que se necesitan de los usuarios
      * para poder registrarlos en el sistema
@@ -58,7 +59,7 @@ class UsuarioController extends Controller
             if($usuarioAuth->rol == "SUPER_ADMIN"){
                 //No olvidar cambiarlo por indexAdmin o la vista que se le genere al admin
                 //en el archivo web.php
-                return redirect()->route('getWelcome')->cookie(cookie('usuario', Crypt::encrypt(json_encode($_usuario))));
+                return redirect()->route('admin.getIndex')->cookie(cookie('usuario', Crypt::encrypt(json_encode($_usuario))));
             }
             if($usuarioAuth->rol = "ALUMNO"){
                 return redirect()->route('indexAlumno')->cookie(cookie('usuario', Crypt::encrypt(json_encode($_usuario))));

@@ -48,7 +48,7 @@
 				<nav class="full-box nav-lateral-menu">
 					<ul>
 						<li>
-							<a href="home.html"><i class="fas fa-store-alt"></i> &nbsp; Inicio</a>
+							<a href="{{route('admin.getIndex')}}"><i class="fas fa-store-alt"></i> &nbsp; Inicio</a>
 						</li>
 
 						<li>
@@ -58,7 +58,7 @@
 								<a href="{{route('admin.getCreate')}}"><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo usuario</a>
 								</li>
 								<li>
-									<a href="#"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de usuarios</a>
+									<a href="{{route('admin.getListUsuarios')}}"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de usuarios</a>
 								</li>
 							</ul>
 						</li>

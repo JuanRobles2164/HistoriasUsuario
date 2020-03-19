@@ -1,25 +1,28 @@
 @extends('Home-admin')
 @section('contenido')
+<br>
+<h3>Lista de usuarios</h3>
+<br>
     <table class="table">
-        <thead>
-            <tr>
-                <th>Nombre completo</th>
-                <th>Identificacion</th>
-                <th>Correo</th>
-                <th>Rol</th>
-                <th>Acciones</th>
+        <thead class="thead-dark">
+            <tr >
+                <th scope="col">Nombre completo</th>
+                <th scope="col">Identificacion</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($usuarios as $usuario)
-                <tr>
-                    <td>{{$usuario->nombres.' '.$usuario->apellidos}}</td>
-                    <td>{{$usuario->identificacion}}</td>
-                    <td>{{$usuario->e_mail}}</td>
-                    <td>{{$usuario->abreviatura}}</td>
-                    <td>
-                        <a href="#">Ver</a>
-                        <a href="#">Editar</a>
+                <tr style="border-color: black; border-radius: 1px;">
+                    <td scope="row">{{$usuario->nombres.' '.$usuario->apellidos}}</td>
+                    <td scope="row">{{$usuario->identificacion}}</td>
+                    <td scope="row">{{$usuario->e_mail}}</td>
+                    <td scope="row">{{$usuario->abreviatura}}</td>
+                    <td scope="row">
+                        <a href="#">Ver</a>|
+                        <a href="#">Editar</a>|
                         <a href="#">Eliminar</a>
                     </td>
                 </tr>

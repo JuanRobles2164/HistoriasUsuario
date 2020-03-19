@@ -51,11 +51,11 @@
                         <i class="fas fa-users"></i>
                     </div>
                     <div class="box">
-                        <select id="rol">
+                        <select id="rol" name="rol">
                           <option hidden ="Seleccione Rol">Seleccione Rol</option>
-                          <option value ="Estudiante">Estudiante</option>
-                          <option value ="Docente">Docente</option>
-                          <option value ="Administrador">Administrador</option>
+                          @foreach ($roles as $rol)
+                              <option value="{{$rol->id}}">{{$rol->abreviatura}}</option>
+                          @endforeach
                         </select>
                       </div>
                 </div>

@@ -32,7 +32,7 @@ class AdministradorController extends Controller
         UsuarioDao::registrar($usuario);
         return view('Contents/Admin/indexAdmin');
     }
-    public function getListarUsuarios(Request $request){
+    public function getListUsuarios(Request $request){
         $usuarios = AdministradorDao::getAllUsers();
         return view('Contents/Admin/listaUsuarios')->with(compact('usuarios'));
     }
