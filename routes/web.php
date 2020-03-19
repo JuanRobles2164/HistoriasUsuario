@@ -32,7 +32,8 @@ Route::post('/administrador/crear_usuario', 'AdministradorController@postCreate'
 Route::get('/administrador/usuarios', 'AdministradorController@getListUsuarios')->name('admin.getListUsuarios');
 
 
+
 //Enrutado para hacer pruebas con las vistas, puede cambiarse cuando desee
 Route::get('/test', function(){
-    return view('Contents/Admin/indexAdmin');
+    return view('Contents/Docente/indexDocente');
 })->name('test');
