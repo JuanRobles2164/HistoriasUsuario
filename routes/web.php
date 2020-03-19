@@ -34,7 +34,8 @@ Route::get('/administrador/editar', 'AdministradorController@getEditar')->name('
 Route::post('/administrador/editar', 'AdministradorController@postEditar')->name('admin.postEdit');
 
 
+
 //Enrutado para hacer pruebas con las vistas, puede cambiarse cuando desee
 Route::get('/test', function(){
-    return view('Contents/Admin/indexAdmin');
+    return view('Contents/Docente/indexDocente');
 })->name('test');
