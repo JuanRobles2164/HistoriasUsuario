@@ -21,6 +21,13 @@ Route::get('/layout', function(){
 })->name('LA');
 Route::get('/registro', 'UsuarioController@index')->name('registro');
 
+
 Route::prefix('welcome')->group(function() {
     Route::get('/','Welcome@onGetWelcome')->name('getWelcome');
 });
+
+
+//Enrutado para hacer pruebas con las vistas, puede cambiarse cuando desee
+Route::get('/test', function(){
+    return view('Home-admin');
+})->name('test');
