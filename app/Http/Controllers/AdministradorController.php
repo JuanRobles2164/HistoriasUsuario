@@ -32,4 +32,24 @@ class AdministradorController extends Controller
         UsuarioDao::registrar($usuario);
         return view('Contents/Admin/indexAdmin');
     }
+    public function getListarUsuarios(Request $request){
+        $usuarios = AdministradorDao::getAllUsers();
+        return view('Contents/Admin/listaUsuarios')->with(compact('usuarios'));
+    }
+    public function getEdit(Request $request){
+        $usuario = AdministradorDao::getById($request->id);
+        return view('Contents/Admin/editUsuario')->with(compact('usuario'));
+    }
+    public function postEdit(Request $request){
+        $usuario = new usuario();
+        $usuario->id = $request->id;
+        $usuario->nombres = $request->nombres;
+        $usuario->apellidos = $request->apellidos;
+        $usuario->username = $request->username;
+        $usuario->identificacion = $request->identificacion;
+        $usuario->email = $request->email;
+        $usuario->contrasenia = Funciones::cifrarClave($request->contrasenia);
+        UsuarioDao::editarUsuario($usuario);
+        return view('Contents/Admin/indexAdmin');
+    }
 }
