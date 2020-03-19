@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Daos\DocenteDao;
 use App\Http\Controllers\Funciones;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Crypt;
 use App\metodologia;
 use App\proyecto;
 use App\usuario;
 
 class DocenteController extends Controller
 {
+    public function getEditar(Request $request){
+        
+    }
     public function index(Request $request){
         return view('indexDocente');
     }
@@ -34,9 +39,11 @@ class DocenteController extends Controller
         return back();
     }
     public function crearProyecto(Request $request){
+        $cookie_docente = json_decode(Crypt::decrypt(Cookie::get('usuario')));
+
         $docente = new usuario();
-        $docente->id = $request->id;
-        $docente->email = $request->email;
+        $docente->id = $cookie_docente->id;
+        $docente->email = $cookie_docente->email;
 
         $metodologia = new metodologia();
         $metodologia->id = $request->id_metodologia;

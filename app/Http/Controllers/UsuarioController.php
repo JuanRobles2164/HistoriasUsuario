@@ -54,6 +54,8 @@ class UsuarioController extends Controller
             $time = config()->get('app')['session-time-minutes'];
             Cache::put($usuarioAuth->nombres, $usuarioAuth, $time*60);
             $_usuario = new stdClass();
+            $_usuario->id = $usuarioAuth->id;
+            $usuario->email = $usuarioAuth->e_mail;
             $_usuario->nombre = $usuarioAuth->nombres;
             $_usuario->token = Str::random(80);
             if($usuarioAuth->rol == "SUPER_ADMIN"){
@@ -78,7 +80,7 @@ class UsuarioController extends Controller
         $usuario->nombres = $request->nombres;
         $usuario->apellidos = $request->apellidos;
         $usuario->identificacion = $request->identificacion;
-        $usuario->email = $request->e_mail;
+        $usuario->email = $request->email;
         $usuario->username = $request->username;
         $usuario->contrasenia = Funciones::cifrarClave($request->contrasenia);
         UsuarioDao::editarUsuario($usuario);

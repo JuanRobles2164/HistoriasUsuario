@@ -22,7 +22,7 @@
                     <td scope="row">{{$usuario->abreviatura}}</td>
                     <td scope="row">
                         <a href="#">Ver</a>|
-                        <a href="#">Editar</a>|
+                        <a href="{{route('admin.getEdit', 'id='.$usuario->id)}}">Editar</a>|
                         <a href="#">Eliminar</a>
                     </td>
                 </tr>

@@ -76,7 +76,7 @@
 				<a href="#">
 					<i class="fas fa-user-cog"></i>
 				</a>
-				<a href="#" class="btn-exit-system">
+				<a href="{{route('getLogin')}}" class="btn-exit-system">
 					<i class="fas fa-power-off"></i>
 				</a>
 			</nav>
