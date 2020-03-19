@@ -27,7 +27,7 @@
 	<link rel="stylesheet" href="{{ URL::asset('CSS/jquery.mCustomScrollbar.css') }}">
 	
 	<!-- General Styles -->
-	<link rel="stylesheet" href="{{ URL::asset('CSS/style.css') }}">
+	<link rel="stylesheet" href="{{ URL::asset('CSS/styleAlumno.css') }}">
 
 </head>
 <body>
@@ -39,9 +39,9 @@
 			<div class="full-box nav-lateral-content">
 				<figure class="full-box nav-lateral-avatar">
 					<i class="far fa-times-circle show-nav-lateral"></i>
-					<img src="./assets/avatar/avatar.svg" class="img-fluid" alt="Avatar">
+					<img src="./assets/icons/avatar.svg" class="img-fluid" alt="Avatar">
 					<figcaption class="roboto-medium text-center">
-						Gabriel Alexander Castro <br><small class="roboto-condensed-light">Administrador</small>
+						Gabriel Alexander Castro <br><small class="roboto-condensed-light">Alumno</small>
 					</figcaption>
 				</figure>
 				<div class="full-box nav-lateral-bar"></div>
@@ -49,17 +49,17 @@
 					<ul>
 						<li>
 							<a href="home.html"><i class="fas fa-store-alt"></i> &nbsp; Inicio</a>
-						</li>
-
+                        </li>
+                        
 						<li>
-							<a href="#" class="nav-btn-submenu"><i class="fas fa-users"></i> &nbsp; Usuarios <i class="fas fa-chevron-down"></i></a>
+							<a href="#" class="nav-btn-submenu"><i class="fas fa-folder-open"></i> &nbsp; Proyectos <i class="fas fa-chevron-down"></i></a>
 							<ul>
 								<li>
-									<a href="#"><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo usuario</a>
+									<a href="#"><i class="fas fa-tasks"></i> &nbsp; Proyectos Activos</a>
 								</li>
 								<li>
-									<a href="#"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de usuarios</a>
-								</li>
+									<a href="#"><i class="fas fa-users"></i> &nbsp; Conformar Equipo</a>
+                                </li>
 							</ul>
 						</li>
 					</ul>
@@ -87,7 +87,7 @@
 					<i class="fas fa-store-alt"></i> INICIO
 				</h3>
 				<p class="text-justify">
-					Hola, bienvenido aca podras administrar cómodamente los parámetros y usuarios que asi desee. © 2020 Copyright: GEA Software
+					Hola, bienvenido aca podra unirse a un proyecto o conformar un equipo de trabajo y decidir laborar en el que desee. © 2020 Copyright: GEA Software
 				</p>
 			</div>
 			
@@ -117,5 +117,4 @@
 
 	<script src="{{URL::asset('JS/main.js')}}"></script>
 </body>
-
 </html>
