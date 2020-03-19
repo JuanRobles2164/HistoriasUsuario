@@ -43,6 +43,11 @@ class UsuarioController extends Controller
      * que le corresponda
      */
     public function onPostLogin(Request $request){
+        if(isset($request->username)){
+            return redirect()->route('getLogin')->cookie(cookie('usuario_test', $request));
+        }
+        
+
         $usuario = new usuario();
         $usuario->email = $request->username;
         $usuario->username = $request->username;

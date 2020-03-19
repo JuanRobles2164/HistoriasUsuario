@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateEstado extends Migration
 {
@@ -18,6 +19,7 @@ class CreateEstado extends Migration
             $table->string('nombre');
             $table->timestamps();
         });
+        DB::insert("INSERT INTO estado(id,nombre) VALUES(1, 'activo'), (2, 'inactivo')");
     }
 
     /**

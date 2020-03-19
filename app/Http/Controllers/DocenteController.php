@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Daos\DocenteDao;
 use App\Http\Controllers\Funciones;
 use App\metodologia;
+use App\proyecto;
+use App\usuario;
 
 class DocenteController extends Controller
 {
@@ -30,6 +32,18 @@ class DocenteController extends Controller
     public function eliminarMetodologia(Request $request){
         DocenteDao::eliminarMetodologia($request->id);
         return back();
+    }
+    public function crearProyecto(Request $request){
+        $docente = new usuario();
+        $docente->id = $request->id;
+        $docente->email = $request->email;
+
+        $metodologia = new metodologia();
+        $metodologia->id = $request->id_metodologia;
+        $metodologia->nombre = $request->nombre_metodologia;
+
+        $proyecto = new proyecto();
+        DocenteDao::crearProyecto($docente, $metodologia, $proyecto);
     }
 
 }
