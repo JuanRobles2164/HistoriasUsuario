@@ -27,6 +27,8 @@ Route::prefix('welcome')->group(function() {
 });
 
 Route::get('/administrador', 'AdministradorController@index')->name('admin.getIndex');
+Route::get('/administrador/editar_perfil', 'AdministradorController@getSelfEdit')->name('admin.getSelfEdit');
+Route::post('/administrador/editar_perfil', 'AdministradorController@postSelfEdit')->name('admin.postSelfEdit');
 Route::get('/administrador/crear_usuario', 'AdministradorController@getCreate')->name('admin.getCreate');
 Route::post('/administrador/crear_usuario', 'AdministradorController@postCreate')->name('admin.postCreate');
 Route::get('/administrador/usuarios', 'AdministradorController@getListUsuarios')->name('admin.getListUsuarios');

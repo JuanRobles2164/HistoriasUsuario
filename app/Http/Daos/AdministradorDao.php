@@ -3,6 +3,7 @@
 namespace App\Http\Daos;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Funciones;
 use Illuminate\Support\Facades\DB;
 
 class AdministradorDao extends Controller
@@ -52,6 +53,15 @@ class AdministradorDao extends Controller
     public static function getRoles(){
         $roles = DB::table('roles')->get();
         return $roles;
+    }
+    public static function restaurarUsuario($id){
+        $usuario = DB::table('usuarios')
+        ->where('id', $id)
+        ->first();
+        $usuario->username = $usuario->identificacion;
+        $usuario->contrasenia = Funciones::cifrarClave($usuario->identificacion);
+        $SQL = "UPDATE usuarios SET username='$usuario->username', contrasenia='$usuario->contrasenia' WHERE id=$id";
+        DB::update($SQL);
     }
 
 }
