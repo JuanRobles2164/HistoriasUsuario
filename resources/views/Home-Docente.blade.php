@@ -88,7 +88,6 @@
 				@yield('contenidoDocente')
 			</div>
 			
-			
 			<!-- Contenido -->
 			<div class="full-box tile-container">
 				

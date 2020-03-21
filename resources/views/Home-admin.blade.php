@@ -66,7 +66,6 @@
 				</nav>
 			</div>
 		</section>
-
 		<!-- navbar superior -->
 		<section class="full-box page-content">
 			<nav class="full-box navbar-info">
@@ -76,19 +75,19 @@
 				<a href="#">
 					<i class="fas fa-user-cog"></i>
 				</a>
-				<a href="{{route('getLogin')}}" class="btn-exit-system">
+				<a class="btn-exit-system">
 					<i class="fas fa-power-off"></i>
 				</a>
 			</nav>
 
+			<!-- cabezera -->
 			<div class="container">
 				@yield('contenido')
 			</div>
 			
-			
 			<!-- Contenido -->
 			<div class="full-box tile-container">
-				
+
 			</div>
 			
         </section>
