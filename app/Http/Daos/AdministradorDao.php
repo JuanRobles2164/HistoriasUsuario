@@ -5,6 +5,7 @@ namespace App\Http\Daos;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Funciones;
 use Illuminate\Support\Facades\DB;
+use App\usuario;
 
 class AdministradorDao extends Controller
 {
@@ -20,7 +21,7 @@ class AdministradorDao extends Controller
       * Estén activos o no
       */
     public static function getAllUsers(){
-        $usuarios = DB::select("SELECT u.*, r.abreviatura FROM usuarios u join roles r WHERE u.rol_id=r.id");
+        $usuarios = DB::select("SELECT u.*, r.abreviatura FROM usuarios u join roles r WHERE u.rol_id=r.id ORDER BY estado_eliminado");
         return $usuarios;
     }
     /**Retorna sólo los usuarios activos
@@ -61,6 +62,17 @@ class AdministradorDao extends Controller
         $usuario->username = $usuario->identificacion;
         $usuario->contrasenia = Funciones::cifrarClave($usuario->identificacion);
         $SQL = "UPDATE usuarios SET username='$usuario->username', contrasenia='$usuario->contrasenia' WHERE id=$id";
+        DB::update($SQL);
+    }
+
+    /**
+     * Habilita o inhabilita un usuario
+     *
+     * @param usuario $usuario
+     * @return void
+     */
+    public static function eliminarUsuario(usuario $usuario){
+        $SQL = "UPDATE usuarios SET eliminado_en = CURRENT_TIMESTAMP, estado_eliminado = $usuario->estado_eliminado WHERE id = $usuario->id";
         DB::update($SQL);
     }
 

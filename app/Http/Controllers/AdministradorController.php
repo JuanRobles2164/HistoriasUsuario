@@ -69,30 +69,30 @@ class AdministradorController extends Controller
         return view('Contents/Admin/listaUsuarios')->with(compact('usuarios'));
     }
     /**
-     * Es probable que esto requiera de AJAX para desplegar la info de un usuario en un modal
-     *
+     * Conectado a un AJAX para desplegar la info de un usuario en un modal--->
+     * GET
      * @param Request $request
-     * @return modal
+     * @return stdClass
      */
     public function detailsUsuario(Request $request){
-        $usuario = AdministradorDao::getById($request->id);
-        return view('Contents/Admin/detallesUsuario')->with(compact('usuario'));
+        $usuario = json_encode(AdministradorDao::getById($request->id));
+        return $usuario;
     }
     /**
      * Obtiene la vista y prepara los datos para editar un usuario
-     *
+     * GET
      * @param Request $request
      * @return view
      */
     public function getEditar(Request $request){
-        //return $request->id[3];
         $usuario = AdministradorDao::getById($request->id);
         return view('Contents/Admin/editUsuario')->with(compact('usuario'));
     }
 
     /**
-     * Edita la información de un usuario
-     * Trabaja ligado al form de la vista
+     * Edita la información de un usuario,
+     * Trabaja ligado al form de la vista de "editar usuarios"
+     * ---> POST
      * @param Request $request
      * @return void
      */
@@ -116,11 +116,19 @@ class AdministradorController extends Controller
     /**
      * Restaura el usuario que posea ese id;
      * Username = contrasenia = CC
+     * GET
      * @param Request $request
      * @return void
      */
     public function restaurarUsuario(Request $request){
         AdministradorDao::restaurarUsuario($request->id);
+        return redirect()->route('admin.getListUsuarios');
+    }
+    public function eliminarUsuario(Request $request){
+        $usuario = new usuario();
+        $usuario->id = $request->id;
+        $usuario->estado_eliminado = $request->eliminado == 0 ? 1 : 0;
+        AdministradorDao::eliminarUsuario($usuario);
         return redirect()->route('admin.getListUsuarios');
     }
 }

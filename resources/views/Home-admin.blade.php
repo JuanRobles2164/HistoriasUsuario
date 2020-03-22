@@ -20,6 +20,9 @@
       <link rel="stylesheet" href="{{ URL::asset('CSS/jquery.mCustomScrollbar.css') }}">
       <!-- General Styles -->
       <link rel="stylesheet" href="{{ URL::asset('CSS/style.css') }}">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
    </head>
    <body>
       <!-- centenedor de menu -->
@@ -77,9 +80,8 @@
             <!-- Contenido -->
             <div class="full-box tile-container">
             </div>
-            <footer class="blockquote-footer">
-				<cite> © 2020 Copyright: GEA Software. </cite>
-            </footer>
+            
+            @yield('modal_detalles')
          </section>
       </main>
       <!-- jQuery V3.4.1 -->
@@ -98,5 +100,6 @@
          });
       </script>
       <script src="{{URL::asset('JS/main.js')}}"></script>
+      <script src="{{URL::asset('JS/AJAX/AdministradorAJAX.JS') }}"></script>
    </body>
 </html>
