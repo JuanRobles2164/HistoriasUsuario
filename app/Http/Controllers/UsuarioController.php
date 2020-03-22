@@ -51,6 +51,10 @@ class UsuarioController extends Controller
 
         $usuarioAuth = UsuarioDao::validaUsuario($usuario);
         if($usuarioAuth != null){
+            if($usuarioAuth->estado_eliminado == 1){
+                //No olvidar hacer la vista para cuando una cuenta esté deshabilitada
+                return redirect()->route('getLogin');
+            }
             $time = config()->get('app')['session-time-minutes'];
             Cache::put($usuarioAuth->nombres, $usuarioAuth, $time*60);
             $_usuario = new stdClass();
