@@ -31,7 +31,7 @@ $(document).ready(function(){
 	});
 
 	/*  Exit system buttom */
-	$('.btn-exit-system').on('click', function(e){
+	/*$('.btn-exit-system').on('click', function(e){
 		e.preventDefault();
 		Swal.fire({
 			title: '¿Estás seguro de cerrar la sesión?',
@@ -44,10 +44,10 @@ $(document).ready(function(){
 			cancelButtonText: 'NO'
 		}).then((result) => {
 			if (result.value) {
-				window.location = "login";
+				window.location.replace("aaaa");
 			}
 		});
-	});
+	});*/
 });
 (function($){
     $(window).on("load",function(){
@@ -64,4 +64,4 @@ $(document).ready(function(){
         	scrollButtons: {enable: true}
         });
     });
-})(jQuery);
+});

@@ -57,7 +57,7 @@ class AdministradorController extends Controller
         $usuario->usuario_modifica = 0;
         $usuario->estado_eliminado = 0;
         UsuarioDao::registrar($usuario);
-        return view('Contents/Admin/indexAdmin');
+        return redirect()->route('admin.getListUsuarios');
     }
     /**
      * Obtiene la vista del listado de usuarios

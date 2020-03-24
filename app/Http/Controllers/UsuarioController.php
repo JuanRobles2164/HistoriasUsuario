@@ -7,7 +7,6 @@ use App\Http\Daos\UsuarioDao;
 use App\usuario;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
-use App\Http\Daos\loginDao;
 use Illuminate\Support\Facades\Crypt;
 use stdClass;
 use Illuminate\Http\Request;
@@ -67,11 +66,11 @@ class UsuarioController extends Controller
                 //en el archivo web.php
                 return redirect()->route('admin.getIndex')->cookie(cookie('usuario', Crypt::encrypt(json_encode($_usuario))));
             }
-            if($usuarioAuth->rol = "ALUMNO"){
-                return redirect()->route('indexAlumno')->cookie(cookie('usuario', Crypt::encrypt(json_encode($_usuario))));
+            if($usuarioAuth->rol == "ALUMNO"){
+                return redirect()->route('alumno.getIndex')->cookie(cookie('usuario', Crypt::encrypt(json_encode($_usuario))));
             }
-            if($usuarioAuth->rol = "DOCENTE"){
-                return redirect()->route('indexDocente')->cookie(cookie('usuario', Crypt::encrypt(json_encode($_usuario))));
+            if($usuarioAuth->rol == "DOCENTE"){
+                return redirect()->route('docente.getIndex')->cookie(cookie('usuario', Crypt::encrypt(json_encode($_usuario))));
             }
             //return redirect()->route('getWelcome')->cookie(cookie('usuario', Crypt::encrypt(json_encode($_usuario))));
         }else{

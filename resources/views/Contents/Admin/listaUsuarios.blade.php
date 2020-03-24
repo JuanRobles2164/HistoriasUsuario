@@ -1,4 +1,4 @@
-@extends('Home-admin')
+@extends('Templates/Admin/_LayoutAdmin')
 @section('contenido')
       <br>
       <h3>Lista de usuarios</h3>

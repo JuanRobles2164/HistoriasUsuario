@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\fase;
 use Illuminate\Http\Request;
 use App\Http\Daos\DocenteDao;
 use App\Http\Controllers\Funciones;
@@ -17,7 +18,7 @@ class DocenteController extends Controller
         
     }
     public function index(Request $request){
-        return view('indexDocente');
+        return view('Contents/Docente/indexDocente');
     }
     public function crearMetodologia(Request $request){
         $metodologia = new metodologia();
@@ -25,6 +26,18 @@ class DocenteController extends Controller
         $metodologia->descripcion = $request->descripcion;
         DocenteDao::crearMetodologia($metodologia);
         return back();
+    }
+    /**
+     * Por como estoy pensandolo, esto va a funcionar con AJAX
+     * Porque qué mamera andar recargando la página XD
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function agregarFaseMetodologia(Request $request){
+        $fase = new fase();
+        $fase->nombre = $request->nombre_metodologia;
+        $fase->descripcion = $request->descripcion_metodologia;
     }
     public function editarMetodologia(Request $request){
         $metodologia = new metodologia();
@@ -50,6 +63,7 @@ class DocenteController extends Controller
         $metodologia->nombre = $request->nombre_metodologia;
 
         $proyecto = new proyecto();
+        $proyecto->fecha_limite = $request->fecha_limite;
         DocenteDao::crearProyecto($docente, $metodologia, $proyecto);
     }
 

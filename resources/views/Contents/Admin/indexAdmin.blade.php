@@ -1,4 +1,4 @@
-@extends('Home-admin')
+@extends('Templates/Admin/_LayoutAdmin')
 @section('contenido')
             <!-- cabezera de pagina -->
 			<div class="full-box page-header">

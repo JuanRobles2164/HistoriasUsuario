@@ -1,4 +1,4 @@
-@extends('Home-admin')
+@extends('Templates/Admin/_LayoutAdmin')
 @section('contenido')
     <form action="{{route('admin.postCreate')}}" method="POST">
         @csrf

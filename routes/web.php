@@ -39,7 +39,7 @@ Route::get('/administrador/detalles_usuario', 'AdministradorController@detailsUs
 Route::get('/administrador/estado_usuario', 'AdministradorController@eliminarUsuario')->name('admin.eliminarUsuario');
 
 
-
+Route::get('/docente', 'DocenteController@index')->name('docente.getIndex');
 
 //Enrutado para hacer pruebas con las vistas, puede cambiarse cuando desee
 Route::get('/test', function(){

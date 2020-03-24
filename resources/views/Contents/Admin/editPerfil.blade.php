@@ -1,4 +1,4 @@
-@extends('Home-admin')
+@extends('Templates/Admin/_LayoutAdmin')
 @section('contenido')
 <div class="full-box page-header">
    <h3 class="text-left">
