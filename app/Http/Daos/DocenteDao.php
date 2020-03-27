@@ -32,17 +32,9 @@ class DocenteDao extends Controller
         $SQL = "INSERT INTO metodologia(nombre, descripcion, estado_eliminado) VALUES ('$metodologia->nombre', '$metodologia->descripcion', 0)";
         DB::insert($SQL);
     }
-    public static function agregarFuenteMetodologia(fuente $fuente){
-        $max_id_fuente = DB::select("SELECT (MAX(id)+1) as conteo FROM fuente")[0];
-        if($max_id_fuente->conteo == null){
-            $max_id_fuente->conteo = 1;
-        }
-        $SQL = "INSERT INTO fuente(id, url, descripcion, id_metodologia) VALUES($max_id_fuente->conteo,'$fuente->url', '$fuente->descripcion', $fuente->id_metodologia)";
+    public static function agregarFuenteMetodologia($fuente){
+        $SQL = "INSERT INTO fuente(url, descripcion, id_metodologia, creado_en, modificado_en) VALUES('$fuente->url', '$fuente->descripcion', $fuente->id_metodologia, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
         DB::insert($SQL);
-        $fuente_retorno = DB::table('fuente')
-        ->where('id', $max_id_fuente->conteo)
-        ->first();
-        return $fuente_retorno;
     }
     public static function eliminarMetodologia($id){
         $SQL = "UPDATE metodologia SET estado_eliminado = 1 WHERE id='$id'";

@@ -12,6 +12,7 @@ use App\metodologia;
 use App\proyecto;
 use App\usuario;
 use App\fuente;
+use stdClass;
 
 class DocenteController extends Controller
 {
@@ -55,11 +56,13 @@ class DocenteController extends Controller
      * @return void
      */
     public function agregarFuenteMetodologiaAJAX(Request $request){
-        $fuente = new fuente();
+        $fuente = new stdClass();
         $fuente->descripcion = $request->descripcion_fuente;
         $fuente->url = $request->url_fuente;
         $fuente->id_metodologia = $request->id_metodologia;
-        return json_encode(DocenteDao::agregarFuenteMetodologia($fuente));
+        
+        DocenteDao::agregarFuenteMetodologia($fuente);
+        return redirect()->route('docente.getEditarMetodologia', 'id='.$request->id_metodologia);
     }
     public function eliminarFuenteMetodologia(Request $request){
         DocenteDao::eliminarFuenteMetodologia($request->id);

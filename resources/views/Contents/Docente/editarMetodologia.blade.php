@@ -29,11 +29,11 @@
         <textarea type="text" name="descripcion" id="descripcion_fuente"></textarea>
         <br>
         <input type="hidden" name="id_metodologia" value="{{$metodologia->id}}" id="id_metodologia">
-        <a href="#" class="btn btn-success" onclick="agregarFuenteMetodologia()">+</a>
+        <a class="btn btn-success" onclick="agregarFuenteMetodologia()" id="btn_agregar_fuente">+</a>
     </div>
 
     <div id="listado_fuentes">
-        @if(isset($fuentes))
+        @if($fuentes == null)
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -66,7 +66,9 @@
                     <tbody>
                         @foreach ($fuentes as $fuente)
                             <tr>
-                                <th scope="row">{{$fuente->url}}</th>
+                                <th scope="row">
+                                    <a href="{{$fuente->url}}">Redirijir</a>
+                                </th>
                                 <th scope="row">{{$fuente->descripcion}}</th>
                                 <th scope="row">
                                     <a href="#" class="btn btn-warning">Editar</a>

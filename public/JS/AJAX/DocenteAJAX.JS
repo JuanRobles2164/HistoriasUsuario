@@ -1,11 +1,16 @@
+
 function agregarFuenteMetodologia(){
+    alert('got it');
+    window.location = "agregar_fuente_metodologia?id_metodologia="+$('#id_metodologia').val()+"&descripcion_fuente="+$('#descripcion_fuente').val()+"&url_fuente="+encodeURIComponent($('#url_fuente').val());
+    /*
     let url_fuente = $('#url_fuente').val();
     let descripcion_fuente = $('#descripcion_fuente').val();
     let id_metodologia = $('#id_metodologia').val();
+    alert(url_fuente+'->'+descripcion_fuente+'->'+id_metodologia);
     $.ajax({
         url : 'agregar_fuente_metodologia',
         async : true,
-        data: {url_fuente:url_fuente, descripcion_fuente:descripcion_fuente, id_metodologia:id_metodologia},
+        data: {url_fuente:encodeURIComponent(url_fuente), descripcion_fuente:descripcion_fuente, id_metodologia:id_metodologia},
         success: function(response){
             let info = $.parseJSON(response);
             //Limpia el contenido de "No hay fuentes"
@@ -21,7 +26,7 @@ function agregarFuenteMetodologia(){
             //$("#tr_no_elements").append("");
         },
         error: function(response){
-            alert("Error al traer los datos, inténtelo más tarde");
+            alert("Error al traer los datos, inténtelo más tarde: "+response);
         }
-    });
+    });*/
 }
