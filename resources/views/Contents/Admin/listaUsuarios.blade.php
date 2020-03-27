@@ -22,9 +22,23 @@
                <td scope="row" valign="middle" align="center" style="line-height: 30px;">{{$usuario->e_mail}}</td>
                <td scope="row" valign="middle" align="center" style="line-height: 30px;">{{$usuario->abreviatura}}</td>
                @if($usuario->estado_eliminado == 0)
-                  <td scope="row" valign="middle" align="center" style="line-height: 30px;">Activo</td>
+                  <td scope="row" valign="middle" align="center" style="line-height: 30px;">
+                     <div class="btn btn-success">
+                        Activo
+                      </div>                     
+                  </td>
+               @elseif($usuario->estado_eliminado == 1)
+                  <td scope="row" valign="middle" align="center" style="line-height: 30px;">
+                     <div class="btn btn-danger">
+                        Inactivo
+                      </div>
+                  </td>
                @else
-                  <td scope="row" valign="middle" align="center" style="line-height: 30px;">Eliminado</td>
+                  <td scope="row" valign="middle" align="center" style="line-height: 30px;">
+                     <div class="btn btn-secondary">
+                        Otro
+                     </div>
+                  </td>
                @endif
                <td scope="row" valign="middle" align="center" style="line-height: 30px;">
                   <a href="#" class="btn btn-info btn-sm" onclick="detallesUsuario({{$usuario->id}})">

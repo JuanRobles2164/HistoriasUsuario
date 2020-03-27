@@ -16,10 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', 'UsuarioController@onGetLogin')->name('getLogin');
 Route::post('/login', 'UsuarioController@onPostLogin')->name('postLogin');
 
-Route::get('/layout', function(){
-    return view('AwaitingConfirmation');
-})->name('LA');
 Route::get('/registro', 'UsuarioController@getRegistro')->name('registro');
+Route::post('/registro', 'UsuarioController@postRegistro')->name('postRegistro');
 
 
 Route::prefix('welcome')->group(function() {
@@ -40,8 +38,21 @@ Route::get('/administrador/estado_usuario', 'AdministradorController@eliminarUsu
 
 
 Route::get('/docente', 'DocenteController@index')->name('docente.getIndex');
+Route::get('/docente/lista_metodologias', 'DocenteController@getListaMetodologias')->name('docente.getListaMetodologias');
+Route::get('/docente/crear_metodologia', 'DocenteController@getCrearMetodologia')->name('docente.getCrearMetodologia');
+Route::post('/docente/crear_metodologia', 'DocenteController@postCrearMetodologia')->name('docente.postCrearMetodologia');
+Route::get('/docente/editar_metodologia', 'DocenteController@getEditarMetodologia')->name('docente.getEditarMetodologia');
+Route::post('/docente/editar_metodologia', 'DocenteController@postEditarMetodologia')->name('docente.postEditarMetodologia');
+Route::get('/docente/agregar_fuente_metodologia', 'DocenteController@agregarFuenteMetodologiaAJAX')->name('docente.agregarFuenteMetodlogiaAJAX');
+Route::get('/docente/eliminar_fuente', 'DocenteController@eliminarFuenteMetodologia')->name('docente.eliminarFuenteMetodologia');
+/*Route::get('', '')->name('');
+Route::get('', '')->name('');
+Route::get('', '')->name('');
+Route::get('', '')->name('');
+Route::get('', '')->name('');*/
+
 
 //Enrutado para hacer pruebas con las vistas, puede cambiarse cuando desee
 Route::get('/test', function(){
-    return view('Contents/Docente/indexDocente');
+    return view('Contents/Docente/crearMetodologia');
 })->name('test');

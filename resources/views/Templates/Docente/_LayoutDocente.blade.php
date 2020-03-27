@@ -18,6 +18,9 @@
       <link rel="stylesheet" href="{{ URL::asset('CSS/jquery.mCustomScrollbar.css') }}">
       <!-- General Styles -->
       <link rel="stylesheet" href="{{ URL::asset('CSS/styleDocente.css') }}">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
    </head>
    <body>
       <!-- centenedor de menu -->
@@ -38,7 +41,18 @@
                <nav class="full-box nav-lateral-menu">
                   <ul>
                      <li>
-                        <a href="home.html"><i class="fas fa-store-alt"></i> &nbsp; Inicio</a>
+                        <a href="{{route('docente.getIndex')}}"><i class="fas fa-store-alt"></i> &nbsp; Inicio</a>
+                     </li>
+                     <li>
+                        <a href="#" class="nav-btn-submenu"><i class="fas fa-folder-open"></i> &nbsp; Metodologías <i class="fas fa-chevron-down"></i></a>
+                        <ul>
+                           <li>
+                              <a href="{{route('docente.getCrearMetodologia')}}"><i class="fas fa-plus fa-fw"></i> &nbsp; Nueva metodología</a>
+                           </li>
+                           <li>
+                              <a href="{{route('docente.getListaMetodologias')}}"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de metodologías</a>
+                           </li>
+                        </ul>
                      </li>
                      <li>
                         <a href="#" class="nav-btn-submenu"><i class="fas fa-folder-open"></i> &nbsp; Proyectos <i class="fas fa-chevron-down"></i></a>
@@ -48,18 +62,6 @@
                            </li>
                            <li>
                               <a href="#"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de proyectos</a>
-                           </li>
-                        </ul>
-					 </li>
-
-					 <li>
-                        <a href="#" class="nav-btn-submenu"><i class="fas fa-folder-open"></i> &nbsp; Metodologías <i class="fas fa-chevron-down"></i></a>
-                        <ul>
-                           <li>
-                              <a href="#"><i class="fas fa-plus fa-fw"></i> &nbsp; Nueva metodología</a>
-                           </li>
-                           <li>
-                              <a href="#"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de metodologías</a>
                            </li>
                         </ul>
                      </li>
@@ -103,5 +105,6 @@
       <script src="{{URL::asset('JS/bootstrap-material-design.min.js')}}" ></script>
       <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
       <script src="{{URL::asset('JS/main.js')}}"></script>
+      <script src="{{URL::asset('JS/AJAX/DocenteAJAX.JS')}}"></script>
    </body>
 </html>

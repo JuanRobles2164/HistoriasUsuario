@@ -18,10 +18,16 @@ class UsuarioDao extends Controller
         $roles = DB::table('roles')->get();
         return $roles;
     }
+    public static function getAlumnoRole(){
+        $roles = DB::table('roles')
+        ->where('abreviatura', 'alumno')
+        ->first();
+        return $roles;
+    }
     /**Registra un usuario */
     public static function registrar(usuario $usuario){
         $SQL = "INSERT INTO "
-        ."usuarios(nombres, apellidos, username, contrasenia, identificacion, e_mail, rol_id, usuario_modifica, estado_eliminado) "
+        ."usuarios(nombres, apellidos, username, contrasenia, identificacion, e_mail, rol_id, usuario_modifica, creado_en, estado_eliminado) "
         ."VALUES "
         ."('$usuario->nombres', "
         ."'$usuario->apellidos', "
@@ -30,7 +36,8 @@ class UsuarioDao extends Controller
         ."'$usuario->identificacion',"
         ."'$usuario->email',"
         ."'$usuario->rol_id',"
-        ."'$usuario->usuario_modifica',"
+        ."0,"
+        ." CURRENT_TIMESTAMP,"
         ."'$usuario->estado_eliminado')";
         DB::insert($SQL);
     }
