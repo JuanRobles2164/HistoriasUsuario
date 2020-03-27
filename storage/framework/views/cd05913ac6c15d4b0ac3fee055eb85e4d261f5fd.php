@@ -1,0 +1,1 @@
+cuenta no válida<?php /**PATH C:\xampp\htdocs\paginasPHP\HistoriasUsuario\resources\views/invalid.blade.php ENDPATH**/ ?>
