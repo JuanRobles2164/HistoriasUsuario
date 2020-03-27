@@ -16,16 +16,17 @@
             <img src="{{URL::asset('Images/Resources/registrese.png')}}">
 		</div>
 		<div class="login-content">
-            <form action="{{route('postLogin')}}" method="POST">
+            <form action="{{route('postRegistro')}}" method="POST">
+                <h2 class="title">Crear Cuenta</h2>
                 @csrf
-				<h2 class="title">Crear Cuenta</h2>
+                <input type="hidden" name="rol" value="{{$rol->id}}">
            		<div class="input-div one">
            		   <div class="i">
            		   		<i class="fas fa-user"></i>
            		   </div>
            		   <div class="div">
            		   		<h5>Nombres</h5>
-           		   		<input type="text" class="input" name="nombre" id="nombre">
+           		   		<input type="text" class="input" name="nombres" id="nombre">
                     </div>
                 </div>
                 <div class="input-div one">
@@ -34,7 +35,7 @@
                     </div>
                     <div class="div">
                             <h5>Apellidos</h5>
-                            <input type="text" class="input" name="apellido" id="apellido">
+                            <input type="text" class="input" name="apellidos" id="apellido">
                   </div>
                 </div>
                 <div class="input-div one">
@@ -48,24 +49,11 @@
                 </div>
                 <div class="input-div one">
                     <div class="i">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="box">
-                        <select id="rol" name="rol">
-                          <option hidden ="Seleccione Rol">Seleccione Rol</option>
-                          @foreach ($roles as $rol)
-                              <option value="{{$rol->id}}">{{$rol->abreviatura}}</option>
-                          @endforeach
-                        </select>
-                      </div>
-                </div>
-                <div class="input-div one">
-                    <div class="i">
                             <i class="fas fa-user"></i>
                     </div>
                     <div class="div">
                             <h5>Correo</h5>
-                            <input type="text" class="input" name="username" id="username">
+                            <input type="text" class="input" name="email" id="email">
                     </div>
                 </div>
            		<div class="input-div pass">
@@ -74,7 +62,7 @@
            		   </div>
            		   <div class="div">
            		    	<h5>Contraseña</h5>
-           		    	<input type="password" class="input" name="contrasenia" id="contrasenia">
+           		    	<input type="password" class="input" name="clave" id="clave">
             	   </div>
             	</div>
                 <input type="submit" class="btn" value="Registrese">

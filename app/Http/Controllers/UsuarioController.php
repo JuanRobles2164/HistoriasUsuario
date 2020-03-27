@@ -5,27 +5,37 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Funciones;
 use App\Http\Daos\UsuarioDao;
 use App\usuario;
+use Facade\FlareClient\View;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Cookie;
 use stdClass;
 use Illuminate\Http\Request;
 
+
 class UsuarioController extends Controller
 {
-    /**Devuelve la vista de Login */
+    /**Devuelve la vista de Login 
+     * Restaura y elimina las cookies de sesión (usuario)
+     * Inhabilita el acceso a otras partes
+    */
     public function onGetLogin(Request $request){
-        return view('Login');
+        
+        $cookiexd = Cookie::forget('usuario');
+        return response(View('Login'))->withCookie($cookiexd);
     }
-    /**Devuelve la vista de registro */
+    /**Devuelve la vista de registro 
+     * Sin autenticación
+    */
     public function getRegistro(Request $request){
-        $roles = UsuarioDao::getAllRoles();
-        return view('Contents/Registro')->with(compact('roles'));
+        $rol = UsuarioDao::getAlumnoRole();
+        return view('Contents/Registro')->with(compact('rol'));
     }
     /**Prepara todos los datos que se necesitan de los usuarios
      * para poder registrarlos en el sistema
      */
-    public function registrar(Request $request){
+    public function postRegistro(Request $request){
         $usuario = new usuario();
         $usuario->nombres = $request->nombres;
         $usuario->apellidos = $request->apellidos;
@@ -34,6 +44,7 @@ class UsuarioController extends Controller
         $usuario->contrasenia = Funciones::cifrarClave($request->clave);
         $usuario->identificacion = $request->identificacion;
         $usuario->rol_id = $request->rol;
+        $usuario->estado_eliminado = 0;
         UsuarioDao::registrar($usuario);
         return back();
     }

@@ -16,6 +16,7 @@ class Authenticate extends Middleware
 {
     const NOSESSIONPATHS = [
         'login',
+        'registro',
         'test',
     ];
 
