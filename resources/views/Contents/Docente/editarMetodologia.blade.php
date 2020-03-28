@@ -67,11 +67,10 @@
                         @foreach ($fuentes as $fuente)
                             <tr>
                                 <th scope="row">
-                                    <a href="{{$fuente->url}}">Redirijir</a>
+                                    <a href="{{$fuente->url}}" target="_blank">Redirigir</a>
                                 </th>
                                 <th scope="row">{{$fuente->descripcion}}</th>
                                 <th scope="row">
-                                    <a href="#" class="btn btn-warning">Editar</a>
                                     <a href="{{route('docente.eliminarFuenteMetodologia', 'id='.$fuente->id)}}" class="btn btn-danger">Eliminar</a>
                                 </th>
                             </tr>

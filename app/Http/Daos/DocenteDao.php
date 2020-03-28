@@ -46,6 +46,7 @@ class DocenteDao extends Controller
     }
     public static function crearProyecto(usuario $docente, metodologia $metodologia, proyecto $proyecto){
         $SQL = "INSERT INTO proyecto(nombre, descripcion, fecha_limite, id_usuario, id_metodologia, id_estado) VALUES('', '', )";
+        DB::insert($SQL);
     }
     public static function getAllMetodologias(){
         $metodologias = DB::table('metodologia')

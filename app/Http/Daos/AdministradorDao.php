@@ -15,8 +15,6 @@ class AdministradorDao extends Controller
         ->first();
         return $usuario;
     }
-
-
      /**Retorna todos los usuarios
       * Estén activos o no
       */

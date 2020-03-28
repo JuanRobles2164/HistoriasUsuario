@@ -74,7 +74,7 @@ class DocenteController extends Controller
     }
     public function crearProyecto(Request $request){
         $cookie_docente = json_decode(Crypt::decrypt(Cookie::get('usuario')));
-
+        
         $docente = new usuario();
         $docente->id = $cookie_docente->id;
         $docente->email = $cookie_docente->email;

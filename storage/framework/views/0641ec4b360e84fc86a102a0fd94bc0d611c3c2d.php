@@ -66,11 +66,10 @@
                         <?php $__currentLoopData = $fuentes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fuente): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
                                 <th scope="row">
-                                    <a href="<?php echo e($fuente->url); ?>">Redirijir</a>
+                                    <a href="<?php echo e($fuente->url); ?>" target="_blank">Redirigir</a>
                                 </th>
                                 <th scope="row"><?php echo e($fuente->descripcion); ?></th>
                                 <th scope="row">
-                                    <a href="#" class="btn btn-warning">Editar</a>
                                     <a href="<?php echo e(route('docente.eliminarFuenteMetodologia', 'id='.$fuente->id)); ?>" class="btn btn-danger">Eliminar</a>
                                 </th>
                             </tr>
