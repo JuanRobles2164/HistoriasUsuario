@@ -59,10 +59,10 @@
                         <a href="#" class="nav-btn-submenu"><i class="fas fa-folder-open"></i> &nbsp; Proyectos <i class="fas fa-chevron-down"></i></a>
                         <ul>
                            <li>
-                              <a href="#"><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo proyecto</a>
+                              <a href="<?php echo e(route('docente.getCrearProyecto')); ?>"><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo proyecto</a>
                            </li>
                            <li>
-                              <a href="#"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de proyectos</a>
+                           <a href="<?php echo e(route('docente.getListaProyectos')); ?>"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de proyectos</a>
                            </li>
                         </ul>
                      </li>

@@ -5,7 +5,7 @@
 <br>
 <center>
    <table class="table table-hover" style="line-height: 400px;">
-      <thead class="thead-dark">
+      <thead class="bg-primary">
          <tr>
             <th scope="col" valign="middle" style="text-align: center">Nombre</th>
             <th scope="col" valign="middle" style="text-align: center">Descripcion</th>

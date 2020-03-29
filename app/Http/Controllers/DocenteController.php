@@ -16,14 +16,15 @@ use stdClass;
 
 class DocenteController extends Controller
 {
+    private $ruta ='/Contents/Docente/';
     public function getEditar(Request $request){
         
     }
     public function index(Request $request){
-        return view('Contents/Docente/indexDocente');
+        return view($this->ruta.'indexDocente');
     }
     public function getCrearMetodologia(Request $request){
-        return view('Contents/Docente/crearMetodologia');
+        return view($this->ruta.'crearMetodologia');
     }
     public function postCrearMetodologia(Request $request){
         $metodologia = new metodologia();
@@ -34,12 +35,12 @@ class DocenteController extends Controller
     }
     public function getListaMetodologias(){
         $metodologias = DocenteDao::getAllMetodologias();
-        return view('Contents/Docente/listaMetodologias')->with(compact('metodologias'));
+        return view($this->ruta.'listaMetodologias')->with(compact('metodologias'));
     }
     public function getEditarMetodologia(Request $request){
         $metodologia = DocenteDao::getMetodologiaById($request->id);
         $fuentes = Docentedao::getFuentesMetodologia($metodologia->id);
-        return View('Contents/Docente/editarMetodologia')->with(compact('metodologia', 'fuentes'));
+        return View($this->ruta.'editarMetodologia')->with(compact('metodologia', 'fuentes'));
     }
     public function postEditarMetodologia(Request $request){
         $metodologia = new metodologia();
@@ -72,20 +73,62 @@ class DocenteController extends Controller
         DocenteDao::eliminarMetodologia($request->id);
         return back();
     }
-    public function crearProyecto(Request $request){
+    /**
+     * Traerá sólo los proyectos que le pertenezcan a ese docente
+     * pues, los que haya creado
+     * @param Request $request
+     * @return void
+     */
+    public function getListaProyectos(Request $request){
         $cookie_docente = json_decode(Crypt::decrypt(Cookie::get('usuario')));
-        
-        $docente = new usuario();
-        $docente->id = $cookie_docente->id;
-        $docente->email = $cookie_docente->email;
-
-        $metodologia = new metodologia();
-        $metodologia->id = $request->id_metodologia;
-        $metodologia->nombre = $request->nombre_metodologia;
-
-        $proyecto = new proyecto();
-        $proyecto->fecha_limite = $request->fecha_limite;
-        DocenteDao::crearProyecto($docente, $metodologia, $proyecto);
+        $proyectos = DocenteDao::getAllProyectos($cookie_docente->id);
+        return View($this->ruta.'listarProyectos')->with(compact('proyectos'));
     }
+    public function getCrearProyecto(Request $request){
+        $metodologias = DocenteDao::getAllMetodologias();
+        return View($this->ruta.'crearProyecto')->with(compact('metodologias'));
+    }
+    public function postCrearProyecto(Request $request){
+        $request->fecha_limite = date('Y-m-d', strtotime("+$request->fecha_limite days"));
+        $cookie_docente = json_decode(Crypt::decrypt(Cookie::get('usuario')));
+        $proyecto = new proyecto();
+        $proyecto->nombre = $request->nombre;
+        $proyecto->descripcion = $request->descripcion;
+        $proyecto->fecha_limite = $request->fecha_limite;
+        $proyecto->id_metodologia = $request->id_metodologia;
+        $proyecto->id_usuario = $cookie_docente->id;
+        $proyecto->id_estado = $request->id_estado;
+        DocenteDao::crearProyecto($proyecto);
+        return redirect()->route('docente.getListaProyectos');
+    }
+    public function getAlternarEstadoProyecto(Request $request){
+        $proyecto = new stdClass();
+        $proyecto->id = $request->id;
+        $proyecto->id_estado = $request->id_estado == 1 ? 2 : 1;
+        DocenteDao::alternarEstadoProyecto($proyecto);
+        return redirect()->route('docente.getListaProyectos');
+    }
+    public function getEditarProyecto(Request $request){
+        $proyecto = DocenteDao::getProyectoById($request->id);
+        return view($this->ruta.'editarProyecto')->with(compact('proyecto'));
+    }
+    public function postEditarProyecto(Request $request){
+        $proyecto = DocenteDao::getProyectoById($request->id);
+        $proyecto->nombre = $request->nombre;
+        $proyecto->descripcion = $request->descripcion;
+        if($request->dias_extra[0] != '-'){
+            $proyecto->fecha_limite = date('Y-m-d', strtotime($proyecto->fecha_limite."+$request->dias_extra days"));
+        }else{
+            $fecha_actual = date('Y-m-d', strtotime("+ 0 days"));
+            $fecha_generada = date('Y-m-d', strtotime($proyecto->fecha_limite."$request->dias_extra days"));
+            if($fecha_actual > $fecha_generada){
+                $proyecto->fecha_limite = date('Y-m-d', strtotime($proyecto->fecha_limite."+ 0 days"));
+            }else{
+                $proyecto->fecha_limite = date('Y-m-d', strtotime($proyecto->fecha_limite."$request->dias_extra days"));
+            }
 
+        }
+        DocenteDao::editarProyecto($proyecto);
+        return redirect()->route('docente.getListaProyectos');
+    }
 }

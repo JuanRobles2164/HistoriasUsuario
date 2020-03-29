@@ -18,7 +18,6 @@ class CreateProyecto extends Migration
             $table->string('nombre');
             $table->string('descripcion');
             $table->date('fecha_limite');
-            $table->string('rol_proyecto');
 
             $table->unsignedBigInteger('id_usuario');
             $table->unsignedBigInteger('id_metodologia');

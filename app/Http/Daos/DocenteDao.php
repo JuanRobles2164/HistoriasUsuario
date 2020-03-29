@@ -9,6 +9,7 @@ use App\usuario;
 use App\proyecto;
 use App\metodologia;
 use App\fuente;
+use stdClass;
 
 class DocenteDao extends Controller
 {
@@ -23,6 +24,12 @@ class DocenteDao extends Controller
         ->where('id_metodologia', $id_metodologia)
         ->get();
         return $fuente;
+    }
+    public static function getProyectoById($id){
+        $proyecto = DB::table('proyecto')
+        ->where('id', $id)
+        ->first();
+        return $proyecto;
     }
     public static function eliminarFuenteMetodologia($id){
         $SQL = "DELETE FROM fuente WHERE id = $id";
@@ -44,13 +51,24 @@ class DocenteDao extends Controller
         $SQL = "UPDATE metodologia SET nombre='$metodologia->nombre', descripcion='$metodologia->descripcion', updated_at = CURRENT_TIMESTAMP WHERE id='$metodologia->id'";
         DB::update($SQL);
     }
-    public static function crearProyecto(usuario $docente, metodologia $metodologia, proyecto $proyecto){
-        $SQL = "INSERT INTO proyecto(nombre, descripcion, fecha_limite, id_usuario, id_metodologia, id_estado) VALUES('', '', )";
+    public static function getAllProyectos($id_docente){
+        $proyectos = DB::select("SELECT p.*,(SELECT DATEDIFF(p.fecha_limite, SYSDATE())) AS dias_restantes FROM proyecto p WHERE p.id_usuario = $id_docente ORDER BY id_estado ASC");
+        return $proyectos;
+    }
+    public static function crearProyecto(proyecto $proyecto){
+        $SQL = "INSERT INTO proyecto(nombre, descripcion, fecha_limite, id_usuario, id_metodologia, id_estado, created_at) VALUES('$proyecto->nombre', '$proyecto->descripcion', '$proyecto->fecha_limite', $proyecto->id_usuario, $proyecto->id_metodologia, $proyecto->id_estado, CURRENT_TIMESTAMP)";
         DB::insert($SQL);
     }
     public static function getAllMetodologias(){
         $metodologias = DB::table('metodologia')
         ->get();
         return $metodologias;
+    }
+    public static function alternarEstadoProyecto(stdClass $proyecto){
+        DB::update("UPDATE proyecto SET id_estado = $proyecto->id_estado WHERE id = $proyecto->id");
+    }
+    public static function editarProyecto(stdClass $proyecto){
+        $SQL = "UPDATE proyecto SET nombre='$proyecto->nombre', descripcion='$proyecto->descripcion', fecha_limite='$proyecto->fecha_limite', updated_at=CURRENT_TIMESTAMP WHERE id=$proyecto->id";
+        DB::update($SQL);
     }
 }

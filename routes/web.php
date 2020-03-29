@@ -38,16 +38,22 @@ Route::get('/administrador/estado_usuario', 'AdministradorController@eliminarUsu
 
 
 Route::get('/docente', 'DocenteController@index')->name('docente.getIndex');
-Route::get('/docente/lista_metodologias', 'DocenteController@getListaMetodologias')->name('docente.getListaMetodologias');
+Route::get('/docente/metodologias', 'DocenteController@getListaMetodologias')->name('docente.getListaMetodologias');
 Route::get('/docente/crear_metodologia', 'DocenteController@getCrearMetodologia')->name('docente.getCrearMetodologia');
 Route::post('/docente/crear_metodologia', 'DocenteController@postCrearMetodologia')->name('docente.postCrearMetodologia');
 Route::get('/docente/editar_metodologia', 'DocenteController@getEditarMetodologia')->name('docente.getEditarMetodologia');
 Route::post('/docente/editar_metodologia', 'DocenteController@postEditarMetodologia')->name('docente.postEditarMetodologia');
 Route::get('/docente/agregar_fuente_metodologia', 'DocenteController@agregarFuenteMetodologiaAJAX')->name('docente.agregarFuenteMetodologiaAJAX');
 Route::get('/docente/eliminar_fuente', 'DocenteController@eliminarFuenteMetodologia')->name('docente.eliminarFuenteMetodologia');
-/*Route::get('', '')->name('');
-Route::get('', '')->name('');
-Route::get('', '')->name('');
+Route::get('/docente/proyectos', 'DocenteController@getListaProyectos')->name('docente.getListaProyectos');
+Route::get('/docente/proyectos/crear_proyecto', 'DocenteController@getCrearProyecto')->name('docente.getCrearProyecto');
+Route::post('/docente/proyectos/crear_proyecto', 'DocenteController@postCrearProyecto')->name('docente.postCrearProyecto');
+Route::get('/docente/proyectos/alternar_estado', 'DocenteController@getAlternarEstadoProyecto')->name('docente.getAlternarEstadoProyecto');
+Route::get('/docente/proyectos/editar', 'DocenteController@getEditarProyecto')->name('docente.getEditarProyecto');
+Route::post('/docente/proyectos/editar', 'DocenteController@postEditarProyecto')->name('docente.postEditarProyecto');
+/*
+
+
 Route::get('', '')->name('');
 Route::get('', '')->name('');*/
 
