@@ -15,11 +15,11 @@ class CreateGrupoUsuario extends Migration
     {
         Schema::create('grupo_usuario', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_usuario_fk');
+            $table->unsignedBigInteger('id_usuario');
             $table->unsignedBigInteger('id_grupo');
             $table->timestamps();
 
-            $table->foreign('id_usuario_fk')->references('id')->on('usuarios');
+            $table->foreign('id_usuario')->references('id')->on('usuarios');
             $table->foreign('id_grupo')->references('id')->on('grupo_trabajo');
         });
     }

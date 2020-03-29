@@ -76,10 +76,10 @@
                <a href="#" class="float-left show-nav-lateral">
                <i class="fas fa-bars"></i>
                </a>
-               <a href="#">
+                  <a href="<?php echo e(route('docente.getSelfEdit')); ?>">
                <i class="fas fa-user-cog"></i>
                </a>
-               <a href="#" class="btn-exit-system">
+                  <a href="<?php echo e(route('getLogin')); ?>" class="btn-exit-system">
                <i class="fas fa-power-off"></i>
                </a>
             </nav>

@@ -13,10 +13,15 @@ class UsuarioDao extends Controller
     /**Obtiene el usuario 
      * asociado al correo
      */
-
     public static function getAllRoles(){
         $roles = DB::table('roles')->get();
         return $roles;
+    }
+    public static function getUserById($id){
+        $usuario = DB::table('usuarios')
+        ->where('id', $id)
+        ->first();
+        return $usuario;
     }
     public static function getAlumnoRole(){
         $roles = DB::table('roles')

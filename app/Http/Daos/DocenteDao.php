@@ -56,8 +56,11 @@ class DocenteDao extends Controller
         return $proyectos;
     }
     public static function crearProyecto(proyecto $proyecto){
-        $SQL = "INSERT INTO proyecto(nombre, descripcion, fecha_limite, id_usuario, id_metodologia, id_estado, created_at) VALUES('$proyecto->nombre', '$proyecto->descripcion', '$proyecto->fecha_limite', $proyecto->id_usuario, $proyecto->id_metodologia, $proyecto->id_estado, CURRENT_TIMESTAMP)";
+        $max_id_proyecto = DB::table('proyecto')->max('id');
+        $max_id_proyecto++;
+        $SQL = "INSERT INTO proyecto(id, nombre, descripcion, fecha_limite, id_usuario, id_metodologia, id_estado, created_at) VALUES($max_id_proyecto,'$proyecto->nombre', '$proyecto->descripcion', '$proyecto->fecha_limite', $proyecto->id_usuario, $proyecto->id_metodologia, $proyecto->id_estado, CURRENT_TIMESTAMP)";
         DB::insert($SQL);
+        DB::insert("INSERT INTO grupo_trabajo(nombre, descripcion, estado_activo, id_proyecto) VALUES('Grupo base', 'Grupo base del proyecto; alumnos sin grupo dentro de un proyecto', 1, $max_id_proyecto)");
     }
     public static function getAllMetodologias(){
         $metodologias = DB::table('metodologia')
@@ -70,5 +73,11 @@ class DocenteDao extends Controller
     public static function editarProyecto(stdClass $proyecto){
         $SQL = "UPDATE proyecto SET nombre='$proyecto->nombre', descripcion='$proyecto->descripcion', fecha_limite='$proyecto->fecha_limite', updated_at=CURRENT_TIMESTAMP WHERE id=$proyecto->id";
         DB::update($SQL);
+    }
+    public static function getAllEstudiantesSinAsignarEnProyecto($id_proyecto){
+        //Obtiene los estudiantes asignados actualmente al proyecto
+        $SQL = "SELECT u.* FROM usuarios u LEFT JOIN grupo_usuario gu on u.id = gu.id_usuario LEFT JOIN grupo_trabajo gt ON gt.id = gu.id_grupo where gt.id_proyecto = 9";
+        $estudiantes = DB::select($SQL);
+        return $estudiantes;
     }
 }

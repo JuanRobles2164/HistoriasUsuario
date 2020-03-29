@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Crypt;
 use App\metodologia;
 use App\proyecto;
+use App\Http\Daos\UsuarioDao;
 use App\usuario;
 use App\fuente;
 use stdClass;
@@ -25,6 +26,27 @@ class DocenteController extends Controller
     }
     public function getCrearMetodologia(Request $request){
         return view($this->ruta.'crearMetodologia');
+    }
+    public function getSelfEdit(Request $request){
+        $cookie_docente = json_decode(Crypt::decrypt(Cookie::get('usuario')));
+        $usuario = UsuarioDao::getUserById($cookie_docente->id);
+        return view($this->ruta.'editPerfil')->with(compact('usuario'));
+    }
+    public function postSelfEdit(Request $request){
+        $usuario = new usuario();
+        $usuario->id = $request->id;
+        $usuario->nombres = $request->nombres;
+        $usuario->apellidos = $request->apellidos;
+        $usuario->username = $request->username;
+        $usuario->identificacion = $request->identificacion;
+        $usuario->email = $request->email;
+        if(strlen($request->contrasenia) <= 80){
+            $usuario->contrasenia = Funciones::cifrarClave($request->contrasenia);
+        }else{
+            $usuario->contrasenia = $request->contrasenia;
+        }
+        UsuarioDao::editarUsuario($usuario);
+        return redirect()->route('docente.index');
     }
     public function postCrearMetodologia(Request $request){
         $metodologia = new metodologia();
@@ -130,5 +152,21 @@ class DocenteController extends Controller
         }
         DocenteDao::editarProyecto($proyecto);
         return redirect()->route('docente.getListaProyectos');
+    }
+    /**
+     * Esta función deberá devolverle a la vista:
+     * - Los alumnos que no estén ligados a un proyecto
+     * - Los grupos que han trabajado en el proyecto 
+     * - Los grupos que estén ligados al proyecto pero no han trabajado
+     * - El porcentaje de trabajo avanzado por grupo
+     * - La última fase trabajada por ese grupo
+     * - La última actividad trabajada por el grupo
+     * @param Request $request
+     * @return void
+     */
+    public function getSupervisarProyecto(Request $request){
+        $proyecto = DocenteDao::getProyectoById($request->id_proyecto);
+        $estudiantes = DocenteDao::getAllEstudiantesSinAsignarEnProyecto($request->id_proyecto);
+        return view($this->ruta.'supervisarProyecto')->with(compact(array('proyecto', 'estudiantes')));
     }
 }

@@ -38,6 +38,8 @@ Route::get('/administrador/estado_usuario', 'AdministradorController@eliminarUsu
 
 
 Route::get('/docente', 'DocenteController@index')->name('docente.getIndex');
+Route::get('/docente/editar_perfil', 'DocenteController@getSelfEdit')->name('docente.getSelfEdit');
+Route::post('/docente/editar_perfil', 'DocenteController@postSelfEdit')->name('docente.postSelfEdit');
 Route::get('/docente/metodologias', 'DocenteController@getListaMetodologias')->name('docente.getListaMetodologias');
 Route::get('/docente/crear_metodologia', 'DocenteController@getCrearMetodologia')->name('docente.getCrearMetodologia');
 Route::post('/docente/crear_metodologia', 'DocenteController@postCrearMetodologia')->name('docente.postCrearMetodologia');
@@ -51,6 +53,7 @@ Route::post('/docente/proyectos/crear_proyecto', 'DocenteController@postCrearPro
 Route::get('/docente/proyectos/alternar_estado', 'DocenteController@getAlternarEstadoProyecto')->name('docente.getAlternarEstadoProyecto');
 Route::get('/docente/proyectos/editar', 'DocenteController@getEditarProyecto')->name('docente.getEditarProyecto');
 Route::post('/docente/proyectos/editar', 'DocenteController@postEditarProyecto')->name('docente.postEditarProyecto');
+Route::get('/docente/proyectos/{id_proyecto}', 'DocenteController@getSupervisarProyecto')->name('docente.getSupervisarProyecto');
 /*
 
 
