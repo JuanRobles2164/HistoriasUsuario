@@ -166,7 +166,17 @@ class DocenteController extends Controller
      */
     public function getSupervisarProyecto(Request $request){
         $proyecto = DocenteDao::getProyectoById($request->id_proyecto);
-        $estudiantes = DocenteDao::getAllEstudiantesSinAsignarEnProyecto($request->id_proyecto);
-        return view($this->ruta.'supervisarProyecto')->with(compact(array('proyecto', 'estudiantes')));
+        $alumnos = DocenteDao::getAllEstudiantesSinAsignarEnProyecto($request->id_proyecto);
+        return view($this->ruta.'supervisarProyecto')->with(compact(array('proyecto', 'alumnos')));
     }
+    public function postAsignarAlumnoProyecto(Request $request){
+        $query_values = array();
+        $grupo_primigenio = DocenteDao::getGrupoPrimigenio($request->id_proyecto);
+        foreach($request->id_alumnos as $idAlumno){
+            
+            array_push($query_values, "($idAlumno, $grupo_primigenio->id),");
+        }
+        return $query_values;
+    }
+    
 }

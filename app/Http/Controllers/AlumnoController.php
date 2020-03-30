@@ -12,7 +12,10 @@ use App\usuario;
 
 class AlumnoController extends Controller
 {
-
+    private $ruta = "/Contents/Alumno/";
+    public function index(Request $request){
+        return view($this->ruta.'indexAlumno');
+    }
     public function crearEquipo(Request $request){
         $grupo = new grupoTrabajo();
         $grupo->nombre = $request->nombre;

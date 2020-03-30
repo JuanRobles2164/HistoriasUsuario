@@ -76,8 +76,14 @@ class DocenteDao extends Controller
     }
     public static function getAllEstudiantesSinAsignarEnProyecto($id_proyecto){
         //Obtiene los estudiantes asignados actualmente al proyecto
-        $SQL = "SELECT u.* FROM usuarios u LEFT JOIN grupo_usuario gu on u.id = gu.id_usuario LEFT JOIN grupo_trabajo gt ON gt.id = gu.id_grupo where gt.id_proyecto = 9";
+        $SQL = "SELECT u.* FROM usuarios u LEFT JOIN grupo_usuario gu on u.id = gu.id_usuario LEFT JOIN grupo_trabajo gt ON gt.id = gu.id_grupo WHERE u.rol_id = 2";
         $estudiantes = DB::select($SQL);
         return $estudiantes;
+    }
+    public static function getGrupoPrimigenio($id_proyecto){
+        $grupo = DB::table('grupo_trabajo')
+        ->where('id', $id_proyecto)
+        ->first();
+        return $grupo;
     }
 }

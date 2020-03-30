@@ -54,12 +54,14 @@ Route::get('/docente/proyectos/alternar_estado', 'DocenteController@getAlternarE
 Route::get('/docente/proyectos/editar', 'DocenteController@getEditarProyecto')->name('docente.getEditarProyecto');
 Route::post('/docente/proyectos/editar', 'DocenteController@postEditarProyecto')->name('docente.postEditarProyecto');
 Route::get('/docente/proyectos/{id_proyecto}', 'DocenteController@getSupervisarProyecto')->name('docente.getSupervisarProyecto');
+Route::post('/docente/proyectos/{id_proyecto}/asignar_alumno', 'DocenteController@postAsignarAlumnoProyecto')->name('docente.postAsignarAlumnoProyecto');
 /*
 
 
 Route::get('', '')->name('');
 Route::get('', '')->name('');*/
 
+Route::get('/alumno', 'AlumnoController@index')->name('alumno.getIndex');
 
 //Enrutado para hacer pruebas con las vistas, puede cambiarse cuando desee
 Route::get('/test', function(){

@@ -41,7 +41,8 @@
 					<i class="far fa-times-circle show-nav-lateral"></i>
 					<img src="./assets/icons/avatar.svg" class="img-fluid" alt="Avatar">
 					<figcaption class="roboto-medium text-center">
-						Gabriel Alexander Castro <br><small class="roboto-condensed-light">Alumno</small>
+						{{json_decode(Crypt::decrypt(Cookie::get('usuario')))->nombre }} 
+						<br><small class="roboto-condensed-light">Alumno</small>
 					</figcaption>
 				</figure>
 				<div class="full-box nav-lateral-bar"></div>
@@ -76,7 +77,7 @@
 				<a href="#">
 					<i class="fas fa-user-cog"></i>
 				</a>
-				<a href="#" class="btn-exit-system">
+				<a href="{{route('getLogin')}}" class="btn-exit-system">
 					<i class="fas fa-power-off"></i>
 				</a>
 			</nav>
