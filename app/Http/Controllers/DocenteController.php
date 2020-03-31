@@ -174,7 +174,7 @@ class DocenteController extends Controller
         $grupo_primigenio = DocenteDao::getGrupoPrimigenio($request->id_proyecto);
         foreach($request->id_alumnos as $idAlumno){
             
-            array_push($query_values, "($idAlumno, $grupo_primigenio->id),");
+            array_push($query_values, "($idAlumno,$grupo_primigenio->id),");
         }
         return $query_values;
     }
