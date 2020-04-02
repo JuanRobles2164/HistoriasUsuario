@@ -7,6 +7,7 @@ use App\Http\Daos\AdministradorDao;
 use Facade\FlareClient\View;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Contracts\Encryption\Encrypter;
 use App\usuario;
 use App\Http\Daos\UsuarioDao;

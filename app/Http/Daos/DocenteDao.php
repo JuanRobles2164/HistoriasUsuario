@@ -52,13 +52,13 @@ class DocenteDao extends Controller
         DB::update($SQL);
     }
     public static function getAllProyectos($id_docente){
-        $proyectos = DB::select("SELECT p.*,(SELECT DATEDIFF(p.fecha_limite, SYSDATE())) AS dias_restantes FROM proyecto p WHERE p.id_usuario = $id_docente ORDER BY id_estado ASC");
+        $proyectos = DB::select("SELECT p.*,(SELECT DATEDIFF(p.fecha_limite, p.fecha_inicial)) AS dias_restantes FROM proyecto p WHERE p.id_usuario = $id_docente ORDER BY id_estado ASC");
         return $proyectos;
     }
     public static function crearProyecto(proyecto $proyecto){
         $max_id_proyecto = DB::table('proyecto')->max('id');
         $max_id_proyecto++;
-        $SQL = "INSERT INTO proyecto(id, nombre, descripcion, fecha_limite, id_usuario, id_metodologia, id_estado, created_at) VALUES($max_id_proyecto,'$proyecto->nombre', '$proyecto->descripcion', '$proyecto->fecha_limite', $proyecto->id_usuario, $proyecto->id_metodologia, $proyecto->id_estado, CURRENT_TIMESTAMP)";
+        $SQL = "INSERT INTO proyecto(id, nombre, descripcion, fecha_limite, fecha_inicial, id_usuario, id_metodologia, id_estado, created_at) VALUES($max_id_proyecto,'$proyecto->nombre', '$proyecto->descripcion', '$proyecto->fecha_limite', '$proyecto->fecha_inicial' ,$proyecto->id_usuario, $proyecto->id_metodologia, $proyecto->id_estado, CURRENT_TIMESTAMP)";
         DB::insert($SQL);
         DB::insert("INSERT INTO grupo_trabajo(nombre, descripcion, estado_activo, id_proyecto) VALUES('Grupo base', 'Grupo base del proyecto; alumnos sin grupo dentro de un proyecto', 1, $max_id_proyecto)");
     }
@@ -71,7 +71,7 @@ class DocenteDao extends Controller
         DB::update("UPDATE proyecto SET id_estado = $proyecto->id_estado WHERE id = $proyecto->id");
     }
     public static function editarProyecto(stdClass $proyecto){
-        $SQL = "UPDATE proyecto SET nombre='$proyecto->nombre', descripcion='$proyecto->descripcion', fecha_limite='$proyecto->fecha_limite', updated_at=CURRENT_TIMESTAMP WHERE id=$proyecto->id";
+        $SQL = "UPDATE proyecto SET nombre='$proyecto->nombre', descripcion='$proyecto->descripcion', fecha_limite='$proyecto->fecha_limite', fecha_inicio='$proyecto->fecha_inicial' updated_at=CURRENT_TIMESTAMP WHERE id=$proyecto->id";
         DB::update($SQL);
     }
     public static function getAllEstudiantesSinAsignarEnProyecto($id_proyecto){

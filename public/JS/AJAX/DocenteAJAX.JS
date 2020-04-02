@@ -29,3 +29,7 @@ function agregarFuenteMetodologia(){
         }
     });*/
 }
+
+function seleccionarTodo(source){
+    
+}

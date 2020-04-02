@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Query\Expression;
 
 class CreateProyecto extends Migration
 {
@@ -17,6 +18,7 @@ class CreateProyecto extends Migration
             $table->bigIncrements('id');
             $table->string('nombre');
             $table->string('descripcion');
+            $table->dateTime('fecha_inicial');
             $table->date('fecha_limite');
 
             $table->unsignedBigInteger('id_usuario');

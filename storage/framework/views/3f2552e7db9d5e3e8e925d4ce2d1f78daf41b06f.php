@@ -22,21 +22,15 @@
                <td scope="row" valign="middle" align="center" style="line-height: 30px;"><?php echo e($usuario->abreviatura); ?></td>
                <?php if($usuario->estado_eliminado == 0): ?>
                   <td scope="row" valign="middle" align="center" style="line-height: 30px;">
-                     <div class="btn btn-success">
+                     <a class="btn btn-success" href="<?php echo e(route('admin.eliminarUsuario', 'id='.$usuario->id.'&eliminado='.$usuario->estado_eliminado)); ?>">
                         Activo
-                      </div>                     
-                  </td>
-               <?php elseif($usuario->estado_eliminado == 1): ?>
-                  <td scope="row" valign="middle" align="center" style="line-height: 30px;">
-                     <div class="btn btn-danger">
-                        Inactivo
-                      </div>
+                     </a>                     
                   </td>
                <?php else: ?>
                   <td scope="row" valign="middle" align="center" style="line-height: 30px;">
-                     <div class="btn btn-secondary">
-                        Otro
-                     </div>
+                     <a class="btn btn-danger" href="<?php echo e(route('admin.eliminarUsuario', 'id='.$usuario->id.'&eliminado='.$usuario->estado_eliminado)); ?>">
+                        Inactivo
+                     </a>
                   </td>
                <?php endif; ?>
                <td scope="row" valign="middle" align="center" style="line-height: 30px;">
@@ -48,9 +42,6 @@
                   </a>
                   <a href="<?php echo e(route('admin.restaurarUsuario', 'id='.$usuario->id)); ?>" <a class="btn btn-warning btn-sm">
                      <i class="glyphicon glyphicon-refresh"></i>
-                  </a>
-                  <a href="<?php echo e(route('admin.eliminarUsuario', 'id='.$usuario->id.'&eliminado='.$usuario->estado_eliminado)); ?>" class="btn btn-danger btn-sm">
-                     <i class="glyphicon glyphicon-trash"></i>
                   </a>
                </td>
             </tr>

@@ -21,7 +21,6 @@ class UsuarioController extends Controller
      * Inhabilita el acceso a otras partes
     */
     public function onGetLogin(Request $request){
-        
         $cookiexd = Cookie::forget('usuario');
         return response(View('Login'))->withCookie($cookiexd);
     }
@@ -54,11 +53,14 @@ class UsuarioController extends Controller
      * que le corresponda
      */
     public function onPostLogin(Request $request){
+        $request->validate([
+            'username' => 'required',
+            'contrasenia' => 'required'
+        ]);
         $usuario = new usuario();
         $usuario->email = $request->username;
         $usuario->username = $request->username;
         $usuario->contrasenia = $request->contrasenia;
-
         $usuarioAuth = UsuarioDao::validaUsuario($usuario);
         if($usuarioAuth != null){
             if($usuarioAuth->estado_eliminado == 1){
@@ -72,20 +74,13 @@ class UsuarioController extends Controller
             $usuario->email = $usuarioAuth->e_mail;
             $_usuario->nombre = $usuarioAuth->nombres;
             $_usuario->token = Str::random(80);
-            if($usuarioAuth->rol == "SUPER_ADMIN"){
-                //No olvidar cambiarlo por indexAdmin o la vista que se le genere al admin
-                //en el archivo web.php
-                return redirect()->route('admin.getIndex')->cookie(cookie('usuario', Crypt::encrypt(json_encode($_usuario))));
-            }
-            if($usuarioAuth->rol == "ALUMNO"){
-                return redirect()->route('alumno.getIndex')->cookie(cookie('usuario', Crypt::encrypt(json_encode($_usuario))));
-            }
-            if($usuarioAuth->rol == "DOCENTE"){
-                return redirect()->route('docente.getIndex')->cookie(cookie('usuario', Crypt::encrypt(json_encode($_usuario))));
-            }
+            return redirect()->route(strtolower($usuarioAuth->rol).'.getIndex')->cookie(cookie('usuario', Crypt::encrypt(json_encode($_usuario))));
+            
             //return redirect()->route('getWelcome')->cookie(cookie('usuario', Crypt::encrypt(json_encode($_usuario))));
         }else{
-            return view('Login');
+
+            return redirect('registro');
+            //return redirect()->route('getLogin')->withErrors($datosErroneos, 'errorDatos');
         }
     }
     public function editar(Request $request){

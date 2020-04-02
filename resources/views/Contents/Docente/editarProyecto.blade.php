@@ -9,8 +9,11 @@
         <label for=""></label>
         <input type="text" name="descripcion" value="{{$proyecto->descripcion}}">
         <br>
-        <label for="">Agregar o quitar días de trabajo al proyecto:</label>
-        <input type="text" name="dias_extra" value="0">
+        <label for="">Fecha inicial: </label>
+        <input type="date" name="fecha_inicial" value="{{$proyecto->fecha_inicial}}">
+        <br>
+        <label for="">Fecha final: </label>
+        <input type="date" name="fecha_limite" value="{{$proyecto->fecha_limite}}">
         <br>
         <label for="" id="label_fecha_limite">La fecha actual de finalización del proyecto es: {{$proyecto->fecha_limite}}</label>
         <input type="hidden" id="fecha_limite_element" value="{{$proyecto->fecha_limite}}">

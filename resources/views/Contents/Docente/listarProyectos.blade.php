@@ -9,7 +9,6 @@
         <thead>
             <tr class="bg-primary">
                 <td style="text-align: center;">Nombre</td>
-                <td style="text-align: center;">Descripcion</td>
                 <td style="text-align: center;">Fecha límite (YYYY-MM-dd)</td>
                 <td style="text-align: center;">días restantes</td>
                 <td style="text-align: center;">Estado</td>
@@ -20,16 +19,15 @@
             @foreach ($proyectos as $proyecto)
                 <tr>
                     <th style="text-align: center;">{{$proyecto->nombre}}</th>
-                    <th style="text-align: center;">{{$proyecto->descripcion}}</th>
                     <th style="text-align: center;">{{$proyecto->fecha_limite}}</th>
                     <th style="text-align: center;">{{($proyecto->dias_restantes)}}</th>
                     @if ($proyecto->id_estado == 1)
                         <th style="text-align: center;">
-                            <a class="btn btn-success">Activo</a>
+                            <a href="{{route('docente.getAlternarEstadoProyecto', 'id='.$proyecto->id."&id_estado=".$proyecto->id_estado)}}" class="btn btn-success">Activo</a>
                         </th>
                     @else
                         <th style="text-align: center;">
-                            <a class="btn btn-danger">Inactivo</a>
+                            <a href="{{route('docente.getAlternarEstadoProyecto', 'id='.$proyecto->id."&id_estado=".$proyecto->id_estado)}}" class="btn btn-danger">Inactivo</a>
                         </th>
                     @endif
                     <th style="text-align: center;">
@@ -39,7 +37,6 @@
                         <a href="#" class="btn btn-success" aria-placeholder="Detalles">Detalles</a>
                         <a href="{{route('docente.getSupervisarProyecto', $proyecto->id)}}" class="btn btn-info" >Supervisar</a>
                         <a href="{{route('docente.getEditarProyecto', 'id='.$proyecto->id)}}" class="btn btn-warning" aria-placeholder="Editar">Editar</a>
-                        <a href="{{route('docente.getAlternarEstadoProyecto', 'id='.$proyecto->id."&id_estado=".$proyecto->id_estado)}}" class="btn btn-danger" placeholder="Suspender">Eiminar</a>
                     </th>
                 </tr>
             @endforeach

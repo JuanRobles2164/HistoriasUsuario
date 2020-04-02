@@ -23,21 +23,15 @@
                <td scope="row" valign="middle" align="center" style="line-height: 30px;">{{$usuario->abreviatura}}</td>
                @if($usuario->estado_eliminado == 0)
                   <td scope="row" valign="middle" align="center" style="line-height: 30px;">
-                     <div class="btn btn-success">
+                     <a class="btn btn-success" href="{{route('admin.eliminarUsuario', 'id='.$usuario->id.'&eliminado='.$usuario->estado_eliminado)}}">
                         Activo
-                      </div>                     
-                  </td>
-               @elseif($usuario->estado_eliminado == 1)
-                  <td scope="row" valign="middle" align="center" style="line-height: 30px;">
-                     <div class="btn btn-danger">
-                        Inactivo
-                      </div>
+                     </a>                     
                   </td>
                @else
                   <td scope="row" valign="middle" align="center" style="line-height: 30px;">
-                     <div class="btn btn-secondary">
-                        Otro
-                     </div>
+                     <a class="btn btn-danger" href="{{route('admin.eliminarUsuario', 'id='.$usuario->id.'&eliminado='.$usuario->estado_eliminado)}}">
+                        Inactivo
+                     </a>
                   </td>
                @endif
                <td scope="row" valign="middle" align="center" style="line-height: 30px;">
@@ -49,9 +43,6 @@
                   </a>
                   <a href="{{route('admin.restaurarUsuario', 'id='.$usuario->id)}}" <a class="btn btn-warning btn-sm">
                      <i class="glyphicon glyphicon-refresh"></i>
-                  </a>
-                  <a href="{{route('admin.eliminarUsuario', 'id='.$usuario->id.'&eliminado='.$usuario->estado_eliminado)}}" class="btn btn-danger btn-sm">
-                     <i class="glyphicon glyphicon-trash"></i>
                   </a>
                </td>
             </tr>

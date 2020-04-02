@@ -33,51 +33,28 @@
     </div>
 
     <div id="listado_fuentes">
-        @if($fuentes == null)
         <table class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col" valign="middle" align="center" style="text-align: center">URL</th>
-                    <th scope="col" valign="middle" align="center" style="text-align: center">Descripcion</th>
-                    <th scope="col" valign="middle" align="center" style="text-align: center">Acciones</th>
+                    <th scope="col" valign="middle" align="center">URL</th>
+                    <th scope="col" valign="middle" align="center">Descripcion</th>
+                    <th scope="col" valign="middle" align="center">Acciones</th>
                 </tr>
             </thead>
-            <tbody id="tbody_container">
-                <tr id="tr_no_elements">
-                    <td scope=row valign=middle align=center id=td_url_no_element>NO HAY ELEMENTOS DISPONIBLES</td>
-                    <td scope="row" valign="middle" align="center" id="td_descripcion_no_element">NO HAY ELEMENTOS DISPONIBLES</td>
-                    <td scope="row" valign="middle" align="center" id="btnSectionFuente">
-                        <a href="#" class="btn btn-warning" id="btnEditarFuente">Editar</a>
-                        <a href="#" class="btn btn-danger" id="btnEliminarFuente">Eliminar</a>
-                    </td>
-                </tr>
+            <tbody>
+                @foreach ($fuentes as $fuente)
+                    <tr>
+                        <th scope="row">
+                            <a href="{{$fuente->url}}" target="_blank">Redirigir</a>
+                        </th>
+                        <th scope="row">{{$fuente->descripcion}}</th>
+                        <th scope="row">
+                            <a href="{{route('docente.eliminarFuenteMetodologia', 'id='.$fuente->id)}}" class="btn btn-danger">Eliminar</a>
+                        </th>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
-        @else
-            
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col" valign="middle" align="center">URL</th>
-                            <th scope="col" valign="middle" align="center">Descripcion</th>
-                            <th scope="col" valign="middle" align="center">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($fuentes as $fuente)
-                            <tr>
-                                <th scope="row">
-                                    <a href="{{$fuente->url}}" target="_blank">Redirigir</a>
-                                </th>
-                                <th scope="row">{{$fuente->descripcion}}</th>
-                                <th scope="row">
-                                    <a href="{{route('docente.eliminarFuenteMetodologia', 'id='.$fuente->id)}}" class="btn btn-danger">Eliminar</a>
-                                </th>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-        @endif
     </div>
     
 </div>

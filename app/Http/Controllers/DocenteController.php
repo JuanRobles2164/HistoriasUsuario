@@ -111,11 +111,12 @@ class DocenteController extends Controller
         return View($this->ruta.'crearProyecto')->with(compact('metodologias'));
     }
     public function postCrearProyecto(Request $request){
-        $request->fecha_limite = date('Y-m-d', strtotime("+$request->fecha_limite days"));
+
         $cookie_docente = json_decode(Crypt::decrypt(Cookie::get('usuario')));
         $proyecto = new proyecto();
         $proyecto->nombre = $request->nombre;
         $proyecto->descripcion = $request->descripcion;
+        $proyecto->fecha_inicial = $request->fecha_inicial;
         $proyecto->fecha_limite = $request->fecha_limite;
         $proyecto->id_metodologia = $request->id_metodologia;
         $proyecto->id_usuario = $cookie_docente->id;
@@ -132,24 +133,16 @@ class DocenteController extends Controller
     }
     public function getEditarProyecto(Request $request){
         $proyecto = DocenteDao::getProyectoById($request->id);
+        $proyecto->fecha_inicial = date('Y-m-d', strtotime($proyecto->fecha_inicial));
+        $proyecto->fecha_limite = date('Y-m-d', strtotime($proyecto->fecha_limite));
         return view($this->ruta.'editarProyecto')->with(compact('proyecto'));
     }
     public function postEditarProyecto(Request $request){
         $proyecto = DocenteDao::getProyectoById($request->id);
         $proyecto->nombre = $request->nombre;
         $proyecto->descripcion = $request->descripcion;
-        if($request->dias_extra[0] != '-'){
-            $proyecto->fecha_limite = date('Y-m-d', strtotime($proyecto->fecha_limite."+$request->dias_extra days"));
-        }else{
-            $fecha_actual = date('Y-m-d', strtotime("+ 0 days"));
-            $fecha_generada = date('Y-m-d', strtotime($proyecto->fecha_limite."$request->dias_extra days"));
-            if($fecha_actual > $fecha_generada){
-                $proyecto->fecha_limite = date('Y-m-d', strtotime($proyecto->fecha_limite."+ 0 days"));
-            }else{
-                $proyecto->fecha_limite = date('Y-m-d', strtotime($proyecto->fecha_limite."$request->dias_extra days"));
-            }
-
-        }
+        $proyecto->fecha_inicial = $request->fecha_inicial;
+        $proyecto->fecha_limite = $request->fecha_limite;
         DocenteDao::editarProyecto($proyecto);
         return redirect()->route('docente.getListaProyectos');
     }
@@ -176,7 +169,7 @@ class DocenteController extends Controller
             
             array_push($query_values, "($idAlumno,$grupo_primigenio->id),");
         }
-        return $query_values;
+        return $request;
     }
     
 }
