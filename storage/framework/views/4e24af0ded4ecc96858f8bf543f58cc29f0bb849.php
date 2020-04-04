@@ -66,6 +66,9 @@
                            </li>
                         </ul>
                      </li>
+                     <li>
+                        <a href="<?php echo e(route('docente.getListaTemas')); ?>" class="fas"><i class="fas fa-archive"></i>&nbsp; &nbsp; Temas</a>
+                     </li>
                   </ul>
                </nav>
             </div>

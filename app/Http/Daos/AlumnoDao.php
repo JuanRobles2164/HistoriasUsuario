@@ -20,7 +20,11 @@ class AlumnoDao extends Controller
         DB::insert($SQL);
 
     }
+    public static function getAllRegisteredProjects($idUsuario){
+        $proyectos = DB::select("SELECT p.*, m.nombre AS metodologia, u.nombres AS docente FROM proyecto p JOIN grupo_trabajo gt ON gt.id_proyecto = p.id JOIN grupo_usuario gu ON gt.id = gu.id_grupo JOIN metodologia m ON p.id_metodologia = m.id JOIN usuarios u ON u.id = p.id_usuario WHERE gu.id_usuario = $idUsuario");
+        return $proyectos;
+    }
     public static function buscarTeammateDisponible(){
-
+        
     }
 }

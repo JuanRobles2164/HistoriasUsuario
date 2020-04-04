@@ -24,6 +24,17 @@ class DocenteController extends Controller
     public function index(Request $request){
         return view($this->ruta.'indexDocente');
     }
+    public function getViewListaTemas(){
+        $temas = DocenteDao::getAllTemas();
+        return view($this->ruta.'listaTopics')->with(compact('temas'));
+    }
+    public function getListaTemas(Request $request){
+        $temaEdit = null;
+        if(isset($request->id)){
+            $temaEdit = DocenteDao::getTemaById($request->id);
+        }
+        return $this->getViewListaTemas()->with(compact('temaEdit'));
+    }
     public function getCrearMetodologia(Request $request){
         return view($this->ruta.'crearMetodologia');
     }
@@ -46,7 +57,7 @@ class DocenteController extends Controller
             $usuario->contrasenia = $request->contrasenia;
         }
         UsuarioDao::editarUsuario($usuario);
-        return redirect()->route('docente.index');
+        return redirect()->route('docente.getIndex');
     }
     public function postCrearMetodologia(Request $request){
         $metodologia = new metodologia();
@@ -166,10 +177,10 @@ class DocenteController extends Controller
         $query_values = array();
         $grupo_primigenio = DocenteDao::getGrupoPrimigenio($request->id_proyecto);
         foreach($request->id_alumnos as $idAlumno){
-            
-            array_push($query_values, "($idAlumno,$grupo_primigenio->id),");
+            array_push($query_values, "($idAlumno,$grupo_primigenio->id, CURRENT_TIMESTAMP)");
         }
-        return $request;
+        DocenteDao::asignarAlumnosAGrupo(implode(",",$query_values));
+        return redirect()->route('docente.getSupervisarProyecto', $request->id_proyecto);
     }
     
 }

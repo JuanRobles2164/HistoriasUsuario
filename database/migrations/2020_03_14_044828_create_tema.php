@@ -17,6 +17,7 @@ class CreateTema extends Migration
             $table->bigIncrements('id');
             $table->string('nombre');
             $table->string('descripcion');
+            $table->boolean('estado_eliminado');
             $table->timestamps();
         });
     }

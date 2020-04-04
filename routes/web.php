@@ -40,6 +40,7 @@ Route::get('/administrador/estado_usuario', 'AdministradorController@eliminarUsu
 Route::get('/docente', 'DocenteController@index')->name('docente.getIndex');
 Route::get('/docente/editar_perfil', 'DocenteController@getSelfEdit')->name('docente.getSelfEdit');
 Route::post('/docente/editar_perfil', 'DocenteController@postSelfEdit')->name('docente.postSelfEdit');
+Route::get('/docente/temas', 'DocenteController@getListaTemas')->name('docente.getListaTemas');
 Route::get('/docente/metodologias', 'DocenteController@getListaMetodologias')->name('docente.getListaMetodologias');
 Route::get('/docente/crear_metodologia', 'DocenteController@getCrearMetodologia')->name('docente.getCrearMetodologia');
 Route::post('/docente/crear_metodologia', 'DocenteController@postCrearMetodologia')->name('docente.postCrearMetodologia');
@@ -62,8 +63,34 @@ Route::get('', '')->name('');
 Route::get('', '')->name('');*/
 
 Route::get('/alumno', 'AlumnoController@index')->name('alumno.getIndex');
+Route::get('/alumno/editar_perfil', 'AlumnoController@getSelfEdit')->name('alumno.getSelfEdit');
+Route::post('/alumno/editar_perfil', 'AlumnoController@postSelfEdit')->name('alumno.postSelfEdit');
+Route::get('/alumno/proyectos', 'AlumnoController@getListaProyectos')->name('alumno.getListaProyectos');
 
 //Enrutado para hacer pruebas con las vistas, puede cambiarse cuando desee
 Route::get('/test', function(){
     return view('Contents/Docente/crearMetodologia');
 })->name('test');
+
+
+//Para sacar el listado de rutas
+Route::get('routes', function() {
+    $routeCollection = Route::getRoutes();
+    
+    echo "<table style='width:100%'>";
+        echo "<tr>";
+            echo "<td width='10%'><h4>HTTP Method</h4></td>";
+            echo "<td width='10%'><h4>Ruta</h4></td>";
+            echo "<td width='10%'><h4>Nombre</h4></td>";
+            echo "<td width='70%'><h4>Acción correspondiente</h4></td>";
+        echo "</tr>";
+        foreach ($routeCollection as $value) {
+            echo "<tr>";
+                echo "<td>" . $value->methods()[0] . "</td>";
+                echo "<td>" . $value->uri() . "</td>";
+                echo "<td>" . $value->getName() . "</td>";
+                echo "<td>" . $value->getActionName() . "</td>";
+            echo "</tr>";
+        }
+    echo "</table>";
+    });

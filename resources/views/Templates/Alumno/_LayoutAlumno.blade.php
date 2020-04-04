@@ -49,18 +49,15 @@
 				<nav class="full-box nav-lateral-menu">
 					<ul>
 						<li>
-							<a href="home.html"><i class="fas fa-store-alt"></i> &nbsp; Inicio</a>
+							<a href="{{route('alumno.getIndex')}}"><i class="fas fa-store-alt"></i> &nbsp; Inicio</a>
                         </li>
                         
 						<li>
 							<a href="#" class="nav-btn-submenu"><i class="fas fa-folder-open"></i> &nbsp; Proyectos <i class="fas fa-chevron-down"></i></a>
 							<ul>
 								<li>
-									<a href="#"><i class="fas fa-tasks"></i> &nbsp; Proyectos Activos</a>
+									<a href="{{route('alumno.getListaProyectos')}}"><i class="fas fa-tasks"></i> &nbsp; Proyectos Activos</a>
 								</li>
-								<li>
-									<a href="#"><i class="fas fa-users"></i> &nbsp; Conformar Equipo</a>
-                                </li>
 							</ul>
 						</li>
 					</ul>
@@ -74,27 +71,17 @@
 				<a href="#" class="float-left show-nav-lateral">
 					<i class="fas fa-bars"></i>
 				</a>
-				<a href="#">
+				<a href="{{route('alumno.getSelfEdit')}}">
 					<i class="fas fa-user-cog"></i>
 				</a>
 				<a href="{{route('getLogin')}}" class="btn-exit-system">
 					<i class="fas fa-power-off"></i>
 				</a>
 			</nav>
-
-			<!-- cabezera de pagina -->
-			<div class="full-box page-header">
-				<h3 class="text-left">
-					<i class="fas fa-store-alt"></i> INICIO
-				</h3>
-				<p class="text-justify">
-					Hola, bienvenido aca podra unirse a un proyecto o conformar un equipo de trabajo y decidir laborar en el que desee. © 2020 Copyright: GEA Software
-				</p>
-			</div>
 			
 			<!-- Contenido -->
 			<div class="full-box tile-container">
-				
+				@yield('contenido')
 			</div>
 			
         </section>

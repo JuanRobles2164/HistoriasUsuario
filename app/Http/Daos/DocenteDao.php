@@ -86,4 +86,18 @@ class DocenteDao extends Controller
         ->first();
         return $grupo;
     }
+    public static function asignarAlumnosAGrupo($cadena){
+        $SQL = "INSERT INTO grupo_usuario(id_usuario, id_grupo, created_at) VALUES ".$cadena;
+        DB::insert($SQL);
+    }
+    public static function getAllTemas(){
+        $temas = DB::table('tema')->get();
+        return $temas;
+    }
+    public static function getTemaById($id){
+        $tema = DB::table('tema')
+        ->where('id', $id)
+        ->first();
+        return $tema;
+    }
 }
