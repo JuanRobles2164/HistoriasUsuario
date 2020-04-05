@@ -19,7 +19,6 @@
     <!-- General Styles -->
     <link rel="stylesheet" href="{{ URL::asset('CSS/styleDocente.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
    </head>
    <body>

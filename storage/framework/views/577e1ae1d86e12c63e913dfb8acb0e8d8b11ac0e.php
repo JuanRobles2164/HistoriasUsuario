@@ -10,32 +10,32 @@
                             <div cass="col-12 col-md-6">
                                 <div class="from-group">
                                     <label for="usuario_nombre">Nombres</label>
-                                    <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,45}" class="form-control" name="usuario_nombre" id="usuario_nombre" maxlength="45">
+                                    <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,45}" class="form-control" name="nombres" id="usuario_nombre" maxlength="45">
                                 </div>
 
                                 <div class="from-group">
                                     <label for="usuario_apellido">Apellidos</label>
-                                    <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,45}" class="form-control" name="usuario_apellido" id="usuario_apellido" maxlength="45">
+                                    <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,45}" class="form-control" name="apellidos" id="usuario_apellido" maxlength="45">
                                 </div>
 
                                 <div class="from-group">
                                     <label for="usuario_cc">Identificacion</label>
-                                    <input type="text" pattern="[a-zA-Z0-9-]{1,35}" class="form-control" name="usuario_cc" id="usuario_cc" maxlength="35">
+                                    <input type="text" pattern="[a-zA-Z0-9-]{1,35}" class="form-control" name="identificacion" id="usuario_cc" maxlength="35">
                                 </div>
 
                                 <div class="from-group">
                                     <label for="usuario_email">Correo electrónico</label>
-                                    <input type="email" class="form-control" name="usuario_email" id="usuario_email" maxlength="70">
+                                    <input type="email" class="form-control" name="email" id="usuario_email" maxlength="70">
                                 </div>
 
                                 <div class="from-group">
                                     <label for="usuario_password">Contraseña</label>
-                                    <input type="password" class="form-control" name="contrasenia" id="contrasenia" maxlength="150">
+                                    <input type="password" class="form-control" name="clave" id="contrasenia" maxlength="150">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="usuario_rol">Seleccioné el Rol</label>
-                                    <select class="form-control" name="usuario_rol">
+                                    <select class="form-control" name="rol">
                                         <option hidden>Seleccione una opción</option>
                                         <?php $__currentLoopData = $roles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rol): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <option value="<?php echo e($rol->id); ?>"><?php echo e($rol->abreviatura); ?></option>    
