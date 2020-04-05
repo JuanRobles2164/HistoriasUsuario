@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\fase;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Funciones;
 use App\Http\Daos\AlumnoDao;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Crypt;
 use App\grupoTrabajo;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Daos\DocenteDao;
 use App\Http\Daos\UsuarioDao;
 use App\usuario;
+use stdClass;
 
 class AlumnoController extends Controller
 {
@@ -54,5 +59,19 @@ class AlumnoController extends Controller
         $proyectos = AlumnoDao::getAllRegisteredProjects(json_decode(Crypt::decrypt(Cookie::get('usuario')))->id);
         return View($this->ruta.'indexProyectos')->with(compact('proyectos'));
     }
-    
+    public function getFasesProyecto(Request $request){
+        $proyecto = AlumnoDao::getProyectoById($request->id_proyecto);
+        $fases = AlumnoDao::getFasesFromProyecto($proyecto->id);
+        return view($this->ruta.'fasesProyecto')->with(compact(array('proyecto', 'fases')));
+    }
+    public function postAgregarFase(Request $request){
+        $fase = new stdClass();
+        $fase = $request->except('_token');
+        if(isset($request->miniatura_fase)){
+            $fase['miniatura_fase'] = $request->file('miniatura_fase')->store('images');
+        }
+        AlumnoDao::crearFase($fase);
+        //$fase->created_at = date('Y-m-d H:i:s', strtotime('now - 4 hours'));
+        return redirect()->route('docente.getFasesProyecto', $request->id_proyecto);
+    }
 }

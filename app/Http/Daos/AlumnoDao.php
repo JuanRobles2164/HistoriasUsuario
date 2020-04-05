@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\grupoTrabajo;
 use App\usuario;
+use App\fase;
 
 class AlumnoDao extends Controller
 {
@@ -24,7 +25,29 @@ class AlumnoDao extends Controller
         $proyectos = DB::select("SELECT p.*, m.nombre AS metodologia, u.nombres AS docente FROM proyecto p JOIN grupo_trabajo gt ON gt.id_proyecto = p.id JOIN grupo_usuario gu ON gt.id = gu.id_grupo JOIN metodologia m ON p.id_metodologia = m.id JOIN usuarios u ON u.id = p.id_usuario WHERE gu.id_usuario = $idUsuario");
         return $proyectos;
     }
-    public static function buscarTeammateDisponible(){
-        
+    public static function getProyectoById($id){
+        $proyecto = DB::table('proyecto')
+        ->where('id', $id)
+        ->first();
+        return $proyecto;
+    }
+    public static function getFasesFromProyecto($id_proyecto){
+        $fases = DB::table('fase')
+        ->where('id_proyecto', $id_proyecto)
+        ->get();
+        return $fases;
+    }
+    public static function crearFase($fase){
+        DB::table('fase')
+        ->insert([
+            'nombre' => $fase['nombre'],
+            'descripcion' => $fase['descripcion'],
+            'fecha_limite' => $fase['fecha_limite'],
+            'miniatura_fase' => $fase['miniatura_fase'],
+            'id_proyecto' => $fase['id_proyecto'],
+            'id_estado' => 1,
+            'id_metodologia' => $fase['id_metodologia'],
+            'created_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours'))
+        ]);
     }
 }

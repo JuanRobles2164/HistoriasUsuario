@@ -36,7 +36,7 @@
                             @endif
                         </td>
                         <td>
-                            <a href="#" class="btn btn-info">Trabajar</a>
+                            <a href="{{route('alumno.getFasesProyecto', $proyecto->id)}}" class="btn btn-info">Trabajar</a>
                         </td>
                     </tr>
                 @endforeach

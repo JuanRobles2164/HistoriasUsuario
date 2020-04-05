@@ -3,7 +3,7 @@
       <h3>Lista de usuarios</h3>
       <br>
       <center>
-         <table class="table table-hover" style="line-height: 400px;">
+         <table class="table">
             <thead class="thead-dark">
                <tr>
                   <th scope="col" valign="middle" style="text-align: center">Nombre completo</th>
@@ -16,24 +16,24 @@
             </thead>
             <?php $__currentLoopData = $usuarios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $usuario): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <tr style="border-color: black; border-radius: 1px; vertical-align:middle; height:100%">
-               <td scope="row" valign="middle" align="center" style="line-height: 30px;"><?php echo e($usuario->nombres.' '.$usuario->apellidos); ?></td>
-               <td scope="row" valign="middle" align="center" style="line-height: 30px;"><?php echo e($usuario->identificacion); ?></td>
-               <td scope="row" valign="middle" align="center" style="line-height: 30px;"><?php echo e($usuario->e_mail); ?></td>
-               <td scope="row" valign="middle" align="center" style="line-height: 30px;"><?php echo e($usuario->abreviatura); ?></td>
+               <td scope="row" valign="middle" align="center"><?php echo e($usuario->nombres.' '.$usuario->apellidos); ?></td>
+               <td scope="row" valign="middle" align="center"><?php echo e($usuario->identificacion); ?></td>
+               <td scope="row" valign="middle" align="center"><?php echo e($usuario->e_mail); ?></td>
+               <td scope="row" valign="middle" align="center"><?php echo e($usuario->abreviatura); ?></td>
                <?php if($usuario->estado_eliminado == 0): ?>
-                  <td scope="row" valign="middle" align="center" style="line-height: 30px;">
+                  <td scope="row" valign="middle" align="center">
                      <a class="btn btn-success" href="<?php echo e(route('admin.eliminarUsuario', 'id='.$usuario->id.'&eliminado='.$usuario->estado_eliminado)); ?>">
                         Activo
                      </a>                     
                   </td>
                <?php else: ?>
-                  <td scope="row" valign="middle" align="center" style="line-height: 30px;">
+                  <td scope="row" valign="middle" align="center">
                      <a class="btn btn-danger" href="<?php echo e(route('admin.eliminarUsuario', 'id='.$usuario->id.'&eliminado='.$usuario->estado_eliminado)); ?>">
                         Inactivo
                      </a>
                   </td>
                <?php endif; ?>
-               <td scope="row" valign="middle" align="center" style="line-height: 30px;">
+               <td scope="row" valign="middle" align="center">
                   <a href="#" class="btn btn-info btn-sm" onclick="detallesUsuario(<?php echo e($usuario->id); ?>)">
                      <i class="glyphicon glyphicon-zoom-in"></i>
                   </a>
@@ -41,7 +41,7 @@
                   <i class="glyphicon glyphicon-pencil"></i>
                   </a>
                   <a href="<?php echo e(route('admin.restaurarUsuario', 'id='.$usuario->id)); ?>" <a class="btn btn-warning btn-sm">
-                     <i class="glyphicon glyphicon-refresh"></i>
+                     <i class="fas fa-trash"></i>
                   </a>
                </td>
             </tr>
