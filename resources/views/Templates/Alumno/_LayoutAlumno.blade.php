@@ -39,7 +39,7 @@
 			<div class="full-box nav-lateral-content">
 				<figure class="full-box nav-lateral-avatar">
 					<i class="far fa-times-circle show-nav-lateral"></i>
-					<img src="./assets/icons/avatar.svg" class="img-fluid" alt="Avatar">
+					<img src="{{URL::asset('Images/Icons/avatar.svg')}}" class="img-fluid" alt="Avatar">
 					<figcaption class="roboto-medium text-center">
 						{{json_decode(Crypt::decrypt(Cookie::get('usuario')))->nombre }} 
 						<br><small class="roboto-condensed-light">Alumno</small>

@@ -17,9 +17,8 @@
       <!-- jQuery Custom Content Scroller V3.1.5 -->
       <link rel="stylesheet" href="<?php echo e(URL::asset('CSS/jquery.mCustomScrollbar.css')); ?>">
       <!-- General Styles -->
-      <link rel="stylesheet" href="<?php echo e(URL::asset('CSS/style.css')); ?>">
+      <link rel="stylesheet" href="<?php echo e(URL::asset('CSS/Style.css')); ?>">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
    </head>
    <body>
