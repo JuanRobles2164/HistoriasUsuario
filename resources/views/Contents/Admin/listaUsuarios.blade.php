@@ -4,7 +4,7 @@
       <h3>Lista de usuarios</h3>
       <br>
       <center>
-         <table class="table table-hover" style="line-height: 400px;">
+         <table class="table">
             <thead class="thead-dark">
                <tr>
                   <th scope="col" valign="middle" style="text-align: center">Nombre completo</th>
@@ -17,24 +17,24 @@
             </thead>
             @foreach ($usuarios as $usuario)
             <tr style="border-color: black; border-radius: 1px; vertical-align:middle; height:100%">
-               <td scope="row" valign="middle" align="center" style="line-height: 30px;">{{$usuario->nombres.' '.$usuario->apellidos}}</td>
-               <td scope="row" valign="middle" align="center" style="line-height: 30px;">{{$usuario->identificacion}}</td>
-               <td scope="row" valign="middle" align="center" style="line-height: 30px;">{{$usuario->e_mail}}</td>
-               <td scope="row" valign="middle" align="center" style="line-height: 30px;">{{$usuario->abreviatura}}</td>
+               <td scope="row" valign="middle" align="center">{{$usuario->nombres.' '.$usuario->apellidos}}</td>
+               <td scope="row" valign="middle" align="center">{{$usuario->identificacion}}</td>
+               <td scope="row" valign="middle" align="center">{{$usuario->e_mail}}</td>
+               <td scope="row" valign="middle" align="center">{{$usuario->abreviatura}}</td>
                @if($usuario->estado_eliminado == 0)
-                  <td scope="row" valign="middle" align="center" style="line-height: 30px;">
+                  <td scope="row" valign="middle" align="center">
                      <a class="btn btn-success" href="{{route('admin.eliminarUsuario', 'id='.$usuario->id.'&eliminado='.$usuario->estado_eliminado)}}">
                         Activo
                      </a>                     
                   </td>
                @else
-                  <td scope="row" valign="middle" align="center" style="line-height: 30px;">
+                  <td scope="row" valign="middle" align="center">
                      <a class="btn btn-danger" href="{{route('admin.eliminarUsuario', 'id='.$usuario->id.'&eliminado='.$usuario->estado_eliminado)}}">
                         Inactivo
                      </a>
                   </td>
                @endif
-               <td scope="row" valign="middle" align="center" style="line-height: 30px;">
+               <td scope="row" valign="middle" align="center">
                   <a href="#" class="btn btn-info btn-sm" onclick="detallesUsuario({{$usuario->id}})">
                      <i class="glyphicon glyphicon-zoom-in"></i>
                   </a>
@@ -42,7 +42,7 @@
                   <i class="glyphicon glyphicon-pencil"></i>
                   </a>
                   <a href="{{route('admin.restaurarUsuario', 'id='.$usuario->id)}}" <a class="btn btn-warning btn-sm">
-                     <i class="glyphicon glyphicon-refresh"></i>
+                     <i class="fas fa-trash"></i>
                   </a>
                </td>
             </tr>

@@ -19,7 +19,7 @@
     <!-- General Styles -->
     <link rel="stylesheet" href="{{ URL::asset('CSS/styleDocente.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
    </head>
    <body>
@@ -64,9 +64,6 @@
                            <a href="{{route('docente.getListaProyectos')}}"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de proyectos</a>
                            </li>
                         </ul>
-                     </li>
-                     <li>
-                        <a href="{{route('docente.getListaTemas')}}" class="fas"><i class="fas fa-archive"></i>&nbsp; &nbsp; Temas</a>
                      </li>
                   </ul>
                </nav>
