@@ -21,23 +21,15 @@ class CreateHistoriaUsuario extends Migration
             $table->integer('estado');
             $table->string('observacion');
             $table->string('descripcion');
-            $table->date('fecha_realizado');
-            $table->integer('dias');
+            $table->date('fecha_inicio');
+            $table->date('fecha_fin');
             //lo comento pues creo que se puede calcular en base a las actividades
             //$table->float('costo', 12, 2); 
-            $table->string('usuario_entrevistado');
-            $table->string('cargo');
-            $table->string('email');
-            $table->string('telefono');
-            $table->string('control_seguimiento');
-
             $table->unsignedBigInteger('id_actividad');
-            $table->unsignedBigInteger('id_tema');
-
+            $table->unsignedBigInteger('id_usuario_entrevistado');
             $table->timestamps();
-
             $table->foreign('id_actividad')->references('id')->on('actividad');
-            $table->foreign('id_tema')->references('id')->on('tema');
+            $table->foreign('id_usuario_entrevistado')->references('id')->on('usuario_entrevistado');
         });
     }
 

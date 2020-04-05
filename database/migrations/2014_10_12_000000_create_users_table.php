@@ -37,7 +37,7 @@ class CreateUsersTable extends Migration
             $table->string('identificacion', 50)->unique();
             $table->string('e_mail', 50)->unique();
             
-            $table->unsignedBigInteger('rol_id')->nullable();
+            $table->unsignedBigInteger('rol_id');
             //$table->unsignedBigInteger('usuario_crea');
             $table->dateTime('creado_en')->default(new Expression('CURRENT_TIMESTAMP'));
             $table->unsignedBigInteger('usuario_modifica');
