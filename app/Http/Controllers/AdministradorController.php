@@ -47,6 +47,15 @@ class AdministradorController extends Controller
         return redirect()->route('admin.getListUsuarios');
     }
     public function postCreate(Request $request){
+        $request->validate([
+        'nombres' => 'required',
+        'apellidos' => 'required',
+        'username' => 'required',
+        'email' => 'required|unique:usuarios,e_mail|max:50',
+        'contrasenia' => 'required',
+        'identificacion' => 'required|unique:usuarios,identificacion|max:50',
+        'rol_id' => 'required']);
+        
         $usuario = new usuario();
         $usuario->nombres = $request->nombres;
         $usuario->apellidos = $request->apellidos;
