@@ -1,7 +1,30 @@
 @extends('Templates/Admin/_LayoutAdmin')
 @section('contenido')
-      <br>
+   <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 50px;">
+      <div class="toast" style="position: absolute; top: 0; right: 0;">
+      <div class="toast-header">
+         <img src="" class="rounded mr-2" alt="">
+         <strong class="mr-auto">Notificación</strong>
+         <small> just now </small>
+         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+         </button>
+      </div>
+      <div class="toast-body">
+         Usuario Restablecido por Defecto.
+      </div>
+      </div>
+   </div>
       <h3>Lista de usuarios</h3>
+      <script>
+         $(document).ready(function(){
+         $('.myBtnXD').click(function(){
+            $('.toast').toast({delay: 5000});
+            $('.toast').toast('show');
+         });
+         });
+      </script>
+      
       <br>
       <div class="center">
          <table class="table">
@@ -41,7 +64,7 @@
                      <a href="{{route('admin.getEdit', 'id='.$usuario->id)}}" a class="btn btn-success btn-sm">
                         <i class="far fa-edit"></i>
                      </a>
-                     <a href="{{route('admin.restaurarUsuario', 'id='.$usuario->id)}}" a class="btn btn-warning btn-sm">
+                     <a href="{{route('admin.restaurarUsuario', 'id='.$usuario->id)}}" a class="btn btn-warning btn-sm myBtnXD">
                         <i class="fas fa-sync"></i>
                      </a>
                   </td>

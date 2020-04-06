@@ -14,12 +14,13 @@
       <link rel="stylesheet" href="{{ URL::asset('CSS/sweetalert2.min.css') }}">
       <!-- Sweet Alert V8.13.0 JS file-->
       <script src="{{URL::asset('JS/sweetalert2.min.js')}}"></script>
-      <!-- jQuery Custom Content Scroller V3.1.5 -->
-      <link rel="stylesheet" href="{{ URL::asset('CSS/jquery.mCustomScrollbar.css') }}">
       <!-- General Styles -->
       <link rel="stylesheet" href="{{ URL::asset('CSS/Style.css') }}">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
    </head>
    <body>
       <!-- centenedor de menu -->
@@ -63,12 +64,12 @@
                <a href="#" class="float-left show-nav-lateral">
                <i class="fas fa-bars"></i>
                </a>
-			<a href="{{route('admin.getSelfEdit')}}">
-               <i class="fas fa-user-cog"></i>
+			      <a href="{{route('admin.getSelfEdit')}}">
+                  <i class="fas fa-user-cog"></i>
                </a>
-            <a class="btn-exit-system" href="{{route('getLogin')}}">
-               <i class="fas fa-power-off"></i>
-            </a>
+               <a class="btn-exit-system" href="{{route('getLogin')}}">
+                  <i class="fas fa-power-off"></i>
+               </a>
             </nav>
             <!-- cabezera -->
             <div class="container">
@@ -76,8 +77,8 @@
             </div>
             <!-- Contenido -->
             <div class="full-box tile-container">
-            </div>
 
+            </div>
             @yield('modal_detalles')
          </section>
       </main>
@@ -87,8 +88,6 @@
       <script src="{{URL::asset('JS/popper.min.js')}}"></script>
       <!-- Bootstrap V4.3 -->
       <script src="{{URL::asset('JS/bootstrap.min.js')}}"></script>
-      <!-- jQuery Custom Content Scroller V3.1.5 -->
-      <script src="{{URL::asset('JS/jquery.mCustomScrollbar.concat.min.js')}}"></script>
       <!-- Bootstrap Material Design V4.0 -->
       <script src="{{URL::asset('JS/bootstrap-material-design.min.js')}}"></script>
       <script>
@@ -100,3 +99,4 @@
       <script src="{{URL::asset('JS/AJAX/AdministradorAJAX.JS') }}"></script>
    </body>
 </html>
+
