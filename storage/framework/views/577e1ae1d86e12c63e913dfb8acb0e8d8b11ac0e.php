@@ -7,7 +7,7 @@
                     <legend><i class="fas fa-user"></i> &nbsp; Información básica</legend>
                     <div class="container-fluid">
                         <div class="row">
-                            <div cass="col-12 col-md-6">
+                            <div class="col-lg-offset-2 col-lg-4">
                                 <div class="from-group">
                                     <label for="usuario_nombre">Nombres</label>
                                     <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,45}" class="form-control" name="nombres" id="usuario_nombre" maxlength="45">
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 </fieldset>
-                <p class="text-center" style="margin-top: 40px;">
+                <p class="text-center" style="margin-top: 10px;">
                     <button type="reset" class="btn btn-raised btn-secondary btn-sm"><i class="fas fa-paint-roller"></i> &nbsp; LIMPIAR</button>
                     <button type="submit" class="btn btn-raised btn-info btn-sm"><i class="far fa-save"></i> &nbsp; GUARDAR</button>
                 </p>

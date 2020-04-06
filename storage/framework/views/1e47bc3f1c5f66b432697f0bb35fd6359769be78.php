@@ -78,7 +78,7 @@
             <!-- Contenido -->
             <div class="full-box tile-container">
             </div>
-            
+
             <?php echo $__env->yieldContent('modal_detalles'); ?>
          </section>
       </main>
@@ -100,4 +100,5 @@
       <script src="<?php echo e(URL::asset('JS/main.js')); ?>"></script>
       <script src="<?php echo e(URL::asset('JS/AJAX/AdministradorAJAX.JS')); ?>"></script>
    </body>
-</html><?php /**PATH C:\wamp64\www\master-php\JuanRobles2164\HistoriasUsuario\resources\views/Templates/Admin/_LayoutAdmin.blade.php ENDPATH**/ ?>
+</html>
+<?php /**PATH C:\wamp64\www\master-php\JuanRobles2164\HistoriasUsuario\resources\views/Templates/Admin/_LayoutAdmin.blade.php ENDPATH**/ ?>

@@ -1,5 +1,4 @@
 function detallesUsuario(Identificador){
-
     $.ajax({
         url: 'detalles_usuario',
         async: true,
