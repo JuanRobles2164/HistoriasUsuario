@@ -67,6 +67,14 @@ Route::post('/alumno/editar_perfil', 'AlumnoController@postSelfEdit')->name('alu
 Route::get('/alumno/proyectos', 'AlumnoController@getListaProyectos')->name('alumno.getListaProyectos');
 Route::get('/alumno/proyectos/{id_proyecto}', 'AlumnoController@getFasesProyecto')->name('alumno.getFasesProyecto');
 Route::post('/alumno/proyectos/{id_proyecto}/agregar_fase', 'AlumnoController@postAgregarFase')->name('alumno.postAgregarFase');
+Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}','AlumnoController@getEditarFase')->name('alumno.getEditarFase');
+Route::post('/alumno/fases/editar_fase','AlumnoController@postEditarFase')->name('alumno.postEditarFase');
+Route::post('/alumno/fases/editar_crear_objetivo','AlumnoController@postEditarCrearObjetivo')->name('alumno.postEditarCrearObjetivo');
+Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos','AlumnoController@getTrabajarEnFaseModulos')->name('alumno.getTrabajarEnFaseModulos');
+Route::post('/alumno/modulos/crear_modulo','AlumnoController@postCrearModulo')->name('alumno.postCrearModulo');
+Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/editar','AlumnoController@getEditarModulo')->name('alumno.getEditarModulo');
+Route::post('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/editar','AlumnoController@postEditarModulo')->name('alumno.postEditarModulo');
+//Route::get('','')->name('');
 
 //Enrutado para hacer pruebas con las vistas, puede cambiarse cuando desee
 Route::get('/test', function(){
