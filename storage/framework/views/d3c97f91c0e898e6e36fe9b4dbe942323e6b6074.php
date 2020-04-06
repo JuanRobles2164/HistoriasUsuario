@@ -17,9 +17,8 @@
       <!-- jQuery Custom Content Scroller V3.1.5 -->
       <link rel="stylesheet" href="<?php echo e(URL::asset('CSS/jquery.mCustomScrollbar.css')); ?>">
       <!-- General Styles -->
-      <link rel="stylesheet" href="<?php echo e(URL::asset('CSS/style.css')); ?>">
+      <link rel="stylesheet" href="<?php echo e(URL::asset('CSS/Style.css')); ?>">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
    </head>
    <body>
@@ -79,7 +78,7 @@
             <!-- Contenido -->
             <div class="full-box tile-container">
             </div>
-            
+
             <?php echo $__env->yieldContent('modal_detalles'); ?>
          </section>
       </main>
@@ -101,4 +100,5 @@
       <script src="<?php echo e(URL::asset('JS/main.js')); ?>"></script>
       <script src="<?php echo e(URL::asset('JS/AJAX/AdministradorAJAX.JS')); ?>"></script>
    </body>
-</html><?php /**PATH C:\xampp\htdocs\paginasPHP\HistoriasUsuario\resources\views/Templates/Admin/_LayoutAdmin.blade.php ENDPATH**/ ?>
+</html>
+<?php /**PATH C:\xampp\htdocs\paginasPHP\HistoriasUsuario\resources\views/Templates/Admin/_LayoutAdmin.blade.php ENDPATH**/ ?>

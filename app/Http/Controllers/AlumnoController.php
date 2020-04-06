@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Daos\DocenteDao;
 use App\Http\Daos\UsuarioDao;
 use App\usuario;
+use Facade\FlareClient\View;
 use stdClass;
 
 class AlumnoController extends Controller
@@ -68,10 +69,59 @@ class AlumnoController extends Controller
         $fase = new stdClass();
         $fase = $request->except('_token');
         if(isset($request->miniatura_fase)){
-            $fase['miniatura_fase'] = $request->file('miniatura_fase')->store('images');
+            $fase['miniatura_fase'] = $request->file('miniatura_fase')->store('uploads', 'public');
+        }else{
+            $fase['miniatura_fase'] = 'uploads/terminal.png';
         }
         AlumnoDao::crearFase($fase);
         //$fase->created_at = date('Y-m-d H:i:s', strtotime('now - 4 hours'));
-        return redirect()->route('docente.getFasesProyecto', $request->id_proyecto);
+        return redirect()->route('alumno.getFasesProyecto', $request->id_proyecto);
+    }
+    public function getEditarFase(Request $request){
+        $fase = AlumnoDao::getFaseById($request->id_fase);
+        $objetivo = AlumnoDao::getObjetivoByFaseId($request->id_fase);
+        return view($this->ruta.'editarFase')->with(compact(array('fase', 'objetivo')));
+    }
+    public function postEditarFase(Request $request){
+        $fase = $request->except('_token', 'miniatura_hidden', 'eliminar_miniatura');
+        if(isset($request->miniatura_fase)){
+            $fase['miniatura_fase'] = $request->file('miniatura_fase')->store('uploads', 'public');
+        }else{
+            $fase['miniatura_fase'] = $request->miniatura_hidden;
+        }
+        if(isset($request->eliminar_miniatura)){
+            $fase['miniatura_fase'] = 'uploads/terminal.png';
+        }
+        AlumnoDao::editarFase($fase);
+        return redirect()->route('alumno.getFasesProyecto', $request->id_proyecto);
+    }
+    public function postEditarCrearObjetivo(Request $request){
+        $objetivo = $request->except('_token', 'id_proyecto');
+        AlumnoDao::agregarEditarObjetivo($objetivo);
+        return redirect()->route('alumno.getFasesProyecto', $request->id_proyecto);
+    }
+    public function getTrabajarEnFaseModulos(Request $request){
+        $id_proyecto = $request->id_proyecto;
+        $id_fase = $request->id_fase;
+        $modulos = AlumnoDao::getModulosByFaseId($request->id_fase);
+        return view($this->ruta.'trabajarFase' , array('id_proyecto' => $id_proyecto, 'id_fase' => $id_fase))->with(compact(array('id_proyecto', 'id_fase', 'modulos')));
+    }
+    public function postCrearModulo(Request $request){
+        $modulo = $request->except('_token');
+        AlumnoDao::agregarModulo($modulo);
+        return back();
+    }
+    public function getEditarModulo(Request $request){
+        $modulo = AlumnoDao::getModuloById($request->id_modulo);
+        return view($this->ruta.'editarModulo', 
+        array('id_proyecto' => $request->id_proyecto, 
+        'id_fase' => $request->id_fase, 
+        'id_modulo' => $request->id_modulo))
+        ->with(compact('modulo'));
+    }
+    public function postEditarModulo(Request $request){
+        $modulo = $request->except('_token', 'id_proyecto', 'id_fase');
+        AlumnoDao::editarModulo($modulo);
+        return redirect()->route('alumno.getTrabajarEnFaseModulos', array('id_proyecto' => $request->id_proyecto, 'id_fase' => $request->id_fase));
     }
 }

@@ -50,4 +50,69 @@ class AlumnoDao extends Controller
             'created_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours'))
         ]);
     }
+    public static function getFaseById($id){
+        $fase = DB::table('fase')
+        ->where('id', $id)
+        ->first();
+        return $fase;
+    }
+    public static function editarFase($fase){
+        DB::table('fase')
+        ->where('id', $fase['id'])
+        ->update([
+            'nombre' => $fase['nombre'],
+            'descripcion' => $fase['descripcion'],
+            'fecha_limite' => $fase['fecha_limite'],
+            'miniatura_fase' => $fase['miniatura_fase'],
+            'updated_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours'))
+        ]);
+    }
+    public static function agregarEditarObjetivo(array $objetivo){
+        DB::table('objetivo')
+        ->updateOrInsert([
+            'id_fase' => $objetivo['id_fase']
+        ],[
+            'nombre' => $objetivo['nombre'],
+            'descripcion' => $objetivo['descripcion'],
+            'id_fase' => $objetivo['id_fase']
+        ]);
+    }
+    public static function getModuloById($id){
+        $modulo = DB::table('modulo')
+        ->where('id', $id)
+        ->first();
+        return $modulo;
+    }
+    public static function getModulosByFaseId($id_fase){
+        $modulos = DB::table('modulo')
+        ->where('id_fase', $id_fase)
+        ->get();
+        return $modulos;
+    }
+    public static function getObjetivoByFaseId($id_fase){
+        $objetivo = DB::table('objetivo')
+        ->where('id_fase', $id_fase)
+        ->first();
+        return $objetivo;
+    }
+    public static function agregarModulo(array $modulo){
+        DB::table('modulo')
+        ->insert([
+            'nombre' =>  $modulo['nombre'],
+            'descripcion' => $modulo['descripcion'],
+            'id_fase' => $modulo['id_fase'],
+            'estado' => 'En desarrollo',
+            'observacion' => 'Ninguna...',
+            'fecha_limite' => $modulo['fecha_limite']
+        ]);
+    }
+    public static function editarModulo(array $modulo){
+        DB::table('modulo')
+        ->where('id', $modulo['id'])
+        ->update([
+            'nombre' => $modulo['nombre'],
+            'descripcion' => $modulo['descripcion'],
+            'fecha_limite' => $modulo['fecha_limite'],
+        ]);
+    }
 }
