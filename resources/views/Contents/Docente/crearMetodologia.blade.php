@@ -10,16 +10,16 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon3">Nombre</span>
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" name="nombre">
             </div>
             <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">Descripción</span>
                 </div>
-                <textarea class="form-control" aria-label="With textarea"></textarea>
+                <textarea class="form-control" aria-label="With textarea" name="descripcion"></textarea>
               </div>
             <hr class="my-4">
-            <a class="btn btn-primary btn-lg btn-block" href="#" type="submit">Crear</a>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Crear</button>
           </div>
     </form>
 @endsection

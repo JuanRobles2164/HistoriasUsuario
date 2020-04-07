@@ -147,6 +147,7 @@ unset($__errorArgs, $__bag); ?>
                         </form>
                     </div>
                 </fieldset>
+                <p class="text-center" style="margin-top: 10px;">
                 <div class="form-group col-md-4" style="margin: 40px 230px">
                     <button type="reset" class="btn btn-raised btn-secondary btn-sm"><i class="fas fa-paint-roller"></i> &nbsp; LIMPIAR</button>
                     &nbsp;

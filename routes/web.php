@@ -89,7 +89,8 @@ Route::post('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}
 Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades/{id_actividad}/recursos/crear_recurso','AlumnoController@getCrearRecurso')->name('alumno.getCrearRecurso');
 Route::post('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades/{id_actividad}/recursos/crear_recurso','AlumnoController@postCrearRecurso')->name('alumno.postCrearRecurso');
 Route::post('/alumno/tipo_recurso/crear','AlumnoController@postCrearTipoRecurso')->name('alumno.postCrearTipoRecurso');
-Route::get('/alumno/historias_de_usuario')->name('alumno.getListaHistorias');
+Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades/{id_actividad}/historias','AlumnoController@getHistoriasUsuarioByActividadId')->name('alumno.getHistoriasUsuarioByActividadId');
+//Route::get('/alumno/historias_de_usuario')->name('alumno.getListaHistorias');
 //Route::get('','')->name('');
 
 //Enrutado para hacer pruebas con las vistas, puede cambiarse cuando desee

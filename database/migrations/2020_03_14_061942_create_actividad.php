@@ -17,6 +17,7 @@ class CreateActividad extends Migration
             $table->bigIncrements('id');
             $table->string('nombre');
             $table->string('descripcion');
+            $table->integer('estado_finalizado');
             $table->integer('prioridad');
             $table->date('fecha_limite');
             $table->unsignedBigInteger('id_modulo');

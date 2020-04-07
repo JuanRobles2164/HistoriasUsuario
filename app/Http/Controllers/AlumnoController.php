@@ -206,6 +206,6 @@ class AlumnoController extends Controller
     }
     public function getHistoriasUsuarioByActividadId(Request $request){
         $historias = AlumnoDao::getHistoriasUsuarioByActividadId($request->id_actividad);
-        //$usuarios = 
+        return $request->id_actividad;
     }
 }
