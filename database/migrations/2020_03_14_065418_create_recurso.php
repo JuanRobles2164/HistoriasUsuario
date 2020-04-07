@@ -15,7 +15,8 @@ class CreateRecurso extends Migration
     {
         Schema::create('recurso', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('descripcion');
+            $table->string('nombre');
+            $table->string('descripcion')->nullable();
             $table->float('valor_unitario', 12, 2);
             $table->float('cantidad', 12, 2);
             $table->unsignedBigInteger('id_tipo_recurso');
