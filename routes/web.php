@@ -67,13 +67,29 @@ Route::post('/alumno/editar_perfil', 'AlumnoController@postSelfEdit')->name('alu
 Route::get('/alumno/proyectos', 'AlumnoController@getListaProyectos')->name('alumno.getListaProyectos');
 Route::get('/alumno/proyectos/{id_proyecto}', 'AlumnoController@getFasesProyecto')->name('alumno.getFasesProyecto');
 Route::post('/alumno/proyectos/{id_proyecto}/agregar_fase', 'AlumnoController@postAgregarFase')->name('alumno.postAgregarFase');
+
 Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}','AlumnoController@getEditarFase')->name('alumno.getEditarFase');
 Route::post('/alumno/fases/editar_fase','AlumnoController@postEditarFase')->name('alumno.postEditarFase');
+
 Route::post('/alumno/fases/editar_crear_objetivo','AlumnoController@postEditarCrearObjetivo')->name('alumno.postEditarCrearObjetivo');
 Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos','AlumnoController@getTrabajarEnFaseModulos')->name('alumno.getTrabajarEnFaseModulos');
 Route::post('/alumno/modulos/crear_modulo','AlumnoController@postCrearModulo')->name('alumno.postCrearModulo');
+
 Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/editar','AlumnoController@getEditarModulo')->name('alumno.getEditarModulo');
 Route::post('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/editar','AlumnoController@postEditarModulo')->name('alumno.postEditarModulo');
+
+Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades','AlumnoController@getActividadesByModulo')->name('alumno.getActividadesByModulo');
+
+Route::post('/alumno/actividad/crear_actividad','AlumnoController@postCrearActividad')->name('alumno.postCrearActividad');
+Route::get('/alumno/actividad/eliminar_actividad','AlumnoController@getEliminarActividad')->name('alumno.getEliminarActividad');
+Route::get('/alumno/actividad/entregar','AlumnoController@getEntregarActividad')->name('alumno.getEntregarActividad');
+Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades/{id_actividad}/recursos','AlumnoController@getRecursosByActividad')->name('alumno.getRecursosByActividad');
+Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades/{id_actividad}/recursos/{id_recurso}/editar','AlumnoController@getEditarRecurso')->name('alumno.getEditarRecurso');
+Route::post('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades/{id_actividad}/recursos/{id_recurso}/editar','AlumnoController@postEditarRecurso')->name('alumno.postEditarRecurso');
+Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades/{id_actividad}/recursos/crear_recurso','AlumnoController@getCrearRecurso')->name('alumno.getCrearRecurso');
+Route::post('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades/{id_actividad}/recursos/crear_recurso','AlumnoController@postCrearRecurso')->name('alumno.postCrearRecurso');
+Route::post('/alumno/tipo_recurso/crear','AlumnoController@postCrearTipoRecurso')->name('alumno.postCrearTipoRecurso');
+Route::get('/alumno/historias_de_usuario')->name('alumno.getListaHistorias');
 //Route::get('','')->name('');
 
 //Enrutado para hacer pruebas con las vistas, puede cambiarse cuando desee

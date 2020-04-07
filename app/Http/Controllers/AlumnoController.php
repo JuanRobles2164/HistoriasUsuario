@@ -124,4 +124,88 @@ class AlumnoController extends Controller
         AlumnoDao::editarModulo($modulo);
         return redirect()->route('alumno.getTrabajarEnFaseModulos', array('id_proyecto' => $request->id_proyecto, 'id_fase' => $request->id_fase));
     }
+    public function getActividadesByModulo(Request $request){
+        $actividades = AlumnoDao::getActividadesByModuloId($request->id_modulo);
+        return view($this->ruta.'trabajarModulo',  
+        array('id_modulo' => $request->id_modulo, 
+        'id_proyecto' => $request->id_proyecto, 
+        'id_fase' => $request->id_fase))
+        ->with(compact('actividades'));
+        //$recursos = AlumnoDao::getAllRecursosFromActividad($);
+    }
+    public function getRecursosByActividad(Request $request){
+        $recursos = AlumnoDao::getAllRecursosFromActividad($request->id_actividad);
+        return view($this->ruta.'indexRecursos', 
+        array('id_modulo' => $request->id_modulo, 
+        'id_proyecto' => $request->id_proyecto, 
+        'id_fase' => $request->id_fase,
+        'id_actividad' => $request->id_actividad))
+        ->with(compact('recursos'));
+    }
+    public function postCrearActividad(Request $request){
+        $actividad = $request->except('_token');
+        AlumnoDao::crearActividad($actividad);
+        return back();
+    }
+    public function getEliminarActividad(Request $request){
+        AlumnoDao::eliminarActividad($request->id);
+        return back();
+    }
+    public function getEntregarActividad(Request $request){
+        AlumnoDao::entregarActividad($request->id);
+        return back();
+    }
+    public function getEliminarRecurso(Request $request){
+        AlumnoDao::eliminarRecurso($request->id);
+        return back();
+    }
+    public function getEditarRecurso(Request $request){
+        $recurso = AlumnoDao::getRecursoById($request->id_recurso);
+        $tipos_recursos = AlumnoDao::getTipoRecursoByRecursoId();
+        return view($this->ruta.'editarRecurso', 
+        array('id_modulo' => $request->id_modulo, 
+        'id_proyecto' => $request->id_proyecto, 
+        'id_fase' => $request->id_fase,
+        'id_actividad' => $request->id_actividad,
+        'id_recurso' => $request->id_recurso))
+        ->with(compact('recurso', 'tipos_recursos'));
+    }
+    public function postEditarRecurso(Request $request){
+        $recurso = $request->except('_token');
+        AlumnoDao::editarRecurso($recurso);
+        return redirect()->route('alumno.getRecursosByActividad', 
+        array('id_proyecto' => $request->id_proyecto, 
+        'id_fase' => $request->id_fase,
+        'id_modulo' => $request->id_modulo,
+        'id_actividad' => $request->id_actividad));
+    }
+    public function getCrearRecurso(Request $request){
+        $tipos_recurso = AlumnoDao::getTipoRecursoByRecursoId();
+        return view($this->ruta.'crearRecurso', 
+        array('id_modulo' => $request->id_modulo, 
+        'id_proyecto' => $request->id_proyecto, 
+        'id_fase' => $request->id_fase,
+        'id_actividad' => $request->id_actividad,
+        'id_recurso' => $request->id_recurso))->with(compact('tipos_recurso'));
+    }
+    public function postCrearRecurso(Request $request){
+        $recurso = $request->except('_token');
+        AlumnoDao::crearRecurso($recurso);
+
+        return redirect()->route(
+        'alumno.getRecursosByActividad', 
+        array('id_modulo' => $request->id_modulo, 
+        'id_proyecto' => $request->id_proyecto, 
+        'id_fase' => $request->id_fase,
+        'id_actividad' => $request->id_actividad));
+    }
+    public function postCrearTipoRecurso(Request $request){
+        $tipo_recurso = $request->except('_token');
+        AlumnoDao::crearTipoRecurso($tipo_recurso);
+        return back();
+    }
+    public function getHistoriasUsuarioByActividadId(Request $request){
+        $historias = AlumnoDao::getHistoriasUsuarioByActividadId($request->id_actividad);
+        //$usuarios = 
+    }
 }

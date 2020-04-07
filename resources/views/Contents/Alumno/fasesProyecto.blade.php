@@ -1,7 +1,7 @@
 @extends('/Templates/Alumno/_LayoutAlumno')
 @section('contenido')
     <br>
-    <h3>Trabajando en el proyecto: {{$proyecto->nombre}}</h3>
+    <h3>Trabajando las fases del proyecto: {{$proyecto->nombre}}</h3>
     <br>
     <div class="container-sm">
         <div class="row">
@@ -21,7 +21,7 @@
                         <label for="miniatura_fase">Imagen</label>
                         <input type="file" name="miniatura_fase" id="miniatura_fase">
                         <button type="submit" class="btn btn-success">+</button>
-                        
+                        <br>
                     </div>
                   </div>
             </form>
@@ -37,9 +37,7 @@
                         <a href="{{route('alumno.getTrabajarEnFaseModulos', array('id_proyecto' => $fase->id_proyecto, 'id_fase' =>$fase->id))}}" class="btn btn-primary">Trabajar</a>
                     </div>
                 </div>
-                
             </div>
-                
             @endforeach
         @endif
         </div>

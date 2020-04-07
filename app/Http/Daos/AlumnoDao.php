@@ -115,4 +115,101 @@ class AlumnoDao extends Controller
             'fecha_limite' => $modulo['fecha_limite'],
         ]);
     }
+    public static function getActividadesByModuloId($id_modulo){
+        $actividades = DB::table('actividad')
+        ->where('id_modulo', $id_modulo)
+        ->get();
+        return $actividades;
+    }
+    public static function getAllRecursosFromActividad($id_actividad){
+        $recursos = DB::select("SELECT r.*, tr.nombre as tipo_recurso FROM recurso r JOIN tipo_recurso tr ON r.id_tipo_recurso = tr.id WHERE r.id_actividad = $id_actividad");
+        /*DB::table('recurso')
+        ->join('tipo_recurso', 'recurso.id_tipo_recurso', '=', 'tipo_recurso.id')
+        ->where('recurso.id_actividad', $id_actividad)
+        ->select('recurso.*', 'tipo_recurso.nombre')
+        ->get();*/
+        return $recursos;
+    }
+    public static function crearActividad(array $actividad){
+        DB::table('actividad')
+        ->insert([
+            'nombre' => $actividad['nombre'],
+            'descripcion' => $actividad['descripcion'],
+            'prioridad' => $actividad['prioridad'],
+            'id_modulo' => $actividad['id_modulo'],
+            'estado_finalizado' => 0,
+            'fecha_limite' => $actividad['fecha_limite'],
+            'created_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours'))
+        ]);
+    }
+    public static function eliminarActividad($id){
+        DB::table('actividad')
+        ->where('id', $id)
+        ->delete();
+    }
+    public static function entregarActividad($id){
+        DB::table('actividad')
+        ->where('id', $id)
+        ->update([
+            'estado_finalizado' => 1,
+            'updated_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours'))
+        ]);
+    }
+    public static function eliminarRecurso($id){
+        DB::table('recurso')
+        ->where('id', $id)
+        ->delete();
+    }
+    public static function editarRecurso(array $recurso){
+        DB::table('recurso')
+        ->where('id', $recurso['id'])
+        ->update([
+            'nombre' => $recurso['nombre'],
+            'descripcion' => $recurso['descripcion'],
+            'valor_unitario' => $recurso['valor_unitario'],
+            'cantidad' => $recurso['cantidad'],
+            'id_tipo_recurso' => $recurso['id_tipo_recurso'],
+            'updated_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours'))
+        ]);
+    }
+    public static function getRecursoById($id){
+        $recurso = DB::table('recurso')
+        ->where('id', $id)
+        ->first();
+        return $recurso;
+    }
+    public static function crearRecurso(array $recurso){
+        DB::table('recurso')
+        ->insert([
+            'nombre' => $recurso['nombre'],
+            'descripcion' => $recurso['descripcion'],
+            'valor_unitario' => $recurso['valor_unitario'],
+            'cantidad' => $recurso['cantidad'],
+            'id_tipo_recurso' => $recurso['id_tipo_recurso'],
+            'id_actividad' => $recurso['id_actividad'],
+            'created_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours'))
+        ]);
+    }
+    public static function crearTipoRecurso(array $tipo_recurso){
+        DB::table('tipo_recurso')
+        ->insert([
+            'nombre' => $tipo_recurso['nombre'],
+            'descripcion' => $tipo_recurso['descripcion'],
+            'created_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours'))
+        ]);
+    }
+    public static function getTipoRecursoByRecursoId(){
+        $tipos_recurso = DB::table('tipo_recurso')
+        ->get();
+        return $tipos_recurso;
+    }
+    public static function getHistoriasUsuarioByActividadId($id_actividad){
+        $historias = DB::table('historia_usuario')
+        ->where('id_actividad', $id_actividad)
+        ->get();
+        return $historias;
+    }
+    public static function getUsuariosFromHistorias($historias){
+        
+    }
 }

@@ -71,10 +71,6 @@
                                             <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                                         </div>
                                         <p>En desarrollo</p>
-                                        <!--
-                                        <div class="alert alert-dark" role="alert">
-                                            En desarrollo
-                                        </div>-->
                                     </li>
                                 @endif
                                 <li class="list-group-item">
@@ -83,6 +79,7 @@
                                 <li class="list-group-item">
                                     <a href="#" class="btn btn-primary">Entregar</a>
                                     <a href="{{route('alumno.getEditarModulo', array('id_modulo' => $modulo->id, 'id_proyecto' => $id_proyecto, 'id_fase' => $id_fase))}}" class="btn btn-warning">Editar</a>
+                                    <a href="{{route('alumno.getActividadesByModulo', array('id_modulo' => $modulo->id, 'id_proyecto' => $id_proyecto, 'id_fase' => $id_fase) )}}" class="btn btn-info">Trabajar</a>
                                     <a href="#" class="btn btn-danger">Eliminar</a>
                                 </li>
                             </ul>
