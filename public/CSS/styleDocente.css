@@ -6,14 +6,6 @@
     font-style: normal;
 
 }
-@font-face {
-    font-family: 'roboto_medium_regular';
-    src: url('../webfonts/roboto-medium-webfont.woff2') format('woff2'),
-         url('../webfonts/roboto-medium-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}
 
 @font-face {
     font-family: 'roboto_condensed_light';
@@ -34,13 +26,13 @@
 }
 
 :root{
-	--color-one: #F5F5F5;
-	--color-two: #24292E;
-	--color-three: #040C32;
+	--color-one: #ffffff;
+	--color-two: #000000;
+	--color-three: #000000;
 
-	--form-color: #14111A;
+	--form-color: #000000;
 
-    --border-color: #00689e;
+    --border-color: #000000;
 }
 
 body,html{
@@ -48,7 +40,7 @@ body,html{
 	width: 100vw;
 	height: 100vh;
 	background-color: var(--color-one);
-	color: #040C32;
+	color: #333;
 	font-size: 16px;
 }
 
@@ -213,7 +205,7 @@ table form{
 .nav-lateral-content{
 	max-width: 300px;
 	height: 100%;
-	background-color: #00689e;
+	background-color: rgba(36, 41, 46, .8);
 }
 .nav-lateral-bar{
 	height: 3px;
@@ -308,7 +300,7 @@ table form{
 }
 .navbar-info a:hover{
 	color: var(--color-three);
-	background-image: radial-gradient(circle,rgba(69, 81, 248, 0.1), transparent 80%);
+	background-image: radial-gradient(circle,#dedede, transparent 80%);
 }
 .navbar-info a:active,
 .navbar-info a:focus{
@@ -454,5 +446,3 @@ table form{
 @media (min-width: 1200px){
 
 }
-
-/*----------  Keyframes  ----------*/

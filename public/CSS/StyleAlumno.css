@@ -26,13 +26,13 @@
 }
 
 :root{
-	--color-one: #F5F5F5;
-	--color-two: #24292E;
-	--color-three: #f5c71d;
+	--color-one: #ffffff;
+	--color-two: #000000;
+	--color-three: #000000;
 
-	--form-color: #14111A;
+	--form-color: #000000;
 
-    --border-color: #f5c71d;
+    --border-color: #000000;
 }
 
 body,html{
@@ -205,7 +205,7 @@ table form{
 .nav-lateral-content{
 	max-width: 300px;
 	height: 100%;
-	background-color: #ffa500;
+	background-color: rgba(36, 41, 46, .8);
 }
 .nav-lateral-bar{
 	height: 3px;
@@ -300,7 +300,7 @@ table form{
 }
 .navbar-info a:hover{
 	color: var(--color-three);
-	background-image: radial-gradient(circle,rgba(250, 30, 78, .1), transparent 80%);
+	background-image: radial-gradient(circle,#dedede, transparent 80%);
 }
 .navbar-info a:active,
 .navbar-info a:focus{
@@ -368,6 +368,8 @@ table form{
 .tile:hover .tile-icon > p{
 	color: var(--color-three);
 }
+
+
 /*----------  Breakpoints  ----------*/
 @media (max-width: 767px){
 	.nav-lateral{
@@ -421,6 +423,8 @@ table form{
 		padding-left: 0;
 	}
 }
+
+
 /*  Bootstrap breakpoints */
 @media (min-width: 576px){
 

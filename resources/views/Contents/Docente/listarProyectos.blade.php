@@ -10,7 +10,7 @@
             <tr class="bg-primary">
                 <td style="text-align: center;">Nombre</td>
                 <td style="text-align: center;">Fecha límite (YYYY-MM-dd)</td>
-                <td style="text-align: center;">días restantes</td>
+                <td style="text-align: center;">Días restantes</td>
                 <td style="text-align: center;">Estado</td>
                 <td style="text-align: center;">Acciones</td>
             </tr>

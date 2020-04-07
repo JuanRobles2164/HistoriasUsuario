@@ -27,7 +27,7 @@
 	<link rel="stylesheet" href="{{ URL::asset('CSS/jquery.mCustomScrollbar.css') }}">
 	
 	<!-- General Styles -->
-	<link rel="stylesheet" href="{{ URL::asset('CSS/styleAlumno.css') }}">
+	<link rel="stylesheet" href="{{ URL::asset('CSS/StyleAlumno.css') }}">
 
 </head>
 <body>
