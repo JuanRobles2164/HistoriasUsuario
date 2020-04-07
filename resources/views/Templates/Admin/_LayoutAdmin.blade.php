@@ -33,7 +33,7 @@
                   <i class="far fa-times-circle show-nav-lateral"></i>
                   <img src="{{URL::asset('Images/Icons/avatar-1.svg')}}" class="img-fluid" alt="Avatar">
                   <figcaption class="roboto-medium text-center">
-					{{json_decode(Crypt::decrypt((Cookie::get('usuario'))))->nombre}}
+					      {{json_decode(Crypt::decrypt((Cookie::get('usuario'))))->nombre}}
                 	<br><small class="roboto-condensed-light">Administrador</small>
                   </figcaption>
                </figure>

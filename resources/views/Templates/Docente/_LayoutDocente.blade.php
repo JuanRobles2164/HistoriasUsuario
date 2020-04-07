@@ -14,12 +14,13 @@
     <link rel="stylesheet"  href="{{ URL::asset('CSS/sweetalert2.min.css') }}">
     <!-- Sweet Alert V8.13.0 JS file-->
     <script src="{{URL::asset('JS/sweetalert2.min.js')}}" ></script>
-    <!-- jQuery Custom Content Scroller V3.1.5 -->
-    <link rel="stylesheet" href="{{ URL::asset('CSS/jquery.mCustomScrollbar.css') }}">
     <!-- General Styles -->
-    <link rel="stylesheet" href="{{ URL::asset('CSS/styleDocente.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('CSS/StyleDocente.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
    </head>
    <body>
       <!-- centenedor de menu -->
@@ -87,25 +88,23 @@
             <!-- Contenido -->
             <div class="full-box tile-container">
             </div>
+            <footer class="blockquote-footer">
+               <cite> © 2020 Copyright: GEA Software. </cite>
+            </footer>
          </section>
       </main>
-      <footer>
-         <cite>© 2020 Copyright: GEA Software</cite>
-      </footer>
       <!-- jQuery V3.4.1 -->
       <script src="{{URL::asset('JS/jquery-3.4.1.min.js')}}"></script>
       <!-- popper -->
       <script src="{{URL::asset('JS/popper.min.js')}}"></script>
       <!-- Bootstrap V4.3 -->
       <script src="{{URL::asset('JS/bootstrap.min.js')}}"></script>
-      <!-- jQuery Custom Content Scroller V3.1.5 -->
-      <script src="{{URL::asset('JS/jquery.mCustomScrollbar.concat.min.js')}}"></script>
       <!-- Bootstrap Material Design V4.0 -->
       <script src="{{URL::asset('JS/bootstrap-material-design.min.js')}}" ></script>
       <script src="{{URL::asset('JS/main.js')}}"></script>
       <script src="{{URL::asset('JS/AJAX/DocenteAJAX.JS')}}"></script>
       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
    </body>
 </html>
