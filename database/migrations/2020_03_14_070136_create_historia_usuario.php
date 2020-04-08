@@ -26,9 +26,11 @@ class CreateHistoriaUsuario extends Migration
             //lo comento pues creo que se puede calcular en base a las actividades
             //$table->float('costo', 12, 2); 
             $table->unsignedBigInteger('id_actividad');
+            $table->unsignedBigInteger('id_modulo');
             $table->unsignedBigInteger('id_usuario_entrevistado');
             $table->timestamps();
             $table->foreign('id_actividad')->references('id')->on('actividad');
+            $table->foreign('id_modulo')->references('id')->on('modulo');
             $table->foreign('id_usuario_entrevistado')->references('id')->on('usuario_entrevistado');
         });
     }
