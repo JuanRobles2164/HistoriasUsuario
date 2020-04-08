@@ -20,6 +20,14 @@
                 <h2 class="title">Crear Cuenta</h2>
                 @csrf
                 <input type="hidden" name="rol" value="{{$rol->id}}">
+                @error('nombres')
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>¡Hey!,</strong> debe ingresar su nombre
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @enderror
            		<div class="input-div one">
            		   <div class="i">
            		   		<i class="fas fa-user"></i>
@@ -29,6 +37,14 @@
            		   		<input type="text" class="input" name="nombres" id="nombre">
                     </div>
                 </div>
+                @error('apellidos')
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>¡Hey!,</strong> debe ingresar su apellido
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @enderror
                 <div class="input-div one">
                     <div class="i">
                             <i class="fas fa-user"></i>
@@ -38,6 +54,14 @@
                             <input type="text" class="input" name="apellidos" id="apellido">
                   </div>
                 </div>
+                @error('identificacion')
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>¡Hey!,</strong> debe ingresar su identificaci&oacute;n o una que no este en uso
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @enderror
                 <div class="input-div one">
                     <div class="i">
                         <i class="fas fa-id-card"></i>
@@ -47,6 +71,14 @@
                             <input type="number" class="input" name="identificacion" id="identificacion">
                    </div>
                 </div>
+                @error('email')
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>¡Hey!,</strong> debe ingresar un email o uno que no este en uso
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @enderror
                 <div class="input-div one">
                     <div class="i">
                             <i class="fas fa-user"></i>
@@ -56,6 +88,14 @@
                             <input type="text" class="input" name="email" id="email">
                     </div>
                 </div>
+                @error('contrasenia')
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>¡Hey!,</strong> debe ingresar una contraseña
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @enderror
            		<div class="input-div pass">
            		   <div class="i"> 
            		    	<i class="fas fa-lock"></i>

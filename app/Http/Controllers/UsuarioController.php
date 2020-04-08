@@ -35,6 +35,13 @@ class UsuarioController extends Controller
      * para poder registrarlos en el sistema
      */
     public function postRegistro(Request $request){
+        $request->validate([
+            'nombres' => 'required',
+            'apellidos' => 'required',
+            'identificacion' => 'required|unique:usuarios,identificacion|max:50',
+            'email' => 'required|unique:usuarios,e_mail|max:50',
+            'contrasenia' => 'required'
+        ]);
         $usuario = new usuario();
         $usuario->nombres = $request->nombres;
         $usuario->apellidos = $request->apellidos;
