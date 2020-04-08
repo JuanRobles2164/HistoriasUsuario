@@ -1,43 +1,67 @@
 @extends('/Templates/Docente/_LayoutDocente')
 @section('contenido')
-<!-- Para agregar nuevos alumnos al proyecto-->
-<h1>Supervisando: {{$proyecto->nombre}}</h1>
-<br>
-<ul class="nav nav-tabs" id="tabSupervisionGrupo" role="tablist">
-    <li class="nav-item">
-      <a class="nav-link active" id="listadoAvanceGrupos" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Avances</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-    </li>
-  </ul>
-<form action="{{route('docente.postAsignarAlumnoProyecto', $proyecto->id)}}" method="POST">
-    @csrf
-    <input type="hidden" name="id_proyecto" value="{{$proyecto->id}}">
-    <div class="container">
-        <fieldset>
-            <legend>Seleccionar alumnos</legend>
-            <input type="checkbox" id="check_all">
-            <label for="check_all">Seleccionar todos</label>
-            <br>
-            <div name="cajaDePrueba">
-                @foreach ($alumnos as $alumno)
-                    <input type="checkbox" name="id_alumnos[]" value="{{$alumno->id}}">
-                    <label for="">{{$alumno->e_mail}}</label>
-                    <br>
-                @endforeach
-            </div>
-            
-        </fieldset>
-        <button type="submit" class="btn btn-success">Agregar</button>
+  <!-- Para agregar nuevos alumnos al proyecto-->
+  <h1><i class="fas fa-chart-line"></i> Supervisando: {{$proyecto->nombre}}</h1>
+  <br>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">  
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <a class="btn btn-primary">Nuevo grupo</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"> </a>
+        </li>
+        <li class="nav-item">
+          <button type="submit" class="btn btn-success">Agregar</button>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Buscar Estudiante">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i> Buscar</button>
+      </form>
     </div>
-</form>
-<br>
-
-<div>
-    <a class="btn btn-primary">Nuevo grupo</a>
-</div>
+  </nav>
+  <form action="{{route('docente.postAsignarAlumnoProyecto', $proyecto->id)}}" method="POST">
+    @csrf
+    <br>
+      <table class="table table-hover table-dark">
+        <thead>
+          <tr>
+            <th scope="col">
+              <div class="form-check">
+                <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+              </div>
+            </th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Identificación</th>
+            <th scope="col">Correo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">
+              <div class="form-check">
+                <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+              </div>
+            </th>
+            <td>
+              @foreach ($alumnos as $alumno)
+                <label for="">{{$alumno->nombres}}</label>
+              @endforeach
+            </td>
+            <td>
+              @foreach ($alumnos as $alumno)
+              <label for="">{{$alumno->identificacion}}</label>
+              @endforeach
+            </td>
+            <td>
+              @foreach ($alumnos as $alumno)
+                <label for="">{{$alumno->e_mail}}</label>
+              @endforeach
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </form>
 @endsection
