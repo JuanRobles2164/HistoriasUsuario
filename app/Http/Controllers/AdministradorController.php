@@ -48,13 +48,14 @@ class AdministradorController extends Controller
     }
     public function postCreate(Request $request){
         $request->validate([
-        'nombres' => 'required',
-        'apellidos' => 'required',
-        'username' => 'required',
-        'email' => 'required|unique:usuarios,e_mail|max:50',
-        'contrasenia' => 'required',
-        'identificacion' => 'required|unique:usuarios,identificacion|max:50',
-        'rol_id' => 'required']);
+            'nombres' => 'required',
+            'apellidos' => 'required',
+            'username' => 'required',
+            'email' => 'required|unique:usuarios,e_mail|max:50',
+            'contrasenia' => 'required',
+            'identificacion' => 'required|unique:usuarios,identificacion|max:50',
+            'rol_id' => 'required'
+        ]);
         
         $usuario = new usuario();
         $usuario->nombres = $request->nombres;

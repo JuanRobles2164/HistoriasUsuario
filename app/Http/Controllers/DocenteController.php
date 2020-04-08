@@ -60,6 +60,10 @@ class DocenteController extends Controller
         return redirect()->route('docente.getIndex');
     }
     public function postCrearMetodologia(Request $request){
+        $request->validate([
+            'nombre' => 'required',
+            'descripcion' => 'required'
+        ]);
         $metodologia = new metodologia();
         $metodologia->nombre = $request->nombre;
         $metodologia->descripcion = $request->descripcion;
