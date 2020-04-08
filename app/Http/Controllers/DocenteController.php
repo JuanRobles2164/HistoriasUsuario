@@ -76,7 +76,6 @@ class DocenteController extends Controller
         return View($this->ruta.'editarMetodologia')->with(compact('metodologia', 'fuentes'));
     }
     public function postEditarMetodologia(Request $request){
-        return $request;
         $metodologia = new metodologia();
         $metodologia->id = $request->id;
         $metodologia->nombre = $request->nombre;
