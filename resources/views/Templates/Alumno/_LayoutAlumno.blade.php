@@ -28,6 +28,7 @@
 	
 	<!-- General Styles -->
 	<link rel="stylesheet" href="{{ URL::asset('CSS/StyleAlumno.css') }}">
+	
 
 </head>
 <body>
@@ -104,5 +105,6 @@
 	<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
 
 	<script src="{{URL::asset('JS/main.js')}}"></script>
+	<script src="{{URL::asset('JS/AJAX/AlumnoAJAX.JS')}}"></script>
 </body>
 </html>

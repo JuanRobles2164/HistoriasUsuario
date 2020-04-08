@@ -19,14 +19,10 @@
                     <input type="date" name="fecha_limite" id="fecha_limite">
                     <br>
                     <label for="prioridad">prioridad</label>
-                    <select name="prioridad" id="prioridad">
-                        <option selected hidden>Seleccione una prioridad</option>
-                        <option value="1">Muy baja</option>
-                        <option value="2">Baja</option>
-                        <option value="3">Media</option>
-                        <option value="4">Alta</option>
-                        <option value="5">Muy alta</option>
-                    </select>
+                    <div class="alert alert-info" role="alert" id="indicador_prioridad">
+                        Media
+                    </div>
+                    <input type="range" name="prioridad" id="desplazamiento_bar" max="5" min="1" class="custom-range">
                     <br>
                     <button type="submit" class="btn btn-primary">Crear</button>
                 </form>
@@ -52,7 +48,7 @@
                             @case(4)
                     <div class="card bg-warning text-white h-300 w-300">
                                 @break
-                            @case(5)
+                            @default
                     <div class="card bg-danger text-white h-300 w-300">
                                 @break
                         @endswitch
@@ -92,7 +88,6 @@
                 </div>
                 @endforeach
             </div>
-
         @endforeach
     @endif
 @endsection
