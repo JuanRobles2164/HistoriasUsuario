@@ -47,12 +47,13 @@ class UsuarioController extends Controller
         $usuario->apellidos = $request->apellidos;
         $usuario->username = $request->identificacion;
         $usuario->email = $request->email;
-        $usuario->contrasenia = Funciones::cifrarClave($request->clave);
+        $usuario->contrasenia = Funciones::cifrarClave($request->contrasenia);
         $usuario->identificacion = $request->identificacion;
         $usuario->rol_id = $request->rol;
         $usuario->estado_eliminado = 0;
         UsuarioDao::registrar($usuario);
-        return back();
+        $mensaje = 'Registrado de forma exitosa!';
+        return back()->with(compact('mensaje'));
     }
     /**Recoje todos los datos de un usuario para poder darle
      * acceso al sistema
@@ -75,12 +76,13 @@ class UsuarioController extends Controller
                 return redirect()->route('getLogin');
             }
             $time = config()->get('app')['session-time-minutes'];
-            Cache::put($usuarioAuth->nombres, $usuarioAuth, $time*60);
             $_usuario = new stdClass();
             $_usuario->id = $usuarioAuth->id;
             $usuario->email = $usuarioAuth->e_mail;
             $_usuario->nombre = $usuarioAuth->nombres;
+            $_usuario->rol = $usuarioAuth->rol;
             $_usuario->token = Str::random(80);
+            Cache::put($_usuario->nombre, $_usuario, $time*60);
             return redirect()->route(strtolower($usuarioAuth->rol).'.getIndex')->cookie(cookie('usuario', Crypt::encrypt(json_encode($_usuario))));
             
             //return redirect()->route('getWelcome')->cookie(cookie('usuario', Crypt::encrypt(json_encode($_usuario))));
