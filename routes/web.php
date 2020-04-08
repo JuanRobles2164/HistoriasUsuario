@@ -24,7 +24,7 @@ Route::prefix('welcome')->group(function() {
     Route::get('/','Welcome@onGetWelcome')->name('getWelcome');
 });
 
-Route::get('/administrador', 'AdministradorController@index')->name('admin.getIndex');
+Route::get('/administrador', 'AdministradorController@index')->name('admin.getIndex')->middleware('CheckRole');
 Route::get('/administrador/editar_perfil', 'AdministradorController@getSelfEdit')->name('admin.getSelfEdit');
 Route::post('/administrador/editar_perfil', 'AdministradorController@postSelfEdit')->name('admin.postSelfEdit');
 Route::get('/administrador/crear_usuario', 'AdministradorController@getCreate')->name('admin.getCreate');
@@ -37,7 +37,7 @@ Route::get('/administrador/detalles_usuario', 'AdministradorController@detailsUs
 Route::get('/administrador/estado_usuario', 'AdministradorController@eliminarUsuario')->name('admin.eliminarUsuario');
 
 
-Route::get('/docente', 'DocenteController@index')->name('docente.getIndex');
+Route::get('/docente', 'DocenteController@index')->name('docente.getIndex')->middleware('CheckRole');
 Route::get('/docente/editar_perfil', 'DocenteController@getSelfEdit')->name('docente.getSelfEdit');
 Route::post('/docente/editar_perfil', 'DocenteController@postSelfEdit')->name('docente.postSelfEdit');
 Route::get('/docente/metodologias', 'DocenteController@getListaMetodologias')->name('docente.getListaMetodologias');
