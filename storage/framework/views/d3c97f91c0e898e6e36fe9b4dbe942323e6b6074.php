@@ -14,6 +14,8 @@
       <link rel="stylesheet" href="<?php echo e(URL::asset('CSS/sweetalert2.min.css')); ?>">
       <!-- Sweet Alert V8.13.0 JS file-->
       <script src="<?php echo e(URL::asset('JS/sweetalert2.min.js')); ?>"></script>
+      	<!-- jQuery Custom Content Scroller V3.1.5 -->
+	    <link rel="stylesheet" href="<?php echo e(URL::asset('CSS/jquery.mCustomScrollbar.css')); ?>">
       <!-- General Styles -->
       <link rel="stylesheet" href="<?php echo e(URL::asset('CSS/Style.css')); ?>">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -89,6 +91,8 @@
       <script src="<?php echo e(URL::asset('JS/popper.min.js')); ?>"></script>
       <!-- Bootstrap V4.3 -->
       <script src="<?php echo e(URL::asset('JS/bootstrap.min.js')); ?>"></script>
+      	<!-- jQuery Custom Content Scroller V3.1.5 -->
+	   <script src="<?php echo e(URL::asset('JS/jquery.mCustomScrollbar.concat.min.js')); ?>"></script>
       <!-- Bootstrap Material Design V4.0 -->
       <script src="<?php echo e(URL::asset('JS/bootstrap-material-design.min.js')); ?>"></script>
       <script>

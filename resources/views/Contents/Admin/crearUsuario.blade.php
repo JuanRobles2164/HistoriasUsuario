@@ -10,6 +10,14 @@
                         <form>
                             <div class="form-row">
                                 <div class="form-group col-md-4">
+                                    @isset($mensaje)
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <p>{{$mensaje}}</p>, ya puedes iniciar sesión.
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    @endisset
                                     @error('nombres')
                                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                             <strong>¡Hey!,</strong> debe ingresar su nombre
@@ -80,7 +88,7 @@
                                     @enderror
                                     <div class="form-group mb-3">
                                         <label for="usuario_password">Contraseña</label>
-                                        <input type="password" class="form-control" name="clave" id="contrasenia" maxlength="150">
+                                        <input type="password" class="form-control" name="contrasenia" id="contrasenia" maxlength="150">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-4">
