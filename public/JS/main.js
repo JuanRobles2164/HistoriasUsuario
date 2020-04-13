@@ -44,7 +44,7 @@ $(document).ready(function(){
 			cancelButtonText: 'No, cancel'
 		}).then((result) => {
 			if (result.value) {
-				window.location="index.html";
+				window.location.href = "/paginasPHP/HistoriasUsuario/public/login";
 			}
 		});
 	});
@@ -52,7 +52,7 @@ $(document).ready(function(){
 (function($){
     $(window).on("load",function(){
         $(".nav-lateral-content").mCustomScrollbar({
-        	theme:"light-thin",
+        	theme:"dark-thin",
         	scrollbarPosition: "inside",
         	autoHideScrollbar: true,
         	scrollButtons: {enable: true}

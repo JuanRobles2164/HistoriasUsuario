@@ -22,7 +22,7 @@
                     <div class="alert alert-info" role="alert" id="indicador_prioridad">
                         Media
                     </div>
-                    <input type="range" name="prioridad" id="desplazamiento_bar" max="5" min="1" class="custom-range">
+                    <input type="range" name="prioridad" id="desplazamiento_bar" value="3" max="5" min="1" class="custom-range">
                     <br>
                     <button type="submit" class="btn btn-primary">Crear</button>
                 </form>

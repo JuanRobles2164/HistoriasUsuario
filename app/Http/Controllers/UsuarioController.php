@@ -84,8 +84,6 @@ class UsuarioController extends Controller
             $_usuario->token = Str::random(80);
             Cache::put($_usuario->nombre, $_usuario, $time*60);
             return redirect()->route(strtolower($usuarioAuth->rol).'.getIndex')->cookie(cookie('usuario', Crypt::encrypt(json_encode($_usuario))));
-            
-            //return redirect()->route('getWelcome')->cookie(cookie('usuario', Crypt::encrypt(json_encode($_usuario))));
         }else{
 
             return redirect('registro');

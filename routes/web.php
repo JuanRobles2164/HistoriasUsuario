@@ -90,6 +90,8 @@ Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/
 Route::post('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades/{id_actividad}/recursos/crear_recurso','AlumnoController@postCrearRecurso')->name('alumno.postCrearRecurso');
 Route::post('/alumno/tipo_recurso/crear','AlumnoController@postCrearTipoRecurso')->name('alumno.postCrearTipoRecurso');
 Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades/{id_actividad}/historias','AlumnoController@getHistoriasUsuarioByActividadId')->name('alumno.getHistoriasUsuarioByActividadId');
+Route::post('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades/{id_actividad}/historias/crear_usuario_entrevistado','AlumnoController@postCrearUsuarioEntrevistado')->name('alumno.postCrearUsuarioEntrevistado');
+Route::post('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades/{id_actividad}/historias/crear_historia_usuario','AlumnoController@postCrearHistoriaUsuario')->name('alumno.postCrearHistoriaUsuario');
 //Route::get('/alumno/historias_de_usuario')->name('alumno.getListaHistorias');
 //Route::get('','')->name('');
 
@@ -102,7 +104,7 @@ Route::get('/test', function(){
 
 
 //Para sacar el listado de rutas
-Route::get('routes', function() {
+Route::get('rutas', function() {
     $routeCollection = Route::getRoutes();
     
     echo "<table style='width:100%'>";

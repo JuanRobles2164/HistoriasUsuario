@@ -3,16 +3,16 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>Inicio</title>
 
 	<!-- Normalize V8.0.1 -->
 	<link rel="stylesheet" href="{{ URL::asset('CSS/normalize.css') }}">
 
-	<!-- Bootstrap V4.3 -->
-	<link rel="stylesheet"  href="{{ URL::asset('CSS/bootstrap.min.css') }}">
-
-	<!-- Bootstrap Material Design V4.0 -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<!-- Bootstrap Material Design V4.0 
 	<link rel="stylesheet"  href="{{ URL::asset('CSS/bootstrap-material-design.min.css') }}">
+	-->
 
 	<!-- Font Awesome V5.9.0 -->
 	<link rel="stylesheet"  href="{{ URL::asset('CSS/all.css') }}">
@@ -89,7 +89,7 @@
         
 	</main>
 	<!-- jQuery V3.4.1 -->
-	<script src="{{URL::asset('JS/jquery-3.4.1.min.js')}}"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 	<!-- popper -->
 	<script src="{{URL::asset('JS/popper.min.js')}}"></script>

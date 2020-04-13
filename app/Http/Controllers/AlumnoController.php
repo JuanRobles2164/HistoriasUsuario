@@ -8,6 +8,7 @@ use App\Http\Controllers\Funciones;
 use App\Http\Daos\AlumnoDao;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 use App\grupoTrabajo;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
@@ -206,6 +207,21 @@ class AlumnoController extends Controller
     }
     public function getHistoriasUsuarioByActividadId(Request $request){
         $historias = AlumnoDao::getHistoriasUsuarioByActividadId($request->id_actividad);
-        return $request->id_actividad;
+        return view($this->ruta.'indexHistorias', array('id_modulo' => $request->id_modulo, 
+        'id_proyecto' => $request->id_proyecto, 
+        'id_fase' => $request->id_fase,
+        'id_actividad' => $request->id_actividad))->with(compact('historias'));
     }
+    public function postCrearUsuarioEntrevistado(Request $request){
+        AlumnoDao::agregarUsuarioEntrevistado($request);
+        return redirect()->route('alumno.getHistoriasUsuarioByActividadId',array('id_modulo' => $request->id_modulo, 
+        'id_proyecto' => $request->id_proyecto, 
+        'id_fase' => $request->id_fase,
+        'id_actividad' => $request->id_actividad));
+    }
+    public function postCrearHistoriaUsuario(Request $request){
+        
+        return $request;
+    }
+
 }

@@ -212,4 +212,14 @@ class AlumnoDao extends Controller
     public static function getUsuariosFromHistorias($historias){
         
     }
+    public static function agregarUsuarioEntrevistado($usuario_entrevistado){
+        DB::table('usuario_entrevistado')
+        ->insert([
+            'nombre' => $usuario_entrevistado->nombre_usuario_entrevistado,
+            'e_mail' => $usuario_entrevistado->email_usuario_entrevistado,
+            'telefono' => $usuario_entrevistado->telefono_usuario_entrevistado,
+            'cargo' => $usuario_entrevistado->cargo_usuario_entrevistado,
+            'created_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours'))
+        ]);
+    }
 }
