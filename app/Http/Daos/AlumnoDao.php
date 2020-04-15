@@ -222,4 +222,8 @@ class AlumnoDao extends Controller
             'created_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours'))
         ]);
     }
+    public static function getAllUsuariosEntrevistados(){
+        $usuarios_entrevistados = DB::table('usuario_entrevistado')->get();
+        return $usuarios_entrevistados;
+    }
 }

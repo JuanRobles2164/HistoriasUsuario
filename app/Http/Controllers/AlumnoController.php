@@ -207,10 +207,11 @@ class AlumnoController extends Controller
     }
     public function getHistoriasUsuarioByActividadId(Request $request){
         $historias = AlumnoDao::getHistoriasUsuarioByActividadId($request->id_actividad);
+        $usuarios_entrevistados = AlumnoDao::getAllUsuariosEntrevistados();
         return view($this->ruta.'indexHistorias', array('id_modulo' => $request->id_modulo, 
         'id_proyecto' => $request->id_proyecto, 
         'id_fase' => $request->id_fase,
-        'id_actividad' => $request->id_actividad))->with(compact('historias'));
+        'id_actividad' => $request->id_actividad))->with(compact('historias', 'usuarios_entrevistados'));
     }
     public function postCrearUsuarioEntrevistado(Request $request){
         AlumnoDao::agregarUsuarioEntrevistado($request);

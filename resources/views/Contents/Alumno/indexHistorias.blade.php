@@ -32,17 +32,30 @@
             'id_fase' => $id_fase,
             'id_actividad' => $id_actividad))}}" method="POST">
             @csrf
-            <label for="">Secuencia</label>
+            <label for="">Secuencia:</label>
             <input type="text" name="secuencia" id="">
             <br>
-            <label for="">Nombre</label>
+            <label for="">Nombre:</label>
             <input type="text" name="nombre" id="">
             <br>
-            <label for="prioridad">Prioridad</label>
+            <label for="prioridad">Prioridad:</label>
             <div class="alert alert-info" role="alert" id="indicador_prioridad">
                 Media
             </div>
             <input type="range" name="prioridad" id="desplazamiento_bar" max="5" min="1" value="3" class="custom-range">
+            <br>
+            <label for="">Usuario entrevistado</label>
+            <select name="usuario_entrevistado">
+                @foreach ($usuarios_entrevistados as $usuario_entrevistado)
+                    <option value="{{$usuario_entrevistado->id}}">{{$usuario_entrevistado->nombre}}</option>
+                @endforeach
+            </select>
+            <br>
+            <label for="">Descripcion:</label>
+            <textarea name="descripcion"></textarea>
+            <br>
+            <label for="">Dias:</label>
+            <input type="number" name="dias" id="">
             <br>
             <label for="">Estado</label>
             <input type="text" name="estado" id="">
@@ -87,9 +100,33 @@
                     </tr>
                 </tbody>
             </table>
-            
             <button type="submit">Crear</button>
             <br>
         </form>
+
+        <table class="table">
+            <thead class="bg-warning">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Telefono</th>
+                    <th>Cargo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($usuarios_entrevistados as $usuario_entrevistado)
+                    <tr>
+                        <td>{{$usuario_entrevistado->nombre}}</td>
+                        <td>{{$usuario_entrevistado->e_mail}}</td>
+                        <td>{{$usuario_entrevistado->telefono}}</td>
+                        <td>{{$usuario_entrevistado->cargo}}</td>
+                        <td>
+                            <a href="#" class="btn btn-warning">Editar</a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 @endsection
