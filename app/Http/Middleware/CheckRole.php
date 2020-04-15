@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Cookie;
 use Closure;
+use App\Http\Middleware\CheckRoleHelper;
 
 class CheckRole
 {
@@ -27,11 +26,8 @@ class CheckRole
         /*$route = Route::getRoutes()->match($request)->uri();
         if(!$this->noSessionPath($route)){
             if($request->hasCookie('usuario')){
-                $response = $next($request);
-                $usuario = Crypt::decrypt(Cookie::get('usuario'), false);
-                $usuarioRol =  $usuario->rol;
-                if(strpos($route, strtolower($usuarioRol)) != null){
-                    return $response;
+                if(CheckRoleHelper::checkCookieRole($request, $route)){
+                    return $next($request);
                 }else{
                     return redirect()->route('getLogin');
                 }
