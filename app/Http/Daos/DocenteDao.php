@@ -60,7 +60,6 @@ class DocenteDao extends Controller
         $max_id_proyecto++;
         $SQL = "INSERT INTO proyecto(id, nombre, descripcion, fecha_limite, fecha_inicial, id_usuario, id_metodologia, id_estado, created_at) VALUES($max_id_proyecto,'$proyecto->nombre', '$proyecto->descripcion', '$proyecto->fecha_limite', '$proyecto->fecha_inicial' ,$proyecto->id_usuario, $proyecto->id_metodologia, $proyecto->id_estado, CURRENT_TIMESTAMP)";
         DB::insert($SQL);
-        DB::insert("INSERT INTO grupo_trabajo(nombre, descripcion, estado_activo, id_proyecto) VALUES('Grupo base', 'Grupo base del proyecto; alumnos sin grupo dentro de un proyecto', 1, $max_id_proyecto)");
     }
     public static function getAllMetodologias(){
         $metodologias = DB::table('metodologia')
@@ -76,8 +75,28 @@ class DocenteDao extends Controller
     }
     public static function getAllEstudiantesSinAsignarEnProyecto($id_proyecto){
         //Obtiene los estudiantes asignados actualmente al proyecto
-        $SQL = "SELECT u.* FROM usuarios u LEFT JOIN grupo_usuario gu on u.id = gu.id_usuario LEFT JOIN grupo_trabajo gt ON gt.id = gu.id_grupo WHERE u.rol_id = 2";
-        $estudiantes = DB::select($SQL);
+        /* Consulta antigua para obtener los estudiantes con un grupo primitivo
+        */
+        //$SQL = "SELECT u.* FROM usuarios u LEFT JOIN grupo_usuario gu on u.id = gu.id_usuario LEFT JOIN grupo_trabajo gt ON gt.id = gu.id_grupo WHERE u.rol_id = 2";
+        //$estudiantes = DB::select($SQL);
+        $model1 = DB::table('usuarios')
+        ->join('roles', 'usuarios.rol_id', '=', 'roles.id')
+        ->select('usuarios.*')
+        ->where('roles.id','=',2)
+        ->get();
+        $model2 = DB::table('usuarios')
+        ->join('usuario_proyecto_union', 'usuarios.id', '=', 'usuario_proyecto_union.id_usuario')
+        ->select('usuarios.*')
+        ->where('usuario_proyecto_union.id_proyecto','=',$id_proyecto)
+        ->get();
+        //Get the id's of first model as array
+        $ids1 = $model1->pluck('id');
+
+        //get the id's of second models as array
+        $ids2 = $model2->pluck('id');
+
+        //get the models
+        $estudiantes = DB::table('usuarios')->whereIn('id',$ids1)->whereNotIn('id',$ids2)->get();
         return $estudiantes;
     }
     public static function getGrupoPrimigenio($id_proyecto){
