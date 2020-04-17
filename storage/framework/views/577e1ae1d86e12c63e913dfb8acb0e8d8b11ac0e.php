@@ -9,6 +9,14 @@
                         <form>
                             <div class="form-row">
                                 <div class="form-group col-md-4">
+                                    <?php if(isset($mensaje)): ?>
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <p><?php echo e($mensaje); ?></p>, ya puedes iniciar sesión.
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    <?php endif; ?>
                                     <?php $__errorArgs = ['nombres'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -114,7 +122,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                     <div class="form-group mb-3">
                                         <label for="usuario_password">Contraseña</label>
-                                        <input type="password" class="form-control" name="clave" id="contrasenia" maxlength="150">
+                                        <input type="password" class="form-control" name="contrasenia" id="contrasenia" maxlength="150">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-4">

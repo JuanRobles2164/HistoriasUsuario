@@ -17,7 +17,7 @@
          <!-- Sweet Alert V8.13.0 JS file-->
          <script src="{{URL::asset('JS/sweetalert2.min.js')}}" ></script>
          <!-- General Styles -->
-         <link rel="stylesheet" href="{{ URL::asset('CSS/StyleDocente.css') }}">
+         <link rel="stylesheet" href="{{ URL::asset('CSS/styleDocente.css') }}">
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -33,7 +33,7 @@
             <div class="full-box nav-lateral-content">
                <figure class="full-box nav-lateral-avatar">
                   <i class="far fa-times-circle show-nav-lateral"></i>
-                  <img src="{{URL::asset('Images/Icons/avatar-3.svg')}}" class="img-fluid" alt="Avatar">
+                  <img src="{{URL::asset('Images/Icons/avatar-3.Svg')}}" class="img-fluid" alt="Avatar">
                   <figcaption class="roboto-medium text-center">
                      {{json_decode(Crypt::decrypt((Cookie::get('usuario'))))->nombre}}
                      <br><small class="roboto-condensed-light">Docente</small>

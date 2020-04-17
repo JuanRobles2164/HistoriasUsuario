@@ -27,12 +27,12 @@
 
 :root{
 	--color-one: #ffffff;
-	--color-two: #000000;
-	--color-three: #000000;
+	--color-two: #182334;
+	--color-three: #00689E;
 
-	--form-color: #000000;
+	--form-color: #ffffff;
 
-    --border-color: #000000;
+    --border-color: #00689E;
 }
 
 body,html{
@@ -127,7 +127,7 @@ body,html{
 	color: #FFF;
 }
 .table tbody tr{
-	color: #ffffff;
+	color: #000000;
 	transition: all .2s ease-in-out;
 }
 .table-dark,
@@ -197,7 +197,7 @@ table form{
 	left: 0;
 	z-index: 1;
 	transition: all .2s ease-in-out;
-	background-image: #000000;
+	background: #00689E;
 	background-position: center center;
 	background-size: cover;
 }
@@ -205,7 +205,7 @@ table form{
 .nav-lateral-content{
 	max-width: 300px;
 	height: 100%;
-	background-color: rgba(36, 41, 46, .8);
+	background-color: #182334;
 }
 .nav-lateral-bar{
 	height: 3px;
@@ -221,7 +221,7 @@ table form{
 	width: 50%;
 	margin: 0 auto;
 	display: block;
-	border: 4px solid #FFF;
+	border: 4px solid #00689E;
 	border-radius: 100%;
 }
 .nav-lateral-avatar figcaption{
