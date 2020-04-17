@@ -50,7 +50,6 @@ class AdministradorController extends Controller
         $request->validate([
             'nombres' => 'required',
             'apellidos' => 'required',
-            'username' => 'required',
             'email' => 'required|unique:usuarios,e_mail|max:50',
             'contrasenia' => 'required',
             'identificacion' => 'required|unique:usuarios,identificacion|max:50',
@@ -62,9 +61,9 @@ class AdministradorController extends Controller
         $usuario->apellidos = $request->apellidos;
         $usuario->username = $request->identificacion;
         $usuario->email = $request->email;
-        $usuario->contrasenia = Funciones::cifrarClave($request->clave);
+        $usuario->contrasenia = Funciones::cifrarClave($request->contrasenia);
         $usuario->identificacion = $request->identificacion;
-        $usuario->rol_id = $request->rol;
+        $usuario->rol_id = $request->rol_id;
         $usuario->usuario_modifica = 0;
         $usuario->estado_eliminado = 0;
         UsuarioDao::registrar($usuario);

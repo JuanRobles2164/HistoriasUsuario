@@ -32,7 +32,7 @@ class UsuarioDao extends Controller
     /**Registra un usuario */
     public static function registrar(usuario $usuario){
         $SQL = "INSERT INTO "
-        ."usuarios(nombres, apellidos, username, contrasenia, identificacion, e_mail, rol_id, usuario_modifica, creado_en, estado_eliminado) "
+        ."usuarios(nombres, apellidos, username, contrasenia, identificacion, e_mail, rol_id, usuario_modifica,estado_eliminado) "
         ."VALUES "
         ."('$usuario->nombres', "
         ."'$usuario->apellidos', "
@@ -42,7 +42,6 @@ class UsuarioDao extends Controller
         ."'$usuario->email',"
         ."'$usuario->rol_id',"
         ."0,"
-        ." CURRENT_TIMESTAMP,"
         ."'$usuario->estado_eliminado')";
         DB::insert($SQL);
     }

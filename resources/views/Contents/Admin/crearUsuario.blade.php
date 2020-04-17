@@ -102,7 +102,7 @@
                                     @enderror
                                     <div class="form-group mb-3">
                                         <label for="usuario_rol">Seleccioné el Rol</label>
-                                        <select class="form-control" name="rol">
+                                        <select class="form-control" name="rol_id">
                                             <option hidden>Seleccione una opción</option>
                                             @foreach ($roles as $rol)
                                                 <option value="{{$rol->id}}">{{$rol->abreviatura}}</option>    
