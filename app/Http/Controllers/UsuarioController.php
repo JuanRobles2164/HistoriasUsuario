@@ -78,7 +78,7 @@ class UsuarioController extends Controller
             $time = config()->get('app')['session-time-minutes'];
             $_usuario = new stdClass();
             $_usuario->id = $usuarioAuth->id;
-            $usuario->email = $usuarioAuth->e_mail;
+            $_usuario->email = $usuarioAuth->e_mail;
             $_usuario->nombre = $usuarioAuth->nombres;
             $_usuario->rol = $usuarioAuth->rol;
             $_usuario->token = Str::random(80);

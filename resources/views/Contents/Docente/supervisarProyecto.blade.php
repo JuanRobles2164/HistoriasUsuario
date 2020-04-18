@@ -25,8 +25,8 @@
   <form action="{{route('docente.postAsignarAlumnoProyecto', $proyecto->id)}}" method="POST">
     @csrf
     <br>
-      <table class="table table-hover table-dark">
-        <thead>
+      <table class="table table-hover">
+        <thead class="bg-dark">
           <tr>
             <th scope="col">
               <div class="form-check">
@@ -39,28 +39,24 @@
           </tr>
         </thead>
         <tbody>
+          @foreach ($alumnos as $alumno)
           <tr>
-            <th scope="row">
+            <td>
               <div class="form-check">
                 <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
               </div>
-            </th>
-            <td>
-              @foreach ($alumnos as $alumno)
-                <label for="">{{$alumno->nombres}}</label>
-              @endforeach
             </td>
             <td>
-              @foreach ($alumnos as $alumno)
+              <label for="">{{$alumno->nombres}}</label>
+            </td>
+            <td>
               <label for="">{{$alumno->identificacion}}</label>
-              @endforeach
             </td>
             <td>
-              @foreach ($alumnos as $alumno)
-                <label for="">{{$alumno->e_mail}}</label>
-              @endforeach
+              <label for="">{{$alumno->e_mail}}</label>
             </td>
           </tr>
+          @endforeach
         </tbody>
       </table>
   </form>
