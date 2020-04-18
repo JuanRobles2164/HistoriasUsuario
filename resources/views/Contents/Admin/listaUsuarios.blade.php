@@ -15,7 +15,8 @@
       </div>
       </div>
    </div>
-      <h3>Lista de usuarios</h3>
+      <h3>Lista de usuarios</h3>      
+      <br>
       <script>
          $(document).ready(function(){
          $('.myBtnXD').click(function(){
@@ -24,8 +25,6 @@
          });
          });
       </script>
-      
-      <br>
       <div class="center">
          <table class="table">
             <thead class="thead-dark">
@@ -59,13 +58,13 @@
                   @endif
                   <td href="#" scope="row" style="text-align: center" valign="middle">      
                      <a class="btn btn-info btn-sm"  onclick="detallesUsuario({{$usuario->id}})">
-                        <i class="fas fa-search-plus"></i>
+                        <i class="fas fa-eye"></i>
                      </a>
                      <a href="{{route('admin.getEdit', 'id='.$usuario->id)}}" a class="btn btn-success btn-sm">
-                        <i class="far fa-edit"></i>
+                        <i class="fas fa-user-edit"></i>
                      </a>
                      <a href="{{route('admin.restaurarUsuario', 'id='.$usuario->id)}}" a class="btn btn-warning btn-sm myBtnXD">
-                        <i class="fas fa-sync"></i>
+                        <i class="fas fa-sync-alt"></i>
                      </a>
                   </td>
                </tr>

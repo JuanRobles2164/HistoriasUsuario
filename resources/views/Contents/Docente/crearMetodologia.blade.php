@@ -4,7 +4,7 @@
     <form action="{{route('docente.postCrearMetodologia')}}" method="POST">
         @csrf
         <div class="jumbotron">
-            <h1 class="display-4"><i class="fas fa-brain"></i> Crear una Metodología</h1>
+            <h1 class="display-4" style="margin:40px 20%"><i class="fas fa-brain"></i> Crear una Metodología</h1>
             <br>
             @error('nombre')
               <div class="alert alert-warning alert-dismissible fade show" role="alert">

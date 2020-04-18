@@ -3,12 +3,13 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
     <form action="{{route('docente.postCrearProyecto')}}" method="POST">
+        <br>
         <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-              <h2 class="display-4"> <i class="fas fa-project-diagram"></i> Nuevo Proyecto</h2>
+            <div class="container-fluid" style="margin:0px 80px;">
+              <h2 class="display-4" style="margin:30px 220px"> <i class="fas fa-project-diagram"></i> Nuevo Proyecto</h2>
                 <form>
                     @csrf
-                    <div class="form-row">
+                    <div class="row">
                         <div class="col-md-4 mb-3">
                           <label for="validationCustom01">Nombre</label>
                           <input type="text" class="form-control" name="nombre" required>
@@ -18,7 +19,7 @@
                             <input type="text" class="form-control" name="descripcion" required>
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="row">
                         <div class="col-md-3 mb-3">
                             <label for="validationCustom03">Fecha inicial:</label>
                             <input type="date" class="form-control" name="fecha_inicial" required>
@@ -37,12 +38,12 @@
                         </div>
                     </div>
                     <input type="hidden" name="id_estado" value="1">
-                    <br>
-                    <p class="text-center">
-                    <button type="submit" class="btn btn-primary btn-lg">Crear</button>
-                    </p>
-                </form>          
+                </form>        
             </div>
+            <br>
+            <p class="text-center">
+            <button type="submit" class="btn btn-primary btn-lg">Crear</button>
+            </p>  
         </div>
     </form>
 @endsection
