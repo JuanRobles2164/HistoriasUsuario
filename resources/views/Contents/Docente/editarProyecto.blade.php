@@ -1,8 +1,9 @@
 @extends('Templates/Docente/_LayoutDocente')
 @section('contenido')
     <form action="{{route('docente.postEditarProyecto')}}" method="POST">
+        <br>
         <div class="jumbotron jumbotron-fluid">
-            <div class="container">
+            <div class="container-fluid" style="margin:0px 80px">
                 <form>
                     @csrf
                     <input type="hidden" value="{{$proyecto->id}}" name="id">
@@ -32,11 +33,11 @@
                             <input type="hidden" id="fecha_limite_element" value="{{$proyecto->fecha_limite}}">
                         </div>
                     </div>
-                    <p class="text-center">
-                        <button type="submit" class="btn btn-warning btn-lg">Editar</button>
-                    </p>
                 </form>          
             </div>
+            <p class="text-center">
+                <button type="submit" class="btn btn-warning btn-lg">Editar</button>
+            </p>
         </div>
     </form>
 @endsection

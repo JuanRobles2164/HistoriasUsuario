@@ -24,7 +24,7 @@
             @endif
             <td scope="row" valign="middle">
                <a href="#" class="btn btn-info btn-sm">
-                  <i class="fas fa-info-circle"></i>
+                  <i class="fas fa-eye"></i>
                </a>
                <a href="{{route('docente.getEditarMetodologia', 'id='.$metodologia->id)}}" a class="btn btn-success btn-sm">
                   <i class="far fa-edit"></i>
