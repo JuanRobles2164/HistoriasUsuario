@@ -181,6 +181,7 @@ class DocenteController extends Controller
         $query_values = array();
         $grupo_primigenio = DocenteDao::getGrupoPrimigenio($request->id_proyecto);
         foreach($request->id_alumnos as $idAlumno){
+            //array_push($query_values, array('usuario_id' => $request->id_usuario, 'proyecto_id' => $request->id_proyecto, 'created_at' => 'CURRENT_TIMESTAMP'));
             array_push($query_values, "($idAlumno,$grupo_primigenio->id, CURRENT_TIMESTAMP)");
         }
         DocenteDao::asignarAlumnosAGrupo(implode(",",$query_values));
