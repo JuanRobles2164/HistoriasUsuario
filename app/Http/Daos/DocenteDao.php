@@ -9,6 +9,7 @@ use App\usuario;
 use App\proyecto;
 use App\metodologia;
 use App\fuente;
+use App\grupo;
 use stdClass;
 
 class DocenteDao extends Controller
@@ -73,7 +74,7 @@ class DocenteDao extends Controller
         $SQL = "UPDATE proyecto SET nombre='$proyecto->nombre', descripcion='$proyecto->descripcion', fecha_limite='$proyecto->fecha_limite', fecha_inicio='$proyecto->fecha_inicial' updated_at=CURRENT_TIMESTAMP WHERE id=$proyecto->id";
         DB::update($SQL);
     }
-    public static function getAllEstudiantesSinAsignarEnProyecto($id_proyecto){
+    public static function getAllEstudiantesSinAsignarEnProyecto($request){
         //Obtiene los estudiantes asignados actualmente al proyecto
         /* Consulta antigua para obtener los estudiantes con un grupo primitivo
         */
@@ -85,16 +86,18 @@ class DocenteDao extends Controller
         ->where('roles.id','=',2)
         ->get();
         $model2 = DB::table('usuarios')
-        ->join('usuario_proyecto_union', 'usuarios.id', '=', 'usuario_proyecto_union.id_usuario')
+        ->join('grupo_usuario', 'usuarios.id', '=', 'grupo_usuario.id_usuario')
+        ->join('grupo_trabajo', 'grupo_usuario.id_grupo', '=', 'grupo_trabajo.id')
         ->select('usuarios.*')
-        ->where('usuario_proyecto_union.id_proyecto','=',$id_proyecto)
+        ->where('grupo_trabajo.id_proyecto','=',$request->id_proyecto)
+        ->where('grupo_trabajo.id','=',$request->id_grupo)
         ->get();
+        
         //Get the id's of first model as array
         $ids1 = $model1->pluck('id');
 
         //get the id's of second models as array
         $ids2 = $model2->pluck('id');
-
         //get the models
         $estudiantes = DB::table('usuarios')->whereIn('id',$ids1)->whereNotIn('id',$ids2)->get();
         return $estudiantes;
@@ -129,15 +132,27 @@ class DocenteDao extends Controller
         ->get();
         return $grupos;
     }
+    /*
     public static function getIntegrantesGrupos($id_grupos){
-        $integrantes = array();
         foreach($id_grupos as $id_grupo){
-            $integrantes = DB::table('grupo_usuario AS gu')
+            $integrante = DB::table('grupo_usuario AS gu')
             ->join('usuarios AS u', 'gu.id_usuario', '=', 'u.id')
             ->select('gu.id_grupo AS grupo','u.nombres AS nombres')
-            ->where('grupo' ,'=',$id_grupo)
+            ->where('gu.id_grupo' ,'=',$id_grupo->id)
             ->get();
+            $integrantes = $integrante->pluck('nombres','grupo');
         }
         return $integrantes;
+    }*/
+    public static function crearGrupo(grupo $grupo, $id_proyecto){
+        $id = DB::table('grupo_trabajo')->insertGetId(
+            array('nombre' => $grupo->nombre, 'descripcion' => $grupo->descripcion, 'id_proyecto' => $id_proyecto, 'estado_activo' => 1)
+        );
+    }
+    public static function getGrupoById($id_grupo){
+        $grupo = DB::table('grupo_trabajo')
+        ->where('id', $id_grupo)
+        ->first();
+        return $grupo;
     }
 }

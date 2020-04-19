@@ -55,6 +55,10 @@ Route::get('/docente/proyectos/editar', 'DocenteController@getEditarProyecto')->
 Route::post('/docente/proyectos/editar', 'DocenteController@postEditarProyecto')->name('docente.postEditarProyecto');
 Route::get('/docente/proyectos/{id_proyecto}', 'DocenteController@getSupervisarProyecto')->name('docente.getSupervisarProyecto');
 Route::get('/docente/proyectos/{id_proyecto}/grupos', 'DocenteController@getListaGrupos')->name('docente.getListaGrupos');
+Route::get('/docente/proyectos/{id_proyecto}/grupos/crear_grupo', 'DocenteController@getCrearGrupo')->name('docente.getCrearGrupo');
+Route::post('/docente/proyectos/{id_proyecto}/grupos/crear_grupo', 'DocenteController@postCrearGrupo')->name('docente.postCrearGrupo');
+Route::get('/docente/proyectos/{id_proyecto}/grupos/{id_grupo}/asignar_alumno', 'DocenteController@getAsignarAlumnoGrupo')->name('docente.getAsignarAlumnoGrupo');
+Route::post('/docente/proyectos/{id_proyecto}/grupos/{id_grupo}/asignar_alumno', 'DocenteController@postAsignarAlumnoGrupo')->name('docente.postAsignarAlumnoGrupo');
 //Route::post('/docente/proyectos/{id_proyecto}/grupos/{id_grupo}/asignar_alumno', 'DocenteController@postAsignarAlumnoProyecto')->name('docente.postAsignarAlumnoProyecto');
 /*
 

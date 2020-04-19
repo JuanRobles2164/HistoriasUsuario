@@ -14,6 +14,7 @@ use App\Http\Daos\UsuarioDao;
 use App\usuario;
 use App\fuente;
 use stdClass;
+use App\grupo;
 
 class DocenteController extends Controller
 {
@@ -172,27 +173,46 @@ class DocenteController extends Controller
      * @param Request $request
      * @return void
      */
-    public function getSupervisarProyecto(Request $request){
-        $proyecto = DocenteDao::getProyectoById($request->id_proyecto);
-        $alumnos = DocenteDao::getAllEstudiantesSinAsignarEnProyecto($request->id_proyecto);
-        return view($this->ruta.'supervisarProyecto')->with(compact(array('proyecto', 'alumnos')));
-    }
-    public function postAsignarAlumnoProyecto(Request $request){
-        $query_values = array();
-        foreach($request->id_alumnos as $idAlumno){
-            //array_push($query_values, array('usuario_id' => $request->id_usuario, 'proyecto_id' => $request->id_proyecto, 'created_at' => 'CURRENT_TIMESTAMP'));
-            array_push($query_values, "($idAlumno,$request->id_proyecto, CURRENT_TIMESTAMP)");
-        }
-        DocenteDao::asignarAlumnosAProyecto(implode(",",$query_values));
-        $mensaje = 'Se añadieron con exito al proyecto!';
-        //return back()->with(compact('mensaje'));
-        return redirect()->route('docente.getSupervisarProyecto', $request->id_proyecto);
-    }
+    
+     //Funciones del controlador para los grupos de los proyectos
     public function getListaGrupos(Request $request){ 
         $proyecto = DocenteDao::getProyectoById($request->id_proyecto);
         $grupos = DocenteDao::getAllGrupos($request->id_proyecto);
-        //$integrantes = DocenteDao::getIntegrantesGrupos();
+        //$integrantes = DocenteDao::getIntegrantesGrupos($grupos);
         return view($this->ruta.'listarGrupos')->with(compact(array('proyecto','grupos')));
     }
-    
+    public function getCrearGrupo(Request $request){
+        $proyecto = DocenteDao::getProyectoById($request->id_proyecto);
+        return view($this->ruta.'crearGrupo')->with(compact('proyecto'));
+    }
+    public function postCrearGrupo(Request $request){
+        $request->validate([
+            'nombre' => 'required',
+            'descripcion' => 'required'
+        ]);
+        $grupo = new grupo();
+        $grupo->nombre = $request->nombre;
+        $grupo->descripcion = $request->descripcion;
+        DocenteDao::crearGrupo($grupo, $request->id_proyecto);
+        return redirect()->route('docente.getListaGrupos', $request->id_proyecto);
+    }
+    public function getAsignarAlumnoGrupo(Request $request){
+        $proyecto = DocenteDao::getProyectoById($request->id_proyecto);
+        $grupo = DocenteDao::getGrupoById($request->id_grupo);
+        $alumnos = DocenteDao::getAllEstudiantesSinAsignarEnProyecto($request);
+        return view($this->ruta.'añadirPersonasAGrupo')->with(compact(array('proyecto', 'alumnos','grupo')));
+    }
+    public function postAsignarAlumnoGrupo(Request $request){
+        $query_values = array();
+        $query_value = array();
+        foreach($request->id_alumnos as $idAlumno){
+            //array_push($query_values, "($idAlumno,$request->id_proyecto, CURRENT_TIMESTAMP)");
+            array_push($query_value, "($idAlumno,$request->id_grupo, CURRENT_TIMESTAMP)");
+        }
+        //DocenteDao::asignarAlumnosAProyecto(implode(",",$query_values));
+        DocenteDao::asignarAlumnosAGrupo(implode(",",$query_value));
+        $mensaje = 'Se añadieron con exito al proyecto!';
+        //return back()->with(compact('mensaje'));
+        return redirect()->route('docente.getListaGrupos', $request->id_proyecto);
+    }
 }
