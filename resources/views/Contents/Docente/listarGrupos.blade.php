@@ -62,11 +62,9 @@
                         </div>
                     </th>
                     <th style="text-align: center;">
-                        <!--foreach ($integrantes as $integrante)
-                            if($integrante->grupo == $grupo->id)
-                            <label> {$integrante->nombres}}</label> <br>
-                        endforeach-->
-                        <!--<label for="">($grupo->Integrantes)}}</label> <br>-->
+                        @foreach ($integrantes->{$grupo->id} as $integrante)
+                            <label> {{$integrante->nombres}}</label> <br>
+                        @endforeach
                     </th>
                     @if ($grupo->estado_activo == 1)
                         <th style="text-align: center;">

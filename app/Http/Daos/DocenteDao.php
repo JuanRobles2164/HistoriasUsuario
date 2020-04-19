@@ -128,22 +128,24 @@ class DocenteDao extends Controller
     }
     public static function getAllGrupos($id_proyecto){
         $grupos = DB::table('grupo_trabajo') 
-        ->where('grupo_trabajo.id_proyecto' ,'=',$id_proyecto)
+        ->where('id_proyecto', $id_proyecto)
         ->get();
         return $grupos;
     }
-    /*
+    
     public static function getIntegrantesGrupos($id_grupos){
+        $integrantes = new stdClass();
         foreach($id_grupos as $id_grupo){
-            $integrante = DB::table('grupo_usuario AS gu')
+            /*$integrante = DB::table('grupo_usuario AS gu')
             ->join('usuarios AS u', 'gu.id_usuario', '=', 'u.id')
             ->select('gu.id_grupo AS grupo','u.nombres AS nombres')
             ->where('gu.id_grupo' ,'=',$id_grupo->id)
-            ->get();
-            $integrantes = $integrante->pluck('nombres','grupo');
+            ->get();*/
+            $sub_integrantes = DB::select("SELECT u.nombres as nombres, id_grupo as grupo FROM usuarios u JOIN grupo_usuario gu ON u.id = gu.id_usuario where gu.id_grupo = $id_grupo->id");
+            $integrantes->{$id_grupo->id} = $sub_integrantes;
         }
         return $integrantes;
-    }*/
+    }
     public static function crearGrupo(grupo $grupo, $id_proyecto){
         $id = DB::table('grupo_trabajo')->insertGetId(
             array('nombre' => $grupo->nombre, 'descripcion' => $grupo->descripcion, 'id_proyecto' => $id_proyecto, 'estado_activo' => 1)

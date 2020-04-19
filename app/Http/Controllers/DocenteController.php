@@ -178,8 +178,10 @@ class DocenteController extends Controller
     public function getListaGrupos(Request $request){ 
         $proyecto = DocenteDao::getProyectoById($request->id_proyecto);
         $grupos = DocenteDao::getAllGrupos($request->id_proyecto);
-        //$integrantes = DocenteDao::getIntegrantesGrupos($grupos);
-        return view($this->ruta.'listarGrupos')->with(compact(array('proyecto','grupos')));
+        $integrantes = DocenteDao::getIntegrantesGrupos($grupos);
+        $variables = array('proyecto','grupos', 'integrantes');
+        //return json_encode($integrantes);
+        return view($this->ruta.'listarGrupos')->with(compact(array('proyecto','grupos', 'integrantes')));
     }
     public function getCrearGrupo(Request $request){
         $proyecto = DocenteDao::getProyectoById($request->id_proyecto);
