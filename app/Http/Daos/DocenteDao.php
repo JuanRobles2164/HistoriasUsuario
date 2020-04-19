@@ -105,6 +105,10 @@ class DocenteDao extends Controller
         ->first();
         return $grupo;
     }
+    public static function asignarAlumnosAProyecto($cadena){
+        $SQL = "INSERT INTO usuario_proyecto_union(id_usuario, id_proyecto, created_at) VALUES ".$cadena;
+        DB::insert($SQL);
+    }
     public static function asignarAlumnosAGrupo($cadena){
         $SQL = "INSERT INTO grupo_usuario(id_usuario, id_grupo, created_at) VALUES ".$cadena;
         DB::insert($SQL);
@@ -118,5 +122,22 @@ class DocenteDao extends Controller
         ->where('id', $id)
         ->first();
         return $tema;
+    }
+    public static function getAllGrupos($id_proyecto){
+        $grupos = DB::table('grupo_trabajo') 
+        ->where('grupo_trabajo.id_proyecto' ,'=',$id_proyecto)
+        ->get();
+        return $grupos;
+    }
+    public static function getIntegrantesGrupos($id_grupos){
+        $integrantes = array();
+        foreach($id_grupos as $id_grupo){
+            $integrantes = DB::table('grupo_usuario AS gu')
+            ->join('usuarios AS u', 'gu.id_usuario', '=', 'u.id')
+            ->select('gu.id_grupo AS grupo','u.nombres AS nombres')
+            ->where('grupo' ,'=',$id_grupo)
+            ->get();
+        }
+        return $integrantes;
     }
 }

@@ -35,7 +35,7 @@
                         <!-- Por ejemplo: Cantidad de grupos en el proyecto... numero de alumnos por grupo-->
                         <!-- Y cosas así XD -->
                         <a href="#" class="btn btn-success" aria-placeholder="Detalles">Detalles</a>
-                        <a href="{{route('docente.getSupervisarProyecto', $proyecto->id)}}" class="btn btn-info" >Supervisar</a>
+                        <a href="{{route('docente.getListaGrupos', $proyecto->id)}}" class="btn btn-info" >Supervisar</a>
                         <a href="{{route('docente.getEditarProyecto', 'id='.$proyecto->id)}}" class="btn btn-warning" aria-placeholder="Editar">Editar</a>
                     </th>
                 </tr>

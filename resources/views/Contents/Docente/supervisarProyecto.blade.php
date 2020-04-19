@@ -43,7 +43,7 @@
           <tr>
             <td>
               <div class="form-check">
-                <input class="form-check-input position-static" type="checkbox" value="{{$alumno->id}}" aria-label="...">
+                <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="id_alumnos[]" value="{{$alumno->id}}" aria-label="...">
               </div>
             </td>
             <td>
