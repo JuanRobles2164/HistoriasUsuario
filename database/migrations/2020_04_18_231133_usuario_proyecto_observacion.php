@@ -13,12 +13,12 @@ class UsuarioProyectoObservacion extends Migration
      */
     public function up()
     {
-        Schema::create('usuario_proyecto_observacion', function(Blueprint $table){
+        Schema::create('observacion_usuario_proyecto', function(Blueprint $table){
             $table->bigIncrements('id');
             $table->string('observacion');
             $table->unsignedBigInteger('proyecto_usuario_union_id');
-            $table->foreign('proyecto_usuario_union_id')->references('id')->on('proyecto_usuario_union');
-            });
+            $table->foreign('proyecto_usuario_union_id')->references('id')->on('usuario_proyecto_union');
+        });
     }
 
     /**
