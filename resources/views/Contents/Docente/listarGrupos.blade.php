@@ -78,7 +78,7 @@
                         </th>
                     @endif
                     <th style="text-align: center;">
-                        <a href="{{route('docente.getAsignarAlumnoGrupo', array('id_proyecto' => $grupo->id_proyecto, 'id_grupo' => $grupo->id) )}}" a class="btn btn-dark btn-sm">
+                        <a href="#" a class="btn btn-dark btn-sm">
                             <i class="fas fa-clipboard"> </i>
                         </a>
                         <a href="#" class="btn btn-info btn-sm">
@@ -87,7 +87,7 @@
                          <a href="#" a class="btn btn-warning  btn-sm">
                             <i class="far fa-edit"></i>
                         </a>
-                        <a href="#" a class="btn btn-light btn-sm">
+                        <a href="{{route('docente.getAsignarAlumnoGrupo', array('id_proyecto' => $grupo->id_proyecto, 'id_grupo' => $grupo->id) )}}" a class="btn btn-light btn-sm">
                             <i class="fas fa-user-plus"></i>
                         </a>
                     </th>

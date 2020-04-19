@@ -90,7 +90,6 @@ class DocenteDao extends Controller
         ->join('grupo_trabajo', 'grupo_usuario.id_grupo', '=', 'grupo_trabajo.id')
         ->select('usuarios.*')
         ->where('grupo_trabajo.id_proyecto','=',$request->id_proyecto)
-        ->where('grupo_trabajo.id','=',$request->id_grupo)
         ->get();
         
         //Get the id's of first model as array
