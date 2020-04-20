@@ -17,8 +17,9 @@ class UsuarioProyecto extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
 
-            $table->unsignedBigInteger('id_usuario')->nullable();
-            $table->unsignedBigInteger('id_proyecto')->nullable();
+            $table->unsignedBigInteger('id_usuario');
+            $table->unsignedBigInteger('id_proyecto');
+            $table->string('observacion');
             $table->foreign('id_usuario')->references('id')->on('usuarios');
             $table->foreign('id_proyecto')->references('id')->on('proyecto');
         });

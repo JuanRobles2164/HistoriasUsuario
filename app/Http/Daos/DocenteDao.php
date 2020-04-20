@@ -101,6 +101,15 @@ class DocenteDao extends Controller
         $estudiantes = DB::table('usuarios')->whereIn('id',$ids1)->whereNotIn('id',$ids2)->get();
         return $estudiantes;
     }
+    public static function getAllEstudiantesAsignadosAProyecto($request){
+        $estudiantes = DB::table('usuarios')
+        ->join('grupo_usuario', 'usuarios.id', '=', 'grupo_usuario.id_usuario')
+        ->join('grupo_trabajo', 'grupo_usuario.id_grupo', '=', 'grupo_trabajo.id')
+        ->select('usuarios.*')
+        ->where('grupo_trabajo.id_proyecto','=',$request->id_proyecto)
+        ->get();
+        return $estudiantes;
+    }
     public static function getGrupoPrimigenio($id_proyecto){
         $grupo = DB::table('grupo_trabajo')
         ->where('id', $id_proyecto)
@@ -162,5 +171,9 @@ class DocenteDao extends Controller
             ->where('id_proyecto', $grupo->id_proyecto)
             ->where('id', $grupo->id)
             ->update(array('estado_activo' => $grupo->estado_activo));
+    }
+    public static function asignarObservacionAAlumnos($cadena){
+        $SQL = "INSERT INTO usuario_proyecto_union(id_usuario, id_proyecto, observacion, created_at) VALUES ".$cadena;
+        DB::insert($SQL);
     }
 }

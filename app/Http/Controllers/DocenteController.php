@@ -226,10 +226,17 @@ class DocenteController extends Controller
         return redirect()->route('docente.getListaGrupos', $request->id_proyecto);
     }
     public function getObservacionAlumnosProyecto(Request $request){
-        
+        $proyecto = DocenteDao::getProyectoById($request->id_proyecto);
+        $alumnos = DocenteDao::getAllEstudiantesAsignadosAProyecto($request);
+        return view($this->ruta.'observacionAlumnosProyecto')->with(compact(array('proyecto', 'alumnos')));
     }
     public function postObservacionAlumnosProyecto(Request $request){
-        
+        $query_value = array();
+        foreach($request->id_alumnos as $idAlumno){
+            array_push($query_value, "($idAlumno,$request->id_proyecto, '$request->observacion', CURRENT_TIMESTAMP)");
+        }
+        DocenteDao::asignarObservacionAAlumnos(implode(",",$query_value));
+        return redirect()->route('docente.getListaGrupos', $request->id_proyecto);
     }
 }
 

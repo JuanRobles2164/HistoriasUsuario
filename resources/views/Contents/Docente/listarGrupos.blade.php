@@ -24,7 +24,7 @@
           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"> </a>
         </li>
         <li class="nav-item">
-          <button type="submit" class="btn btn-secondary">Observaci&oacute;n</button>
+            <a href="{{route('docente.getObservacionAlumnosProyecto', $proyecto->id)}}" class="btn btn-secondary">Observaci&oacute;n</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
@@ -61,20 +61,20 @@
                             <div class="progress-bar progress-bar-striped bg-primary" role="progressbar" style="width: 25%;line-height:50px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
                         </div>
                     </th>
-                    <th style="text-align: center; center;display: table-cell;vertical-align: middle;">
+                    <th style="text-align: center; display: table-cell;vertical-align: middle;">
                         <div class="">
                         @foreach ($integrantes->{$grupo->id} as $integrante)
                             <p style="font-size:12px;  line-height:5px;" > {{$integrante->nombres}}</p> 
                         @endforeach
                         </div>
                     </th>
-                    @if ($proyecto->id_estado == 1)
+                    @if ($grupo->estado_activo == 1)
                         <th style="text-align: center;">
                             <a href="{{route('docente.getAlternarEstadoGrupo',  array('id_proyecto' => $grupo->id_proyecto, 'id' => $grupo->id, 'id_estado' => $grupo->estado_activo))}}" class="btn btn-success">Activo</a>
                         </th>
                     @else
                         <th style="text-align: center;">
-                            <a href="{{route('docente.getAlternarEstadoGrupo',  array('id_proyecto' => $grupo->id_proyecto, 'id' => $grupo->id, 'id_estado' => $grupo->estado_activo))}}" class="btn btn-success">Activo</a>
+                            <a href="{{route('docente.getAlternarEstadoGrupo',  array('id_proyecto' => $grupo->id_proyecto, 'id' => $grupo->id, 'id_estado' => $grupo->estado_activo))}}" class="btn btn-danger">Inactivo</a>
                         </th>
                     @endif
                     <th style="text-align: center;">
