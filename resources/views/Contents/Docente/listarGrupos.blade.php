@@ -47,7 +47,7 @@
         </thead>
         <tbody>
             @foreach ($grupos as $grupo)
-                <tr>
+                <tr style="line-height:50px;">
                     <th style="text-align: center;">
                         <a href="#" class="btn btn-danger btn-sm">
                             <i class="far fa-trash-alt"></i>
@@ -56,27 +56,25 @@
                     <th style="text-align: center;">
                         <label for="">{{$grupo->nombre}}</label>
                     </th>
-                    <th style="text-align: center;"> 
+                    <th style="text-align: center;display: table-cell;vertical-align: middle;"> 
                         <div class="progress">
-                            <div class="progress-bar progress-bar-striped bg-primary" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                            <div class="progress-bar progress-bar-striped bg-primary" role="progressbar" style="width: 25%;line-height:50px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
                         </div>
                     </th>
-                    <th style="text-align: center;">
+                    <th style="text-align: center; center;display: table-cell;vertical-align: middle;">
+                        <div class="">
                         @foreach ($integrantes->{$grupo->id} as $integrante)
-                            @if($integrante != null)
-                                <label> {{$integrante->nombres}}</label> <br>
-                            @else
-                                <label> Sin alumnos</label> <br>
-                            @endif
+                            <p style="font-size:12px;  line-height:5px;" > {{$integrante->nombres}}</p> 
                         @endforeach
+                        </div>
                     </th>
-                    @if ($grupo->estado_activo)
+                    @if ($proyecto->id_estado == 1)
                         <th style="text-align: center;">
-                            <a href="#'"&id_estado="" class="btn btn-success">Activo</a>
+                            <a href="{{route('docente.getAlternarEstadoGrupo',  array('id_proyecto' => $grupo->id_proyecto, 'id' => $grupo->id, 'id_estado' => $grupo->estado_activo))}}" class="btn btn-success">Activo</a>
                         </th>
                     @else
                         <th style="text-align: center;">
-                            <a href="#"&id_estado="" class="btn btn-danger">Inactivo</a>
+                            <a href="{{route('docente.getAlternarEstadoGrupo',  array('id_proyecto' => $grupo->id_proyecto, 'id' => $grupo->id, 'id_estado' => $grupo->estado_activo))}}" class="btn btn-success">Activo</a>
                         </th>
                     @endif
                     <th style="text-align: center;">
