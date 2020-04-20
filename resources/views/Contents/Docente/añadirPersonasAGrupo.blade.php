@@ -23,8 +23,7 @@
                 <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
               </div>
             </th>
-            <th scope="col">Nombres</th>
-            <th scope="col">Apellidos</th>
+            <th scope="col">Nombre</th>
             <th scope="col">Identificación</th>
             <th scope="col">Correo</th>
           </tr>
@@ -39,9 +38,6 @@
             </td>
             <td>
               <label for="">{{$alumno->nombres}}</label>
-            </td>
-            <td>
-              <label for="">{{$alumno->apellidos}}</label>
             </td>
             <td>
               <label for="">{{$alumno->identificacion}}</label>

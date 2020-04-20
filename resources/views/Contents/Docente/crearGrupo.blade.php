@@ -4,7 +4,7 @@
     <form action="{{route('docente.postCrearGrupo',$proyecto->id)}}" method="POST">
         @csrf
         <div class="jumbotron">
-            <h1 class="display-4" style="margin:40px 15%"><i class="fas fa-users"></i> Crear grupo de trabajo</h1>
+            <h1 class="display-4" style="margin:40px 20%"><i class="fas fa-users"></i> Crear grupo de trabajo</h1>
             <br>
             @error('nombre')
               <div class="alert alert-warning alert-dismissible fade show" role="alert">

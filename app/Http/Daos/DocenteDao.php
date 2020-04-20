@@ -140,7 +140,7 @@ class DocenteDao extends Controller
             ->select('gu.id_grupo AS grupo','u.nombres AS nombres')
             ->where('gu.id_grupo' ,'=',$id_grupo->id)
             ->get();*/
-            $sub_integrantes = DB::select("SELECT CONCAT(u.nombres, ' ', u.apellidos) as nombres, id_grupo as grupo FROM usuarios u JOIN grupo_usuario gu ON u.id = gu.id_usuario where gu.id_grupo = $id_grupo->id");
+            $sub_integrantes = DB::select("SELECT u.nombres as nombres, id_grupo as grupo FROM usuarios u JOIN grupo_usuario gu ON u.id = gu.id_usuario where gu.id_grupo = $id_grupo->id");
             $integrantes->{$id_grupo->id} = $sub_integrantes;
         }
         return $integrantes;
@@ -155,12 +155,5 @@ class DocenteDao extends Controller
         ->where('id', $id_grupo)
         ->first();
         return $grupo;
-    }
-    public static function alternarEstadoGrupo(stdClass $grupo){
-        //DB::update("UPDATE proyecto SET id_estado = $proyecto->id_estado WHERE id = $proyecto->id");
-        DB::table('grupo_trabajo')
-            ->where('id_proyecto', $grupo->id_proyecto)
-            ->where('id', $grupo->id)
-            ->update(array('estado_activo' => $grupo->estado_activo));
     }
 }
