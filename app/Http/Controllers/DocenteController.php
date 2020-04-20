@@ -217,4 +217,19 @@ class DocenteController extends Controller
         //return back()->with(compact('mensaje'));
         return redirect()->route('docente.getListaGrupos', $request->id_proyecto);
     }
+    public function getAlternarEstadoGrupo(Request $request){
+        $grupo= new stdClass();
+        $grupo->id = $request->id;
+        $grupo->id_proyecto = $request->id_proyecto;
+        $grupo->estado_activo = $request->id_estado == 1 ? 2 : 1;
+        DocenteDao::alternarEstadoGrupo($grupo);
+        return redirect()->route('docente.getListaGrupos', $request->id_proyecto);
+    }
+    public function getObservacionAlumnosProyecto(Request $request){
+        
+    }
+    public function postObservacionAlumnosProyecto(Request $request){
+        
+    }
 }
+
