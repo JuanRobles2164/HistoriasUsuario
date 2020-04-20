@@ -63,10 +63,14 @@
                     </th>
                     <th style="text-align: center;">
                         @foreach ($integrantes->{$grupo->id} as $integrante)
-                            <label> {{$integrante->nombres}}</label> <br>
+                            @if($integrante != null)
+                                <label> {{$integrante->nombres}}</label> <br>
+                            @else
+                                <label> Sin alumnos</label> <br>
+                            @endif
                         @endforeach
                     </th>
-                    @if ($grupo->estado_activo == 1)
+                    @if ($grupo->estado_activo)
                         <th style="text-align: center;">
                             <a href="#'"&id_estado="" class="btn btn-success">Activo</a>
                         </th>
