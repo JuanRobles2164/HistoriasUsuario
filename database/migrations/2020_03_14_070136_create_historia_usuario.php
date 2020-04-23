@@ -18,8 +18,7 @@ class CreateHistoriaUsuario extends Migration
             $table->string('nombre');
             $table->string('prioridad');
             $table->string('secuencia');
-            $table->integer('estado');
-            $table->string('observacion');
+            $table->string('estado');
             $table->string('descripcion');
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
