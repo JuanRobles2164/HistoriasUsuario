@@ -176,4 +176,40 @@ class DocenteDao extends Controller
         $SQL = "INSERT INTO usuario_proyecto_union(id_usuario, id_proyecto, observacion, created_at) VALUES ".$cadena;
         DB::insert($SQL);
     }
+    public static function getAllHistoriasFromGrupoById($id_grupo){
+        $historias = DB::table('grupo_trabajo')
+        ->join('proyecto' ,'grupo_trabajo.id_proyecto' ,'=', 'proyecto.id')
+        ->join('fase', 'proyecto.id', '=', 'fase.id_proyecto')
+        ->join('modulo', 'fase.id', '=', 'modulo.id_fase')
+        ->join('historia_usuario', 'modulo.id', '=', 'historia_usuario.id_modulo')
+        ->select('historia_usuario.*')
+        ->get();
+        return $historias;
+        /*$historias = new stdClass;
+        foreach($historias_id as $id){
+            $historias->{'data_'.$id} = DB::table('historia_usuario')
+            ->join('compromiso', 'compromiso.id_historia_usuario', '=', 'historia_usuario.id')
+            ->join('criterios_aceptacion', 'criterios_aceptacion.id_historia_usuario', '=', 'historia_usuario.id')
+            ->join('evidencia',)
+        }*/
+        
+    }
+    public static function getHistoriaById($id){
+        $historia = DB::table('historia_usuario')
+        ->where('id', $id)
+        ->first();
+        return $historia;
+    }
+    public static function getCompromisosByHistoriaId($id_historia){
+        $compromisos = DB::table('compromiso')
+        ->where('id_historia_usuario', $id_historia)
+        ->get();
+        return $compromisos;
+    }
+    public static function getEvidenciasByHistoriaId($id_historia){
+        $evidencias = DB::table('evidencia')
+        ->where('id_historia_usuario', $id_historia)
+        ->get();
+        return $evidencias;
+    }
 }

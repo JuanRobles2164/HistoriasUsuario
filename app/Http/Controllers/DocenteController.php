@@ -205,16 +205,12 @@ class DocenteController extends Controller
         return view($this->ruta.'añadirPersonasAGrupo')->with(compact(array('proyecto', 'alumnos','grupo')));
     }
     public function postAsignarAlumnoGrupo(Request $request){
-        $query_values = array();
         $query_value = array();
         foreach($request->id_alumnos as $idAlumno){
             //array_push($query_values, "($idAlumno,$request->id_proyecto, CURRENT_TIMESTAMP)");
             array_push($query_value, "($idAlumno,$request->id_grupo, CURRENT_TIMESTAMP)");
         }
-        //DocenteDao::asignarAlumnosAProyecto(implode(",",$query_values));
         DocenteDao::asignarAlumnosAGrupo(implode(",",$query_value));
-        $mensaje = 'Se añadieron con exito al proyecto!';
-        //return back()->with(compact('mensaje'));
         return redirect()->route('docente.getListaGrupos', $request->id_proyecto);
     }
     public function getAlternarEstadoGrupo(Request $request){
@@ -237,6 +233,19 @@ class DocenteController extends Controller
         }
         DocenteDao::asignarObservacionAAlumnos(implode(",",$query_value));
         return redirect()->route('docente.getListaGrupos', $request->id_proyecto);
+    }
+    public function getSupervisarGrupo(Request $request){
+        $historias = DocenteDao::getAllHistoriasFromGrupoById($request->id_grupo);
+        return view($this->ruta.'supervisarHistoriasGrupo', 
+        array('id_proyecto' => $request->id_proyecto, 
+        'id_grupo' => $request->id_grupo))
+        ->with(compact('historias'));
+    }
+    public function getDetallesHistoria(Request $request){
+        $historia = DocenteDao::getHistoriaById($request->id_historia);
+        $evidencias = DocenteDao::getEvidenciasByHistoriaId($historia->id);
+        $compromisos = DocenteDao::getCompromisosByHistoriaId($historia->id);
+        return view($this->ruta.'supervisarHistoriasGrupo');
     }
 }
 
