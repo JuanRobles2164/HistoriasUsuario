@@ -209,7 +209,7 @@ class DocenteController extends Controller
         $query_value = array();
         foreach($request->id_alumnos as $idAlumno){
             //array_push($query_values, "($idAlumno,$request->id_proyecto, CURRENT_TIMESTAMP)");
-            array_push($query_value, "($idAlumno,$request->id_grupo, CURRENT_TIMESTAMP)");
+            array_push($query_value, "($idAlumno,$request->id_grupo, NOW(), NULL, CURRENT_TIMESTAMP)");
         }
         //DocenteDao::asignarAlumnosAProyecto(implode(",",$query_values));
         DocenteDao::asignarAlumnosAGrupo(implode(",",$query_value));

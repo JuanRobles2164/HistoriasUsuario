@@ -90,6 +90,7 @@ class DocenteDao extends Controller
         ->join('grupo_trabajo', 'grupo_usuario.id_grupo', '=', 'grupo_trabajo.id')
         ->select('usuarios.*')
         ->where('grupo_trabajo.id_proyecto','=',$request->id_proyecto)
+        ->whereNull('grupo_usuario.fecha_fin')
         ->get();
         
         //Get the id's of first model as array
@@ -107,6 +108,7 @@ class DocenteDao extends Controller
         ->join('grupo_trabajo', 'grupo_usuario.id_grupo', '=', 'grupo_trabajo.id')
         ->select('usuarios.*')
         ->where('grupo_trabajo.id_proyecto','=',$request->id_proyecto)
+        ->whereNull('grupo_usuario.fecha_fin')
         ->get();
         return $estudiantes;
     }
@@ -121,7 +123,7 @@ class DocenteDao extends Controller
         DB::insert($SQL);
     }
     public static function asignarAlumnosAGrupo($cadena){
-        $SQL = "INSERT INTO grupo_usuario(id_usuario, id_grupo, created_at) VALUES ".$cadena;
+        $SQL = "INSERT INTO grupo_usuario(id_usuario, id_grupo, fecha_inicio, fecha_fin, created_at) VALUES ".$cadena;
         DB::insert($SQL);
     }
     public static function getAllTemas(){

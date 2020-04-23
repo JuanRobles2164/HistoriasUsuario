@@ -18,6 +18,9 @@ class CreateGrupoUsuario extends Migration
             $table->unsignedBigInteger('id_usuario');
             $table->unsignedBigInteger('id_grupo');
             $table->timestamps();
+            $table->dateTime('fecha_inicio');
+            $table->dateTime('fecha_fin')->nullable();
+
 
             $table->foreign('id_usuario')->references('id')->on('usuarios');
             $table->foreign('id_grupo')->references('id')->on('grupo_trabajo');
