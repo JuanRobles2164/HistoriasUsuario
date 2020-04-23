@@ -221,8 +221,25 @@ class AlumnoController extends Controller
         'id_actividad' => $request->id_actividad));
     }
     public function postCrearHistoriaUsuario(Request $request){
-        
-        return $request;
+        $historia_usuario = new stdClass();
+        $historia_usuario = $request->except('token');
+        $id_historia = AlumnoDao::crearHistoriaUsuarioGetId($historia_usuario);
+        foreach($historia_usuario['compromisos'] as $compromiso){
+            AlumnoDao::crearCompromisosByHistoria($id_historia, $compromiso);
+        }
+        foreach(array_combine($request->nombre_evidencia, $request->foto_evidencia) as $nombre => $foto){
+            AlumnoDao::crearEvidencia($id_historia, $nombre, $foto);
+        }
+
+        /*$objeto_retorno = new stdClass();
+        $objeto_retorno->nombres = array();
+        $objeto_retorno->fotos = array();
+        foreach($arr as $nombre => $foto){
+            array_push($objeto_retorno->nombres,$nombre);
+            array_push($objeto_retorno->fotos,$foto);
+            //$objeto_retorno->fotos = $foto;
+        }*/
+        return back();
     }
 
 }

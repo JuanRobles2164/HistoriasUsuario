@@ -32,6 +32,12 @@
             'id_fase' => $id_fase,
             'id_actividad' => $id_actividad))}}" method="POST">
             @csrf
+            <input type="hidden" name="id_proyecto" value="{{$id_proyecto}}">
+            <input type="hidden" name="id_modulo" value="{{$id_modulo}}">
+            <input type="hidden" name="id_proyecto" value="{{$id_proyecto}}">
+            <input type="hidden" name="id_fase" value="{{$id_fase}}">
+            <input type="hidden" name="id_actividad" value="{{$id_actividad}}">
+
             <label for="">Secuencia:</label>
             <input type="text" name="secuencia" id="">
             <br>
@@ -54,14 +60,14 @@
             <label for="">Descripcion:</label>
             <textarea name="descripcion"></textarea>
             <br>
-            <label for="">Dias:</label>
-            <input type="number" name="dias" id="">
-            <br>
             <label for="">Estado</label>
             <input type="text" name="estado" id="">
             <br>
-            <label for="">Fecha de ralización</label>
-            <input type="date" name="fecha_realizado" id="">
+            <label for="">Fecha de inicio</label>
+            <input type="date" name="fecha_inicio" id="">
+            <br>
+            <label for="">Fecha de finalización</label>
+            <input type="date" name="fecha_fin" id="">
             <br>
             <label for="">Compromisos</label>
             <a class="btn btn-success" id="btnAgregarCompromiso">+</a>

@@ -226,4 +226,38 @@ class AlumnoDao extends Controller
         $usuarios_entrevistados = DB::table('usuario_entrevistado')->get();
         return $usuarios_entrevistados;
     }
+    public static function crearHistoriaUsuarioGetId($historia_usuario){
+        $id = DB::table('historia_usuario')
+        ->insertGetId([
+            'secuencia' => $historia_usuario['secuencia'],
+            'nombre' => $historia_usuario['nombre'],
+            'prioridad' => $historia_usuario['prioridad'],
+            'id_usuario_entrevistado' => $historia_usuario['usuario_entrevistado'],
+            'descripcion' => $historia_usuario['descripcion'],
+            'estado' => $historia_usuario['estado'],
+            'fecha_inicio' => $historia_usuario['fecha_inicio'],
+            'id_actividad' => $historia_usuario['id_actividad'],
+            'id_modulo' => $historia_usuario['id_modulo'],
+            'fecha_fin' => $historia_usuario['fecha_fin'],
+            'created_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours'))
+        ]);
+        return $id;
+    }
+    public static function crearCompromisosByHistoria($id_historia_usuario, $compromiso){
+        DB::table('compromiso')
+        ->insert([
+            'descripcion' => $compromiso,
+            'created_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours')),
+            'id_historia_usuario' => $id_historia_usuario
+        ]);
+    }
+    public static function crearEvidencia($id_historia_usuario, $nombre, $foto){
+        DB::table('evidencia')
+        ->insert([
+            'nombre' => $nombre,
+            'foto' => $foto,
+            'id_historia_usuario' => $id_historia_usuario,
+            'created_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours'))
+        ]);
+    }
 }
