@@ -26,7 +26,10 @@
          });
       </script>
       <div class="center">
-         <table class="table">
+         <div>
+            <input type="text" name="criterio" id="criterio" placeholder="Cualquier campo...">
+         </div>
+         <table class="table" id="tabla">
             <thead class="thead-dark">
                <tr>
                   <th scope="col" valign="middle" style="text-align: center">Nombre completo</th>
