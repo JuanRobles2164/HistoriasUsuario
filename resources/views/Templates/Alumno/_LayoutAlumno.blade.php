@@ -74,8 +74,9 @@
 			<!-- Contenido -->
 			<div class="full-box tile-container">
 				@yield('contenido')
+				@yield('modal_fases')
+				@yield('modal_objetivo')
 			</div>
-			
         </section>
         
 	</main>

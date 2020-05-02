@@ -1,31 +1,41 @@
 @extends('/Templates/Alumno/_LayoutAlumno')
 @section('contenido')
-
-<br>
-<h3>Administrando los módulos</h3>
-<br>
-<div class="row">
-    <div class="col-sm-4">
-        <div class="card">
-            <form action="{{route('alumno.postCrearModulo')}}" method="POST">
-                @csrf
-                <input type="hidden" name="id_fase" value="{{$id_fase}}">
-                <br>
-                <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" id="nombre">
-                <br>
-                <label for="descripcion">Descripcion</label>
-                <textarea type="text" name="descripcion" id="descripcion"></textarea>
-                <br>
-                <label for="fecha_limite">Fecha limite</label>
-                <input type="date" name="fecha_limite" id="fecha_limite">
-                <br>
-                <button type="submit">Crear</button>
-                <br>
-            </form>
-        </div>
+<div class="card border-warning text-center">
+    <div class="card-header">
+        <h3>Administrando los Módulos</h3>
     </div>
-</div>
+    <div class="card-body">
+      <p class="card-text">
+        <form action="{{route('alumno.postCrearModulo')}}" method="POST">
+            @csrf
+            <input type="hidden" name="id_fase" value="{{$id_fase}}">
+            <div class="d-flex justify-content-center">
+                <div class="form-group row">
+                    <label for="nombre" class="col-sm-4 col-form-label">Nombre:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="nombre" id="nombre" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="descripcion" class="col-sm-4 col-form-label">Descripción</label>
+                    <div class="col-sm-10">
+                        <textarea type="text" class="form-control" name="descripcion" id="descripcion" required></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="fecha_limite" class="col-sm-5 col-form-label">Fecha limite:</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" name="fecha_limite" id="fecha_limite" required>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-outline-success btn-lg">Crear</button>
+        </form>
+      </p>
+    </div>
+    <div class="card-footer text-muted"></div>
+  </div>
 <br>
     @if($modulos != null)   
         @foreach ($modulos->chunk(3) as $chunk)
@@ -90,5 +100,4 @@
             </div>
         @endforeach
     @endif
-    
 @endsection

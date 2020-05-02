@@ -64,6 +64,8 @@ class AlumnoController extends Controller
     public function getFasesProyecto(Request $request){
         $proyecto = AlumnoDao::getProyectoById($request->id_proyecto);
         $fases = AlumnoDao::getFasesFromProyecto($proyecto->id);
+        
+        //return json_encode($fases);
         return view($this->ruta.'fasesProyecto')->with(compact(array('proyecto', 'fases')));
     }
     public function postAgregarFase(Request $request){
