@@ -54,13 +54,13 @@
                                 <h5 class="card-title">{{$fase->nombre}}</h5>
                                 <p class="card-text">{{$fase->descripcion}}</p>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modalfases">
+                                    <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modalfases" onclick="consultarFase({{$fase->id}})">
                                         Fase
                                     </button>
                                     <button type="button" class="btn btn-outline-warning" disabled><i class="fas fa-cog"></i></button>
-                                    <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modalobjetivo">
+                                    <a class="btn btn-outline-warning" data-toggle="modal" data-target="#modalobjetivo">
                                         Objetivo
-                                    </button>
+                                    </a>
                                   </div>
                                   <a href="{{route('alumno.getTrabajarEnFaseModulos', array('id_proyecto' => $fase->id_proyecto, 'id_fase' =>$fase->id))}}" class="btn btn-outline-dark">Trabajar</a>
                             </div>
@@ -85,23 +85,20 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('alumno.postEditarFase')}}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <form>
+                    <form enctype="multipart/form-data">
                             <div class="form-group">
-                                <input type="hidden" name="id">
-                                <input type="hidden" name="id_proyecto">
+                                <input type="hidden" name="id_fase" id="id_fase_modal">
                                 <label for="nombre" class="col-form-label">Nombre</label>
-                                <input type="text" class="form-control" name="nombre">
+                                <input type="text" class="form-control" name="nombre" id="nombre_fase_modal">
                             </div>
                             <div class="form-group">
                                 <label for="descripcion" class="col-form-label">Descripcion</label>
-                                <textarea class="form-control" name="descripcion" id="descripcion"></textarea>
+                                <textarea class="form-control" name="descripcion" id="descripcion_fase_modal"></textarea>
                             </div>
                             <div class="d-flex justify-content-center">
                                 <div class="form-group">
                                     <label for="fechalimite" >Fecha límite</label>
-                                    <input type="date" class="form-control" name="fecha_limite">
+                                    <input type="date" class="form-control" name="fecha_limite" id="fecha_limite_fase_modal">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -111,14 +108,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="asignarimagen">Asignar Una Imagen</label>
-                                <input type="file" name="miniatura_fase" id="">
+                                <input type="file" name="miniatura_fase" id="miniatura_fase_modal">
                             </div>
                             <div class="form-group">
                                 <label for="eliminarimagen">¿Eliminar imagen?</label>
                                 <input type="checkbox" name="eliminar_miniatura" id="">
                             </div>
-                            <button type="submit" class="btn btn-warning btn-lg">Editar</button>
-                        </form>
+                        <a type="submit" class="btn btn-warning btn-lg" onclick="editarFase()">Editar</a>
                     </form>
                 </div>
             </div>

@@ -20,9 +20,11 @@
 		<!-- General Styles -->
 		<link rel="stylesheet" href="{{ URL::asset('CSS/styleAlumno.css') }}">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-      	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+		<meta name="csrf-token" content="{{ csrf_token() }}" />
    </head>
 <body>
+	<input type="hidden" id="token_maestro" value="{{ csrf_field() }}">
 	<!-- centenedor de menu -->
 	<main class="full-box main-container">
 		<!-- Navbar lateral -->
@@ -82,8 +84,6 @@
 	</main>
     <!-- Sweet Alert V8.13.0 JS file-->
     <script src="{{URL::asset('JS/sweetalert2.min.js')}}"></script>
-    <!-- jQuery V3.4.1 -->
-    <script src="{{URL::asset('JS/jquery-3.4.1.min.js')}}"></script>
     <!-- popper -->
     <script src="{{URL::asset('JS/popper.min.js')}}"></script>
     <!-- Bootstrap V4.3 -->
@@ -98,7 +98,6 @@
 	<script src="{{URL::asset('JS/main.js')}}"></script>
 	<script src="{{URL::asset('JS/AJAX/AlumnoAJAX.JS')}}"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </body>
