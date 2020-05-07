@@ -80,12 +80,12 @@ class AlumnoController extends Controller
         //$fase->created_at = date('Y-m-d H:i:s', strtotime('now - 4 hours'));
         return redirect()->route('alumno.getFasesProyecto', $request->id_proyecto);
     }
-    public function getEditarFase($request){
-        $fase = AlumnoDao::getFaseById($request);
-        //$objetivo = AlumnoDao::getObjetivoByFaseId($request->id_fase);
-        //return view($this->ruta.'editarFase')->with(compact(array('fase', 'objetivo')));
-        return response()->json($fase);
+
+    public function getEditarFase(Request $request){
+        $fase = AlumnoDao::getFaseById($request->id_fase);
+        return json_encode($fase);
     }
+
     public function postEditarFase(Request $request){
         $fase = $request->except('_token', 'miniatura_hidden', 'eliminar_miniatura');
         if(isset($request->miniatura_fase)){

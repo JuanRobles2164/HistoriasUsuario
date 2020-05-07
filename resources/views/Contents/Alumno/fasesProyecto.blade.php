@@ -1,5 +1,6 @@
 @extends('/Templates/Alumno/_LayoutAlumno')
 @section('contenido')
+    <input type="hidden" value="{{route('alumno.getEditarFase')}}" name="api_route_get_fase" id="api_route_get_fase">
     <br>
     <form action="{{route('alumno.postAgregarFase', $proyecto->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -54,9 +55,12 @@
                                 <h5 class="card-title">{{$fase->nombre}}</h5>
                                 <p class="card-text">{{$fase->descripcion}}</p>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#modalfases" onclick="consultarFase({{$fase->id}})">
+                                    <a class="btn btn-outline-warning btn_editar_modal"
+                                    data-toggle="modal" 
+                                    data-target="#modalfases"  
+                                    onclick="consultarFase({{$fase->id}})">
                                         Fase
-                                    </button>
+                                    </a>
                                     <button type="button" class="btn btn-outline-warning" disabled><i class="fas fa-cog"></i></button>
                                     <a class="btn btn-outline-warning" data-toggle="modal" data-target="#modalobjetivo">
                                         Objetivo
@@ -80,7 +84,7 @@
                     <h5 class="modal-title" id="exampleModalCenterTitle">
                         Editando la fase:
                     </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnCierraModal">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>

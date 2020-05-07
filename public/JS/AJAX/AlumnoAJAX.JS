@@ -58,12 +58,28 @@ $('#btn_agregar_evidencia').on('click', function(e){
   $('#contenedor_evidencia').append( "<tr><td><input type='text' name='nombre_evidencia[]'></td><td><input type='file' name='foto_evidencia[]'></td></tr>" );
 });
 
-consultarFase = (id) => {
+$('btn_editar_modal').click(function(event){
+  event.preventDefault();
+});
+
+limpiarModal = () => {
+  $('#id_fase_modal').val('');
+  $('#nombre_fase_modal').val('');
+  $('#descripcion_fase_modal').val('');
+  $('#fecha_limite_fase_modal').val('');
+}
+
+consultarFase = (Identificador) => {
+  const ruta = $('#api_route_get_fase').val();
+  console.log(ruta);
   $.ajax({
-    url : window.location+'/get_editar_fase',
+    url : ruta,
+    type: 'GET',
     async: true,
-    data: {'id_fase':id},
+    data: {id_fase:Identificador, legal:true},
     success: function(response){
+      console.log(response);
+      response = $.parseJSON(response);
       $('#id_fase_modal').val(response.id);
       $('#nombre_fase_modal').val(response.nombre);
       $('#descripcion_fase_modal').val(response.descripcion);
@@ -71,9 +87,14 @@ consultarFase = (id) => {
     },
     error: function(response){
       alert("Algo salió mal... vuelve a intentarlo");
+      response = null;
     }
   });
 }
+
+$('#btnCierraModal').click(function(){
+  limpiarModal();
+});
 
 editarFase = () => {
   //Prepare data
@@ -81,7 +102,6 @@ editarFase = () => {
   let nombre_fase = $('#nombre_fase_modal').val();
   let descripcion_fase = $('#descripcion_fase_modal').val();
   let fecha_limite = $('#fecha_limite_fase_modal').val();
-  let _token = $('#token_maestro').val();
   $.ajax({
     //A toda petición de POST hay que generarle un _token
     //Nunca lo olviden!
@@ -99,9 +119,12 @@ editarFase = () => {
     },
     success: function(response){
       alert('Actualización exitosa');
+      limpiarModal();
+      response = null;
     },
     error: function(response){
       console.log(response);
+      response = null;
     }
   });
 }
