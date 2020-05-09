@@ -49,7 +49,7 @@
             <div class="card-deck">
                 @foreach ($chunk as $fase)
                     <div class="col mb-4">
-                        <div class="card" style="width: 25rem;">
+                        <div class="card border-warning" style="width: 25rem;">
                             <img src="{{URL::asset('Images/ejemplo.jpg')}}" class="card-img-top" alt="imagen de ejemplo">
                             <div class="card-body">
                                 <h5 class="card-title">{{$fase->nombre}}</h5>

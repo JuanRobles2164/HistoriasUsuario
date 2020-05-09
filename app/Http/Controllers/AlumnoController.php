@@ -21,6 +21,7 @@ use stdClass;
 class AlumnoController extends Controller
 {
     private $ruta = "/Contents/Alumno/";
+    private static $json_result = array('result' => 'success');
     public function index(Request $request){
         return view($this->ruta.'indexAlumno');
     }
@@ -117,16 +118,13 @@ class AlumnoController extends Controller
     }
     public function getEditarModulo(Request $request){
         $modulo = AlumnoDao::getModuloById($request->id_modulo);
-        return view($this->ruta.'editarModulo', 
-        array('id_proyecto' => $request->id_proyecto, 
-        'id_fase' => $request->id_fase, 
-        'id_modulo' => $request->id_modulo))
-        ->with(compact('modulo'));
+        return json_encode($modulo);
     }
     public function postEditarModulo(Request $request){
         $modulo = $request->except('_token', 'id_proyecto', 'id_fase');
         AlumnoDao::editarModulo($modulo);
-        return redirect()->route('alumno.getTrabajarEnFaseModulos', array('id_proyecto' => $request->id_proyecto, 'id_fase' => $request->id_fase));
+        
+        return response()->json(self::$json_result);
     }
     public function getActividadesByModulo(Request $request){
         $actividades = AlumnoDao::getActividadesByModuloId($request->id_modulo);

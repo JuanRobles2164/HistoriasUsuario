@@ -78,6 +78,7 @@
 				@yield('contenido')
 				@yield('modal_fases')
 				@yield('modal_objetivo')
+				@yield('modal_modulo')
 			</div>
         </section>
         

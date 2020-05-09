@@ -84,8 +84,8 @@ Route::post('/alumno/fases/editar_crear_objetivo','AlumnoController@postEditarCr
 Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos','AlumnoController@getTrabajarEnFaseModulos')->name('alumno.getTrabajarEnFaseModulos');
 Route::post('/alumno/modulos/crear_modulo','AlumnoController@postCrearModulo')->name('alumno.postCrearModulo');
 
-Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/editar','AlumnoController@getEditarModulo')->name('alumno.getEditarModulo');
-Route::post('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/editar','AlumnoController@postEditarModulo')->name('alumno.postEditarModulo');
+Route::get('/alumno/get_editar_modulo','AlumnoController@getEditarModulo')->name('alumno.getEditarModulo');
+Route::post('/alumno/modulos/post_editar_modulo','AlumnoController@postEditarModulo')->name('alumno.postEditarModulo');
 
 Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades','AlumnoController@getActividadesByModulo')->name('alumno.getActividadesByModulo');
 
