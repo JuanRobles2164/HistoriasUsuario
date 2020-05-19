@@ -1,34 +1,47 @@
 @extends('/Templates/Alumno/_LayoutAlumno')
 @section('contenido')
-    <br>
-    <h3>Actividades</h3>
-    <br>
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="card">
-                <form action="{{route('alumno.postCrearActividad')}}" method="POST">
-                    @csrf
-                    <input type="hidden" name="id_modulo" value="{{$id_modulo}}">
-                    <label for="nombre">nombre</label>
-                    <input type="text" name="nombre" id="nombre">
-                    <br>
-                    <label for="descripcion">descripcion</label>
-                    <textarea type="text" name="descripcion" id="descripcion"></textarea>
-                    <br>
+<div class="card shadow-lg p-3 mb-5 bg-white rounded">
+    <div class="card-header p-3 mb-2 bg-warning text-dark font-weight-bold">
+        <h3>Actividades</h3> 
+    </div>
+    <div class="card-body">
+        <form action="{{route('alumno.postCrearActividad')}}" method="POST">
+            @csrf
+            <input type="hidden" name="id_modulo" value="{{$id_modulo}}">
+            <div class="d-flex justify-content-center">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <div class="col-auto">
+                        <input type="text" class="form-control" name="nombre" id="nombre">
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="descripcion">Descripcion</label>
+                    <div class="col-auto">
+                        <textarea type="text"  class="form-control" name="descripcion" id="descripcion"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="fecha_limite">Fecha límite</label>
-                    <input type="date" name="fecha_limite" id="fecha_limite">
-                    <br>
-                    <label for="prioridad">prioridad</label>
+                    <div class="col-auto">
+                        <input type="date" class="form-control" name="fecha_limite" id="fecha_limite">
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="form-group col-md-8">
+                    <label for="prioridad" class="font-weight-bold text-warning">Prioridad</label>
                     <div class="alert alert-info" role="alert" id="indicador_prioridad">
                         Media
                     </div>
-                    <input type="range" name="prioridad" id="desplazamiento_bar" value="3" max="5" min="1" class="custom-range">
-                    <br>
-                    <button type="submit" class="btn btn-primary">Crear</button>
-                </form>
+                    <input type="range" name="prioridad" id="desplazamiento_bar" value="3" max="5" min="1" class="custom-range">  
+                </div>
             </div>
-        </div>
+            <button type="submit" class="btn btn-primary btn-lg">Crear</button>
+        </form>
     </div>
+</div>
+
     <br>
     @if($actividades != null)
         @foreach ($actividades->chunk(3) as $chunk)
