@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class usuario extends Model
+class usuario extends Authenticatable
 {
+    protected $table = 'usuarios';
+    protected $fillable = ['id', 'e_mail', 'nombres', 'apellidos'];
     public $id;
     public $nombres;
     public $apellidos;
@@ -19,84 +23,5 @@ class usuario extends Model
     public $usuario_modifica;
     public $modificado_en;
     public $estado_eliminado;
-    
 
-    public function __construct(){
-
-    }
-    public function __construct1($username, $contrasenia, $email, $rol_id){
-        $this->username = $username;
-        $this->contrasenia = $contrasenia;
-        $this->email = $email;
-        $this->rol_id = $rol_id;
-    }
-
-
-    public function getId(){
-        return $this->id;
-    }
-    public function setId($id){
-        $this->id = $id;
-    }
-
-    public function getEmail(){
-        return $this->email;
-    }
-    public function setEmail($email){
-        $this->email = $email;
-    }
-    public function getNombres(){
-        return $this->nombres;
-    }
-    public function setNombres($nombres){
-        $this->nombres = $nombres;
-    }
-
-    public function getApellidos(){
-        return $this->apellidos;
-    }
-    public function setApellidos($apellidos){
-        $this->apellidos = $apellidos;
-    }
-
-    public function getContrasenia(){
-        return $this->contrasenia;
-    }
-    public function setContrasenia($contrasenia){
-        $this->contrasenia = $contrasenia;
-    }
-
-    public function getUserName(){
-        return $this->username;
-    }
-    public function setUserName($username){
-        $this->username = $username;
-    }
-
-    public function getIdentificacion(){
-        return $this->identificacion;
-    }
-    public function setIdentificacion($identificacion){
-        $this->identificacion = $identificacion;
-    }
-
-    public function getRolId(){
-        return $this->rol_id;
-    }
-    public function setRolId($rol_id){
-        $this->rol_id = $rol_id;
-    }
-
-    public function getCreadoEn(){
-        return $this->creado_en;
-    }
-    public function getUsuarioModifica(){
-        return $this->usuario_modifica;
-    }
-    public function getEstadoEliminado(){
-        return $this->estado_eliminado;
-    }
-    public function getModificadoEn(){
-        return $this->modificado_en;
-    }
 }

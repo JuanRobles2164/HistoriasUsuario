@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'usuarios',
     ],
 
     /*
@@ -53,7 +53,7 @@ return [
     | User Providers
     |--------------------------------------------------------------------------
     |
-    | All authentication drivers have a user provider. This defines how the
+    | All authentication drivers have an user provider. This defines how the
     | users are actually retrieved out of your database or other storage
     | mechanisms used by this application to persist your user's data.
     |
@@ -66,15 +66,17 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        
+        /*'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
-        ],
+            'model' => App\usuario::class,
+        ],*/
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+         'users' => [
+             'driver' => 'eloquent',
+             'table' => 'usuarios',
+             'model' => App\usuario::class
+         ],
     ],
 
     /*

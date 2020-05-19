@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Cookie;
 use stdClass;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 class UsuarioController extends Controller
 {
@@ -83,6 +84,8 @@ class UsuarioController extends Controller
             $_usuario->rol = $usuarioAuth->rol;
             $_usuario->token = Str::random(80);
             Cache::put($_usuario->nombre, $_usuario, $time*60);
+            Auth::attempt(['e_mail' => $usuarioAuth->e_mail, 'contrasenia' => $usuarioAuth->contrasenia]);
+            $request->user()->rol = $usuarioAuth->rol;
             return redirect()->route(strtolower($usuarioAuth->rol).'.getIndex')->cookie(cookie('usuario', Crypt::encrypt(json_encode($_usuario))));
         }else{
 
