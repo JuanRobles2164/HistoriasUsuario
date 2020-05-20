@@ -9,6 +9,11 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
+	@isset($erroneos)
+		<script>
+			alert('Estos datos no coinciden con ningún usuario');
+		</script>
+	@endisset
 	<img class="wave" src="{{URL::asset('Images/Backgrounds/wave.jpg')}}">
 	<div class="container">
 		<div class="img">

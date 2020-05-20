@@ -14,6 +14,8 @@ use stdClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Facades\Config;
+use App\Http\Util\Utilities;
 
 class UsuarioController extends Controller
 {
@@ -23,6 +25,9 @@ class UsuarioController extends Controller
     */
     public function onGetLogin(Request $request){
         $cookiexd = Cookie::forget('usuario');
+        if($cookiexd != null){
+            Auth::logout();
+        }
         return response(View('Login'))->withCookie($cookiexd);
     }
     /**Devuelve la vista de registro 
@@ -76,6 +81,7 @@ class UsuarioController extends Controller
                 //No olvidar hacer la vista para cuando una cuenta esté deshabilitada
                 return redirect()->route('getLogin');
             }
+            Auth::logout();
             $time = config()->get('app')['session-time-minutes'];
             $_usuario = new stdClass();
             $_usuario->id = $usuarioAuth->id;
@@ -83,15 +89,16 @@ class UsuarioController extends Controller
             $_usuario->nombre = $usuarioAuth->nombres;
             $_usuario->rol = $usuarioAuth->rol;
             $_usuario->token = Str::random(80);
-            Cache::put($_usuario->nombre, $_usuario, $time*60);
-            Auth::attempt(['e_mail' => $usuarioAuth->e_mail, 'contrasenia' => $usuarioAuth->contrasenia]);
-            $request->user()->rol = $usuarioAuth->rol;
+            Cache::put($_usuario->email, $_usuario, $time*60);
+            //Auth::attempt(['e_mail' => $usuarioAuth->e_mail, 'contrasenia' => $usuarioAuth->contrasenia]);
+            //Auth::loginUsingId($_usuario->id);
             return redirect()->route(strtolower($usuarioAuth->rol).'.getIndex')->cookie(cookie('usuario', Crypt::encrypt(json_encode($_usuario))));
-        }else{
 
-            return redirect('registro');
-            //return redirect()->route('getLogin')->withErrors($datosErroneos, 'errorDatos');
         }
+        $erroneos = "Datos erróneos";
+        return view('Login')->with(compact('erroneos'));
+        //return redirect()->route('getLogin')->withErrors($datosErroneos, 'errorDatos');
+        
     }
     public function editar(Request $request){
         $usuario = new usuario();
