@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\fase;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Funciones;
 use App\Http\Daos\AlumnoDao;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\DB;
 use App\grupoTrabajo;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Daos\DocenteDao;
 use App\Http\Daos\UsuarioDao;
 use App\usuario;
-use Facade\FlareClient\View;
 use stdClass;
 
 class AlumnoController extends Controller
