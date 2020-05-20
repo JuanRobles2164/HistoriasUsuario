@@ -15,6 +15,7 @@ use App\usuario;
 use App\fuente;
 use stdClass;
 use App\grupo;
+use App\Http\Util\Utilities;
 
 class DocenteController extends Controller
 {
@@ -40,7 +41,7 @@ class DocenteController extends Controller
         return view($this->ruta.'crearMetodologia');
     }
     public function getSelfEdit(Request $request){
-        $cookie_docente = json_decode(Crypt::decrypt(Cookie::get('usuario')));
+        $cookie_docente = Utilities::returnDecryptedCookieByName('usuario');
         $usuario = UsuarioDao::getUserById($cookie_docente->id);
         return view($this->ruta.'editPerfil')->with(compact('usuario'));
     }
@@ -118,7 +119,7 @@ class DocenteController extends Controller
      * @return void
      */
     public function getListaProyectos(Request $request){
-        $cookie_docente = json_decode(Crypt::decrypt(Cookie::get('usuario')));
+        $cookie_docente = Utilities::returnDecryptedCookieByName('usuario');
         $proyectos = DocenteDao::getAllProyectos($cookie_docente->id);
         return View($this->ruta.'listarProyectos')->with(compact('proyectos'));
     }
@@ -128,7 +129,7 @@ class DocenteController extends Controller
     }
     public function postCrearProyecto(Request $request){
 
-        $cookie_docente = json_decode(Crypt::decrypt(Cookie::get('usuario')));
+        $cookie_docente = Utilities::returnDecryptedCookieByName('usuario');
         $proyecto = new proyecto();
         $proyecto->nombre = $request->nombre;
         $proyecto->descripcion = $request->descripcion;
