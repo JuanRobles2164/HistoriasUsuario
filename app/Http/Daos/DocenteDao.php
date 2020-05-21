@@ -71,7 +71,8 @@ class DocenteDao extends Controller
         DB::update("UPDATE proyecto SET id_estado = $proyecto->id_estado WHERE id = $proyecto->id");
     }
     public static function editarProyecto(stdClass $proyecto){
-        $SQL = "UPDATE proyecto SET nombre='$proyecto->nombre', descripcion='$proyecto->descripcion', fecha_limite='$proyecto->fecha_limite', fecha_inicio='$proyecto->fecha_inicial' updated_at=CURRENT_TIMESTAMP WHERE id=$proyecto->id";
+        $fecha = date('Y-m-d H:i:s', strtotime('now - 4 hours'));
+        $SQL = "UPDATE proyecto SET nombre='$proyecto->nombre', descripcion='$proyecto->descripcion', fecha_limite='$proyecto->fecha_limite', fecha_inicio='$proyecto->fecha_inicial' updated_at = $fecha WHERE id = $proyecto->id";
         DB::update($SQL);
     }
     public static function getAllEstudiantesSinAsignarEnProyecto($request){

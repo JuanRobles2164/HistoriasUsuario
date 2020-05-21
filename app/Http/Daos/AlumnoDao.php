@@ -37,9 +37,15 @@ class AlumnoDao extends Controller
         ->get();
         return $fases;
     }
+    /**
+     * Miniatura, descripcion, nombre, fecha_limite, id_proyecto, id_metodologia
+     *
+     * @param [type] $fase
+     * @return void
+     */
     public static function crearFase($fase){
-        DB::table('fase')
-        ->insert([
+        return DB::table('fase')
+        ->insertGetId([
             'nombre' => $fase['nombre'],
             'descripcion' => $fase['descripcion'],
             'fecha_limite' => $fase['fecha_limite'],
