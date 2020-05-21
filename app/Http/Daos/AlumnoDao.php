@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\grupoTrabajo;
 use App\usuario;
 use App\fase;
+use App\Http\Util\Utilities;
 
 class AlumnoDao extends Controller
 {
@@ -53,7 +54,7 @@ class AlumnoDao extends Controller
             'id_proyecto' => $fase['id_proyecto'],
             'id_estado' => 1,
             'id_metodologia' => $fase['id_metodologia'],
-            'created_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours'))
+            'created_at' => Utilities::getCurrentDate()
         ]);
     }
     public static function getFaseById($id){
@@ -70,7 +71,7 @@ class AlumnoDao extends Controller
             'descripcion' => $fase['descripcion'],
             'fecha_limite' => $fase['fecha_limite'],
             'miniatura_fase' => $fase['miniatura_fase'],
-            'updated_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours'))
+            'updated_at' => Utilities::getCurrentDate()
         ]);
     }
     public static function agregarEditarObjetivo(array $objetivo){
@@ -145,7 +146,7 @@ class AlumnoDao extends Controller
             'id_modulo' => $actividad['id_modulo'],
             'estado_finalizado' => 0,
             'fecha_limite' => $actividad['fecha_limite'],
-            'created_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours'))
+            'created_at' => Utilities::getCurrentDate()
         ]);
     }
     public static function eliminarActividad($id){
@@ -158,7 +159,7 @@ class AlumnoDao extends Controller
         ->where('id', $id)
         ->update([
             'estado_finalizado' => 1,
-            'updated_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours'))
+            'updated_at' => Utilities::getCurrentDate()
         ]);
     }
     public static function eliminarRecurso($id){
@@ -175,7 +176,7 @@ class AlumnoDao extends Controller
             'valor_unitario' => $recurso['valor_unitario'],
             'cantidad' => $recurso['cantidad'],
             'id_tipo_recurso' => $recurso['id_tipo_recurso'],
-            'updated_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours'))
+            'updated_at' => Utilities::getCurrentDate()
         ]);
     }
     public static function getRecursoById($id){
@@ -193,7 +194,7 @@ class AlumnoDao extends Controller
             'cantidad' => $recurso['cantidad'],
             'id_tipo_recurso' => $recurso['id_tipo_recurso'],
             'id_actividad' => $recurso['id_actividad'],
-            'created_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours'))
+            'created_at' => Utilities::getCurrentDate()
         ]);
     }
     public static function crearTipoRecurso(array $tipo_recurso){
@@ -201,7 +202,7 @@ class AlumnoDao extends Controller
         ->insert([
             'nombre' => $tipo_recurso['nombre'],
             'descripcion' => $tipo_recurso['descripcion'],
-            'created_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours'))
+            'created_at' => Utilities::getCurrentDate()
         ]);
     }
     public static function getTipoRecursoByRecursoId(){
@@ -225,7 +226,7 @@ class AlumnoDao extends Controller
             'e_mail' => $usuario_entrevistado->email_usuario_entrevistado,
             'telefono' => $usuario_entrevistado->telefono_usuario_entrevistado,
             'cargo' => $usuario_entrevistado->cargo_usuario_entrevistado,
-            'created_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours'))
+            'created_at' => Utilities::getCurrentDate()
         ]);
     }
     public static function getAllUsuariosEntrevistados(){
@@ -245,7 +246,7 @@ class AlumnoDao extends Controller
             'id_actividad' => $historia_usuario['id_actividad'],
             'id_modulo' => $historia_usuario['id_modulo'],
             'fecha_fin' => $historia_usuario['fecha_fin'],
-            'created_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours'))
+            'created_at' => Utilities::getCurrentDate()
         ]);
         return $id;
     }
@@ -253,7 +254,7 @@ class AlumnoDao extends Controller
         DB::table('compromiso')
         ->insert([
             'descripcion' => $compromiso,
-            'created_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours')),
+            'created_at' => Utilities::getCurrentDate(),
             'id_historia_usuario' => $id_historia_usuario
         ]);
     }
@@ -263,7 +264,7 @@ class AlumnoDao extends Controller
             'nombre' => $nombre,
             'foto' => $foto,
             'id_historia_usuario' => $id_historia_usuario,
-            'created_at' => date('Y-m-d H:i:s', strtotime('now - 4 hours'))
+            'created_at' => Utilities::getCurrentDate()
         ]);
     }
 }

@@ -54,4 +54,7 @@ class Utilities{
             return $deleted;
         }
     }
+    public static function getCurrentDate(){
+        return date('Y-m-d H:i:s', strtotime('now'));
+    }
 }
