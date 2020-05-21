@@ -10,6 +10,7 @@ use App\proyecto;
 use App\metodologia;
 use App\fuente;
 use App\grupo;
+use App\Http\Util\Utilities;
 use stdClass;
 
 class DocenteDao extends Controller
@@ -71,7 +72,7 @@ class DocenteDao extends Controller
         DB::update("UPDATE proyecto SET id_estado = $proyecto->id_estado WHERE id = $proyecto->id");
     }
     public static function editarProyecto(stdClass $proyecto){
-        $fecha = date('Y-m-d H:i:s', strtotime('now - 4 hours'));
+        $fecha = Utilities::getCurrentDate();
         $SQL = "UPDATE proyecto SET nombre='$proyecto->nombre', descripcion='$proyecto->descripcion', fecha_limite='$proyecto->fecha_limite', fecha_inicio='$proyecto->fecha_inicial' updated_at = $fecha WHERE id = $proyecto->id";
         DB::update($SQL);
     }

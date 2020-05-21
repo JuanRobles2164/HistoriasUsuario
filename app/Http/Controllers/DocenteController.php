@@ -150,8 +150,8 @@ class DocenteController extends Controller
     }
     public function getEditarProyecto(Request $request){
         $proyecto = DocenteDao::getProyectoById($request->id);
-        $proyecto->fecha_inicial = date('Y-m-d', strtotime($proyecto->fecha_inicial));
-        $proyecto->fecha_limite = date('Y-m-d', strtotime($proyecto->fecha_limite));
+        $proyecto->fecha_inicial = Utilities::getCurrentDate($proyecto->fecha_inicial);
+        $proyecto->fecha_limite = Utilities::getCurrentDate($proyecto->fecha_limite);
         return view($this->ruta.'editarProyecto')->with(compact('proyecto'));
     }
     public function postEditarProyecto(Request $request){
