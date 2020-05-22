@@ -4,8 +4,10 @@ namespace App\Http\Daos;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Funciones;
+use App\Http\Daos\AdministradorDao;
 use Illuminate\Support\Facades\DB;
 use App\usuario;
+use App\Http\Util\Utilities;
 
 class AdministradorDao extends Controller
 {
@@ -19,7 +21,11 @@ class AdministradorDao extends Controller
       * Estén activos o no
       */
     public static function getAllUsers(){
-        $usuarios = DB::select("SELECT u.*, r.abreviatura FROM usuarios u join roles r WHERE u.rol_id=r.id ORDER BY estado_eliminado");
+        $usuarios = DB::table('usuarios')
+        ->orderBy('estado_eliminado')
+        ->join('roles', 'usuarios.rol_id','=','roles.id')
+        ->select('usuarios.*', 'roles.abreviatura')
+        ->get();
         return $usuarios;
     }
     /**Retorna sólo los usuarios activos
@@ -54,13 +60,12 @@ class AdministradorDao extends Controller
         return $roles;
     }
     public static function restaurarUsuario($id){
-        $usuario = DB::table('usuarios')
-        ->where('id', $id)
-        ->first();
+        $usuario = AdministradorDao::getById($id);
         $usuario->username = $usuario->identificacion;
         $usuario->contrasenia = Funciones::cifrarClave($usuario->identificacion);
-        $SQL = "UPDATE usuarios SET username='$usuario->username', contrasenia='$usuario->contrasenia' WHERE id=$id";
-        DB::update($SQL);
+        DB::table('usuarios')
+        ->where('id',$id)
+        ->update(array('username' => $usuario->username, 'contrasenia' => $usuario->contrasenia));
     }
 
     /**
@@ -70,8 +75,9 @@ class AdministradorDao extends Controller
      * @return void
      */
     public static function eliminarUsuario(usuario $usuario){
-        $SQL = "UPDATE usuarios SET eliminado_en = CURRENT_TIMESTAMP, estado_eliminado = $usuario->estado_eliminado WHERE id = $usuario->id";
-        DB::update($SQL);
+        DB::table('usuarios')
+        ->where('id',$usuario->id)
+        ->update(array('eliminado_en' => Utilities::getCurrentDate(), 'estado_eliminado' => $usuario->estado_eliminado));
     }
 
 }
