@@ -149,10 +149,10 @@ class DocenteController extends Controller
         return redirect()->route('docente.getListaProyectos');
     }
     public function getEditarProyecto(Request $request){
+        $metodologias = DocenteDao::getAllMetodologias();
         $proyecto = DocenteDao::getProyectoById($request->id);
-        $proyecto->fecha_inicial = Utilities::getCurrentDate($proyecto->fecha_inicial);
-        $proyecto->fecha_limite = Utilities::getCurrentDate($proyecto->fecha_limite);
-        return view($this->ruta.'editarProyecto')->with(compact('proyecto'));
+        $proyecto->fecha_inicial = date("Y-m-d", strtotime($proyecto->fecha_inicial));
+        return view($this->ruta.'editarProyecto')->with(compact(array('proyecto','metodologias')));
     }
     public function postEditarProyecto(Request $request){
         $proyecto = DocenteDao::getProyectoById($request->id);
@@ -160,6 +160,7 @@ class DocenteController extends Controller
         $proyecto->descripcion = $request->descripcion;
         $proyecto->fecha_inicial = $request->fecha_inicial;
         $proyecto->fecha_limite = $request->fecha_limite;
+        $proyecto->id_metodologia = $request->id_metodologia;
         DocenteDao::editarProyecto($proyecto);
         return redirect()->route('docente.getListaProyectos');
     }

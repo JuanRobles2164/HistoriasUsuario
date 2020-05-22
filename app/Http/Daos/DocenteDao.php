@@ -65,8 +65,10 @@ class DocenteDao extends Controller
     public static function crearProyecto(proyecto $proyecto){
         $max_id_proyecto = DB::table('proyecto')->max('id');
         $max_id_proyecto++;
-        $SQL = "INSERT INTO proyecto(id, nombre, descripcion, fecha_limite, fecha_inicial, id_usuario, id_metodologia, id_estado, created_at) VALUES($max_id_proyecto,'$proyecto->nombre', '$proyecto->descripcion', '$proyecto->fecha_limite', '$proyecto->fecha_inicial' ,$proyecto->id_usuario, $proyecto->id_metodologia, $proyecto->id_estado, CURRENT_TIMESTAMP)";
-        DB::insert($SQL);
+        DB::table('proyecto')
+        ->insert(
+            array('id'=>$max_id_proyecto,'nombre' => $proyecto->nombre,'descripcion' => $proyecto->descripcion,'fecha_limite' => $proyecto->fecha_limite,'fecha_inicial' => $proyecto->fecha_inicial,'id_usuario' => $proyecto->id_usuario,'id_metodologia' => $proyecto->id_metodologia,'id_estado' => $proyecto->id_estado, 'created_at' => Utilities::getCurrentDate())
+        );
     }
     public static function getAllMetodologias(){
         $metodologias = DB::table('metodologia')
@@ -74,12 +76,15 @@ class DocenteDao extends Controller
         return $metodologias;
     }
     public static function alternarEstadoProyecto(stdClass $proyecto){
-        DB::update("UPDATE proyecto SET id_estado = $proyecto->id_estado WHERE id = $proyecto->id");
+        DB::table('proyecto')
+        ->where('id',$proyecto->id)
+        ->update(array('id_estado' => $proyecto->id_estado));
     }
     public static function editarProyecto(stdClass $proyecto){
-        $fecha = Utilities::getCurrentDate();
-        $SQL = "UPDATE proyecto SET nombre='$proyecto->nombre', descripcion='$proyecto->descripcion', fecha_limite='$proyecto->fecha_limite', fecha_inicio='$proyecto->fecha_inicial' updated_at = $fecha WHERE id = $proyecto->id";
-        DB::update($SQL);
+        DB::table('proyecto')
+        ->where('id', $proyecto->id)
+        ->update(array('nombre' => $proyecto->nombre,'descripcion' => $proyecto->descripcion,'fecha_limite' => $proyecto->fecha_limite,'fecha_inicial' => $proyecto->fecha_inicial,'updated_at' => Utilities::getCurrentDate(),'id_metodologia' => $proyecto->id_metodologia)
+        );
     }
     public static function getAllEstudiantesSinAsignarEnProyecto($request){
         //Obtiene los estudiantes asignados actualmente al proyecto

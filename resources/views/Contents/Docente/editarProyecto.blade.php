@@ -26,6 +26,17 @@
                             <label for="validationCustom04">Fecha límite:</label>
                             <input type="date" class="form-control" name="fecha_limite" value="{{$proyecto->fecha_limite}}" required>
                         </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom05">Metodología</label>
+                            <select class="custom-select" id="validationDefault05" name="id_metodologia" required>
+                                @foreach ($metodologias as $metodologia)
+                                    @if($proyecto->id_metodologia == $metodologia->id)
+                                        <option selected="selected" value="{{$metodologia->id}}">{{$metodologia->nombre}}</option>
+                                    @endif
+                                    <option value="{{$metodologia->id}}">{{$metodologia->nombre}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="form-row">
                         <div class="col-md-5 mb-3">
