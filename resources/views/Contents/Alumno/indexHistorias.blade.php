@@ -112,11 +112,11 @@
                     <div class="d-flex justify-content-around">
                         <div class="form-group">
                             <label for="" class="text-info font-weight-bold">Compromisos </label>
-                            <a class="btn btn-success btn-lg" id="btnAgregarCompromiso"><i class="fas fa-plus"></i></a>
+                            <a class="btn btn-info btn-lg" id="btnAgregarCompromiso"><i class="fas fa-plus"></i></a>
                         </div>
                         <div class="form-group">
                             <label for="" class="text-info font-weight-bold">Evidencias </label>
-                            <a class="btn btn-success btn-lg" id="btn_agregar_evidencia"><i class="fas fa-plus"></i></a>
+                            <a class="btn btn-info btn-lg" id="btn_agregar_evidencia"><i class="fas fa-plus"></i></a>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between">
@@ -130,7 +130,7 @@
                                 <tbody id="contenedor">
                                     <tr>
                                         <td>
-                                            <textarea type="text" name="compromisos[]"></textarea>
+                                            <textarea class="form-control" name="compromisos[]"></textarea>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -147,10 +147,10 @@
                                 <tbody id="contenedor_evidencia">
                                     <tr>
                                         <td>
-                                            <input type='text' name='nombre_evidencia[]'>
+                                            <input type="text" class="form-control" name='nombre_evidencia[]'>
                                         </td>
                                         <td>
-                                            <input type='file' name='foto_evidencia[]'>
+                                            <input type="file" class="form-control-file" name='foto_evidencia[]'>
                                         </td>
                                     </tr>
                                 </tbody>

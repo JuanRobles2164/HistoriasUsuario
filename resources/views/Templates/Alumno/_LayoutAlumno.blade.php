@@ -79,6 +79,8 @@
 				@yield('modal_fases')
 				@yield('modal_objetivo')
 				@yield('modal_modulo')
+				@yield('modal_crear_recurso')
+				@yield('modal_editar_recurso')
 			</div>
         </section>
         

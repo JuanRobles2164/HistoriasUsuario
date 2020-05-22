@@ -133,12 +133,13 @@ class AlumnoController extends Controller
     }
     public function getRecursosByActividad(Request $request){
         $recursos = AlumnoDao::getAllRecursosFromActividad($request->id_actividad);
+        $tipos_recurso = AlumnoDao::getTipoRecursoByRecursoId();
         return view($this->ruta.'indexRecursos', 
         array('id_modulo' => $request->id_modulo, 
         'id_proyecto' => $request->id_proyecto, 
         'id_fase' => $request->id_fase,
         'id_actividad' => $request->id_actividad))
-        ->with(compact('recursos'));
+        ->with(compact('recursos', 'tipos_recurso'));
     }
     public function postCrearActividad(Request $request){
         $actividad = $request->except('_token');
@@ -160,22 +161,13 @@ class AlumnoController extends Controller
     public function getEditarRecurso(Request $request){
         $recurso = AlumnoDao::getRecursoById($request->id_recurso);
         $tipos_recursos = AlumnoDao::getTipoRecursoByRecursoId();
-        return view($this->ruta.'editarRecurso', 
-        array('id_modulo' => $request->id_modulo, 
-        'id_proyecto' => $request->id_proyecto, 
-        'id_fase' => $request->id_fase,
-        'id_actividad' => $request->id_actividad,
-        'id_recurso' => $request->id_recurso))
-        ->with(compact('recurso', 'tipos_recursos'));
+        $json_response = array('recurso' => $recurso, 'tipos_recursos' => $tipos_recursos);
+        return json_encode($json_response);
     }
     public function postEditarRecurso(Request $request){
         $recurso = $request->except('_token');
-        AlumnoDao::editarRecurso($recurso);
-        return redirect()->route('alumno.getRecursosByActividad', 
-        array('id_proyecto' => $request->id_proyecto, 
-        'id_fase' => $request->id_fase,
-        'id_modulo' => $request->id_modulo,
-        'id_actividad' => $request->id_actividad));
+        dd(AlumnoDao::editarRecurso($recurso));
+        return response()->json(self::$json_result);
     }
     public function getCrearRecurso(Request $request){
         $tipos_recurso = AlumnoDao::getTipoRecursoByRecursoId();
@@ -189,13 +181,7 @@ class AlumnoController extends Controller
     public function postCrearRecurso(Request $request){
         $recurso = $request->except('_token');
         AlumnoDao::crearRecurso($recurso);
-
-        return redirect()->route(
-        'alumno.getRecursosByActividad', 
-        array('id_modulo' => $request->id_modulo, 
-        'id_proyecto' => $request->id_proyecto, 
-        'id_fase' => $request->id_fase,
-        'id_actividad' => $request->id_actividad));
+        return back();
     }
     public function postCrearTipoRecurso(Request $request){
         $tipo_recurso = $request->except('_token');
