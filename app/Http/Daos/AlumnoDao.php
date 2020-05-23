@@ -129,12 +129,12 @@ class AlumnoDao extends Controller
         return $actividades;
     }
     public static function getAllRecursosFromActividad($id_actividad){
-        $recursos = DB::select("SELECT r.*, tr.nombre as tipo_recurso FROM recurso r JOIN tipo_recurso tr ON r.id_tipo_recurso = tr.id WHERE r.id_actividad = $id_actividad");
-        /*DB::table('recurso')
+        //$recursos = DB::select("SELECT r.*, tr.nombre as tipo_recurso FROM recurso r JOIN tipo_recurso tr ON r.id_tipo_recurso = tr.id WHERE r.id_actividad = $id_actividad");
+        $recursos = DB::table('recurso')
         ->join('tipo_recurso', 'recurso.id_tipo_recurso', '=', 'tipo_recurso.id')
-        ->where('recurso.id_actividad', $id_actividad)
-        ->select('recurso.*', 'tipo_recurso.nombre')
-        ->get();*/
+        ->select('recurso.*', 'tipo_recurso.nombre AS tipo_recurso')
+        ->where('recurso.id_actividad',$id_actividad)
+        ->get();
         return $recursos;
     }
     public static function crearActividad(array $actividad){
