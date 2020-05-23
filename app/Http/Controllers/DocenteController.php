@@ -207,12 +207,7 @@ class DocenteController extends Controller
         return view($this->ruta.'añadirPersonasAGrupo')->with(compact(array('proyecto', 'alumnos','grupo')));
     }
     public function postAsignarAlumnoGrupo(Request $request){
-        $query_value = array();
-        foreach($request->id_alumnos as $idAlumno){
-            //array_push($query_values, "($idAlumno,$request->id_proyecto, CURRENT_TIMESTAMP)");
-            array_push($query_value, "($idAlumno,$request->id_grupo, NOW(), NULL, CURRENT_TIMESTAMP)");
-        }
-        DocenteDao::asignarAlumnosAGrupo(implode(",",$query_value));
+        DocenteDao::asignarAlumnosAGrupo($request);
         return redirect()->route('docente.getListaGrupos', $request->id_proyecto);
     }
     public function getAlternarEstadoGrupo(Request $request){
@@ -228,12 +223,8 @@ class DocenteController extends Controller
         $alumnos = DocenteDao::getAllEstudiantesAsignadosAProyecto($request);
         return view($this->ruta.'observacionAlumnosProyecto')->with(compact(array('proyecto', 'alumnos')));
     }
-    public function postObservacionAlumnosProyecto(Request $request){
-        $query_value = array();
-        foreach($request->id_alumnos as $idAlumno){
-            array_push($query_value, "($idAlumno,$request->id_proyecto, '$request->observacion', CURRENT_TIMESTAMP)");
-        }
-        DocenteDao::asignarObservacionAAlumnos(implode(",",$query_value));
+    public function postObservacionAlumnosProyecto(Request $request){        
+        DocenteDao::asignarObservacionAAlumnos($request);
         return redirect()->route('docente.getListaGrupos', $request->id_proyecto);
     }
     public function getSupervisarGrupo(Request $request){

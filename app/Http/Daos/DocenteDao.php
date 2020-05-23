@@ -58,8 +58,13 @@ class DocenteDao extends Controller
         ->where('id',$metodologia->id)
         ->update(array('nombre' => $metodologia->nombre, 'descripcion' => $metodologia->descripcion, 'updated_at' => Utilities::getCurrentDate()));
     }
+    //falta ordenar los proyectos por estado
     public static function getAllProyectos($id_docente){
-        $proyectos = DB::select("SELECT p.*,(SELECT DATEDIFF(p.fecha_limite, p.fecha_inicial)) AS dias_restantes FROM proyecto p WHERE p.id_usuario = $id_docente ORDER BY id_estado ASC");
+        $proyectos = DB::table('proyecto')
+        ->where('id_usuario',$id_docente)
+        ->orderBy('id_estado')
+        ->select('*',DB::raw("(SELECT DATEDIFF(proyecto.fecha_limite,proyecto.fecha_inicial))AS dias_restantes"))
+        ->get();
         return $proyectos;
     }
     public static function crearProyecto(proyecto $proyecto){
@@ -103,8 +108,7 @@ class DocenteDao extends Controller
         ->select('usuarios.*')
         ->where('grupo_trabajo.id_proyecto','=',$request->id_proyecto)
         ->whereNull('grupo_usuario.fecha_fin')
-        ->get();
-        
+        ->get();       
         //Get the id's of first model as array
         $ids1 = $model1->pluck('id');
 
@@ -130,13 +134,18 @@ class DocenteDao extends Controller
         ->first();
         return $grupo;
     }
-    public static function asignarAlumnosAProyecto($cadena){
-        $SQL = "INSERT INTO usuario_proyecto_union(id_usuario, id_proyecto, created_at) VALUES ".$cadena;
-        DB::insert($SQL);
-    }
-    public static function asignarAlumnosAGrupo($cadena){
-        $SQL = "INSERT INTO grupo_usuario(id_usuario, id_grupo, fecha_inicio, fecha_fin, created_at) VALUES ".$cadena;
-        DB::insert($SQL);
+   // public static function asignarAlumnosAProyecto($request){
+        
+       // $SQL = "INSERT INTO usuario_proyecto_union(id_usuario, id_proyecto, created_at) VALUES ".$cadena;
+       // DB::insert($SQL);
+    //}
+    public static function asignarAlumnosAGrupo($request){
+        foreach($request->id_alumnos as $idAlumno){
+            DB::table('grupo_usuario')
+            ->insert(
+                array('id_usuario'=>$idAlumno,'id_grupo' => $request->id_grupo,'fecha_inicio' => Utilities::getCurrentDate(),'created_at' => Utilities::getCurrentDate())
+            );
+        }
     }
     public static function getAllTemas(){
         $temas = DB::table('tema')->get();
@@ -151,19 +160,18 @@ class DocenteDao extends Controller
     public static function getAllGrupos($id_proyecto){
         $grupos = DB::table('grupo_trabajo') 
         ->where('id_proyecto', $id_proyecto)
+        ->orderBy('estado_activo')
         ->get();
         return $grupos;
     }
-    
     public static function getIntegrantesGrupos($id_grupos){
         $integrantes = new stdClass();
         foreach($id_grupos as $id_grupo){
-            /*$integrante = DB::table('grupo_usuario AS gu')
-            ->join('usuarios AS u', 'gu.id_usuario', '=', 'u.id')
-            ->select('gu.id_grupo AS grupo','u.nombres AS nombres')
-            ->where('gu.id_grupo' ,'=',$id_grupo->id)
-            ->get();*/
-            $sub_integrantes = DB::select("SELECT CONCAT(u.nombres, ' ', u.apellidos) as nombres, id_grupo as grupo FROM usuarios u JOIN grupo_usuario gu ON u.id = gu.id_usuario where gu.id_grupo = $id_grupo->id");
+            $sub_integrantes = DB::table('usuarios')
+            ->join('grupo_usuario', 'grupo_usuario.id_usuario', '=', 'usuarios.id')
+            ->select(DB::raw("CONCAT(usuarios.nombres,' ', usuarios.apellidos) AS nombres"),'grupo_usuario.id_grupo AS grupo')
+            ->where('grupo_usuario.id_grupo' ,'=',$id_grupo->id)
+            ->get();
             $integrantes->{$id_grupo->id} = $sub_integrantes;
         }
         return $integrantes;
@@ -180,15 +188,21 @@ class DocenteDao extends Controller
         return $grupo;
     }
     public static function alternarEstadoGrupo(stdClass $grupo){
-        //DB::update("UPDATE proyecto SET id_estado = $proyecto->id_estado WHERE id = $proyecto->id");
         DB::table('grupo_trabajo')
             ->where('id_proyecto', $grupo->id_proyecto)
             ->where('id', $grupo->id)
             ->update(array('estado_activo' => $grupo->estado_activo));
     }
-    public static function asignarObservacionAAlumnos($cadena){
-        $SQL = "INSERT INTO usuario_proyecto_union(id_usuario, id_proyecto, observacion, created_at) VALUES ".$cadena;
-        DB::insert($SQL);
+    public static function asignarObservacionAAlumnos($request){
+        foreach($request->id_alumnos as $idAlumno){
+            DB::table('usuario_proyecto_union')
+            ->insert(
+                array('id_usuario'=>$idAlumno,'id_proyecto' => $request->id_proyecto,'observacion' => $request->observacion,'created_at' => Utilities::getCurrentDate())
+            );
+        }
+        
+        //$SQL = "INSERT INTO usuario_proyecto_union(id_usuario, id_proyecto, observacion, created_at) VALUES ".$cadena;
+        //DB::insert($SQL);
     }
     public static function getAllHistoriasFromGrupoById($id_grupo){
         $historias = DB::table('grupo_trabajo')
