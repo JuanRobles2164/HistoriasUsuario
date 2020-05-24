@@ -4,7 +4,6 @@ namespace App\Http\Daos;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Funciones;
-use App\Http\Daos\AdministradorDao;
 use Illuminate\Support\Facades\DB;
 use App\usuario;
 use App\Http\Util\Utilities;
