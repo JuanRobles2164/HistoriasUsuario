@@ -252,29 +252,27 @@ editarRecurso = () => {
   let valor_unitario_recurso = $('#valor_unitario_recurso_modal').val();
   let tipo_recurso = $('#tipo_recurso_modal').val();
   $.ajax({
-    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-    type: 'POST',
+    type: 'GET',
     url: ruta,
     async: true,
     data:{
       'id':id_recurso,
-      'nomrbre':nombre_recurso,
+      'nombre':nombre_recurso,
       'descripcion':descripcion_recurso,
       'cantidad':cantidad_recurso,
       'valor_unitario':valor_unitario_recurso,
-      'tipo_recurso':tipo_recurso
+      'id_tipo_recurso':tipo_recurso
     },
     success: function(response){
       console.log(response);
       alert('Actualización Existosa');
       limpiarModal();
       limpiarSelect();
-      response = null;
+      $('#modalEditarRecurso').modal('hide');
+      location.reload();
     },
     error: function(response){
       console.log(response);
-      limpiarSelect();
-      response = null;
     }
   });
 }

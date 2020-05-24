@@ -94,7 +94,7 @@ Route::get('/alumno/actividad/eliminar_actividad','AlumnoController@getEliminarA
 Route::get('/alumno/actividad/entregar','AlumnoController@getEntregarActividad')->name('alumno.getEntregarActividad');
 Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades/{id_actividad}/recursos','AlumnoController@getRecursosByActividad')->name('alumno.getRecursosByActividad');
 Route::get('/alumno/get_editar_recurso','AlumnoController@getEditarRecurso')->name('alumno.getEditarRecurso');
-Route::post('/alumno/recursos/post_editar_recurso','AlumnoController@postEditarRecurso')->name('alumno.postEditarRecurso');
+Route::get('/alumno/recursos/post_editar_recurso','AlumnoController@postEditarRecurso')->name('alumno.postEditarRecurso');
 Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades/{id_actividad}/recursos/crear_recurso','AlumnoController@getCrearRecurso')->name('alumno.getCrearRecurso');
 Route::post('/alumno/recursos/crear_recurso','AlumnoController@postCrearRecurso')->name('alumno.postCrearRecurso');
 Route::post('/alumno/tipo_recurso/crear','AlumnoController@postCrearTipoRecurso')->name('alumno.postCrearTipoRecurso');

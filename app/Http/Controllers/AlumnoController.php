@@ -165,9 +165,9 @@ class AlumnoController extends Controller
         return json_encode($json_response);
     }
     public function postEditarRecurso(Request $request){
-        $recurso = $request->except('_token');
-        dd(AlumnoDao::editarRecurso($recurso));
-        return response()->json(self::$json_result);
+        $recurso = $request->all();
+        AlumnoDao::editarRecurso($recurso);
+        return json_encode(true);
     }
     public function getCrearRecurso(Request $request){
         $tipos_recurso = AlumnoDao::getTipoRecursoByRecursoId();

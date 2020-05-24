@@ -1,6 +1,7 @@
 @extends('/Templates/Alumno/_LayoutAlumno')
 @section('contenido')
 <input type="hidden" value="{{route('alumno.getEditarRecurso')}}" name="api_route_get_recurso" id="api_route_get_recurso">
+<input type="hidden" name="web_editar_recurso" id="web_editar_recurso" value="{{route('alumno.postEditarRecurso')}}">
     <div class="card border-warning shadow-lg p-3 mb-5 bg-white rounded">
         <div class="card-header p-3 mb-2 bg-warning text-dark">
             <h3>Lista de Recursos</h3>
@@ -123,7 +124,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <form enctype="multipart/form-data">
+            <form>
                 <input type="hidden" name="id_proyecto" id="id_proyecto_modal">
                 <input type="hidden" name="id_fase" id="id_fase_modal">
                 <input type="hidden" name="id_modulo" id="id_modulo_modal">
@@ -150,11 +151,11 @@
                     <option value="" selected hidden>Seleccione un opcion</option>
                 </select>
                 <br>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" onclick="limpiarSelect()" data-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btn-primary" onclick="editarRecurso()">Editar</button>
-        </div>
+            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="limpiarSelect()" data-dismiss="modal">Cerrar</button>
+                    <a type="submit" class="btn btn-primary" onclick="editarRecurso()">Editar</a>
+                </div>
             </form>
       </div>
     </div>
