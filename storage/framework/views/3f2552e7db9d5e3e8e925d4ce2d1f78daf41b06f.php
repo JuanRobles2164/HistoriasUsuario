@@ -124,4 +124,8 @@
  </div>
 <?php $__env->stopSection(); ?>
 
+<?php $__env->startSection('custom_scripts'); ?>
+   <script src="<?php echo e(URL::asset('JS/AJAX/admin/usuariosAJAX.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('Templates/Admin/_LayoutAdmin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\paginasPHP\HistoriasUsuario\resources\views/Contents/Admin/listaUsuarios.blade.php ENDPATH**/ ?>

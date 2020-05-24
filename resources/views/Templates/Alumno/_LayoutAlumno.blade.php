@@ -56,7 +56,6 @@
 				</nav>
 			</div>
 		</section>
-
 		<!-- navbar superior -->
 		<section class="full-box page-content">
 			<nav class="full-box navbar-info">
@@ -70,19 +69,13 @@
 					<i class="fas fa-power-off"></i>
 				</a>
 			</nav>
-			
 			<!-- Contenido -->
 			<div class="full-box tile-container">
 				@yield('contenido')
-				@yield('modal_fases')
-				@yield('modal_objetivo')
-				@yield('modal_modulo')
-				@yield('modal_crear_recurso')
-				@yield('modal_editar_recurso')
 			</div>
         </section>
-        
 	</main>
+	@yield('modals')
     <!-- Sweet Alert V8.13.0 JS file-->
     <script src="{{URL::asset('JS/sweetalert2.min.js')}}"></script>
     <!-- popper -->
@@ -97,9 +90,9 @@
 		$(document).ready(function() { $('body').bootstrapMaterialDesign();});
 	</script>
 	<script src="{{URL::asset('JS/main.js')}}"></script>
-	<script src="{{URL::asset('JS/AJAX/AlumnoAJAX.JS')}}"></script>
-	
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+	@yield('custom_scripts')
 </body>
 </html>

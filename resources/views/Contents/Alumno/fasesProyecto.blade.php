@@ -76,7 +76,7 @@
     @endif       
 @endsection
 
-@section('modal_fases')
+@section('modals')
     <div class="modal fade" id="modalfases" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -124,9 +124,7 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('modal_objetivo')
+    
 <div class="modal fade" id="modalobjetivo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">

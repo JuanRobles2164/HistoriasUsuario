@@ -106,7 +106,7 @@
     @endif
 @endsection
 
-@section('modal_modulo')
+@section('modals')
         <input type="hidden" value="{{route('alumno.postEditarModulo')}}" id="web_editar_modulo" name="web_editar_modulo">
     <div class="modal fade" id="modalmodulo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">

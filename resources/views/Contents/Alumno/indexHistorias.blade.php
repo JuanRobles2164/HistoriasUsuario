@@ -191,3 +191,11 @@
     </div>
   </div>
 @endsection
+
+@section('modals')
+    
+@endsection
+
+@section('custom_scripts')
+    <script src="{{URL::asset('JS/AJAX/alumno/historias.js')}}"></script>
+@endsection

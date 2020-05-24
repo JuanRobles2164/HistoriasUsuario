@@ -60,7 +60,7 @@
 <input type="hidden" name="route_alumno_post_crear_recurso" value="{{route('alumno.postCrearRecurso')}}" id="route_alumno_post_crear_recurso">
 @endsection
 
-@section('modal_crear_recurso')
+@section('modals')
     <div class="modal fade" id="modalRecurso" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle">
         <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -111,9 +111,6 @@
         </div>
         </div>
     </div>
-@endsection
-
-@section('modal_editar_recurso') 
   <div class="modal fade" id="modalEditarRecurso" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -160,4 +157,8 @@
       </div>
     </div>
   </div>
+@endsection
+
+@section('custom_scripts')
+    <script src="{{URL::asset('JS/AJAX/alumno/recursosAJAX.js')}}"></script>
 @endsection

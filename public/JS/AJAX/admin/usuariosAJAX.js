@@ -32,7 +32,7 @@ function detallesUsuario(Identificador){
 $('#btnCierraModalDetallesUsuario').click(function(){
     $('#modalDetalles').toggle();
 });
-
+//Para la barra de búsqueda
 $('#criterio').keypress(function (e) { 
     _this = this;  
     $.each($("#tabla tbody tr"), function() {
@@ -42,5 +42,3 @@ $('#criterio').keypress(function (e) {
             $(this).show();
     });
 });
-
-

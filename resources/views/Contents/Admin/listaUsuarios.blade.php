@@ -124,3 +124,7 @@
    </div>
  </div>
 @endsection
+
+@section('custom_scripts')
+   <script src="{{URL::asset('JS/AJAX/admin/usuariosAJAX.js') }}"></script>
+@endsection
