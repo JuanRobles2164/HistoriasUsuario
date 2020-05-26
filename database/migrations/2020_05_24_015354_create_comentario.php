@@ -16,13 +16,12 @@ class CreateComentario extends Migration
         Schema::create('comentario', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('comentario');
-            $table->unsignedBigInteger('grupo_usuario_id');
+            $table->unsignedBigInteger('id_grupo');
             //El email del docente que hace el comentario
-            $table->string('email_usuario')->index();
             $table->boolean('estado')->default(false);
+            $table->unsignedBigInteger('UsuarioVisto');
             $table->timestamps();
-
-            $table->foreign('grupo_usuario_id')->references('id')->on('grupo_usuario');
+            $table->foreign('id_grupo')->references('id')->on('grupo_trabajo');
         });
     }
 

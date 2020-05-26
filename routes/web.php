@@ -62,8 +62,9 @@ Route::post('/docente/proyectos/{id_proyecto}/grupos/{id_grupo}/asignar_alumno',
 Route::get('/docente/proyectos/{id_proyecto}/grupos/alternar_estado', 'DocenteController@getAlternarEstadoGrupo')->name('docente.getAlternarEstadoGrupo');
 Route::get('/docente/proyectos/{id_proyecto}/grupos/observacion', 'DocenteController@getObservacionAlumnosProyecto')->name('docente.getObservacionAlumnosProyecto');
 Route::post('/docente/proyectos/{id_proyecto}/grupos/observacion', 'DocenteController@postObservacionAlumnosProyecto')->name('docente.postObservacionAlumnosProyecto');
-Route::get('/docente/proyectos/{id_proyecto}/grupo/{id_grupo}/historias_de_usuario', 'DocenteController@getSupervisarGrupo')->name('docente.getSupervisarGrupo');
-//Route::post('/docente/proyectos/{id_proyecto}/grupos/{id_grupo}/asignar_alumno', 'DocenteController@postAsignarAlumnoProyecto')->name('docente.postAsignarAlumnoProyecto');
+Route::get('/docente/proyectos/{id_proyecto}/grupos/{id_grupo}/historias_de_usuario', 'DocenteController@getSupervisarGrupo')->name('docente.getSupervisarGrupo');
+Route::get('/docente/proyectos/{id_proyecto}/grupos/{id_grupo}/ObservacionGrupo','DocenteController@getCrearObservacionGrupo')->name('docente.getCrearObservacionGrupo');
+Route::post('/docente/ObservacionGrupo','DocenteController@postCrearObservacionGrupo')->name('docente.postCrearObservacionGrupo');
 /*
 
 

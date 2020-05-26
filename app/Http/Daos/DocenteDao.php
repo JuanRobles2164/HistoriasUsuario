@@ -240,4 +240,19 @@ class DocenteDao extends Controller
         ->get();
         return $evidencias;
     }
+    public static function CrearObservacionGrupo($recurso){
+        DB::table('comentario')
+        ->insert([
+            'observacion' => $recurso['comentario'],
+            'id_grupo' => $recurso['id_grupo'],
+            'created_at' => Utilities::getCurrentDate()
+        ]);
+    }
+    public static function getNombreGrupo($id_grupo){
+        $nombre = DB::table('grupo_trabajo')
+        ->where('id',$id_grupo)
+        ->select('nombre')
+        ->get();
+        return $nombre;
+    }
 }

@@ -1,5 +1,6 @@
 @extends('Templates/Docente/_LayoutDocente')
 @section('contenido')
+<input type="hidden" value="{{route('docente.getCrearObservacionGrupo')}}" name="api_route_get_observacion" id="api_route_get_observacion">
 <br>
 <form>
     <div class="row">
@@ -78,11 +79,12 @@
                         </th>
                     @endif
                     <th style="text-align: center;">
-                        <a href="{{route('docente.getSupervisarGrupo', 
-                        array('id_proyecto' => $grupo->id_proyecto, 
-                        'id_grupo' => $grupo->id))}}" a class="btn btn-dark btn-sm">
+                        <a href="{{route('docente.getSupervisarGrupo', array('id_proyecto' => $grupo->id_proyecto, 'id_grupo' => $grupo->id))}}" class="btn btn-dark btn-sm">
                             <i class="fas fa-clipboard"></i>
                         </a>
+                        <button type="submit" class="btn btn-warning" data-toggle="modal" data-target="#modalEditarRecurso"  onclick="consultaGrupo({{$grupo->id_proyecto}},{{$grupo->id}})">
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>
                         <a href="#" class="btn btn-info btn-sm">
                             <i class="fas fa-eye"></i>
                         </a>
@@ -97,4 +99,7 @@
             @endforeach
         </tbody>
     </table>
+@endsection
+@section('custom_scripts')
+    <script src="{{URL::asset('JS/AJAX/docente/observacion.js')}}"></script>
 @endsection

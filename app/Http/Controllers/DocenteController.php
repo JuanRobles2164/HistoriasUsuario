@@ -240,5 +240,15 @@ class DocenteController extends Controller
         $compromisos = DocenteDao::getCompromisosByHistoriaId($historia->id);
         return view($this->ruta.'supervisarHistoriasGrupo');
     }
+    public function getCrearObservacionGrupo(Request $request){
+        $grupo = AlumnoDao::getNombreGrupo($request->id_grupo);
+        $json_response = array('grupo' => $grupo, 'id_grupo' => $request->id_grupo);
+        return json_encode($json_response);
+    }
+    public function postCrearObservacionGrupo(Request $request){
+        $recurso = $request->all();
+        DocenteDao::CrearObservacionGrupo($recurso);
+        return json_encode(true);
+    }
 }
 
