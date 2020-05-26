@@ -7,20 +7,22 @@ limpiarModal = () => {
     limpiarModal();
   });
 
-consultaGrupo = (Identificador, Identificador2) =>{
+consultaGrupo = (Identificador) =>{
     const ruta = $('#api_route_get_observacion').val();
+    console.log(ruta);
     $.ajax({
       url: ruta,
       type: 'GET',
       async: true,
-      data: {id_proyecto:Identificador, id_grupo:Identificador2, legal:true},
+      data: {'id_grupo':Identificador, 'legal':true},
       success: function(response){
-        response = $.parseJSON(response); 
-        console.log(response.grupo);
-        $('#nombre_grupo').val(response.grupo);
+        //response = $.parseJSON(response);
+        console.log(response);
+        $('#nombre_grupo').text(response.nombre);
         $('#id_grupo_observacion').val(response.id_grupo);
       },
       error: function(response){
+        console.log(response);
         alert("Algo salió mal... vuelve a intentarlo");
         response = null;
       }
@@ -32,14 +34,15 @@ consultaGrupo = (Identificador, Identificador2) =>{
 crearObservacion = () => {
     const ruta = $('#web_crear_observacion').val();
     let id_grupo = $('#id_grupo_observacion').val();
-    let observacion = $('#observacion_grupo').val();
+    let comentario = $('#observacion_grupo').val();
     $.ajax({
       type: 'POST',
+      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
       url: ruta,
       async: true,
       data:{
         'id_grupo':id_grupo,
-        'observacion':observacion
+        'comentario':comentario
       },
       success: function(response){
         console.log(response);

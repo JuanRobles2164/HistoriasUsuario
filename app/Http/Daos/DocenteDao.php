@@ -243,7 +243,7 @@ class DocenteDao extends Controller
     public static function CrearObservacionGrupo($recurso){
         DB::table('comentario')
         ->insert([
-            'observacion' => $recurso['comentario'],
+            'comentario' => $recurso['comentario'],
             'id_grupo' => $recurso['id_grupo'],
             'created_at' => Utilities::getCurrentDate()
         ]);

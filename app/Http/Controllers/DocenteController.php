@@ -15,6 +15,7 @@ use App\usuario;
 use App\fuente;
 use stdClass;
 use App\grupo;
+use App\Http\Daos\AlumnoDao;
 use App\Http\Util\Utilities;
 
 class DocenteController extends Controller
@@ -241,9 +242,9 @@ class DocenteController extends Controller
         return view($this->ruta.'supervisarHistoriasGrupo');
     }
     public function getCrearObservacionGrupo(Request $request){
-        $grupo = AlumnoDao::getNombreGrupo($request->id_grupo);
-        $json_response = array('grupo' => $grupo, 'id_grupo' => $request->id_grupo);
-        return json_encode($json_response);
+        $grupo = DocenteDao::getGrupoById($request->id_grupo);
+        return response()->json($grupo);
+        //return json_encode($grupo);
     }
     public function postCrearObservacionGrupo(Request $request){
         $recurso = $request->all();

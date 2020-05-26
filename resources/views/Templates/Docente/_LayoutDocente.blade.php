@@ -4,6 +4,7 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
       <title>Inicio</title>
+      <meta name="csrf-token" content="{{ csrf_token() }}">
       <!-- jQuery V3.4.1 -->
       <script src="{{URL::asset('JS/jquery-3.4.1.min.js')}}"></script>
       <!-- Normalize V8.0.1 -->
@@ -105,9 +106,10 @@
 	   <script src="{{URL::asset('JS/jquery.mCustomScrollbar.concat.min.js')}}"></script>
       <!-- Bootstrap Material Design V4.0 -->
       <script src="{{URL::asset('JS/bootstrap-material-design.min.js')}}" ></script>
+      <script>
+         $(document).ready(function() { $('body').bootstrapMaterialDesign();});
+      </script>
       <script src="{{URL::asset('JS/main.js')}}"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 

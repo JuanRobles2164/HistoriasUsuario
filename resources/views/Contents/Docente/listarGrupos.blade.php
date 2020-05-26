@@ -1,6 +1,6 @@
 @extends('Templates/Docente/_LayoutDocente')
 @section('contenido')
-<input type="hidden" value="{{route('docente.getCrearObservacionGrupo')}}" name="api_route_get_observacion" id="api_route_get_observacion">
+<input type="hidden" name="api_route_get_observacion" id="api_route_get_observacion" value="{{route('docente.getCrearObservacionGrupo')}}">
 <br>
 <form>
     <div class="row">
@@ -82,7 +82,7 @@
                         <a href="{{route('docente.getSupervisarGrupo', array('id_proyecto' => $grupo->id_proyecto, 'id_grupo' => $grupo->id))}}" class="btn btn-dark btn-sm">
                             <i class="fas fa-clipboard"></i>
                         </a>
-                        <button type="submit" class="btn btn-warning" data-toggle="modal" data-target="#modalEditarRecurso"  onclick="consultaGrupo({{$grupo->id_proyecto}},{{$grupo->id}})">
+                        <button type="submit" class="btn btn-warning" data-toggle="modal" data-target="#modalComentario"  onclick="consultaGrupo({{$grupo->id}})">
                             <i class="fas fa-pencil-alt"></i>
                         </button>
                         <a href="#" class="btn btn-info btn-sm">
@@ -100,6 +100,37 @@
         </tbody>
     </table>
 @endsection
+@section('modals')
+<input type="hidden" name="web_crear_observacion" id="web_crear_observacion" value="{{route('docente.postCrearObservacionGrupo')}}">
+<div class="modal fade" id="modalComentario" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Crear Observacion Grupo: 
+              <label name="nombre_grupo" id="nombre_grupo"> </label>
+            </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <input type="hidden" name="id_grupo" id="id_grupo_observacion">
+                <label for="observacion">Observacion</label>
+                <textarea  class="form-control" name="observacion" id="observacion_grupo"></textarea>
+                <br>
+            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <a type="submit" class="btn btn-primary" onclick="crearObservacion()">Crear</a>
+                </div>
+            </form>
+      </div>
+    </div>
+  </div>
+  @endsection
+
+
 @section('custom_scripts')
     <script src="{{URL::asset('JS/AJAX/docente/observacion.js')}}"></script>
 @endsection
