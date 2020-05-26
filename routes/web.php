@@ -13,16 +13,15 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function(){
+    return redirect()->route('getLogin');
+});
 Route::get('/login', 'UsuarioController@onGetLogin')->name('getLogin');
 Route::post('/login', 'UsuarioController@onPostLogin')->name('postLogin');
 
 Route::get('/registro', 'UsuarioController@getRegistro')->name('registro');
 Route::post('/registro', 'UsuarioController@postRegistro')->name('postRegistro');
 
-
-Route::prefix('welcome')->group(function() {
-    Route::get('/','Welcome@onGetWelcome')->name('getWelcome');
-});
 
 Route::get('/administrador', 'AdministradorController@index')->name('admin.getIndex')->middleware('CheckRole');
 Route::get('/administrador/editar_perfil', 'AdministradorController@getSelfEdit')->name('admin.getSelfEdit');

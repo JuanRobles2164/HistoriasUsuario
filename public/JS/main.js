@@ -44,7 +44,7 @@ $(document).ready(function(){
 			cancelButtonText: 'No, cancelar'
 		}).then((result) => {
 			if (result.value) {
-				window.location.href = "/paginasPHP/HistoriasUsuario/public/login";
+				window.location.href = $('#log_out_route').val();
 				//window.location.href = "/master-php/JuanRobles2164/HistoriasUsuario/public/login";
 			}
 		});

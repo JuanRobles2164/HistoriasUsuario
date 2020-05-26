@@ -24,6 +24,7 @@
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
    </head>
    <body>
+      <input type="hidden" name="" id="log_out_route" value="{{route('getLogin')}}">
       <!-- centenedor de menu -->
       <main class="full-box main-container">
          <!-- Navbar lateral -->

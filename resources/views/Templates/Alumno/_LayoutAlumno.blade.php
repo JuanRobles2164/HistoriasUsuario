@@ -23,6 +23,7 @@
 		<meta name="csrf-token" content="{{ csrf_token() }}" />
    </head>
 <body>
+	<input type="hidden" name="" id="log_out_route" value="{{route('getLogin')}}">
 	<!-- centenedor de menu -->
 	<main class="full-box main-container">
 		<!-- Navbar lateral -->
