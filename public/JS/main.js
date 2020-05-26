@@ -34,17 +34,18 @@ $(document).ready(function(){
 	$('.btn-exit-system').on('click', function(e){
 		e.preventDefault();
 		Swal.fire({
-			title: 'Are you sure to close the session?',
-			text: "You are about to close the session and exit the system",
+			title: '¿Estás seguro de cerrar la sesión?',
+			text: "Está a punto de cerrar la sesión y salir del sistema.",
 			type: 'question',
 			showCancelButton: true,
 			confirmButtonColor: '#3085d6',
 			cancelButtonColor: '#d33',
-			confirmButtonText: 'Yes, exit!',
-			cancelButtonText: 'No, cancel'
+			confirmButtonText: 'Yes, salir!',
+			cancelButtonText: 'No, cancelar'
 		}).then((result) => {
 			if (result.value) {
 				window.location.href = "/paginasPHP/HistoriasUsuario/public/login";
+				//window.location.href = "/master-php/JuanRobles2164/HistoriasUsuario/public/login";
 			}
 		});
 	});

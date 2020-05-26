@@ -28,13 +28,20 @@
                             <label for="validationCustom04">Fecha límite:</label>
                             <input type="date" class="form-control" name="fecha_limite" required>
                         </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="validationCustom05">Metodología</label>
-                            <select class="custom-select" id="validationDefault05" name="id_metodologia" required>
-                                @foreach ($metodologias as $metodologia)
-                                    <option value="{{$metodologia->id}}">{{$metodologia->nombre}}</option>
-                                @endforeach
-                            </select>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group two-fields">
+                                <label for="validationCustom05">Metodología</label>
+                                <div class="input-group">
+                                    <select class="custom-select" id="validationDefault05" name="id_metodologia" required>
+                                        @foreach ($metodologias as $metodologia)
+                                            <option value="{{$metodologia->id}}">{{$metodologia->nombre}}</option>
+                                        @endforeach
+                                    </select>
+                                    <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalCenter">
+                                        Agregar
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <input type="hidden" name="id_estado" value="1">
@@ -46,4 +53,36 @@
             </p>  
         </div>
     </form>
+@endsection
+
+@section('modals')
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Agregar Metodología <i class="fas fa-brain"></i></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <label for="recipient-name" class="col-form-label text-info">Desde aca tambien puedes crear una metodología, solo es una acceso rápido.</label>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Nombre:</label>
+              <input type="text" class="form-control" id="recipient-name">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Descripción:</label>
+              <textarea class="form-control" id="message-text"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary">Crear</button>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
