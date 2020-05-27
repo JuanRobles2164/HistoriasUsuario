@@ -84,3 +84,7 @@
 </div>
 
 @endsection
+
+@section('custom_scripts')
+    <script src="{{URL::asset('JS/AJAX/docente/metodologia.js')}}"></script>
+@endsection
