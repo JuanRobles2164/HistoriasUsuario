@@ -19,7 +19,7 @@ consultaGrupo = (Identificador) =>{
         //response = $.parseJSON(response);
         console.log(response);
         $('#nombre_grupo').text(response.nombre);
-        $('#id_grupo_observacion').val(response.id_grupo);
+        $('#id_grupo_observacion').val(response.id);
       },
       error: function(response){
         console.log(response);
