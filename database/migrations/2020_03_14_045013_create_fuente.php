@@ -17,7 +17,7 @@ class CreateFuente extends Migration
         Schema::create('fuente', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('url');
-            $table->string('descripcion');
+            $table->string('descripcion')->nullable();
             $table->unsignedBigInteger('id_metodologia');
             $table->dateTime('creado_en')->default(new Expression('CURRENT_TIMESTAMP'));
             $table->dateTime('modificado_en');
