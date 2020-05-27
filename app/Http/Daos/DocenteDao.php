@@ -40,6 +40,7 @@ class DocenteDao extends Controller
         $id = DB::table('metodologia')->insertGetId(
             array('nombre' => $metodologia->nombre, 'descripcion' => $metodologia->descripcion, 'estado_eliminado' => 0)
         );
+        return $id;
     }
     public static function agregarFuenteMetodologia($fuente){
         $id = DB::table('fuente')->insertGetId(
