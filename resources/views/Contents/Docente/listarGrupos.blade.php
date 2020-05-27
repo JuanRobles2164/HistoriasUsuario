@@ -82,13 +82,16 @@
                         <a href="{{route('docente.getSupervisarGrupo', array('id_proyecto' => $grupo->id_proyecto, 'id_grupo' => $grupo->id))}}" class="btn btn-dark btn-sm">
                             <i class="fas fa-clipboard"></i>
                         </a>
-                        <button type="submit" class="btn btn-warning" data-toggle="modal" data-target="#modalComentario"  onclick="consultaGrupo({{$grupo->id}})">
-                            <i class="fas fa-pencil-alt"></i>
-                        </button>
+                        <a href="#" class="btn btn-outline-secondary btn-sm"  data-toggle="modal" data-target="#modalComentario"  onclick="consultaGrupo({{$grupo->id}})">
+                            <i class="fas fa-comment-medical"></i>
+                        </a>
+                        <a href="#" class="btn btn-danger btn-sm"  data-toggle="modal" data-target=""  onclick="">
+                            <i class="far fa-comments"></i>
+                        </a>
                         <a href="#" class="btn btn-info btn-sm">
                             <i class="fas fa-eye"></i>
                         </a>
-                         <a href="#" a class="btn btn-warning  btn-sm">
+                         <a href="#" class="btn btn-warning  btn-sm">
                             <i class="far fa-edit"></i>
                         </a>
                         <a href="{{route('docente.getAsignarAlumnoGrupo', array('id_proyecto' => $grupo->id_proyecto, 'id_grupo' => $grupo->id) )}}" a class="btn btn-light btn-sm">

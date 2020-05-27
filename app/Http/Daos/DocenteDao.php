@@ -249,11 +249,4 @@ class DocenteDao extends Controller
             'created_at' => Utilities::getCurrentDate()
         ]);
     }
-    public static function getNombreGrupo($id_grupo){
-        $nombre = DB::table('grupo_trabajo')
-        ->where('id',$id_grupo)
-        ->select('nombre')
-        ->get();
-        return $nombre;
-    }
 }
