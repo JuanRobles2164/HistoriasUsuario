@@ -1,5 +1,6 @@
 @extends('Templates/Docente/_LayoutDocente')
 @section('contenido')
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
     <form action="{{route('docente.postCrearProyecto')}}" method="POST">
@@ -67,22 +68,35 @@
         </div>
         <div class="modal-body">
           <form>
-            <label for="recipient-name" class="col-form-label text-info">Desde aca tambien puedes crear una metodología, solo es una acceso rápido.</label>
+            <input type="hidden" name="api_route_crear_metodologia" id="api_route_crear_metodologia" value="{{route('docente.formsAgiles.postCrearMetodologia')}}">
+            <label for="recipient-name" class="col-form-label text-info">Agregue y use una metodología rápidamente</label>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Nombre:</label>
-              <input type="text" class="form-control" id="recipient-name">
+              <input type="text" class="form-control" id="nombre_metodologia">
             </div>
             <div class="form-group">
               <label for="message-text" class="col-form-label">Descripción:</label>
-              <textarea class="form-control" id="message-text"></textarea>
+              <textarea class="form-control" id="descripcion_metodologia"></textarea>
             </div>
-          </form>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Fuente (URL):</label>
+              <input type="url" class="form-control" id="fuente_metodologia">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Descripción de la fuente:</label>
+              <textarea class="form-control" id="descripcion_fuente"></textarea>
+            </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary">Crear</button>
+          <button type="button" class="btn btn-primary" onclick="agregarMetodologiaRapido()">Crear</button>
         </div>
+      </form>
       </div>
     </div>
   </div>
+@endsection
+
+@section('custom_scripts')
+<script src="{{URL::asset('JS/AJAX/docente/proyecto.js')}}"></script>
 @endsection
