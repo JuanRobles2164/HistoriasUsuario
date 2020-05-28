@@ -68,7 +68,7 @@ consultarObservaciones = (Identificador) =>{
           console.log(response);
           alert('La observacion se marco como leida!');
           limpiarModal();
-          consultaGrupo(id_proyecto);
+          consultarObservaciones(id_proyecto);
         },
         error: function(response){
           console.log(response);
