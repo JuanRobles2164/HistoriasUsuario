@@ -11,6 +11,7 @@ use App\grupoTrabajo;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Daos\UsuarioDao;
+use App\Http\Util\Utilities;
 use App\usuario;
 use stdClass;
 
@@ -226,7 +227,7 @@ class AlumnoController extends Controller
     }
     public function getListarObservacionesLyS(Request $request){
         $usuario = Utilities::returnDecryptedCookieByName('usuario');
-        $grupo = AlumnoDao::EncontrarGrupByIdProyecto($request->id_proyecto,$usuario->id);
+        $grupo = AlumnoDao::EncontrarGrupByIdProyecto($request->id_proyecto, $usuario->id);
         $ob_vistas = AlumnoDao::getObservacionesV($grupo->id);
         $ob_sinver = AlumnoDao::getObservacionesS($grupo->id);
         $json_response = array('usuario' => $usuario->id,'ObS' => $ob_sinver ,'ObV' => $ob_vistas);
@@ -234,7 +235,7 @@ class AlumnoController extends Controller
     }
     public function postListarObservacionesLyS(Request $request){
         $recurso = $request->all();
-        DocenteDao::MarcarComoLeido($recurso);
+        AlumnoDao::MarcarComoLeido($recurso);
         return json_encode(true);
     }
 
