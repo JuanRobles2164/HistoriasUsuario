@@ -19,7 +19,7 @@ class CreateComentario extends Migration
             $table->unsignedBigInteger('id_grupo');
             //El email del docente que hace el comentario
             $table->boolean('estado')->default(false);
-            $table->unsignedBigInteger('UsuarioVisto')->nullable();
+            $table->unsignedBigInteger('usuariovisto')->nullable();
             $table->timestamps();
             $table->foreign('id_grupo')->references('id')->on('grupo_trabajo');
         });
