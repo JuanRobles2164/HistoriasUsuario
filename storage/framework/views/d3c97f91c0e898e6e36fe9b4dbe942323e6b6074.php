@@ -104,6 +104,11 @@
       </script>
       <script src="<?php echo e(URL::asset('JS/main.js')); ?>"></script>
       <?php echo $__env->yieldContent('custom_scripts'); ?>
+      <script>
+         $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+         })
+      </script>
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
    </body>
