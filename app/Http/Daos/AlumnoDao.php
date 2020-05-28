@@ -11,6 +11,8 @@ use App\Http\Util\Utilities;
 
 class AlumnoDao extends Controller
 {
+    private static $LEIDO = true;
+    private static $SIN_LEER = false;
     public static function crearEquipo(grupoTrabajo $grupo, usuario $usuario){
         //Obtiene el máx id mas 1 para poder asignarlo tanto al grupo, como a la relacion n -> n
         $max_id_grupo = (int) DB::select("SELECT MAX(id)+1 as max_id from grupo_trabajo")[0]->max_id;
@@ -277,12 +279,12 @@ class AlumnoDao extends Controller
         return $grupo;
     }
     public static function MarcarComoLeido($recurso){
-        $id = (int) $recurso->id;
+        $id = $recurso['id'];
         DB::table('comentario')
         ->where('id', $id)
         ->update([
-            'estado' => 1,
-            'UsuarioVisto' => $recurso->id_usuario,
+            'estado' => self::$LEIDO,
+            'usuariovisto' => $recurso['id_usuario'],
             'updated_at' => Utilities::getCurrentDate()
         ]);
     }
