@@ -17,7 +17,7 @@ consultarObservaciones = (Identificador) =>{
       data: {'id_proyecto':Identificador, 'legal':true},
       success: function(response){
         //response = $.parseJSON(response);
-        console.log(response.ObV);
+        console.log(response);
         $('#id_usuario').val(response.usuario);
         $('#id_proyecto').val(Identificador);
         ObservacionesLeidas = response.ObV;
@@ -49,7 +49,7 @@ consultarObservaciones = (Identificador) =>{
   }
 
 
-  MarcarLeida =() => {
+  MarcarLeida = () => {
     const ruta = $('#web_observaciones').val();
     let id_usuario = $('#id_usuario').val();
     let id_observacion = $('#id_observacion').val();
