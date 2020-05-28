@@ -61,7 +61,7 @@
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalCenterTitle">Observaciones del docente</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <span aria-hidden="true" onclick="limpiarModal()">&times;</span>
           </button>
         </div>
         <div class="modal-body">
@@ -71,6 +71,8 @@
                     <a class="nav-item nav-link active" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Sin ver</a>
                 </div>
             </nav>
+            <input type="hidden" name="id_proyecto" id="id_proyecto">
+            <input type="hidden" name="id_usuario" id="id_usuario">
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade" id="nav-gabito" role="tabpanel" aria-labelledby="nav-gabito-tab">
                     <div class="jumbotron">

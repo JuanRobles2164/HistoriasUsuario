@@ -277,8 +277,9 @@ class AlumnoDao extends Controller
         return $grupo;
     }
     public static function MarcarComoLeido($recurso){
+        $id = (int) $recurso->id;
         DB::table('comentario')
-        ->where('id', $recurso->id_observacion)
+        ->where('id', $id)
         ->update([
             'estado' => 1,
             'UsuarioVisto' => $recurso->id_usuario,

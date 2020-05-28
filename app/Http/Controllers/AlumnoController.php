@@ -234,9 +234,9 @@ class AlumnoController extends Controller
         return response()->json($json_response);
     }
     public function postListarObservacionesLyS(Request $request){
-        $recurso = $request->all();
-        AlumnoDao::MarcarComoLeido($recurso);
-        return json_encode(true);
+        $visto = $request->except('_token');
+        AlumnoDao::MarcarComoLeido($visto);
+        return response()->json(self::$json_result);
     }
 
 }

@@ -1,6 +1,6 @@
 function limpiarModal(){
-    $('#leidas').empty();
-    $('#sinleer').empty();
+  $('#leidas tbody').empty();
+  $('#sinleer tbody').empty();
 }
   
   $('#btnCierraModal').click(function(){
@@ -25,13 +25,13 @@ consultarObservaciones = (Identificador) =>{
         var island_serverinfo = '';
         ObservacionesSinleer.forEach(element => {
             island_serverinfo += '<tr>';
-            island_serverinfo += '<input type="hidden" name="id_observacion" id="id_observacion" value="'+element.id_observacion+'">';
+            //island_serverinfo += '<input type="hidden" name="id_observacion" id="id_observacion" value="'+element.id_observacion+'">';
             island_serverinfo += '<td scope="row">'+element.observacion+'</td>';
-            island_serverinfo += '<td scope="row"> <a class="btn btn-primary" onclick="marcarLeida()"></a> </td>';
+            island_serverinfo += '<td scope="row"><a type="submit" class="btn btn-primary" onclick="MarcarLeida('+element.id_observacion+')">Editar</a><i class="fas fa-box-open"></i></a></td>';
             island_serverinfo += '</tr>';
         });
         $('#sinleer tbody').append(island_serverinfo);
-        island_serverinfo = '';
+        island_serverinfo = ' ';
         ObservacionesLeidas.forEach(element =>{
             island_serverinfo += '<tr>';
             island_serverinfo += '<td scope="row">'+element.observacion+'</td>';
@@ -49,20 +49,20 @@ consultarObservaciones = (Identificador) =>{
   }
 
 
-  MarcarLeida = () => {
+  MarcarLeida = (Identificador) => {
     const ruta = $('#web_observaciones').val();
     let id_usuario = $('#id_usuario').val();
-    let id_observacion = $('#id_observacion').val();
     let id_proyecto = $('#id_proyecto').val();
-    console.log(ruta);
+    let idOb = JSON.stringify(Identificador);
+    console.log(id_usuario, id_proyecto, idOb);
     $.ajax({
-        type: 'POST',
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        type: 'POST',
         url: ruta,
         async: true,
         data:{
           'id_usuario':id_usuario,
-          'id_observacion':id_observacion,
+          'id':idOb
         },
         success: function(response){
           console.log(response);
