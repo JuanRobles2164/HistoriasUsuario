@@ -14,7 +14,7 @@ class Utilities{
      * Undocumented function
      *
      * @param string $cookie_name
-     * @return void
+     * @return Cookie
      */
     public static function returnDecryptedCookieByName(string $cookie_name){
         try{
