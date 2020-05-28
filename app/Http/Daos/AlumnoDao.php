@@ -273,7 +273,7 @@ class AlumnoDao extends Controller
         ->select('grupo_trabajo.id AS id')
         ->where('grupo_trabajo.id_proyecto',$idProyecto)
         ->where('grupo_usuario.id_usuario',$idUsuario)
-        ->get();
+        ->first();
         return $grupo;
     }
     public static function MarcarComoLeido($recurso){
