@@ -105,7 +105,8 @@ Route::post('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}
 Route::post('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades/{id_actividad}/historias/crear_historia_usuario','AlumnoController@postCrearHistoriaUsuario')->name('alumno.postCrearHistoriaUsuario');
 //Route::get('/alumno/historias_de_usuario')->name('alumno.getListaHistorias');
 //Route::get('','')->name('');
-
+Route::get('/alumno/proyectos/notificacion','AlumnoController@getListarObservacionesLyS')->name('alumno.getListarObservacionesLyS');
+Route::post('/alumno/notificacion','AlumnoController@postListarObservacionesLyS')->name('alumno.postListarObservacionesLyS');
 //Enrutado para hacer pruebas con las vistas, puede cambiarse cuando desee
 Route::get('/test', function(){
     

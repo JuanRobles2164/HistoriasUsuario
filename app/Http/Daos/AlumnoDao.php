@@ -267,4 +267,38 @@ class AlumnoDao extends Controller
             'created_at' => Utilities::getCurrentDate()
         ]);
     }
+    public static function EncontrarGrupByIdProyecto($idProyecto, $idUsuario){
+        $grupo = DB::table('grupo_trabajo')
+        ->join('grupo_usuario', 'grupo_usuario.id_grupo', '=', 'grupo_trabajo.id')
+        ->select('grupo_trabajo.id AS id')
+        ->where('grupo_trabajo.id_proyecto',$idProyecto)
+        ->where('grupo_usuario.id_usuario',$idUsuario)
+        ->get();
+        return $grupo;
+    }
+    public static function MarcarComoLeido($recurso){
+        DB::table('comentario')
+        ->where('id', $recurso->id_observacion)
+        ->update([
+            'estado' => 1,
+            'UsuarioVisto' => $recurso->id_usuario,
+            'updated_at' => Utilities::getCurrentDate()
+        ]);
+    }
+    public static function getObservacionesV($grupo){
+        $observaciones = DB::table('comentario')
+        ->select('comentario AS observacion', 'created_at AS fecha')
+        ->where('estado',1)
+        ->where('id_grupo',$grupo)
+        ->get();
+        return $observaciones;
+    }
+    public static function getObservacionesS($grupo){
+        $observaciones = DB::table('comentario')
+        ->select('comentario AS observacion', 'id AS id_observacion')
+        ->where('estado',0)
+        ->where('id_grupo',$grupo)
+        ->get();
+        return $observaciones;
+    }
 }

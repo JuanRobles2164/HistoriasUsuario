@@ -224,5 +224,18 @@ class AlumnoController extends Controller
         }*/
         return back();
     }
+    public function getListarObservacionesLyS(Request $request){
+        $usuario = Utilities::returnDecryptedCookieByName('usuario');
+        $grupo = AlumnoDao::EncontrarGrupByIdProyecto($request->id_proyecto,$usuario->id);
+        $ob_vistas = AlumnoDao::getObservacionesV($grupo->id);
+        $ob_sinver = AlumnoDao::getObservacionesS($grupo->id);
+        $json_response = array('usuario' => $usuario->id,'ObS' => $ob_sinver ,'ObV' => $ob_vistas);
+        return response()->json($json_response);
+    }
+    public function postListarObservacionesLyS(Request $request){
+        $recurso = $request->all();
+        DocenteDao::MarcarComoLeido($recurso);
+        return json_encode(true);
+    }
 
 }
