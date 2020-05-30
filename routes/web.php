@@ -106,6 +106,9 @@ Route::post('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}
 Route::get('/alumno/notificacion','AlumnoController@getListarObservacionesLyS')->name('alumno.getListarObservacionesLyS');
 Route::post('/alumno/notificacion','AlumnoController@postListarObservacionesLyS')->name('alumno.postListarObservacionesLyS');
 //Enrutado para hacer pruebas con las vistas, puede cambiarse cuando desee
+Route::get('/alumno/select/modulos', 'AlumnoController@getSelectModulos')->name('alumno.select.getListaModulos');
+Route::get('/alumno/select/actividades', 'AlumnoController@getSelectActividades')->name('alumno.select.getListaActividades');
+
 Route::get('/test', function(){
     
     $fase = date('Y-m-d H:i:s', strtotime('now - 4 hours'));

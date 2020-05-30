@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Daos\AlumnoDao;
 use App\Http\Util\Utilities;
 use Illuminate\Http\Request;
+namespace App\Http\Controllers;
+use App\Http\Requests;
 use stdClass;
 
 
