@@ -33,14 +33,14 @@
                         <div class="form-group col-md-4">
                             <label for="">Fase</label>
                             <select class="form-control" id="id_fase">
-                                <option value="0"> Seleccione</option>
+                                <option value="0" selected> Seleccione</option>
                                 @foreach($fases as $fase)
-                                    <option value="{{$fase->id}}">{{$fase->nombre}}</option>
+                                    <option value="{{$fase->id}}" onclick="">{{$fase->nombre}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="">Modelo</label>
+                            <label for="">Modulo</label>
                             <select class="form-control" id="id_modulo">
 
                             </select>

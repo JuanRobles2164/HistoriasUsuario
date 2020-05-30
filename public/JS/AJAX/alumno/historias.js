@@ -12,13 +12,11 @@ $('#btnAgregarCompromiso').on('click', function(e){
     event.preventDefault();
   });
 
-  $('document').ready(function(){
-    $('#id_fase').change(function(){
-      alert('xd');
-      const ruta = $('#api_route_get_modulos').val();
+
+  traerFases = () => {
+    const ruta = $('#api_route_get_modulos').val();
       var fase = $('#id_fase').val();
-      console.log(ruta);
-      if($('#id_fase').val()!=0){
+      if($('#id_fase').val() != 0){
         $.ajax({
           url: ruta,
           type: 'GET',
@@ -27,8 +25,7 @@ $('#btnAgregarCompromiso').on('click', function(e){
           success: function(response){
             console.log(response);
             response.forEach(element => {
-              $('#id_modulo').empty();
-              $('#id_modulo').append("<option value'"+element.id+"'> "+element.nombre+"</option>");
+              $('#id_modulo').append("<option value='"+element.id+"' onclick='traerActividades("+element.id+")'> "+element.nombre+"</option>");
             });
           },
           error: function(response){
@@ -38,20 +35,21 @@ $('#btnAgregarCompromiso').on('click', function(e){
           }
         });
       }
-    });
-  });
+  }
+
       
   traerActividades = (Identificador) =>{
     const ruta = $('#api_route_get_actividades').val();
-    console.log(ruta);
+    console.log("funciona!");
     $.ajax({
       url: ruta,
       type: 'GET',
       async: true,
       data: {'id_modulo':Identificador, 'legal':true},
       success: function(response){
+        console.log(response);
+        $('#id_actividad').empty();
         response.forEach(element => {
-          $('#id_actividad').empty();
           $('#id_actividad').append("<option value'"+element.id+"'> "+element.nombre+"</option>");
         });
       },

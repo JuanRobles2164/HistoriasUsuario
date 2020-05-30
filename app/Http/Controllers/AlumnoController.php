@@ -239,11 +239,11 @@ class AlumnoController extends Controller
         AlumnoDao::MarcarComoLeido($visto);
         return response()->json(self::$json_result);
     }
-    public function getSelectModulos($request){
+    public function getSelectModulos(Request $request){
         $Modulos = AlumnoDao::getModulosByFaseId($request->id_fase);
         return response()->json($Modulos);
     }
-    public function getSelectActividades($request){
+    public function getSelectActividades(Request $request){
         $Actividades = AlumnoDao::getActividadesByModuloId($request->id_modulo);
         return response()->json($Actividades);
     }

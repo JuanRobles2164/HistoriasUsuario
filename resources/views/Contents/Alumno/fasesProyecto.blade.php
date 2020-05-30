@@ -178,3 +178,9 @@
 </div>
 @endsection
 
+
+@section('custom_scripts')
+    <script src="{{URL::asset('JS/AJAX/alumno/fasesAJAX.js')}}"></script>    
+@endsection
+
+

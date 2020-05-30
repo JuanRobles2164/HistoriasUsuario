@@ -1,25 +1,25 @@
 consultarFase = (Identificador) => {
-    const ruta = $('#api_route_get_fase').val();
-    console.log(ruta);
-    $.ajax({
-      url : ruta,
-      type: 'GET',
-      async: true,
-      data: {id_fase:Identificador, legal:true},
-      success: function(response){
-        console.log(response);
-        response = $.parseJSON(response);
-        $('#id_fase_modal').val(response.id);
-        $('#nombre_fase_modal').val(response.nombre);
-        $('#descripcion_fase_modal').val(response.descripcion);
-        $('#fecha_limite_fase_modal').val(response.fecha_limite);
-      },
-      error: function(response){
-        alert("Algo salió mal... vuelve a intentarlo");
-        response = null;
-      }
-    });
-  }
+  const ruta = $('#api_route_get_fase').val();
+  console.log(ruta);
+  $.ajax({
+    url : ruta,
+    type: 'GET',
+    async: true,
+    data: {id_fase:Identificador, legal:true},
+    success: function(response){
+      console.log(response);
+      response = $.parseJSON(response);
+      $('#id_fase_modal').val(response.id);
+      $('#nombre_fase_modal').val(response.nombre);
+      $('#descripcion_fase_modal').val(response.descripcion);
+      $('#fecha_limite_fase_modal').val(response.fecha_limite);
+    },
+    error: function(response){
+      alert("Algo salió mal... vuelve a intentarlo");
+      response = null;
+    }
+  });
+}
 
 editarFase = () => {
     //Prepare data
