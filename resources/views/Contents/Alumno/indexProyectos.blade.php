@@ -40,12 +40,17 @@
                             <a href="{{route('alumno.getFasesProyecto', $proyecto->id)}}" class="btn btn-info">
                                 <i class="fas fa-file-signature"></i>
                             </a>
-                            <a href="#" class="btn btn-outline-dark"  data-toggle="modal" data-target="#modalObservacionDocente"  onclick="consultarObservaciones({{$proyecto->id}})">
-                                <i class="fas fa-box-open"></i>
-                            </a>
-                            <a href="#" class="btn btn-outline-danger"  data-toggle="modal" data-target="#modalObservacionDocente" onclick="consultarObservaciones({{$proyecto->id}})">
-                                <i class="fas fa-parachute-box"></i>
-                            </a>
+                            @foreach ($notificaciones->{$proyecto->id} as $notificacion)
+                                @if ( $notificacion->estado  == 0)
+                                    <a href="#" class="btn btn-outline-dark" data-toggle="modal" data-target="#modalObservacionDocente"  onclick="consultarObservaciones({{$proyecto->id}}),limpiarModal()">
+                                        <i class="fas fa-box-open"></i>
+                                    </a>
+                                @else
+                                    <a href="#" class="btn btn-outline-danger" data-toggle="modal" data-target="#modalObservacionDocente" onclick="consultarObservaciones({{$proyecto->id}}),limpiarModal()">
+                                        <i class="fas fa-parachute-box"></i>
+                                    </a>
+                                @endif
+                            @endforeach
                         </td>
                     </tr>
                 @endforeach
@@ -61,7 +66,7 @@
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalCenterTitle">Observaciones del docente</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true" onclick="limpiarModal()">&times;</span>
+            <span aria-hidden="true" onclick="limpiarModal(), window.location.reload()">&times;</span>
           </button>
         </div>
         <div class="modal-body">

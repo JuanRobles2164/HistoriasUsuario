@@ -2,10 +2,6 @@ function limpiarModal(){
   $('#leidas tbody').empty();
   $('#sinleer tbody').empty();
 }
-  
-  $('#btnCierraModal').click(function(){
-    limpiarModal();
-  });
 
 consultarObservaciones = (Identificador) =>{
     const ruta = $('#api_route_get_notificacion').val();
@@ -27,7 +23,7 @@ consultarObservaciones = (Identificador) =>{
             island_serverinfo += '<tr>';
             //island_serverinfo += '<input type="hidden" name="id_observacion" id="id_observacion" value="'+element.id_observacion+'">';
             island_serverinfo += '<td scope="row">'+element.observacion+'</td>';
-            island_serverinfo += '<td scope="row"><a type="submit" class="btn btn-primary" onclick="MarcarLeida('+element.id_observacion+')">Editar</a><i class="fas fa-box-open"></i></a></td>';
+            island_serverinfo += '<td scope="row"><a type="submit" class="btn btn-primary" onclick="MarcarLeida('+element.id_observacion+')"><i class="fas fa-box-open"></i></a></td>';
             island_serverinfo += '</tr>';
         });
         $('#sinleer tbody').append(island_serverinfo);
@@ -47,7 +43,6 @@ consultarObservaciones = (Identificador) =>{
       }
     });
   }
-
 
   MarcarLeida = (Identificador) => {
     const ruta = $('#web_observaciones').val();

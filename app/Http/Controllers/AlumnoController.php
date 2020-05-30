@@ -57,12 +57,12 @@ class AlumnoController extends Controller
     }
     public function getListaProyectos(Request $request){
         $proyectos = AlumnoDao::getAllRegisteredProjects(json_decode(Crypt::decrypt(Cookie::get('usuario')))->id);
-        return View($this->ruta.'indexProyectos')->with(compact('proyectos'));
+        $notificaciones = AlumnoDao::getNotificacionesByProyecto($proyectos);
+        return View($this->ruta.'indexProyectos')->with(compact(array('proyectos','notificaciones')));
     }
     public function getFasesProyecto(Request $request){
         $proyecto = AlumnoDao::getProyectoById($request->id_proyecto);
-        $fases = AlumnoDao::getFasesFromProyecto($proyecto->id);
-        
+        $fases = AlumnoDao::getFasesFromProyecto($proyecto->id);  
         //return json_encode($fases);
         return view($this->ruta.'fasesProyecto')->with(compact(array('proyecto', 'fases')));
     }

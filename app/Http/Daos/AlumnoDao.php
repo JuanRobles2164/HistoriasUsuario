@@ -8,6 +8,7 @@ use App\grupoTrabajo;
 use App\usuario;
 use App\fase;
 use App\Http\Util\Utilities;
+use stdClass;
 
 class AlumnoDao extends Controller
 {
@@ -25,7 +26,7 @@ class AlumnoDao extends Controller
 
     }
     public static function getAllRegisteredProjects($idUsuario){
-        $proyectos = DB::select("SELECT p.*, m.nombre AS metodologia, u.nombres AS docente FROM proyecto p JOIN grupo_trabajo gt ON gt.id_proyecto = p.id JOIN grupo_usuario gu ON gt.id = gu.id_grupo JOIN metodologia m ON p.id_metodologia = m.id JOIN usuarios u ON u.id = p.id_usuario WHERE gu.id_usuario = $idUsuario");
+        $proyectos = DB::select("SELECT p.*, m.nombre AS metodologia, u.nombres AS docente, gt.id AS id_grupo FROM proyecto p JOIN grupo_trabajo gt ON gt.id_proyecto = p.id JOIN grupo_usuario gu ON gt.id = gu.id_grupo JOIN metodologia m ON p.id_metodologia = m.id JOIN usuarios u ON u.id = p.id_usuario WHERE gu.id_usuario = $idUsuario");
         return $proyectos;
     }
     public static function getProyectoById($id){
@@ -303,5 +304,17 @@ class AlumnoDao extends Controller
         ->where('id_grupo',$grupo)
         ->get();
         return $observaciones;
+    }
+    public static function getNotificacionesByProyecto($id_grupos){
+        $notificaciones = new stdClass();
+        foreach($id_grupos as $grupo){
+            $notificacion = DB::table('comentario')
+            ->select(DB::raw("COUNT(estado) AS estado"))
+            ->where('id_grupo' ,'=',$grupo->id_grupo)
+            ->where('estado', 0)
+            ->get();
+            $notificaciones->{$grupo->id} = $notificacion;
+        }
+        return $notificaciones;
     }
 }
