@@ -228,13 +228,6 @@ class DocenteController extends Controller
         DocenteDao::asignarObservacionAAlumnos($request);
         return redirect()->route('docente.getListaGrupos', $request->id_proyecto);
     }
-    public function getSupervisarGrupo(Request $request){
-        $historias = DocenteDao::getAllHistoriasFromGrupoById($request->id_grupo);
-        return view($this->ruta.'supervisarHistoriasGrupo', 
-        array('id_proyecto' => $request->id_proyecto, 
-        'id_grupo' => $request->id_grupo))
-        ->with(compact('historias'));
-    }
     public function getDetallesHistoria(Request $request){
         $historia = DocenteDao::getHistoriaById($request->id_historia);
         $evidencias = DocenteDao::getEvidenciasByHistoriaId($historia->id);
@@ -250,6 +243,36 @@ class DocenteController extends Controller
         $recurso = $request->all();
         DocenteDao::CrearObservacionGrupo($recurso);
         return json_encode(true);
+    }
+    public function getSupervisarGrupo(Request $request){
+        $fases = AlumnoDao::getFasesFromProyecto($request->id_proyecto);
+        $modulos = [];
+        foreach($fases as $fase){
+            array_push($modulos, AlumnoDao::getModulosByFaseId($fase->id));
+        }
+        $actividades = [];
+        foreach($modulos as $moduloSingleArray){
+            foreach($moduloSingleArray as $modulo){
+                array_push($actividades, AlumnoDao::getActividadesByModuloId($modulo->id));
+            }
+        }
+        $historias = DocenteDao::getAllHistoriasFromGrupoById($request->id_grupo);
+        return view($this->ruta.'supervisarHistoriasGrupo', 
+        array('id_proyecto' => $request->id_proyecto, 
+        'id_grupo' => $request->id_grupo))
+        ->with(compact('historias', 'fases', 'modulos', 'actividades'));
+    }
+    public function getHistoriaUsuario(Request $request){
+        $historia = AlumnoDao::getHistoriaById($request->id_historia);
+        $usuario = AlumnoDao::getUsuariosFromHistoriaId($historia->id_usuario_entrevistado);
+        $compromisos = AlumnoDao::getCompromisosByHistoriaId($historia->id);
+        $evidencias = AlumnoDao::getEvidenciasByHistoriaId($historia->id);
+        return response()->json(array(
+            $historia,
+            $usuario,
+            $compromisos,
+            $evidencias
+        ));
     }
 }
 

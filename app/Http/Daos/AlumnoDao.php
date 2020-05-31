@@ -14,17 +14,6 @@ class AlumnoDao extends Controller
 {
     private static $LEIDO = true;
     private static $SIN_LEER = false;
-    public static function crearEquipo(grupoTrabajo $grupo, usuario $usuario){
-        //Obtiene el máx id mas 1 para poder asignarlo tanto al grupo, como a la relacion n -> n
-        $max_id_grupo = (int) DB::select("SELECT MAX(id)+1 as max_id from grupo_trabajo")[0]->max_id;
-        $grupo->id = $max_id_grupo; 
-        $SQL = "INSERT INTO grupo_trabajo(id, nombre, descripcion, estado, id_proyecto) VALUES ($max_id_grupo, '$grupo->nombre', '$grupo->descripcion', 1, $grupo->id_proyecto)";
-        DB::insert($SQL);
-        //Asigna un alumno 
-        $SQL ="INSERT INTO grupo_usuario(id_usuario, id_grupo) VALUES($usuario->id, $max_id_grupo)";
-        DB::insert($SQL);
-
-    }
     public static function getAllRegisteredProjects($idUsuario){
         $proyectos = DB::select("SELECT p.*, m.nombre AS metodologia, u.nombres AS docente, gt.id AS id_grupo FROM proyecto p JOIN grupo_trabajo gt ON gt.id_proyecto = p.id JOIN grupo_usuario gu ON gt.id = gu.id_grupo JOIN metodologia m ON p.id_metodologia = m.id JOIN usuarios u ON u.id = p.id_usuario WHERE gu.id_usuario = $idUsuario");
         return $proyectos;
@@ -113,7 +102,8 @@ class AlumnoDao extends Controller
             'id_fase' => $modulo['id_fase'],
             'estado' => 'En desarrollo',
             'observacion' => 'Ninguna...',
-            'fecha_limite' => $modulo['fecha_limite']
+            'fecha_limite' => $modulo['fecha_limite'],
+            'created_at' => Utilities::getCurrentDate()
         ]);
     }
     public static function editarModulo(array $modulo){
@@ -219,9 +209,6 @@ class AlumnoDao extends Controller
         ->get();
         return $historias;
     }
-    public static function getUsuariosFromHistorias($historias){
-        
-    }
     public static function agregarUsuarioEntrevistado($usuario_entrevistado){
         DB::table('usuario_entrevistado')
         ->insert([
@@ -257,7 +244,6 @@ class AlumnoDao extends Controller
         DB::table('compromiso')
         ->insert([
             'descripcion' => $compromiso,
-            'created_at' => Utilities::getCurrentDate(),
             'id_historia_usuario' => $id_historia_usuario
         ]);
     }
@@ -317,4 +303,29 @@ class AlumnoDao extends Controller
         }
         return $notificaciones;
     }
+    public static function getHistoriaById($id){
+        $historia = DB::table('historia_usuario')
+        ->where('id', $id)
+        ->first();
+        return $historia;
+    }
+    public static function getCompromisosByHistoriaId($id_historia){
+        $evidencias = DB::table('compromiso')
+        ->where('id_historia_usuario', $id_historia)
+        ->get();
+        return $evidencias;
+    }
+    public static function getUsuariosFromHistoriaId($id_usuario){
+        $usuario_entrevistado = DB::table('usuario_entrevistado')
+        ->where('id', $id_usuario)
+        ->first();
+        return $usuario_entrevistado;
+    }
+    public static function getEvidenciasByHistoriaId($id_historia){
+        $evidencias = DB::table('evidencia')
+        ->where('id_historia_usuario', $id_historia)
+        ->get();
+        return $evidencias;
+    }
+    
 }

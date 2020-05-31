@@ -212,6 +212,7 @@ class DocenteDao extends Controller
         ->join('modulo', 'fase.id', '=', 'modulo.id_fase')
         ->join('historia_usuario', 'modulo.id', '=', 'historia_usuario.id_modulo')
         ->select('historia_usuario.*')
+        ->where('grupo_trabajo.id', $id_grupo)
         ->get();
         return $historias;
         /*$historias = new stdClass;
@@ -248,5 +249,11 @@ class DocenteDao extends Controller
             'id_grupo' => $recurso['id_grupo'],
             'created_at' => Utilities::getCurrentDate()
         ]);
+    }
+    public static function getAllHistoriasByActividadId($id_actividad){
+        $historias = DB::table('historia_usuario')
+        ->where('id_actividad', $id_actividad)
+        ->get();
+        return $historias;
     }
 }

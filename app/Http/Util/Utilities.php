@@ -57,4 +57,7 @@ class Utilities{
     public static function getCurrentDate($params = 'now'){
         return date('Y-m-d H:i:s', strtotime($params));
     }
+    public static function getDaysDiff($low = 'now', $max){
+        return gmdate('d',(strtotime($low) - strtotime($max)));
+    }
 }

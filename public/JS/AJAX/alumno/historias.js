@@ -13,9 +13,8 @@ $('#btnAgregarCompromiso').on('click', function(e){
   });
 
 
-  traerFases = () => {
+  traerFases = (fase) => {
     const ruta = $('#api_route_get_modulos').val();
-      var fase = $('#id_fase').val();
       if($('#id_fase').val() != 0){
         $.ajax({
           url: ruta,

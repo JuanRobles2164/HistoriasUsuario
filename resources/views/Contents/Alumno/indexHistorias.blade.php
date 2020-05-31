@@ -35,7 +35,7 @@
                             <select class="form-control" id="id_fase">
                                 <option value="0" selected> Seleccione</option>
                                 @foreach($fases as $fase)
-                                    <option value="{{$fase->id}}" onclick="">{{$fase->nombre}}</option>
+                                    <option value="{{$fase->id}}" onclick="traerFases({{$fase->id}})">{{$fase->nombre}}</option>
                                 @endforeach
                             </select>
                         </div>
