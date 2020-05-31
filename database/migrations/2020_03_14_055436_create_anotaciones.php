@@ -15,7 +15,7 @@ class CreateAnotaciones extends Migration
     {
         Schema::create('anotaciones', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('descripcion');
+            $table->string('descripcion')->nullable();
             $table->unsignedBigInteger('id_fase');
             $table->timestamps();
             //FKs

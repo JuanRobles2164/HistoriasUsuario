@@ -17,7 +17,7 @@ class CreateEstado extends Migration
         Schema::create('estado', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
-            $table->string('descripcion');
+            $table->string('descripcion')->nullable();
         });
         DB::insert("INSERT INTO estado(id,nombre, descripcion) VALUES(1, 'activo', 'Un proyecto/Fase/Objeto está en proceso de realización'), (2, 'inactivo', 'Un proyecto/Fase/Objeto no está en proceso de realización')");
     }

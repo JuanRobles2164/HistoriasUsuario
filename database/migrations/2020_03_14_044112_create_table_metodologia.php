@@ -16,7 +16,7 @@ class CreateTableMetodologia extends Migration
         Schema::create('metodologia', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
-            $table->string('descripcion');
+            $table->string('descripcion')->nullable();
             $table->tinyInteger('estado_eliminado');
             $table->timestamps();
         });

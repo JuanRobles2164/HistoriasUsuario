@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('abreviatura', 15)->unique();
             $table->string('nombre');
-            $table->string('descripcion',1024);
+            $table->string('descripcion', 1024)->nullable();
             $table->unsignedBigInteger('usuario_crea');
             $table->dateTime('creado_en')->default(new Expression('CURRENT_TIMESTAMP'));
             $table->unsignedBigInteger('usuario_modifica');

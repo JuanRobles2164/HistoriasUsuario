@@ -16,7 +16,7 @@ class CreateGrupoTrabajo extends Migration
         Schema::create('grupo_trabajo', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
-            $table->string('descripcion');
+            $table->string('descripcion')->nullable();
             $table->tinyInteger('estado_activo');
             $table->unsignedBigInteger('id_proyecto');
             $table->timestamps();

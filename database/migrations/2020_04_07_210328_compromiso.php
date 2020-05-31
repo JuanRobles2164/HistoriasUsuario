@@ -15,7 +15,7 @@ class Compromiso extends Migration
     {
         Schema::create('compromiso', function(Blueprint $table){
         $table->bigIncrements('id');
-        $table->string('descripcion');
+        $table->string('descripcion')->nullable();
         $table->unsignedBigInteger('id_historia_usuario');
 
 		$table->foreign('id_historia_usuario')->references('id')->on('historia_usuario');

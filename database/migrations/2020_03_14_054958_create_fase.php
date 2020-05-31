@@ -16,7 +16,7 @@ class CreateFase extends Migration
         Schema::create('fase', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
-            $table->string('descripcion');
+            $table->string('descripcion')->nullable();
             $table->date('fecha_limite');
             $table->string('miniatura_fase')->nullable();
             $table->unsignedBigInteger('id_metodologia');

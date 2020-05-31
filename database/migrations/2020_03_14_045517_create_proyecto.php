@@ -17,7 +17,7 @@ class CreateProyecto extends Migration
         Schema::create('proyecto', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
-            $table->string('descripcion');
+            $table->string('descripcion')->nullable();
             $table->dateTime('fecha_inicial');
             $table->date('fecha_limite');
 

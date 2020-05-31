@@ -16,7 +16,7 @@ class CreateModulo extends Migration
         Schema::create('modulo', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
-            $table->string('descripcion');
+            $table->string('descripcion')->nullable();
             $table->string('observacion');
             $table->string('estado');
             $table->date('fecha_limite');

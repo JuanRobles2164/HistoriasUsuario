@@ -19,7 +19,7 @@ class CreateHistoriaUsuario extends Migration
             $table->string('prioridad');
             $table->string('secuencia');
             $table->string('estado');
-            $table->string('descripcion');
+            $table->string('descripcion')->nullable();
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
             //lo comento pues creo que se puede calcular en base a las actividades

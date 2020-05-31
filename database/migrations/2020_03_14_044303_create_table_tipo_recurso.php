@@ -16,7 +16,7 @@ class CreateTableTipoRecurso extends Migration
         Schema::create('tipo_recurso', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
-            $table->string('descripcion');
+            $table->string('descripcion')->nullable();
             $table->timestamps();
         });
     }
