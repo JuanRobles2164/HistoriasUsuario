@@ -13,6 +13,7 @@ consultarFase = (Identificador) => {
       $('#nombre_fase_modal').val(response.nombre);
       $('#descripcion_fase_modal').val(response.descripcion);
       $('#fecha_limite_fase_modal').val(response.fecha_limite);
+      $('#fecha_inicio_fase_modal').val(response.fecha_inicio);
     },
     error: function(response){
       alert("Algo salió mal... vuelve a intentarlo");
@@ -27,6 +28,7 @@ editarFase = () => {
     let nombre_fase = $('#nombre_fase_modal').val();
     let descripcion_fase = $('#descripcion_fase_modal').val();
     let fecha_limite = $('#fecha_limite_fase_modal').val();
+    let fecha_inicio = $('#fecha_inicio_fase_modal').val();
     $.ajax({
       //A toda petición de POST hay que generarle un _token
       //Nunca lo olviden!
@@ -40,6 +42,7 @@ editarFase = () => {
       'nombre':nombre_fase, 
       'descripcion':descripcion_fase, 
       'fecha_limite':fecha_limite,
+      'fecha_inicio':fecha_inicio,
       'eliminar_imagen': true
       },
       success: function(response){

@@ -49,7 +49,11 @@ consultandoRecurso = (Indetificador) =>{
         $('#valor_unitario_recurso_modal').val(response.recurso.valor_unitario);
         lista_tipos_recurso = response.tipos_recursos;
         lista_tipos_recurso.forEach(element => {
-          $('#tipo_recurso_modal').append('<option value="'+element.id + '">'+element.nombre +'</option>');
+          if(response.recurso.id_tipo_recurso == element.id){
+            $('#tipo_recurso_modal').append('<option selected="selected" value="'+element.id + '">'+element.nombre +'</option>');
+          }else{
+            $('#tipo_recurso_modal').append('<option value="'+element.id + '">'+element.nombre +'</option>');
+          }
         });
       },
       error: function(response){

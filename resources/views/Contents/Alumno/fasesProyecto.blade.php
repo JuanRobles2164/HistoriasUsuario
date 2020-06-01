@@ -15,17 +15,20 @@
                 <div class="row justify-content-center">
                     <div class="form-row">
                         <div class="col">
-                            <label for="nombre"></label>
+                            <label for="nombre">Nombre</label>
                             <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" required>
                         </div>
     
                         <div class="col">
-                            <label for="descripcion_fase"></label>
+                            <label for="descripcion_fase">Descripcion</label>
                             <input type="text" class="form-control" name="descripcion" id="descripcion_fase" placeholder="Descripcion" required>
                         </div>
-    
                         <div class="col">
-                            <label for="fecha_limite"></label>
+                            <label for="fecha_inicio">Fecha inicio</label>
+                            <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" placeholder="Fecha inicio" required>
+                        </div>
+                        <div class="col">
+                            <label for="fecha_limite">Fecha limite</label>
                             <input type="date" class="form-control" name="fecha_limite" id="fecha_limite" placeholder="Fecha límite" required>
                         </div>
                     </div>
@@ -100,6 +103,10 @@
                                 <textarea class="form-control" name="descripcion" id="descripcion_fase_modal"></textarea>
                             </div>
                             <div class="d-flex justify-content-center">
+                                <div class="form-group">
+                                    <label for="ffechainicio" >Fecha inicio</label>
+                                    <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio_fase_modal">
+                                </div>
                                 <div class="form-group">
                                     <label for="fechalimite" >Fecha límite</label>
                                     <input type="date" class="form-control" name="fecha_limite" id="fecha_limite_fase_modal">

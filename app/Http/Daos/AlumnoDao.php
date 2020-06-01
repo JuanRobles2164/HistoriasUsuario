@@ -42,6 +42,7 @@ class AlumnoDao extends Controller
             'nombre' => $fase['nombre'],
             'descripcion' => $fase['descripcion'],
             'fecha_limite' => $fase['fecha_limite'],
+            'fecha_inicio' => $fase['fecha_inicio'],
             'miniatura_fase' => $fase['miniatura_fase'],
             'id_proyecto' => $fase['id_proyecto'],
             'id_estado' => 1,
@@ -62,6 +63,7 @@ class AlumnoDao extends Controller
             'nombre' => $fase['nombre'],
             'descripcion' => $fase['descripcion'],
             'fecha_limite' => $fase['fecha_limite'],
+            'fecha_inicio' => $fase['fecha_inicio'],
             'miniatura_fase' => $fase['miniatura_fase'],
             'updated_at' => Utilities::getCurrentDate()
         ]);
@@ -102,6 +104,7 @@ class AlumnoDao extends Controller
             'id_fase' => $modulo['id_fase'],
             'estado' => 'En desarrollo',
             'observacion' => 'Ninguna...',
+            'fecha_inicio' => $modulo['fecha_inicio'],
             'fecha_limite' => $modulo['fecha_limite'],
             'created_at' => Utilities::getCurrentDate()
         ]);
@@ -112,6 +115,7 @@ class AlumnoDao extends Controller
         ->update([
             'nombre' => $modulo['nombre'],
             'descripcion' => $modulo['descripcion'],
+            'fecha_inicio' => $modulo['fecha_inicio'],
             'fecha_limite' => $modulo['fecha_limite'],
         ]);
     }
@@ -138,6 +142,7 @@ class AlumnoDao extends Controller
             'prioridad' => $actividad['prioridad'],
             'id_modulo' => $actividad['id_modulo'],
             'estado_finalizado' => 0,
+            'fecha_inicio' => $actividad['fecha_inicio'],
             'fecha_limite' => $actividad['fecha_limite'],
             'created_at' => Utilities::getCurrentDate()
         ]);

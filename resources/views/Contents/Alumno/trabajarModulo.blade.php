@@ -22,6 +22,12 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="fecha_inicio">Fecha inicio</label>
+                    <div class="col-auto">
+                        <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio">
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="fecha_limite">Fecha límite</label>
                     <div class="col-auto">
                         <input type="date" class="form-control" name="fecha_limite" id="fecha_limite">

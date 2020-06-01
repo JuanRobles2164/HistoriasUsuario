@@ -18,7 +18,6 @@ limpiarModal = () => {
     $('#descripcion_recurso_modal').val('');
     $('#cantidad_recurso_modal').val('');
     $('#valor_unitario_recurso_modal').val('');
-  
   }
 
 
@@ -38,6 +37,7 @@ limpiarModal = () => {
         $('#nombre_modulo_modal').val(response.nombre);
         $('#descripcion_modulo_modal').val(response.descripcion);
         $('#fecha_limite_modulo_modal').val(response.fecha_limite);
+        $('#fecha_inicio_modulo_modal').val(response.fecha_inicio);
       },
       error: function(response){
         alert("Algo salió mal... vuelve a intentarlo");
@@ -54,6 +54,7 @@ limpiarModal = () => {
     let nombre_modulo = $('#nombre_modulo_modal').val();
     let descripcion_modulo = $('#descripcion_modulo_modal').val();
     let fecha_limite = $('#fecha_limite_modulo_modal').val();
+    let fecha_inicio = $('#fecha_inicio_modulo_modal').val();
     $.ajax({
       headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
       type: 'POST',
@@ -63,12 +64,15 @@ limpiarModal = () => {
         'id':id_modulo,
         'nombre':nombre_modulo,
         'descripcion':descripcion_modulo,
+        'fecha_inicio': fecha_inicio,
         'fecha_limite':fecha_limite
       },
       success: function(response){
         console.log(response);
         alert('Actualización Existosa');
         limpiarModal();
+        $('#modalmodulo').hide();
+        window.location.reload()
         response = null;
       },
       error: function(response){
