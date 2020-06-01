@@ -19,6 +19,7 @@ class CreateModulo extends Migration
             $table->string('descripcion')->nullable();
             $table->string('observacion');
             $table->string('estado');
+            $table->date('fecha_inicio');
             $table->date('fecha_limite');
             $table->unsignedBigInteger('id_fase');
             $table->timestamps();

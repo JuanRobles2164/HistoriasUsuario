@@ -17,6 +17,7 @@ class CreateFase extends Migration
             $table->bigIncrements('id');
             $table->string('nombre');
             $table->string('descripcion')->nullable();
+            $table->date('fecha_inicio');
             $table->date('fecha_limite');
             $table->string('miniatura_fase')->nullable();
             $table->unsignedBigInteger('id_metodologia');
