@@ -110,6 +110,10 @@ Route::post('/alumno/notificacion','AlumnoController@postListarObservacionesLyS'
 Route::get('/alumno/select/modulos', 'AlumnoController@getSelectModulos')->name('alumno.select.getListaModulos');
 Route::get('/alumno/select/actividades', 'AlumnoController@getSelectActividades')->name('alumno.select.getListaActividades');
 
+//enrutado para form agil
+Route::get('/alumno/proyectos/{id_proyecto}/forms_agiles/historia_usuario', 'AlumnoController@getCrearHistoriaUsuario')->name('alumno.formsAgiles.getCrearHistoriaUsuario');
+Route::post('/alumno/proyectos/{id_proyecto}/forms_agiles/historia_usuario', 'AlumnoController@postCrearHistoriaUsuario')->name('alumno.formsAgiles.postCrearHistoriaUsuario');
+
 Route::get('/test', function(){
     
     $fase = date('Y-m-d H:i:s', strtotime('now - 4 hours'));

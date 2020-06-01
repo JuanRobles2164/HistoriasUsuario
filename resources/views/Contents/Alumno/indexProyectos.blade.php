@@ -40,6 +40,9 @@
                             <a href="{{route('alumno.getFasesProyecto', $proyecto->id)}}" class="btn btn-info">
                                 <i class="fas fa-file-signature"></i>
                             </a>
+                            <a href="{{route('alumno.formsAgiles.getCrearHistoriaUsuario', $proyecto->id)}}" class="btn btn-primary">
+                                <i class="fas fa-file-signature"></i>
+                            </a>
                             @foreach ($notificaciones->{$proyecto->id} as $notificacion)
                                 @if ( $notificacion->estado  == 0)
                                     <a href="#" class="btn btn-outline-dark" data-toggle="modal" data-target="#modalObservacionDocente"  onclick="consultarObservaciones({{$proyecto->id}}),limpiarModal()">
