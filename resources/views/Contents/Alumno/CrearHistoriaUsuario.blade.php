@@ -27,49 +27,59 @@
             <div class="tab-pane fade" id="pills-select" role="tabpanel" aria-labelledby="pills-select-tab">
                 <!-- Formulacio para crear historias de usuario-->
                 <h5>Gestionar Historia de Usuario</h5>
+                <br>
                 <!--Este es el form para agregar a un usuario entrevistado-->
-                    @csrf
+                @csrf
+                <form>
                     <div class="d-flex justify-content-center">
-                        <div class="form-group col-md-4">
-                            <label for="">Fase</label>
-                            <a href="" class="btn btn-info" onclick="">
-                                <i class="fas fa-file-signature"></i>
-                            </a>
-                            <select class="form-control" id="id_fase">
-                                <option value="0" selected> Seleccione</option>
-                                @foreach($fases as $fase)
-                                    <option value="{{$fase->id}}" onclick="traerFases({{$fase->id}})">{{$fase->nombre}}</option>
-                                @endforeach
-                            </select>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label class="my-1 mr-3" for="fase">Fase</label>
+                                <select class="form-control" id="id_fase">
+                                    <option value="0" selected> Seleccione</option>
+                                    @foreach($fases as $fase)
+                                        <option value="{{$fase->id}}" onclick="traerFases({{$fase->id}})">{{$fase->nombre}}</option>
+                                    @endforeach
+                                </select>
+                                <div class="col-auto">
+                                    <a href="" class="btn btn-info" onclick="">
+                                        <i class="fas fa-file-signature"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        
-                        <div class="form-group col-md-4">
-                            <label for="">Modulo</label>
-                            <select class="form-control" id="id_modulo">
-
-                            </select>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label class="my-1 mr-3" for="">Modulo</label>
+                                <select class="form-control" id="id_modulo">
+                                    <option value="0" selected> Seleccione</option>
+                                </select>
+                                <div class="col-auto">
+                                     <a href="" class="btn btn-info" onclick="">
+                                         <i class="fas fa-file-signature"></i>
+                                     </a>
+                                </div>
+                            </div>
                         </div>
-                        <a href="" class="btn btn-info" onclick="">
-                            <i class="fas fa-file-signature"></i>
-                        </a>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label class="my-1 mr-3" for="">Actividad</label>
+                                <select class="form-control" id="id_actividad">
+                                    <option value="0" selected> Seleccione</option>
+                                </select>
+                                <div class="col-auto">
+                                     <a href="" class="btn btn-info" onclick="">
+                                         <i class="fas fa-file-signature"></i>
+                                     </a>
+                                </div>
+                            </div>
+                       </div>
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <div class="form-group col-md-4">
-                            <label for="">Actividad</label>
-                            <select class="form-control" id="id_actividad">
-
-                            </select>
-                        </div>
-                    </div>
-                    <a href="" class="btn btn-info" onclick="">
-                        <i class="fas fa-file-signature"></i>
-                    </a>
-                    <br>
+                </form>
             </div>
-
         </div>
     </div>
-  </div>
+</div>
 @endsection
 
 @section('modals')
