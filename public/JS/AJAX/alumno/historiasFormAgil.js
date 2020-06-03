@@ -127,13 +127,14 @@ agregarModuloRapido = () => {
     alert('Debe seleccionar una fase primero!')
   }
 }
-agregarModuloRapido = () => {
+agregarActividadRapido = () => {
 
   let nombre_actividad = $('#nombre_actividad_modal').val();
   let descripcion_actividad = $('#descripcion_actividad_modal').val();
   let fecha_limite = $('#fecha_limite_actividad_modal').val();
   let fecha_inicio = $('#fecha_inicio_actividad_modal').val();
-  console.log(nombre_actividad,descripcion_actividad,fecha_limite,fecha_inicio,$('#id_fase').val());
+   let valor = $('#desplazamiento_bar').val();
+  console.log(nombre_actividad,descripcion_actividad,fecha_limite,fecha_inicio,$('#id_modulo').val());
   const uri = $('#api_route_crear_actividad').val();
   if($('#id_modulo').val()!=0){
     $.ajax({
@@ -141,11 +142,12 @@ agregarModuloRapido = () => {
       type: 'POST',
       headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
       data: {
-          'id_fase': $('#id_modulo').val(), 
+          'id_modulo': $('#id_modulo').val(), 
           'nombre':nombre_actividad, 
           'descripcion':descripcion_actividad,
           'fecha_limite':fecha_limite,
-          'fecha_inicio':fecha_inicio
+          'fecha_inicio':fecha_inicio,
+          'prioridad': valor
       },
       success: function(response){
           //response = $.parseJSON(response);
@@ -167,6 +169,19 @@ agregarModuloRapido = () => {
     alert('Debe seleccionar un modulo primero!')
   }
 }
+$('#btnAgregarCompromiso').on('click', function(e){
+  e.preventDefault();
+  $('#contenedor').append( "<tr><td><textarea type='text' class='form-control' name='compromisos[]'></textarea></td></tr>" );
+})
+
+$('#btn_agregar_evidencia').on('click', function(e){
+  e.preventDefault();
+  $('#contenedor_evidencia').append( "<tr><td><input type='text' class='form-control' name='nombre_evidencia[]'></td><td><input type='file' class='form-control-file' name='foto_evidencia[]'></td></tr>" );
+});
+$('#btnAgregarCriterio').on('click', function(e){
+  e.preventDefault();
+  $('#contenedor_criterio').append( "<tr><td> <input type='text' class='form-control' name='nombre_criterio[]'></td><td><textarea class='form-control' name='contexto_criterio[]'></textarea></td><td><input type='text' class='form-control' name='evento_criterio[]'></td> <td><input type='text' class='form-control' name='resultado_criterio[]'></td> <td> <input type='checkbox' class='form-control' name='cumple_criterio[]'> </td></tr>");
+});
 
 $('#desplazamiento_bar').on('mousemove',function(){
   let valor = $('#desplazamiento_bar').val();
@@ -190,6 +205,31 @@ $('#desplazamiento_bar').on('mousemove',function(){
     default:
       $("#indicador_prioridad").attr('class', 'alert alert-danger');
       $("#indicador_prioridad").text("Muy alta");
+      break;
+  }
+});
+$('#desplazamiento_bar_modal').on('mousemove',function(){
+  let valor = $('#desplazamiento_bar_modal').val();
+  switch(valor){
+    case "1":
+      $("#indicador_prioridad_modal").attr('class', 'alert alert-light');
+      $("#indicador_prioridad_modal").text("Muy baja");
+      break;
+    case "2":
+      $("#indicador_prioridad_modal").attr('class', 'alert alert-dark');
+      $("#indicador_prioridad_modal").text("Baja");
+      break;
+    case "3":
+      $("#indicador_prioridad_modal").attr('class', 'alert alert-info');
+      $("#indicador_prioridad_modal").text("Media");
+      break;
+    case "4":
+      $("#indicador_prioridad_modal").attr('class', 'alert alert-warning');
+      $("#indicador_prioridad_modal").text("Alta");
+      break;
+    default:
+      $("#indicador_prioridad_modal").attr('class', 'alert alert-danger');
+      $("#indicador_prioridad_modal").text("Muy alta");
       break;
   }
 });

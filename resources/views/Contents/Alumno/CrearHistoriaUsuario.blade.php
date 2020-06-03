@@ -200,7 +200,7 @@
                                     <th>¿Cumple?</th>
                                 </tr>
                             </thead>
-                            <tbody id="contenedor">
+                            <tbody id="contenedor_criterio">
                                 <tr>
                                     <td>
                                         <input type="text" class="form-control" name='nombre_criterio[]'>
@@ -331,10 +331,10 @@
                         <div class="d-flex justify-content-center">
                             <div class="form-group col-md-8">
                                 <label for="prioridad" class="font-weight-bold text-warning">Prioridad</label>
-                                <div class="alert alert-info" role="alert" id="indicador_prioridad">
+                                <div class="alert alert-info" role="alert" id="indicador_prioridad_modal">
                                     Media
                                 </div>
-                                <input type="range" name="prioridad" id="desplazamiento_bar" value="3" max="5" min="1" class="custom-range">  
+                                <input type="range" name="prioridad" id="desplazamiento_bar_modal" value="3" max="5" min="1" class="custom-range">  
                             </div>
                         </div>
                         <div class="d-flex justify-content-center">
@@ -347,7 +347,7 @@
                                 <input type="date" class="form-control" name="fecha_limite" id="fecha_limite_actividad_modal">
                             </div>
                         </div>
-                    <a type="submit" class="btn btn-warning btn-lg" onclick="agregarFaseRapido()">Agregar</a>
+                    <a type="submit" class="btn btn-warning btn-lg" onclick="agregarActividadRapido()">Agregar</a>
                 </form>
             </div>
         </div>

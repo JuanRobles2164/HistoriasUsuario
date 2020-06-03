@@ -42,7 +42,7 @@ class HistoriasController extends Controller
         $moduloRetorno = AlumnoDao::getModuloById($id);
         return response()->json($moduloRetorno);
     }
-    public function ostCrearActividadAJAX(Request $request){
+    public function postCrearActividadAJAX(Request $request){
         $actividad = new stdClass();
         $actividad = $request->except('_token');
         $id = AlumnoDao::crearActividadAgil($actividad);
