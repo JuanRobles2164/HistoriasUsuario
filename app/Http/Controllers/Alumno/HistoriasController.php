@@ -27,4 +27,26 @@ class HistoriasController extends Controller
         $fases = AlumnoDao::getFasesFromProyecto($request->id_proyecto);
         return view($this->ruta.'CrearHistoriaUsuario')->with(compact(array('usuarios_entrevistados', 'fases')));
     }
+    public function postCrearFaseAJAX(Request $request){
+        $fase = new stdClass();
+        $fase = $request->except('_token');
+        $metodologia = AlumnoDao::getMetodologiaByIdProyecto($fase['id_proyecto']);
+        $id_fase = AlumnoDao::crearFaseAgil($fase, $metodologia->id);
+        $faseRetorno = AlumnoDao::getFaseById($id_fase);
+        return response()->json($faseRetorno);
+    }
+    public function postCrearModuloAJAX(Request $request){
+        $modulo = new stdClass();
+        $modulo = $request->except('_token');
+        $id = AlumnoDao::agregarModuloAgil($modulo);
+        $moduloRetorno = AlumnoDao::getModuloById($id);
+        return response()->json($moduloRetorno);
+    }
+    public function ostCrearActividadAJAX(Request $request){
+        $actividad = new stdClass();
+        $actividad = $request->except('_token');
+        $id = AlumnoDao::crearActividadAgil($actividad);
+        $actividadRetorno = AlumnoDao::getActividadById($id);
+        return response()->json($actividadRetorno);
+    }
 }

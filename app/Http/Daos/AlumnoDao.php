@@ -36,6 +36,7 @@ class AlumnoDao extends Controller
      * @param [type] $fase
      * @return void
      */
+
     public static function crearFase($fase){
         return DB::table('fase')
         ->insertGetId([
@@ -332,5 +333,57 @@ class AlumnoDao extends Controller
         ->get();
         return $evidencias;
     }
-    
+    public static function crearFaseAgil($fase, $id_metodologia){
+        $id = DB::table('fase')->insertGetId([
+            'nombre' => $fase['nombre'],
+            'descripcion' => $fase['descripcion'],
+            'fecha_limite' => $fase['fecha_limite'],
+            'fecha_inicio' => $fase['fecha_inicio'],
+            'id_proyecto' => $fase['id_proyecto'],
+            'id_estado' => 1,
+            'id_metodologia' => $id_metodologia,
+            'created_at' => Utilities::getCurrentDate()
+        ]);
+        return $id;
+    }
+    public static function getMetodologiaByIdProyecto($id_proyecto){
+        $metodologia = DB::table('proyecto')
+        ->join('metodologia', 'metodologia.id', '=', 'proyecto.id_metodologia')
+        ->select('metodologia.*')
+        ->where('proyecto.id',$id_proyecto)
+        ->first();
+        return $metodologia;
+    }
+    public static function agregarModuloAgil(array $modulo){
+        $id = DB::table('modulo')->insertGetId([
+            'nombre' =>  $modulo['nombre'],
+            'descripcion' => $modulo['descripcion'],
+            'id_fase' => $modulo['id_fase'],
+            'estado' => 'En desarrollo',
+            'observacion' => 'Ninguna...',
+            'fecha_inicio' => $modulo['fecha_inicio'],
+            'fecha_limite' => $modulo['fecha_limite'],
+            'created_at' => Utilities::getCurrentDate()
+        ]);
+        return $id;
+    }
+    public static function crearActividadAgil(array $actividad){
+        $id = DB::table('actividad')->insertGetId([
+            'nombre' => $actividad['nombre'],
+            'descripcion' => $actividad['descripcion'],
+            'prioridad' => $actividad['prioridad'],
+            'id_modulo' => $actividad['id_modulo'],
+            'estado_finalizado' => 0,
+            'fecha_inicio' => $actividad['fecha_inicio'],
+            'fecha_limite' => $actividad['fecha_limite'],
+            'created_at' => Utilities::getCurrentDate()
+        ]);
+        return $id;
+    }
+    public static function getActividadById($id){
+        $modulos = DB::table('actividad')
+        ->where('id', $id)
+        ->first();
+        return $modulos;
+    }
 }

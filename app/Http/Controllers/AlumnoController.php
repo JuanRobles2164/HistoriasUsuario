@@ -238,6 +238,7 @@ class AlumnoController extends Controller
     public function getCrearHistoriaUsuario(Request $request){
         $usuarios_entrevistados = AlumnoDao::getAllUsuariosEntrevistados();
         $fases = AlumnoDao::getFasesFromProyecto($request->id_proyecto);
-        return view($this->ruta.'CrearHistoriaUsuario')->with(compact(array('usuarios_entrevistados', 'fases')));
+        $id_proyecto = $request->id_proyecto;
+        return view($this->ruta.'CrearHistoriaUsuario')->with(compact(array('usuarios_entrevistados', 'fases','id_proyecto')));
     }
 }
