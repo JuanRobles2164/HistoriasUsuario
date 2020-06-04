@@ -12,10 +12,7 @@
             <a class="nav-link disabled text-warning" href="#" tabindex="-1" aria-disabled="true">Historias de usuario</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="pills-select-tab" data-toggle="pill" href="#pills-select" role="tab" aria-controls="pills-select" aria-selected="false"><i class="fas fa-user-plus fa-lg"></i></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"><i class="fas fa-user-plus fa-lg"></i></a>
+            <a class="nav-link active" id="pills-select-tab" data-toggle="pill" href="#pills-select" role="tab" aria-controls="pills-select" aria-selected="true"><i class="fas fa-user-plus fa-lg"></i></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><i class="fas fa-address-card fa-lg"></i></a>
@@ -27,7 +24,7 @@
     </div>
     <div class="card-body">
         <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade" id="pills-select" role="tabpanel" aria-labelledby="pills-select-tab">
+            <div class="tab-pane active show fade" id="pills-select" role="tabpanel" aria-labelledby="pills-select-tab">
                 <!-- Formulacio para crear historias de usuario-->
                 <h5>Gestionar Historia de Usuario</h5>
                 <br>
