@@ -36,8 +36,9 @@
                 <form>
                     <div class="d-flex justify-content-center">
                         <div class="form-inline">
+                            <label class="my-1 mr-3" for="fase">Fase</label>
                             <div class="form-group">
-                                <label class="my-1 mr-3" for="fase">Fase</label>
+                               
                                 <select class="form-control" id="id_fase">
                                     <option value="0" selected> Seleccione</option>
                                     @foreach($fases as $fase)
@@ -52,8 +53,8 @@
                             </div>                     
                         </div>
                         <div class="form-inline">
+                            <label class="my-1 mr-3" for="">Modulo</label>
                             <div class="form-group">
-                                <label class="my-1 mr-3" for="">Modulo</label>
                                 <select class="form-control" id="id_modulo">
                                     <option value="0" selected> Seleccione</option>
                                 </select>
@@ -65,8 +66,8 @@
                             </div>
                         </div>
                         <div class="form-inline">
+                            <label class="my-1 mr-3" for="">Actividad</label>
                             <div class="form-group">
-                                <label class="my-1 mr-3" for="">Actividad</label>
                                 <select class="form-control" id="id_actividad">
                                     <option value="0" selected> Seleccione</option>
                                 </select>

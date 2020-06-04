@@ -27,7 +27,8 @@ traerFases = (fase) => {
 
       
   traerActividades = (modulo) =>{
-    
+    $('#id_actividad').empty();
+    $('#id_actividad').append("<option value='0' selected> Seleccione</option>");
     const ruta = $('#api_route_get_actividades').val();
     console.log("funciona!");
     if($('#id_fase').val() != 0){
@@ -52,7 +53,6 @@ traerFases = (fase) => {
   }
 
   agregarFaseRapido = (Identificador) => {
-
     let nombre_fase = $('#nombre_fase_modal').val();
     let descripcion_fase = $('#descripcion_fase_modal').val();
     let fecha_limite = $('#fecha_limite_fase_modal').val();
