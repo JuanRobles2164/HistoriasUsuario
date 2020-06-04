@@ -16,7 +16,6 @@ class CriterioAceptacion extends Migration
         Schema::create('criterio_aceptacion', function(Blueprint $table){
         $table->bigIncrements('id');
         $table->string('nombre');
-        $table->string('descripcion')->nullable();
         $table->string('contexto');
         $table->string('evento');
         $table->string('resultado');
