@@ -143,7 +143,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                     <div class="form-group mb-3">
                                         <label for="usuario_rol">Seleccioné el Rol</label>
-                                        <select class="form-control" name="rol_id">
+                                        <select class="form-control" name="rol">
                                             <option hidden>Seleccione una opción</option>
                                             <?php $__currentLoopData = $roles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rol): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option value="<?php echo e($rol->id); ?>"><?php echo e($rol->abreviatura); ?></option>    
