@@ -8,7 +8,7 @@
                 <fieldset>
                     <legend style="margin:20px 310px;"> <i class="fas fa-user-edit"></i> &nbsp; Editar Iformación </legend>
                         <div class="form-row">
-                            <div class="">
+                            <div class="form-group">
                                 <label for=""></label>
                                 <input type="hidden" name="id" value="{{$usuario->id}}" id="id">
                             </div>
