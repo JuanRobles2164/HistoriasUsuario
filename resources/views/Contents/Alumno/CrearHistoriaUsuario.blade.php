@@ -22,6 +22,7 @@
           </li>
       </ul>
     </div>
+<form action="{{ route('alumno.formsAgiles.postCrearHistoriaFormAgil', array('id_proyecto' => $id_proyecto) ) }}" method="POST">
     <div class="card-body">
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane active show fade" id="pills-select" role="tabpanel" aria-labelledby="pills-select-tab">
@@ -29,14 +30,13 @@
                 <h5>Gestionar Historia de Usuario</h5>
                 <br>
                 <!--Este es el form para agregar a un usuario entrevistado-->
-                @csrf
-                <form>
+                    @csrf
                     <div class="d-flex justify-content-center">
                         <div class="form-inline">
                             <label class="my-1 mr-3" for="fase">Fase</label>
                             <div class="form-group">
                                
-                                <select class="form-control" id="id_fase">
+                                <select class="form-control" id="id_fase" name="id_fase">
                                     <option value="0" selected> Seleccione</option>
                                     @foreach($fases as $fase)
                                         <option value="{{$fase->id}}" onclick="traerFases({{$fase->id}})">{{$fase->nombre}}</option>
@@ -52,7 +52,7 @@
                         <div class="form-inline">
                             <label class="my-1 mr-3" for="">Modulo</label>
                             <div class="form-group">
-                                <select class="form-control" id="id_modulo">
+                                <select class="form-control" id="id_modulo" name="id_modulo">
                                     <option value="0" selected> Seleccione</option>
                                 </select>
                                 <div class="col-auto">
@@ -65,7 +65,7 @@
                         <div class="form-inline">
                             <label class="my-1 mr-3" for="">Actividad</label>
                             <div class="form-group">
-                                <select class="form-control" id="id_actividad">
+                                <select class="form-control" id="id_actividad" name="id_actividad">
                                     <option value="0" selected> Seleccione</option>
                                 </select>
                                 <div class="col-auto">
@@ -76,12 +76,10 @@
                             </div>
                        </div>
                     </div>
-                </form>
+                
             </div>
             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                 <h5>Agregar Historia de Usuario</h5>
-                <form action="#" method="POST">
-                    @csrf
                     <div class="d-flex justify-content-center">
                         <div class="form-group col-md-4">
                             <label for="">Secuencia</label>
@@ -109,10 +107,19 @@
                                     <option value="{{$usuario_entrevistado->id}}">{{$usuario_entrevistado->nombre}}</option>
                                 @endforeach
                             </select>
+                            <div class="col-auto">
+                                <a class="btn btn-info" data-toggle="modal" data-target="#modalUsuarioEntrevistado">
+                                    <i class="fas fa-plus"></i>
+                                 </a>
+                            </div>
                         </div>
                         <div class="form group col-md-3">
                             <label for="">Estado</label>
-                            <input type="text" class="form-control" name="estado" id="">
+                            <select name="estado" id="" class="form-control">
+                                <option value="En proceso" selected>En proceso</option>
+                                <option value="Aceptada">Aceptada</option>
+                                <option value="Rechazada">Rechazada</option>
+                            </select>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="">Fecha de inicio</label>
@@ -129,7 +136,6 @@
                             <textarea class="form-control" name="descripcion"></textarea>
                         </div>
                     </div>
-                </form>
             </div>
             <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                 <div class="d-flex justify-content-around">
@@ -213,7 +219,7 @@
                                         <input type="text" class="form-control" name='resultado_criterio[]'>
                                     </td>
                                     <td>
-                                        <input type="checkbox" class="form-control" name='cumple_criterio[]'>
+                                        <input type="checkbox" class="form-control" name='cumple_criterio[]' value="0">
                                     </td>
                                 </tr>
                             </tbody>
@@ -222,9 +228,11 @@
                 </div>
                 <button type="submit" class="btn btn-outline-primary btn-lg">Crear</button>
             </div>
+        
         </div>  
     </div>
-</div>
+    </div>
+</form>
 @endsection
 
 @section('modals')

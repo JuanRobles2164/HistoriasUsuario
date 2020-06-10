@@ -60,4 +60,7 @@ class Utilities{
     public static function getDaysDiff($low = 'now', $max){
         return gmdate('d',(strtotime($low) - strtotime($max)));
     }
+    public static function getCurrentOnlyDate($params = 'now'){
+        return date('Y-m-d', strtotime($params));
+    }
 }

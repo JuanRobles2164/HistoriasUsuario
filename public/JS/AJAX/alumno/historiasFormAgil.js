@@ -1,3 +1,7 @@
+var contador = 1;
+$('#id_fase').click(function(e){
+  
+});
 traerFases = (fase) => {
     $('#id_modulo').empty();
     $('#id_modulo').append("<option value='0' selected> Seleccione</option>");
@@ -40,7 +44,7 @@ traerFases = (fase) => {
         success: function(response){
           console.log(response);
           response.forEach(element => {
-            $('#id_actividad').append("<option value'"+element.id+"'> "+element.nombre+"</option>");
+            $('#id_actividad').append("<option value='"+element.id+"'> "+element.nombre+"</option>");
           });
         },
         error: function(response){
@@ -180,7 +184,8 @@ $('#btn_agregar_evidencia').on('click', function(e){
 });
 $('#btnAgregarCriterio').on('click', function(e){
   e.preventDefault();
-  $('#contenedor_criterio').append( "<tr><td> <input type='text' class='form-control' name='nombre_criterio[]'></td><td><textarea class='form-control' name='contexto_criterio[]'></textarea></td><td><input type='text' class='form-control' name='evento_criterio[]'></td> <td><input type='text' class='form-control' name='resultado_criterio[]'></td> <td> <input type='checkbox' class='form-control' name='cumple_criterio[]'> </td></tr>");
+  $('#contenedor_criterio').append( "<tr><td> <input type='text' class='form-control' name='nombre_criterio[]'></td><td><textarea class='form-control' name='contexto_criterio[]'></textarea></td><td><input type='text' class='form-control' name='evento_criterio[]'></td> <td><input type='text' class='form-control' name='resultado_criterio[]'></td> <td> <input type='checkbox' class='form-control' name='cumple_criterio[]' value='"+contador+"'> </td></tr>");
+  contador = contador + 1;
 });
 
 $('#desplazamiento_bar').on('mousemove',function(){
@@ -233,3 +238,15 @@ $('#desplazamiento_bar_modal').on('mousemove',function(){
       break;
   }
 });
+
+$(document).on("click", "input[name='cumple_criterio[]']", function(){
+  thisRadio = $(this);
+  if (thisRadio.hasClass("imChecked")) {
+      thisRadio.removeClass("imChecked");
+      thisRadio.prop('checked', false);
+  } else { 
+      thisRadio.prop('checked', true);
+      thisRadio.addClass("imChecked");
+  };
+})
+

@@ -49,4 +49,28 @@ class HistoriasController extends Controller
         $actividadRetorno = AlumnoDao::getActividadById($id);
         return response()->json($actividadRetorno);
     }
+    public function postCrearHistoriaFormAgil(Request $request){
+        $data = $request->except('_token');
+        $historia = AlumnoDao::crearHistoriaUsuarioGetId($data);
+        for($i = 0; $i < count($request->nombre_criterio); $i++){
+            $cumple = null;
+            $nombre_criterio = $request->nombre_criterio[$i];
+            $contexto = $request->contexto_criterio[$i];
+            $evento = $request->evento_criterio[$i];
+            $resultado = $request->resultado_criterio[$i];
+            if(isset($request->cumple_criterio[$i])){
+                $cumple = 'CUMPLE';
+            }else{
+                $cumple = 'NO CUMPLE';
+            }
+            AlumnoDao::crearCriterio($historia, $nombre_criterio, $contexto, $evento, $resultado, $cumple);
+        }
+        foreach($request->compromisos as $compromiso){
+            AlumnoDao::crearCompromisosByHistoria($historia, $compromiso);
+        }
+        foreach(array_combine($request->nombre_evidencia, $request->foto_evidencia) as $nombre => $foto){
+            AlumnoDao::crearEvidencia($historia, $nombre, $foto);
+        }
+        return back();
+    }
 }

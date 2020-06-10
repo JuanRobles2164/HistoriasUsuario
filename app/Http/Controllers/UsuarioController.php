@@ -82,7 +82,7 @@ class UsuarioController extends Controller
                 return redirect()->route('getLogin');
             }
             Auth::logout();
-            $time = config()->get('app')['session-time-minutes'];
+            $time = 600;
             $_usuario = new stdClass();
             $_usuario->id = $usuarioAuth->id;
             $_usuario->email = $usuarioAuth->e_mail;

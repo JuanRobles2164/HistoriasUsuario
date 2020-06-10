@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('contenido'); ?>
 <br>
 <div class="d-flex bd-highlight mb-3">

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function(){
     return redirect()->route('getLogin');
 });
+Route::get('/genera_pdf', 'PDFs\PDFController@pdff')->name('generar');
 Route::get('/login', 'UsuarioController@onGetLogin')->name('getLogin');
 Route::post('/login', 'UsuarioController@onPostLogin')->name('postLogin');
 
@@ -23,7 +24,7 @@ Route::get('/registro', 'UsuarioController@getRegistro')->name('registro');
 Route::post('/registro', 'UsuarioController@postRegistro')->name('postRegistro');
 
 
-Route::get('/administrador', 'AdministradorController@index')->name('admin.getIndex')->middleware('CheckRole');
+Route::get('/administrador', 'AdministradorController@index')->name('admin.getIndex');
 Route::get('/administrador/editar_perfil', 'AdministradorController@getSelfEdit')->name('admin.getSelfEdit');
 Route::post('/administrador/editar_perfil', 'AdministradorController@postSelfEdit')->name('admin.postSelfEdit');
 Route::get('/administrador/crear_usuario', 'AdministradorController@getCreate')->name('admin.getCreate');
@@ -36,7 +37,7 @@ Route::get('/administrador/detalles_usuario', 'AdministradorController@detailsUs
 Route::get('/administrador/estado_usuario', 'AdministradorController@eliminarUsuario')->name('admin.eliminarUsuario');
 
 
-Route::get('/docente', 'DocenteController@index')->name('docente.getIndex')->middleware('CheckRole');
+Route::get('/docente', 'DocenteController@index')->name('docente.getIndex');
 Route::get('/docente/editar_perfil', 'DocenteController@getSelfEdit')->name('docente.getSelfEdit');
 Route::post('/docente/editar_perfil', 'DocenteController@postSelfEdit')->name('docente.postSelfEdit');
 Route::get('/docente/metodologias', 'DocenteController@getListaMetodologias')->name('docente.getListaMetodologias');
@@ -74,11 +75,13 @@ Route::get('', '')->name('');
 Route::get('', '')->name('');*/
 
 Route::get('/alumno', 'AlumnoController@index')->name('alumno.getIndex');
+Route::get('/alumno/generar_pdf/historia_usuario', 'PDFs\PDFController@getHistoriaPdfById')->name('alumno.pdf.getHistoriaPdfById');
 Route::get('/alumno/editar_perfil', 'AlumnoController@getSelfEdit')->name('alumno.getSelfEdit');
 Route::post('/alumno/editar_perfil', 'AlumnoController@postSelfEdit')->name('alumno.postSelfEdit');
 Route::get('/alumno/proyectos', 'AlumnoController@getListaProyectos')->name('alumno.getListaProyectos');
 Route::get('/alumno/proyectos/{id_proyecto}', 'AlumnoController@getFasesProyecto')->name('alumno.getFasesProyecto');
 Route::post('/alumno/proyectos/{id_proyecto}/agregar_fase', 'AlumnoController@postAgregarFase')->name('alumno.postAgregarFase');
+Route::post('/alumno/proyectos/{id_proyecto}/forms_agiles/crear_historia', 'Alumno\HistoriasController@postCrearHistoriaFormAgil')->name('alumno.formsAgiles.postCrearHistoriaFormAgil');
 
 Route::get('/alumno/get_editar_fase','AlumnoController@getEditarFase')->name('alumno.getEditarFase');
 Route::post('/alumno/proyectos/{id_proyecto}/post_editar_fase','AlumnoController@postEditarFase')->name('alumno.postEditarFase');

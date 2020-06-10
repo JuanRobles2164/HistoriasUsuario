@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('contenido'); ?>
             <!-- cabezera de pagina -->
 			<div class="full-box page-header">

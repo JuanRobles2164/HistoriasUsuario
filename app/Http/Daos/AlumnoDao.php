@@ -241,8 +241,7 @@ class AlumnoDao extends Controller
             'fecha_inicio' => $historia_usuario['fecha_inicio'],
             'id_actividad' => $historia_usuario['id_actividad'],
             'id_modulo' => $historia_usuario['id_modulo'],
-            'fecha_fin' => $historia_usuario['fecha_fin'],
-            'created_at' => Utilities::getCurrentDate()
+            'fecha_fin' => $historia_usuario['fecha_fin']
         ]);
         return $id;
     }
@@ -260,6 +259,17 @@ class AlumnoDao extends Controller
             'foto' => $foto,
             'id_historia_usuario' => $id_historia_usuario,
             'created_at' => Utilities::getCurrentDate()
+        ]);
+    }
+    public static function crearCriterio($id_historia_usuario, $nombre, $contexto, $evento, $resultado, $cumple){
+        DB::table('criterio_aceptacion')
+        ->insert([
+            'nombre' => $nombre,
+            'contexto' => $contexto,
+            'evento' => $evento,
+            'cumple' => $cumple,
+            'resultado' => $resultado,
+            'id_historia_usuario' => $id_historia_usuario
         ]);
     }
     public static function EncontrarGrupByIdProyecto($idProyecto, $idUsuario){
@@ -385,5 +395,10 @@ class AlumnoDao extends Controller
         ->where('id', $id)
         ->first();
         return $modulos;
+    }
+    public static function getCriteriosByHistoriaId($id_historia_usuario){
+        return DB::table('criterio_aceptacion')
+        ->where('id_historia_usuario', $id_historia_usuario)
+        ->get();
     }
 }
