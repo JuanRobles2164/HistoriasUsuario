@@ -67,6 +67,7 @@ Route::get('/docente/proyectos/observacion_grupo','DocenteController@getCrearObs
 Route::post('/docente/ObservacionGrupo','DocenteController@postCrearObservacionGrupo')->name('docente.postCrearObservacionGrupo');
 Route::get('/docente/revision/historia_usuario', 'DocenteController@getHistoriaUsuario')->name('docente.getHistoriaUsuario');
 Route::get('/docente/grupos/{id_grupo}/graficas/historias_estados', 'DocenteController@getEstadoHistoriasData')->name('docente.graficas.getHistoriasEstadosData');
+Route::get('/docente/detalles_metodologia', 'DocenteController@detallesMetodologia')->name('docente.getdetallesMetodologia');
 
 Route::post('/docente/forms_agiles/crear_metodologia', 'Docente\MetodologiaController@postCrearMetodologiaAJAX')->name('docente.formsAgiles.postCrearMetodologia');
 /*
@@ -123,7 +124,7 @@ Route::post('/alumno/forms_agiles/crear_modulo', 'Alumno\HistoriasController@pos
 Route::post('/alumno/forms_agiles/crear_actividad', 'Alumno\HistoriasController@postCrearActividadAJAX')->name('alumno.formsAgiles.postCrearActividad');
 
 Route::get('/test', function(){
-    
+
     $fase = date('Y-m-d H:i:s', strtotime('now - 4 hours'));
     return json_encode($fase);
 })->name('test');
@@ -132,7 +133,7 @@ Route::get('/test', function(){
 //Para sacar el listado de rutas
 Route::get('rutas', function() {
     $routeCollection = Route::getRoutes();
-    
+
     echo "<table style='width:100%'>";
         echo "<tr>";
             echo "<td width='10%'><h4>HTTP Method</h4></td>";

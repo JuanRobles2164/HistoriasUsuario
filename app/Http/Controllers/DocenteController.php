@@ -22,7 +22,7 @@ class DocenteController extends Controller
 {
     private $ruta ='/Contents/Docente/';
     public function getEditar(Request $request){
-        
+
     }
     public function index(Request $request){
         return view($this->ruta.'indexDocente');
@@ -101,7 +101,7 @@ class DocenteController extends Controller
         $fuente->descripcion = $request->descripcion_fuente;
         $fuente->url = $request->url_fuente;
         $fuente->id_metodologia = $request->id_metodologia;
-        
+
         DocenteDao::agregarFuenteMetodologia($fuente);
         return redirect()->route('docente.getEditarMetodologia', 'id='.$request->id_metodologia);
     }
@@ -168,7 +168,7 @@ class DocenteController extends Controller
     /**
      * Esta función deberá devolverle a la vista:
      * - Los alumnos que no estén ligados a un proyecto
-     * - Los grupos que han trabajado en el proyecto 
+     * - Los grupos que han trabajado en el proyecto
      * - Los grupos que estén ligados al proyecto pero no han trabajado
      * - El porcentaje de trabajo avanzado por grupo
      * - La última fase trabajada por ese grupo
@@ -176,9 +176,9 @@ class DocenteController extends Controller
      * @param Request $request
      * @return void
      */
-    
+
      //Funciones del controlador para los grupos de los proyectos
-    public function getListaGrupos(Request $request){ 
+    public function getListaGrupos(Request $request){
         $proyecto = DocenteDao::getProyectoById($request->id_proyecto);
         $grupos = DocenteDao::getAllGrupos($request->id_proyecto);
         $integrantes = DocenteDao::getIntegrantesGrupos($grupos);
@@ -224,7 +224,7 @@ class DocenteController extends Controller
         $alumnos = DocenteDao::getAllEstudiantesAsignadosAProyecto($request);
         return view($this->ruta.'observacionAlumnosProyecto')->with(compact(array('proyecto', 'alumnos')));
     }
-    public function postObservacionAlumnosProyecto(Request $request){        
+    public function postObservacionAlumnosProyecto(Request $request){
         DocenteDao::asignarObservacionAAlumnos($request);
         return redirect()->route('docente.getListaGrupos', $request->id_proyecto);
     }
@@ -257,8 +257,8 @@ class DocenteController extends Controller
             }
         }
         $historias = DocenteDao::getAllHistoriasFromGrupoById($request->id_grupo);
-        return view($this->ruta.'supervisarHistoriasGrupo', 
-        array('id_proyecto' => $request->id_proyecto, 
+        return view($this->ruta.'supervisarHistoriasGrupo',
+        array('id_proyecto' => $request->id_proyecto,
         'id_grupo' => $request->id_grupo))
         ->with(compact('historias', 'fases', 'modulos', 'actividades'));
     }
@@ -278,5 +278,11 @@ class DocenteController extends Controller
         $labels = DocenteDao::getLabelsToEstadoHistorias();
         return response()->json(array('labels' => $labels));
     }
+    public function detallesMetodologia(Request $request){
+        $metodologia = DocenteDao::getMetodologiaById($request->id);
+        //return view('Contents/Docente/consultandometodologia')->with(compact('metodologia'));
+        //$metodologia = json_encode(DocenteDao::getMetodologiaById($request->id));
+        return response()->json($metodologia);
+      }
+    }
 }
-

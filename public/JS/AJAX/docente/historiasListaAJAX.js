@@ -33,3 +33,32 @@ consultarFase = (Identificador) => {
       }
     });
   }
+
+  consultandometodologia = (Identificador) =>{
+    $.ajax({
+        url: 'detalles_metodologia',
+        async: true,
+        data: {id:Identificador},
+        success:function(response){
+            //let data = $.parseJSON(response);
+            $('#nombre_metodologia').val(response.nombre);
+            $('#descripcion_metodologia').val(response.descripcion);
+            
+            $('#nombre_metodologia').attr('disabled','disabled');
+            $('#descripcion_metodologia').attr('disabled','disabled');
+
+            $('#modalmetodologia').modal('show');
+            console.log(response);
+        },
+        error:function(error){
+            console.log(error);
+            $('#nombre_metodologia').val('Error al consultar, intente más tarde');
+            $('#modalmetodologia').show();
+        }
+
+    });
+}
+
+$('#btnCierramodalmetodologia').click(function(){
+  $('#modalDetalles').toggle();
+});
