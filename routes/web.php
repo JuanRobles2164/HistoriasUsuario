@@ -66,7 +66,7 @@ Route::get('/docente/proyectos/{id_proyecto}/grupos/{id_grupo}/historias_de_usua
 Route::get('/docente/proyectos/observacion_grupo','DocenteController@getCrearObservacionGrupo')->name('docente.getCrearObservacionGrupo');
 Route::post('/docente/ObservacionGrupo','DocenteController@postCrearObservacionGrupo')->name('docente.postCrearObservacionGrupo');
 Route::get('/docente/revision/historia_usuario', 'DocenteController@getHistoriaUsuario')->name('docente.getHistoriaUsuario');
-
+Route::get('/docente/detalles_metodologia', 'DocenteController@detallesMetodologia')->name('docente.getdetallesMetodologia');
 Route::post('/docente/forms_agiles/crear_metodologia', 'Docente\MetodologiaController@postCrearMetodologiaAJAX')->name('docente.formsAgiles.postCrearMetodologia');
 /*
 

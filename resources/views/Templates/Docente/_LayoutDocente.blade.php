@@ -85,6 +85,7 @@
             </nav>
             <div class="container">
                @yield('contenido')
+               @yield('modals')
             </div>
             <!-- Contenido -->
             <div class="full-box tile-container">

@@ -274,5 +274,11 @@ class DocenteController extends Controller
             $evidencias
         ));
     }
+    public function detallesMetodologia(Request $request){
+        $metodologia = DocenteDao::getMetodologiaById($request->id);
+        //return view('Contents/Docente/consultandometodologia')->with(compact('metodologia'));
+        //$metodologia = json_encode(DocenteDao::getMetodologiaById($request->id));
+        return response()->json($metodologia);
+    }
 }
 
