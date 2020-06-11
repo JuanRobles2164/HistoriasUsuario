@@ -216,8 +216,8 @@ class AlumnoDao extends Controller
         return $historias;
     }
     public static function agregarUsuarioEntrevistado($usuario_entrevistado){
-        DB::table('usuario_entrevistado')
-        ->insert([
+        return DB::table('usuario_entrevistado')
+        ->insertGetId([
             'nombre' => $usuario_entrevistado->nombre_usuario_entrevistado,
             'e_mail' => $usuario_entrevistado->email_usuario_entrevistado,
             'telefono' => $usuario_entrevistado->telefono_usuario_entrevistado,

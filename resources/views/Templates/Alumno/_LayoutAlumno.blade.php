@@ -20,6 +20,7 @@
 		<link rel="stylesheet" href="{{ URL::asset('CSS/styleAlumno.css') }}">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 		<meta name="csrf-token" content="{{ csrf_token() }}" />
    </head>
 <body>

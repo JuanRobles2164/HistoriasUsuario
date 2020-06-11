@@ -241,4 +241,13 @@ class AlumnoController extends Controller
         $id_proyecto = $request->id_proyecto;
         return view($this->ruta.'CrearHistoriaUsuario')->with(compact(array('usuarios_entrevistados', 'fases','id_proyecto')));
     }
+    public function postCrearUsuarioEntrevistadoAJAX(Request $request){
+        $data = new stdClass;
+        $data->nombre_usuario_entrevistado = $request->nombre;
+        $data->email_usuario_entrevistado = $request->e_mail;
+        $data->telefono_usuario_entrevistado = $request->telefono;
+        $data->cargo_usuario_entrevistado = $request->cargo;
+        $data->id = AlumnoDao::agregarUsuarioEntrevistado($data);
+        return response()->json($data);
+    }
 }

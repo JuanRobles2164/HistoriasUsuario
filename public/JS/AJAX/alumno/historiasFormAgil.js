@@ -2,6 +2,38 @@ var contador = 1;
 $('#id_fase').click(function(e){
   
 });
+abrirModal = () => {
+  $('#usuarioEntrevistado').modal('show');
+}
+crearUsuarioFast = () => {
+  const nombre = $('#usuario_nombre').val();
+  const e_mail = $('#usuario_e_mail').val();
+  const telefono = $('#usuario_telefono').val();
+  const cargo = $('#usuario_cargo').val();
+  const ruta = $('#api_route_crear_usuario_form_agil').val();
+
+  $.ajax({
+    url: ruta,
+    type: 'POST',
+    data: {
+      'nombre': nombre,
+      'e_mail' : e_mail,
+      'telefono': telefono,
+      'cargo': cargo
+    },
+    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+    success: function(response){
+      alert('Creado satisfactoriamente');
+      console.log(response);
+      $('#usuario_entrevistado').append("<option value='"+response.id+"' selected>"+response.nombre_usuario_entrevistado+"</option>");
+      $('#usuarioEntrevistado').modal('hide');
+    },
+    error: function(response){
+      console.log(response);
+    }
+  });
+}
+
 traerFases = (fase) => {
     $('#id_modulo').empty();
     $('#id_modulo').append("<option value='0' selected> Seleccione</option>");

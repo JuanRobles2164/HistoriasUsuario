@@ -274,5 +274,9 @@ class DocenteController extends Controller
             $evidencias
         ));
     }
+    public function getEstadoHistoriasData(Request $request){
+        $labels = DocenteDao::getLabelsToEstadoHistorias();
+        return response()->json(array('labels' => $labels));
+    }
 }
 

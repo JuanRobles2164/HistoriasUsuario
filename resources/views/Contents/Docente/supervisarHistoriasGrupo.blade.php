@@ -140,6 +140,18 @@
                 @endforeach
             </tbody>
         </table>
+        <input type="hidden" name="api_route_get_historias_graficas" 
+                id="api_route_get_historias_graficas" 
+                value="{{route('docente.graficas.getHistoriasEstadosData', 
+                array('id_grupo' => $id_grupo))}}">
+
+
+            <div class="container-sm">
+                <canvas id="estados_historias_grafica" class="chartjs-render-monitor" width="400" height="350">
+
+                </canvas>
+            </div>
+        
     </div>
   </div>
 @endsection
@@ -180,4 +192,5 @@
 
 @section('custom_scripts')
     <script src="{{URL::asset('JS/AJAX/docente/historiasListaAJAX.js')}}"></script>
+    <script src="{{URL::asset('JS/AJAX/docente/graficas/estadosHistorias.js')}}"></script>
 @endsection

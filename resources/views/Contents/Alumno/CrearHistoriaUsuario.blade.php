@@ -101,17 +101,13 @@
                     <div class="d-flex justify-content-center">
                         <div class="form-group col-md-3">
                             <label for="">Usuario entrevistado</label>
-                            <select class="custom-select" name="usuario_entrevistado">
-                                <option selected disabled value="">Seleccione una opción</option>
+                            <select class="custom-select" name="usuario_entrevistado" id="usuario_entrevistado">
+                                <option selected value="0">Seleccione una opción</option>
                                 @foreach ($usuarios_entrevistados as $usuario_entrevistado)
                                     <option value="{{$usuario_entrevistado->id}}">{{$usuario_entrevistado->nombre}}</option>
                                 @endforeach
+                                <option onclick="abrirModal()" value="">CREAR NUEVO USUARIO</option>
                             </select>
-                            <div class="col-auto">
-                                <a class="btn btn-info" data-toggle="modal" data-target="#modalUsuarioEntrevistado">
-                                    <i class="fas fa-plus"></i>
-                                 </a>
-                            </div>
                         </div>
                         <div class="form group col-md-3">
                             <label for="">Estado</label>
@@ -359,6 +355,53 @@
         </div>
     </div>
 </div> 
+
+<div class="modal fade" id="usuarioEntrevistado" tabindex="-1" role="dialog" aria-labelledby="usuarioEntrevistadoLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Usuario entrevistado</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <input type="hidden" name="" id="api_route_crear_usuario_form_agil" value="{{route('alumno.formsAgiles.postCrearUsuarioEntrevistadoAJAX')}}">
+              <div class="form-group">
+                  <label for="usuario_nombre">Nombre</label>
+                  <div>
+                    <input type="text" name="usuario_nombre" id="usuario_nombre" class="form-control">
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label for="">Correo electrónico</label>
+                <div>
+                    <input type="text" name="usuario_e_mail" id="usuario_e_mail" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="usuario_telefono">Telefono</label>
+                <div>
+                    <input type="text" name="usuario_telefono" id="usuario_telefono" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="usuario_cargo">Cargo</label>
+                <div>
+                    <input type="text" name="usuario_cargo" id="usuario_cargo" class="form-control">
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" onclick="crearUsuarioFast()">Crear</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 @endsection
 
 @section('custom_scripts')

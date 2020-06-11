@@ -215,14 +215,6 @@ class DocenteDao extends Controller
         ->where('grupo_trabajo.id', $id_grupo)
         ->get();
         return $historias;
-        /*$historias = new stdClass;
-        foreach($historias_id as $id){
-            $historias->{'data_'.$id} = DB::table('historia_usuario')
-            ->join('compromiso', 'compromiso.id_historia_usuario', '=', 'historia_usuario.id')
-            ->join('criterios_aceptacion', 'criterios_aceptacion.id_historia_usuario', '=', 'historia_usuario.id')
-            ->join('evidencia',)
-        }*/
-        
     }
     public static function getHistoriaById($id){
         $historia = DB::table('historia_usuario')
@@ -255,5 +247,12 @@ class DocenteDao extends Controller
         ->where('id_actividad', $id_actividad)
         ->get();
         return $historias;
+    }
+    public static function getLabelsToEstadoHistorias(){
+        $estados = DB::table('historia_usuario')
+                    ->select('estado')
+                    ->distinct()
+                    ->get();
+        return $estados;
     }
 }
