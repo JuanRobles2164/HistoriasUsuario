@@ -65,7 +65,7 @@
                                         Fase
                                     </a>
                                     <button type="button" class="btn btn-outline-warning" disabled><i class="fas fa-cog"></i></button>
-                                    <a class="btn btn-outline-warning" data-toggle="modal" data-target="#modalobjetivo">
+                                    <a class="btn btn-outline-warning" data-toggle="modal" data-target="#modalobjetivo" onclick="setIdFase({{$fase->id}})">
                                         Objetivo
                                     </a>
                                   </div>
@@ -149,7 +149,7 @@
                     <form>
                         <div class="form-group">
                             <input type="hidden" name="id_proyecto">
-                            <input type="hidden" name="id_fase">
+                            <input type="hidden" name="id_fase" id="id_fase">
                             <label for="nombre" class="col-form-label">Nombre</label>
                             <input type="text" class="form-control" name="nombre">
                         </div>

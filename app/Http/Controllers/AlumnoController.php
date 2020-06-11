@@ -89,7 +89,7 @@ class AlumnoController extends Controller
     public function postEditarCrearObjetivo(Request $request){
         $objetivo = $request->except('_token', 'id_proyecto');
         AlumnoDao::agregarEditarObjetivo($objetivo);
-        return redirect()->route('alumno.getFasesProyecto', $request->id_proyecto);
+        return back();
     }
     public function getTrabajarEnFaseModulos(Request $request){
         $id_proyecto = $request->id_proyecto;

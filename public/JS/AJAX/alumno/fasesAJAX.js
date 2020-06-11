@@ -56,3 +56,9 @@ editarFase = () => {
       }
     });
   }
+
+  function setIdFase(id){
+    //const ocultoFaseId = document.getElementById('id_fase');
+    //ocultoFaseId.Value = id;
+    $('#id_fase').val(id);
+  }
