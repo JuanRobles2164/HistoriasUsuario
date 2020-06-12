@@ -289,5 +289,10 @@ class DocenteController extends Controller
         //return view('Contents/Docente/consultandometodologia')->with(compact('metodologia'));
         //$metodologia = json_encode(DocenteDao::getMetodologiaById($request->id));
         return response()->json($metodologia);
-      }
     }
+    public function detallesProyectos(Request $request){
+        $proyecto = DocenteDao::getProyectoById($request->id);
+        $metodologia = DocenteDao::getMetodologiaById($proyecto->id_metodologia);
+        return response()->json(array('proyecto' => $proyecto, 'metodologia' => $metodologia));
+    }
+}

@@ -96,7 +96,6 @@
             </footer>
          </section>
       </main>
-      @yield('modals')
       <!-- Sweet Alert V8.13.0 JS file-->
       <script src="{{URL::asset('JS/sweetalert2.min.js')}}"></script>
       <!-- jQuery V3.4.1 -->

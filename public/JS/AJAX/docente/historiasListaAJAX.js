@@ -59,6 +59,41 @@ consultarFase = (Identificador) => {
     });
 }
 
+consultandoproyectos = (Identificador) =>{
+  $.ajax({
+    url: 'detalles_proyectos',
+    async: true,
+    data: {id:Identificador},
+    success:function(response){
+      console.log(response);
+      /*$('#nombre_proyecto').val(response[0].nombre);
+      $('#descripcion_proyecto').val(response[0].descripcion);
+      $('#fecha_inicio_proyecto').val(response[0].fecha_inicial);
+      $('#fecha_fin_proyecto').val(response[0].fecha_limite);
+      $('#metodologia_proyecto').val(response[1].nombre);*/
+      $('#nombre_proyecto').val(response.proyecto.nombre);
+      $('#descripcion_proyecto').val(response.proyecto.descripcion);
+      $('#fecha_inicio_proyecto').val(response.proyecto.fecha_inicial);
+      $('#fecha_fin_proyecto').val(response.proyecto.fecha_limite);
+      $('#metodologia_proyecto').val(response.metodologia.nombre);
+
+      $('#nombre_proyecto').attr('disabled','disabled');
+      $('#descripcion_proyecto').attr('disabled','disabled');
+      $('#fecha_inicio_proyecto').attr('disabled','disabled');
+      $('#fecha_fin_proyecto').attr('disabled','disabled');
+      $('#metodologia_proyecto').attr('disabled','disabled');
+
+      $('#modalproyectos').modal('show');
+    },
+    error:function(error){
+      console.log(error);
+      $('#nombre_proyecto').val('Error al consultar, intente más tarde');
+    }
+  });
+}
+
+
 $('#btnCierramodalmetodologia').click(function(){
   $('#modalDetalles').toggle();
+  $('#modalproyectos').toggle();
 });
