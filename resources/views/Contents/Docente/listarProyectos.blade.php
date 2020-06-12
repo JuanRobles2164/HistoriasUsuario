@@ -34,7 +34,9 @@
                         <!-- Propongo que en el botón de "detalles" salgan reportes del proyecto-->
                         <!-- Por ejemplo: Cantidad de grupos en el proyecto... numero de alumnos por grupo-->
                         <!-- Y cosas así XD -->
-                        <a href="#" class="btn btn-success" aria-placeholder="Detalles">Detalles</a>
+                        <a class="btn btn-success" onclick="consultandoproyectos({{$proyecto->id}})">
+                            Detalles
+                        </a>
                         <a href="{{route('docente.getListaGrupos', $proyecto->id)}}" class="btn btn-info" >Supervisar</a>
                         <a href="{{route('docente.getEditarProyecto', 'id='.$proyecto->id)}}" class="btn btn-warning" aria-placeholder="Editar">Editar</a>
                     </th>
@@ -42,4 +44,52 @@
             @endforeach
         </tbody>
     </table>
+@endsection
+
+@section('modals')
+<div class="modal fade" tabindex="-1" role="dialog" id="modalproyectos">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Detalles Proyecto</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="nombre_proyecto" class="col-form-label">Nombre:</label>
+              <input type="text" class="form-control" id="nombre_proyecto">
+            </div>
+            <div class="form-group">
+              <label for="descripcion_proyecto" class="col-form-label">Descripción:</label>
+              <textarea class="form-control" id="descripcion_proyecto"></textarea>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="fecha_inicio_proyecto" class="col-form-label">fecha Incio:</label>
+                    <input type="text" class="form-control" id="fecha_inicio_proyecto">
+                </div>
+                <div class="col">
+                    <label for="fecha_fin_proyecto" class="col-form-label">fecha Final:</label>
+                    <input type="text" class="form-control" id="fecha_fin_proyecto">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="metodologia_proyecto" class="col-form-label">Metodología:</label>
+                <input type="text" class="form-control" id="metodologia_proyecto">
+            </div>  
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCierramodalmetodologia">Cerrar</button>
+        </div>
+      </div>
+    </div>
+</div>
+@endsection
+
+@section('custom_scripts')
+   <script src="{{URL::asset('JS/AJAX/docente/historiasListaAJAX.js')}}"></script>
 @endsection
