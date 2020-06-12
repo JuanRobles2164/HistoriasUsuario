@@ -95,7 +95,11 @@
                         </div>
                         <div class="form group col-md-3">
                             <label for="">Estado</label>
-                            <input type="text" class="form-control" name="estado" id="">
+                            <select name="estado" id="" class="form-control">
+                                <option value="En proceso" selected>En proceso</option>
+                                <option value="Aceptada">Aceptada</option>
+                                <option value="Rechazada">Rechazada</option>
+                            </select>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">

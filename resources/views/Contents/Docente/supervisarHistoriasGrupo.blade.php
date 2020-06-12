@@ -147,9 +147,7 @@
 
 
             <div class="container-sm">
-                <canvas id="estados_historias_grafica" class="chartjs-render-monitor" width="400" height="350">
-
-                </canvas>
+                <canvas id="estados_historias_grafica" class="chartjs-render-monitor" height="75"></canvas>
             </div>
         
     </div>

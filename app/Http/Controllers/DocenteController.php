@@ -276,7 +276,13 @@ class DocenteController extends Controller
     }
     public function getEstadoHistoriasData(Request $request){
         $labels = DocenteDao::getLabelsToEstadoHistorias();
-        return response()->json(array('labels' => $labels));
+        $contador = [];
+        $historias = DocenteDao::getAllHistoriasFromGrupoById($request->id_grupo);
+        foreach($labels as $estado){
+            $conteo = $historias->where('estado', $estado->estado)->count();
+            array_push($contador, $conteo);
+        }
+        return response()->json(array('labels' => $labels, 'contador' => $contador));
     }
     public function detallesMetodologia(Request $request){
         $metodologia = DocenteDao::getMetodologiaById($request->id);
@@ -285,4 +291,3 @@ class DocenteController extends Controller
         return response()->json($metodologia);
       }
     }
-}

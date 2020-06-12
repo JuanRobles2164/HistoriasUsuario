@@ -87,6 +87,7 @@
             </nav>
             <div class="container">
                <?php echo $__env->yieldContent('contenido'); ?>
+               <?php echo $__env->yieldContent('modals'); ?>
             </div>
             <!-- Contenido -->
             <div class="full-box tile-container">

@@ -7,9 +7,10 @@ var chart = new Chart(ctx, {
     data: {
         labels: ['inicial'],
         datasets: [{
-            label: 'My First dataset',
-            backgroundColor: ['rgb(255, 99, 132)', 'rgb(255, 0, 1)', 'rgb(99,178,15)'],
-            borderColor: ['rgb(255, 99, 132)', 'rgb(255, 0, 1)'],
+            label: 'Estado de las historias',
+            //['rgb(255, 99, 132)', 'rgb(255, 0, 1)', 'rgb(99,178,15)']
+            backgroundColor: ['Yellow', 'Red', 'Blue', 'Black'],
+            //borderColor: ['rgb(255, 99, 132)', 'rgb(255, 0, 1)'],
             data: []
         }]
     },
@@ -26,8 +27,17 @@ const updateGraficaEstadoHistorias = () => {
         data: null,
         success: function(response){
             console.log(response);
-            chart.data.labels = response.labels;
-            chart.data.datasets.data = [10];
+            const arrayLabels = [];
+            const arrayCount = [];
+            response.labels.forEach(element => {
+                arrayLabels.push(element.estado);
+            });
+            response.contador.forEach(element => {
+                arrayCount.push(element);
+            });
+            console.log(arrayCount);
+            chart.data.labels = arrayLabels;
+            chart.data.datasets[0].data = arrayCount;
             chart.update();
         },
         error: function(response){
@@ -39,6 +49,8 @@ const updateGraficaEstadoHistorias = () => {
 
 updateGraficaEstadoHistorias();
 
-setInterval(() => {
+/*setInterval(() => {
     updateGraficaEstadoHistorias()
 }, 1000);
+
+*/
