@@ -17,7 +17,7 @@
                 <div class="input-group-prepend">
                     <form action="{{route('docente.postEditarMetodologia')}}" method="POST">
                         @csrf
-                        <input type="hidden" name="id" value="{{$metodologia->id}}">
+                        <input type="hidden" name="id" value="{{$metodologia->id}}" required>
                         <span class="input-group-text" id="basic-addon3">Nombre</span>
                 </div>
                 <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" name="nombre" value="{{$metodologia->nombre}}">
@@ -26,7 +26,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" name="descripcion">Descripción</span>
                 </div>
-                <textarea class="form-control" aria-label="With textarea" name="descripcion">{{$metodologia->descripcion}}</textarea>
+                <textarea class="form-control" aria-label="With textarea" name="descripcion" required>{{$metodologia->descripcion}}</textarea>
             </div>
             <hr class="my-4">
             <button class="btn btn-primary btn-lg btn-block" type="submit">Editar</button>
@@ -35,23 +35,25 @@
     </div>
     <div class="tab-pane fade" id="nav-gabito" role="tabpanel" aria-labelledby="nav-gabito-tab">
         <div class="jumbotron">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <input type="hidden" name="id" value="{{$metodologia->id}}" id="id_metodologia">
-                    <span class="input-group-text" name="url">URL</span>
+            <form>
+                <input type="hidden" name="id" value="{{$metodologia->id}}" id="id_metodologia">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" name="url">URL</span>
+                    </div>
+                    <input type="text" class="form-control" aria-describedby="basic-addon3" id="url_fuente" name="url_fuente" required>
                 </div>
-                <input type="text" class="form-control" aria-describedby="basic-addon3" id="url_fuente" name="url_fuente">
-            </div>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" name="descripcion">Descripción</span>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" name="descripcion" required>Descripción</span>
+                    </div>
+                    <textarea class="form-control" aria-label="With textarea" id="descripcion_fuente" required></textarea>
                 </div>
-                <textarea class="form-control" aria-label="With textarea" id="descripcion_fuente"></textarea>
-            </div>
-            <hr class="my-4">
-            <a class="btn btn-primary btn-lg btn-block" onclick="agregarFuenteMetodologia()" id="btn_agregar_fuente">
-                        Agregar
-                    </a>
+                <hr class="my-4">
+                <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="agregarFuenteMetodologia()" id="btn_agregar_fuente">
+                    Agregar
+                </button>
+            </form>
         </div>
     </div>
     <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">

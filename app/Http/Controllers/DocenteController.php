@@ -295,4 +295,8 @@ class DocenteController extends Controller
         $metodologia = DocenteDao::getMetodologiaById($proyecto->id_metodologia);
         return response()->json(array('proyecto' => $proyecto, 'metodologia' => $metodologia));
     }
+    public function detallesGrupos(Request $request){
+        $grupo = DocenteDao::getGrupoById($request->id_grupo);
+        return response()->json($grupo);  
+    }
 }

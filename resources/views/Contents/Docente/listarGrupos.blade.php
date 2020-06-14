@@ -1,11 +1,12 @@
 @extends('Templates/Docente/_LayoutDocente')
 @section('contenido')
+<input type="hidden" name="api_route_get_grupo" id="api_route_get_grupo" value="{{route('docente.getdetallesGrupos')}}">
 <input type="hidden" name="api_route_get_observacion" id="api_route_get_observacion" value="{{route('docente.getCrearObservacionGrupo')}}">
 <br>
 <form>
     <div class="row">
       <div class="col">
-        <h3>Grupos  </h3>
+        <h3>Grupos</h3>
       </div>
       <div class="col" align="right" valign="top">
         <h4 style="color:gray; align-items: center;">
@@ -88,7 +89,7 @@
                         <a href="#" class="btn btn-danger btn-sm"  data-toggle="modal" data-target=""  onclick="">
                             <i class="far fa-comments"></i>
                         </a>
-                        <a href="#" class="btn btn-info btn-sm">
+                        <a class="btn btn-info btn-sm" style="color: white" onclick="consultandogrupos({{$grupo->id}})">
                             <i class="fas fa-eye"></i>
                         </a>
                          <a href="#" class="btn btn-warning  btn-sm">
@@ -131,9 +132,35 @@
       </div>
     </div>
   </div>
-  @endsection
-
+<div class="modal fade" tabindex="-1" role="dialog" id="modalgrupos">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Grupo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="modal_nombre_grupo" class="col-form-label">Nombre:</label>
+              <input type="text" class="form-control" id="modal_nombre_grupo">
+            </div>
+            <div class="form-group">
+              <label for="descripcion_grupo" class="col-form-label">Descripcion:</label>
+              <textarea class="form-control" id="descripcion_grupo"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCierramodal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+</div>    
+@endsection
 
 @section('custom_scripts')
-    <script src="{{URL::asset('JS/AJAX/docente/observacion.js')}}"></script>
+    <script src="{{URL::asset('JS/AJAX/docente/grupos.js')}}"></script>
 @endsection
