@@ -1,10 +1,19 @@
 @extends('Templates/Docente/_LayoutDocente')
 @section('contenido')
+@if ($errors->any())
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <p>{{$error}}</p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+    @endforeach
+@endif
     <form action="{{route('docente.postEditarProyecto')}}" method="POST">
         <br>
         <div class="jumbotron jumbotron-fluid">
             <div class="container-fluid" style="margin:0px 80px">
-                <form>
                     @csrf
                     <input type="hidden" value="{{$proyecto->id}}" name="id">
                     <div class="form-row">
@@ -43,8 +52,7 @@
                             <label class="text-danger" id="label_fecha_limite">La fecha actual de finalización del proyecto es: {{$proyecto->fecha_limite}}</label>
                             <input type="hidden" id="fecha_limite_element" value="{{$proyecto->fecha_limite}}">
                         </div>
-                    </div>
-                </form>          
+                    </div>        
             </div>
             <p class="text-center">
                 <button type="submit" class="btn btn-warning btn-lg">Editar</button>

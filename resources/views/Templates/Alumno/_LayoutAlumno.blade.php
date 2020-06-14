@@ -90,6 +90,7 @@
 	<script src="{{URL::asset('JS/bootstrap-material-design.min.js')}}" ></script>
 	<script>
 		$(document).ready(function() { $('body').bootstrapMaterialDesign();});
+        $('.alert').alert();
 	</script>
 	<script src="{{URL::asset('JS/main.js')}}"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>

@@ -4,15 +4,27 @@
     <div class="card-header p-3 mb-2 bg-warning text-dark font-weight-bold">
         <h3>Actividades</h3> 
     </div>
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <p>{{$error}}</p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endforeach
+    @endif
     <div class="card-body">
         <form action="{{route('alumno.postCrearActividad')}}" method="POST">
             @csrf
+            <input type="hidden" name="modulo_fecha_inicio" value="{{$modulo->fecha_inicio}}">
+            <input type="hidden" name="modulo_fecha_limite" value="{{$modulo->fecha_limite}}">
             <input type="hidden" name="id_modulo" value="{{$id_modulo}}">
             <div class="d-flex justify-content-center">
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
                     <div class="col-auto">
-                        <input type="text" class="form-control" name="nombre" id="nombre">
+                        <input type="text" class="form-control" name="nombre" id="nombre" required>
                     </div>
                 </div>
                 <div class="form-group col-md-4">
@@ -22,13 +34,17 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="fecha_inicio">Fecha inicio</label>
+                    <label for="fecha_inicio">Fecha inicio: </label>
+                    <br>
+                    <p>(Mínima // {{date('d-m-Y', strtotime($modulo->fecha_inicio))}})</p>
                     <div class="col-auto">
                         <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="fecha_limite">Fecha límite</label>
+                    <label for="fecha_limite">Fecha límite: </label>
+                    <br>
+                    <p>(Máxima // {{date('d-m-Y', strtotime($modulo->fecha_limite))}})</p>
                     <div class="col-auto">
                         <input type="date" class="form-control" name="fecha_limite" id="fecha_limite">
                     </div>

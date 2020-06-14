@@ -2,6 +2,18 @@
 @section('contenido')
     <input type="hidden" value="{{route('alumno.getEditarFase')}}" name="api_route_get_fase" id="api_route_get_fase">
     <br>
+    
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <p>{{$error}}</p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endforeach
+    @endif
+
     <form action="{{route('alumno.postAgregarFase', $proyecto->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="card text-center">
@@ -10,6 +22,8 @@
             </div>
             <div class="card-body">
               <p class="card-text">
+                <input type="hidden" name="proyecto_fecha_limite" value="{{$proyecto->fecha_limite}}">
+                <input type="hidden" name="proyecto_fecha_inicial" value="{{$proyecto->fecha_inicial}}">
                 <input type="hidden" name="id_metodologia" value="{{$proyecto->id_metodologia}}">
                 <input type="hidden" name="id_proyecto" value="{{$proyecto->id}}">
                 <div class="row justify-content-center">
@@ -21,14 +35,18 @@
     
                         <div class="col">
                             <label for="descripcion_fase">Descripcion</label>
-                            <input type="text" class="form-control" name="descripcion" id="descripcion_fase" placeholder="Descripcion" required>
+                            <input type="text" class="form-control" name="descripcion" id="descripcion_fase" placeholder="Descripcion" value="{{Request::old('descripcion')}}">
                         </div>
                         <div class="col">
-                            <label for="fecha_inicio">Fecha inicio</label>
+                            <label for="fecha_inicio">Fecha inicio </label>
+                            <br>
+                            <span>(Mínimo: {{$proyecto->fecha_inicial}})</span>
                             <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" placeholder="Fecha inicio" required>
                         </div>
                         <div class="col">
                             <label for="fecha_limite">Fecha limite</label>
+                            <br>
+                            <span>(Máximo: {{$proyecto->fecha_limite}})</span>
                             <input type="date" class="form-control" name="fecha_limite" id="fecha_limite" placeholder="Fecha límite" required>
                         </div>
                     </div>

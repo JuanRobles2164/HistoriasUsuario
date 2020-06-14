@@ -56,6 +56,13 @@ class AlumnoController extends Controller
         return view($this->ruta.'fasesProyecto')->with(compact(array('proyecto', 'fases')));
     }
     public function postAgregarFase(Request $request){
+        $request->validate(
+            [
+                'nombre' => ['required'],
+                'fecha_inicio' => ['required', 'after_or_equal:proyecto_fecha_inicial', 'before_or_equal:fecha_limite'],
+                'fecha_limite' => ['required', 'before_or_equal:proyecto_fecha_limite', 'after_or_equal:fecha_inicio']
+            ]
+        );
         $fase = new stdClass();
         $fase = $request->except('_token');
         if(isset($request->miniatura_fase)){
@@ -94,10 +101,16 @@ class AlumnoController extends Controller
     public function getTrabajarEnFaseModulos(Request $request){
         $id_proyecto = $request->id_proyecto;
         $id_fase = $request->id_fase;
+        $fase = AlumnoDao::getFaseById($id_fase);
         $modulos = AlumnoDao::getModulosByFaseId($request->id_fase);
-        return view($this->ruta.'trabajarFase' , array('id_proyecto' => $id_proyecto, 'id_fase' => $id_fase))->with(compact(array('id_proyecto', 'id_fase', 'modulos')));
+        return view($this->ruta.'trabajarFase' , array('id_proyecto' => $id_proyecto, 'id_fase' => $id_fase, 'fase' => $fase))->with(compact(array('id_proyecto', 'id_fase', 'modulos')));
     }
     public function postCrearModulo(Request $request){
+        $request->validate([
+            'nombre' => 'required',
+            'fecha_inicio' => ['required', 'after_or_equal:fase_fecha_inicio', 'before_or_equal:fecha_limite'],
+            'fecha_limite' => ['required', 'before_or_equal:fase_fecha_limite', 'after_or_equal:fecha_inicio']
+        ]);
         $modulo = $request->except('_token');
         AlumnoDao::agregarModulo($modulo);
         return back();
@@ -107,6 +120,11 @@ class AlumnoController extends Controller
         return json_encode($modulo);
     }
     public function postEditarModulo(Request $request){
+        $request->validate([
+            'nombre' => 'required',
+            'fecha_inicio' => ['required', 'after_or_equal:fase_fecha_inicio', 'before_or_equal:fecha_limite'],
+            'fecha_limite' => ['required', 'before_or_equal:fase_fecha_limite', 'after_or_equal:fecha_inicio']
+        ]);
         $modulo = $request->except('_token', 'id_proyecto', 'id_fase');
         AlumnoDao::editarModulo($modulo);
         
@@ -114,12 +132,12 @@ class AlumnoController extends Controller
     }
     public function getActividadesByModulo(Request $request){
         $actividades = AlumnoDao::getActividadesByModuloId($request->id_modulo);
+        $modulo = AlumnoDao::getModuloById($request->id_modulo);
         return view($this->ruta.'trabajarModulo',  
         array('id_modulo' => $request->id_modulo, 
         'id_proyecto' => $request->id_proyecto, 
         'id_fase' => $request->id_fase))
-        ->with(compact('actividades'));
-        //$recursos = AlumnoDao::getAllRecursosFromActividad($);
+        ->with(compact('actividades', 'modulo'));
     }
     public function getRecursosByActividad(Request $request){
         $recursos = AlumnoDao::getAllRecursosFromActividad($request->id_actividad);
@@ -132,6 +150,11 @@ class AlumnoController extends Controller
         ->with(compact('recursos', 'tipos_recurso'));
     }
     public function postCrearActividad(Request $request){
+        $request->validation([
+            'fecha_inicio' => ['required', 'after_or_equal:modulo_fecha_inicio', 'before_or_equal:fecha_limite'],
+            'fecha_limite' => ['required', 'before_or_equal:modulo_fecha_limite', 'after_or_equal:fecha_inicio'],
+            'nombre' => 'required'
+        ]);
         $actividad = $request->except('_token');
         AlumnoDao::crearActividad($actividad);
         return back();

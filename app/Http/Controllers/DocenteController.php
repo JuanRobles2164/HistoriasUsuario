@@ -129,7 +129,11 @@ class DocenteController extends Controller
         return View($this->ruta.'crearProyecto')->with(compact('metodologias'));
     }
     public function postCrearProyecto(Request $request){
-
+        $request->validate([
+            'nombre' => 'required',
+            'fecha_inicial' => ['required', 'before_or_equal:fecha_limite'],
+            'fecha_limite' => ['required', 'after_or_equal:fecha_inicial']
+        ]);
         $cookie_docente = Utilities::returnDecryptedCookieByName('usuario');
         $proyecto = new proyecto();
         $proyecto->nombre = $request->nombre;
@@ -156,6 +160,11 @@ class DocenteController extends Controller
         return view($this->ruta.'editarProyecto')->with(compact(array('proyecto','metodologias')));
     }
     public function postEditarProyecto(Request $request){
+        $request->validate([
+            'nombre' => 'required',
+            'fecha_inicial' => ['required', 'before_or_equal:fecha_limite'],
+            'fecha_limite' => ['required', 'after_or_equal:fecha_inicial']
+        ]);
         $proyecto = DocenteDao::getProyectoById($request->id);
         $proyecto->nombre = $request->nombre;
         $proyecto->descripcion = $request->descripcion;
@@ -193,7 +202,6 @@ class DocenteController extends Controller
     public function postCrearGrupo(Request $request){
         $request->validate([
             'nombre' => 'required',
-            'descripcion' => 'required'
         ]);
         $grupo = new grupo();
         $grupo->nombre = $request->nombre;

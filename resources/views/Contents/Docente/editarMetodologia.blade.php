@@ -13,18 +13,18 @@
 <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <div class="jumbotron">
-            <div class="input-group mb-3">
+                <form action="{{route('docente.postEditarMetodologia')}}" method="POST">
+                    <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <form action="{{route('docente.postEditarMetodologia')}}" method="POST">
                         @csrf
                         <input type="hidden" name="id" value="{{$metodologia->id}}">
                         <span class="input-group-text" id="basic-addon3">Nombre</span>
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" name="nombre" value="{{$metodologia->nombre}}">
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" name="nombre" value="{{$metodologia->nombre}}" required>
             </div>
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" name="descripcion">Descripción</span>
+                    <span class="input-group-text">Descripción</span>
                 </div>
                 <textarea class="form-control" aria-label="With textarea" name="descripcion">{{$metodologia->descripcion}}</textarea>
             </div>
@@ -69,7 +69,7 @@
                     @foreach ($fuentes as $fuente)
                     <tr>
                         <th scope="row">
-                            <a href="{{$fuente->url}}" target="_blank">Redirigir</a>
+                            <a href="{{$fuente->url}}" target="_blank">{{$loop->iteration}} - {{parse_url($fuente->url, PHP_URL_HOST)}}</a>
                         </th>
                         <th scope="row">{{$fuente->descripcion}}</th>
                         <th scope="row">

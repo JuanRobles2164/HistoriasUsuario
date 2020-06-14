@@ -4,6 +4,7 @@
 <input type="hidden" name="api_route_get_historia" id="api_route_get_historia" value="{{route('docente.getHistoriaUsuario')}}">
 <br>
 <h3>Supervisando avances del grupo: {{$id_grupo}}</h3>
+
 <br>
 <ul class="nav nav-tabs" id="myNavTabs" role="tablist">
     <li class="nav-item">

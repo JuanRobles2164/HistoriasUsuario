@@ -3,12 +3,23 @@
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
+  <h2 class="display-4" style="margin:30px 220px"> <i class="fas fa-project-diagram"></i> Nuevo Proyecto</h2>
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <p>{{$error}}</p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        @endforeach
+    @endif
+    
     <form action="{{route('docente.postCrearProyecto')}}" method="POST">
         <br>
         <div class="jumbotron jumbotron-fluid">
             <div class="container-fluid" style="margin:0px 80px;">
-              <h2 class="display-4" style="margin:30px 220px"> <i class="fas fa-project-diagram"></i> Nuevo Proyecto</h2>
-                <form>
+              
                     @csrf
                     <div class="row">
                         <div class="col-md-4 mb-3">
@@ -46,7 +57,7 @@
                         </div>
                     </div>
                     <input type="hidden" name="id_estado" value="1">
-                </form>        
+                        
             </div>
             <br>
             <p class="text-center">

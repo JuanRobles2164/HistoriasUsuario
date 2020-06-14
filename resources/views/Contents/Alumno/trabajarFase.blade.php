@@ -1,6 +1,18 @@
 @extends('/Templates/Alumno/_LayoutAlumno')
 @section('contenido')
 <input type="hidden" value="{{route('alumno.getEditarModulo')}}" name="api_route_get_modulo" id="api_route_get_modulo">
+
+@if ($errors->any())
+@foreach ($errors->all() as $error)
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <p>{{$error}}</p>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+@endforeach
+@endif
+
 <div class="card text-center">
     <div class="card-header">
         <h3>Administrando los Módulos</h3>
@@ -10,6 +22,8 @@
         <form action="{{route('alumno.postCrearModulo')}}" method="POST">
             @csrf
             <input type="hidden" name="id_fase" value="{{$id_fase}}">
+            <input type="hidden" name="fase_fecha_inicio" value="{{$fase->fecha_inicio}}">
+            <input type="hidden" name="fase_fecha_limite" value="{{$fase->fecha_limite}}">
             <div class="d-flex justify-content-center">
                 <div class="form-group row">
                     <label for="nombre" class="col-sm-4 col-form-label">Nombre:</label>
@@ -20,17 +34,17 @@
                 <div class="form-group row">
                     <label for="descripcion" class="col-sm-5 col-form-label">Descripción</label>
                     <div class="col-sm-10">
-                        <textarea type="text" class="form-control" name="descripcion" id="descripcion" required></textarea>
+                        <textarea type="text" class="form-control" name="descripcion" id="descripcion"></textarea>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="fecha_inicio" class="col-sm-7 col-form-label">Fecha inicio:</label>
+                    <label for="fecha_inicio" class="col-sm-8 col-form-label">Fecha inicio: (Mínima // {{date('d-m-Y', strtotime($fase->fecha_inicio))}})</label>
                     <div class="col-sm-10">
                         <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" required>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="fecha_limite" class="col-sm-7 col-form-label">Fecha limite:</label>
+                    <label for="fecha_limite" class="col-sm-8 col-form-label">Fecha limite: (Máxima // {{date('d-m-Y', strtotime($fase->fecha_limite))}})</label>
                     <div class="col-sm-10">
                         <input type="date" class="form-control" name="fecha_limite" id="fecha_limite" required>
                     </div>

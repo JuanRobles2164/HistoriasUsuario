@@ -97,7 +97,6 @@
             </footer>
          </section>
       </main>
-      <?php echo $__env->yieldContent('modals'); ?>
       <!-- Sweet Alert V8.13.0 JS file-->
       <script src="<?php echo e(URL::asset('JS/sweetalert2.min.js')); ?>"></script>
       <!-- jQuery V3.4.1 -->
@@ -112,6 +111,7 @@
       <script src="<?php echo e(URL::asset('JS/bootstrap-material-design.min.js')); ?>" ></script>
       <script>
          $(document).ready(function() { $('body').bootstrapMaterialDesign();});
+         $('.alert').alert();
       </script>
       <script src="<?php echo e(URL::asset('JS/main.js')); ?>"></script>
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
