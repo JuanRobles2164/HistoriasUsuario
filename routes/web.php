@@ -69,6 +69,8 @@ Route::get('/docente/revision/historia_usuario', 'DocenteController@getHistoriaU
 Route::get('/docente/grupos/{id_grupo}/graficas/historias_estados', 'DocenteController@getEstadoHistoriasData')->name('docente.graficas.getHistoriasEstadosData');
 Route::get('/docente/detalles_metodologia', 'DocenteController@detallesMetodologia')->name('docente.getdetallesMetodologia');
 Route::get('/docente/detalles_proyectos', 'DocenteController@detallesProyectos')->name('docente.getdetallesProyectos');
+Route::get('/docente/api/detalles_grupos', 'DocenteController@detallesGrupos')->name('docente.getdetallesGrupos');
+
 
 Route::post('/docente/forms_agiles/crear_metodologia', 'Docente\MetodologiaController@postCrearMetodologiaAJAX')->name('docente.formsAgiles.postCrearMetodologia');
 /*

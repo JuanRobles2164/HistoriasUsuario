@@ -8,13 +8,14 @@ var chart = new Chart(ctx, {
         labels: ['inicial'],
         datasets: [{
             label: 'Estado de las historias',
-            //['rgb(255, 99, 132)', 'rgb(255, 0, 1)', 'rgb(99,178,15)']
-            backgroundColor: ['Yellow', 'Red', 'Blue', 'Black'],
-            //borderColor: ['rgb(255, 99, 132)', 'rgb(255, 0, 1)'],
+            backgroundColor: [
+                '#00D8FF',
+                '#DD1B16',
+                '#41B883'
+            ],
             data: []
         }]
     },
-
     // Configuration options go here
     options: {}
 });
