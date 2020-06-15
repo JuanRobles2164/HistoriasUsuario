@@ -30,6 +30,15 @@ class AlumnoDao extends Controller
         ->get();
         return $fases;
     }
+    public static function getFasesFromProyectoByGrupoId($id_proyecto, $id_grupo_trabajo){
+        $fases = DB::table('fase')
+        ->where([
+            ['id_proyecto', $id_proyecto],
+            ['id_grupo_trabajo', $id_grupo_trabajo]
+        ])
+        ->get();
+        return $fases;
+    }
     /**
      * Miniatura, descripcion, nombre, fecha_limite, id_proyecto, id_metodologia
      *
@@ -37,7 +46,7 @@ class AlumnoDao extends Controller
      * @return void
      */
 
-    public static function crearFase($fase){
+    public static function crearFase($fase, $id_grupo_trabajo){
         return DB::table('fase')
         ->insertGetId([
             'nombre' => $fase['nombre'],
@@ -48,6 +57,7 @@ class AlumnoDao extends Controller
             'id_proyecto' => $fase['id_proyecto'],
             'id_estado' => 1,
             'id_metodologia' => $fase['id_metodologia'],
+            'id_grupo_trabajo' => $id_grupo_trabajo,
             'created_at' => Utilities::getCurrentDate()
         ]);
     }
@@ -343,13 +353,14 @@ class AlumnoDao extends Controller
         ->get();
         return $evidencias;
     }
-    public static function crearFaseAgil($fase, $id_metodologia){
+    public static function crearFaseAgil($fase, $id_metodologia, $id_grupo_trabajo){
         $id = DB::table('fase')->insertGetId([
             'nombre' => $fase['nombre'],
             'descripcion' => $fase['descripcion'],
             'fecha_limite' => $fase['fecha_limite'],
             'fecha_inicio' => $fase['fecha_inicio'],
             'id_proyecto' => $fase['id_proyecto'],
+            'id_grupo_trabajo' => $id_grupo_trabajo,
             'id_estado' => 1,
             'id_metodologia' => $id_metodologia,
             'created_at' => Utilities::getCurrentDate()

@@ -8,6 +8,7 @@ use App\Http\Daos\AlumnoDao;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Crypt;
 use App\grupoTrabajo;
+use App\Http\Daos\GrupoTrabajoDao;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Daos\UsuarioDao;
@@ -22,7 +23,6 @@ class AlumnoController extends Controller
     public function index(Request $request){
         return view($this->ruta.'indexAlumno');
     }
-
     public function getSelfEdit(Request $request){
         $usuario = UsuarioDao::getUserById( json_decode(Crypt::decrypt(Cookie::get('usuario')))->id );
         return view($this->ruta.'editPerfil')->with(compact('usuario'));
@@ -51,7 +51,10 @@ class AlumnoController extends Controller
     }
     public function getFasesProyecto(Request $request){
         $proyecto = AlumnoDao::getProyectoById($request->id_proyecto);
+        $usuario = Utilities::returnDecryptedCookieByName('usuario');
+        $grupo_trabajo = GrupoTrabajoDao::getGrupoTrabajo($proyecto->id, $usuario->id);
         $fases = AlumnoDao::getFasesFromProyecto($proyecto->id);  
+        $fases = $fases->where('id_grupo_trabajo', $grupo_trabajo->id);
         //return json_encode($fases);
         return view($this->ruta.'fasesProyecto')->with(compact(array('proyecto', 'fases')));
     }
@@ -70,9 +73,11 @@ class AlumnoController extends Controller
         }else{
             $fase['miniatura_fase'] = 'uploads/terminal.png';
         }
-        AlumnoDao::crearFase($fase);
+        $usuario = Utilities::returnDecryptedCookieByName('usuario');
+        $grupo_trabajo = GrupoTrabajoDao::getGrupoTrabajo($request->id_proyecto, $usuario->id);
+        AlumnoDao::crearFase($fase, $grupo_trabajo->id);
         //$fase->created_at = date('Y-m-d H:i:s', strtotime('now - 4 hours'));
-        return redirect()->route('alumno.getFasesProyecto', $request->id_proyecto);
+        return back();
     }
 
     public function getEditarFase(Request $request){
@@ -150,14 +155,18 @@ class AlumnoController extends Controller
         ->with(compact('recursos', 'tipos_recurso'));
     }
     public function postCrearActividad(Request $request){
-        $request->validation([
+        $request->validate([
             'fecha_inicio' => ['required', 'after_or_equal:modulo_fecha_inicio', 'before_or_equal:fecha_limite'],
             'fecha_limite' => ['required', 'before_or_equal:modulo_fecha_limite', 'after_or_equal:fecha_inicio'],
             'nombre' => 'required'
         ]);
         $actividad = $request->except('_token');
         AlumnoDao::crearActividad($actividad);
-        return back();
+        return redirect()->route('alumno.getActividadesByModulo', [
+            'id_proyecto' => $request->id_proyecto,
+            'id_fase' => $request->id_fase,
+            'id_modulo' => $request->id_modulo
+        ]);
     }
     public function getEliminarActividad(Request $request){
         AlumnoDao::eliminarActividad($request->id);
@@ -261,6 +270,9 @@ class AlumnoController extends Controller
     public function getCrearHistoriaUsuario(Request $request){
         $usuarios_entrevistados = AlumnoDao::getAllUsuariosEntrevistados();
         $fases = AlumnoDao::getFasesFromProyecto($request->id_proyecto);
+        $usuario = Utilities::returnDecryptedCookieByName('usuario');
+        $grupo_trabajo = GrupoTrabajoDao::getGrupoTrabajo($request->id_proyecto, $usuario->id);
+        $fases = $fases->where('id_grupo_trabajo', $grupo_trabajo->id);
         $id_proyecto = $request->id_proyecto;
         return view($this->ruta.'CrearHistoriaUsuario')->with(compact(array('usuarios_entrevistados', 'fases','id_proyecto')));
     }

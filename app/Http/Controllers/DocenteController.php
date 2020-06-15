@@ -254,6 +254,7 @@ class DocenteController extends Controller
     }
     public function getSupervisarGrupo(Request $request){
         $fases = AlumnoDao::getFasesFromProyecto($request->id_proyecto);
+        $fases = $fases->where('id_grupo_trabajo', $request->id_grupo);
         $modulos = [];
         foreach($fases as $fase){
             array_push($modulos, AlumnoDao::getModulosByFaseId($fase->id));

@@ -15,7 +15,11 @@
         @endforeach
     @endif
     <div class="card-body">
-        <form action="{{route('alumno.postCrearActividad')}}" method="POST">
+        <form action="{{route('alumno.postCrearActividad',[
+            'id_proyecto' => $id_proyecto,
+            'id_fase' => $id_fase,
+            'id_modulo' => $id_modulo
+        ])}}" method="POST">
             @csrf
             <input type="hidden" name="modulo_fecha_inicio" value="{{$modulo->fecha_inicio}}">
             <input type="hidden" name="modulo_fecha_limite" value="{{$modulo->fecha_limite}}">

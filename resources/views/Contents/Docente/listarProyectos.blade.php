@@ -20,7 +20,7 @@
                 <tr>
                     <th style="text-align: center;">{{$proyecto->nombre}}</th>
                     <th style="text-align: center;">{{$proyecto->fecha_limite}}</th>
-                    <th style="text-align: center;">{{($proyecto->dias_restantes)}}</th>
+                    <th style="text-align: center;">{{date('d', (strtotime("$proyecto->fecha_limite") - strtotime('now')))}}</th>
                     @if ($proyecto->id_estado == 1)
                         <th style="text-align: center;">
                             <a href="{{route('docente.getAlternarEstadoProyecto', 'id='.$proyecto->id."&id_estado=".$proyecto->id_estado)}}" class="btn btn-success">Activo</a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Alumno;
 
 use App\Http\Controllers\Controller;
 use App\Http\Daos\AlumnoDao;
+use App\Http\Daos\GrupoTrabajoDao;
 use App\Http\Util\Utilities;
 use Illuminate\Http\Request;
 use stdClass;
@@ -16,7 +17,9 @@ class HistoriasController extends Controller
 
     public function CrearFaseRetornoAJAX(Request $request){
         $fase = $request->except('_token');
-        $id = AlumnoDao::crearFase($fase);
+        $usuario = Utilities::returnDecryptedCookieByName('usuario');
+        $grupo_trabajo = GrupoTrabajoDao::getGrupoTrabajo($request->id_proyecto, $usuario->id);
+        $id = AlumnoDao::crearFase($fase, $grupo_trabajo->id);
         $fase_retorno = new stdClass();
         $fase_retorno->nombre = $fase['nombre'];
         $fase_retorno->id = $id;
@@ -28,10 +31,15 @@ class HistoriasController extends Controller
         return view($this->ruta.'CrearHistoriaUsuario')->with(compact(array('usuarios_entrevistados', 'fases')));
     }
     public function postCrearFaseAJAX(Request $request){
+
+        $usuario = Utilities::returnDecryptedCookieByName('usuario');
+        $grupo_trabajo = GrupoTrabajoDao::getGrupoTrabajo($request->id_proyecto, $usuario->id);
+
         $fase = new stdClass();
         $fase = $request->except('_token');
+        
         $metodologia = AlumnoDao::getMetodologiaByIdProyecto($fase['id_proyecto']);
-        $id_fase = AlumnoDao::crearFaseAgil($fase, $metodologia->id);
+        $id_fase = AlumnoDao::crearFaseAgil($fase, $metodologia->id, $grupo_trabajo->id);
         $faseRetorno = AlumnoDao::getFaseById($id_fase);
         return response()->json($faseRetorno);
     }

@@ -2,7 +2,7 @@
 @section('contenido')
 <input type="hidden" name="api_route_get_modulos" id="api_route_get_modulos" value="{{route('alumno.select.getListaModulos')}}">
 <input type="hidden" name="api_route_get_actividades" id="api_route_get_actividades" value="{{route('alumno.select.getListaActividades')}}">
-<input type="hidden" name="api_route_crear_fase" id="api_route_crear_fase" value="{{route('alumno.formsAgiles.postCrearFase')}}">
+<input type="hidden" name="api_route_crear_fase" id="api_route_crear_fase" value="{{route('alumno.formsAgiles.postCrearFase', array('id_proyecto' => $id_proyecto))}}">
 <input type="hidden" name="api_route_crear_modulo" id="api_route_crear_modulo" value="{{route('alumno.formsAgiles.postCrearModulo')}}">
 <input type="hidden" name="api_route_crear_actividad" id="api_route_crear_actividad" value="{{route('alumno.formsAgiles.postCrearActividad')}}">
 <div class="card text-center shadow-lg p-3 mb-5 bg-white rounded">

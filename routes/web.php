@@ -70,7 +70,8 @@ Route::get('/docente/grupos/{id_grupo}/graficas/historias_estados', 'DocenteCont
 Route::get('/docente/detalles_metodologia', 'DocenteController@detallesMetodologia')->name('docente.getdetallesMetodologia');
 Route::get('/docente/detalles_proyectos', 'DocenteController@detallesProyectos')->name('docente.getdetallesProyectos');
 Route::get('/docente/api/detalles_grupos', 'DocenteController@detallesGrupos')->name('docente.getdetallesGrupos');
-
+Route::get('/docente/proyectos/{id_proyecto}/grupos/{id_grupo}/avances/cronograma', 'CronogramaController@getCronogramaByGrupoId')->name('docente.getCronogramaByGrupoId');
+Route::get('/docente/proyectos/{id_proyecto}/grupos/{id_grupo}/avances/cronograma/llenar', 'CronogramaController@getDataCronogramaByGrupoId')->name('docente.getDataCronogramaByGrupoId');
 
 Route::post('/docente/forms_agiles/crear_metodologia', 'Docente\MetodologiaController@postCrearMetodologiaAJAX')->name('docente.formsAgiles.postCrearMetodologia');
 /*
@@ -101,7 +102,7 @@ Route::post('/alumno/modulos/post_editar_modulo','AlumnoController@postEditarMod
 
 Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades','AlumnoController@getActividadesByModulo')->name('alumno.getActividadesByModulo');
 
-Route::post('/alumno/actividad/crear_actividad','AlumnoController@postCrearActividad')->name('alumno.postCrearActividad');
+Route::post('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades','AlumnoController@postCrearActividad')->name('alumno.postCrearActividad');
 Route::get('/alumno/actividad/eliminar_actividad','AlumnoController@getEliminarActividad')->name('alumno.getEliminarActividad');
 Route::get('/alumno/actividad/entregar','AlumnoController@getEntregarActividad')->name('alumno.getEntregarActividad');
 Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades/{id_actividad}/recursos','AlumnoController@getRecursosByActividad')->name('alumno.getRecursosByActividad');
@@ -122,7 +123,7 @@ Route::get('/alumno/select/actividades', 'AlumnoController@getSelectActividades'
 //enrutado para form agil
 Route::get('/alumno/proyectos/{id_proyecto}/forms_agiles/historia_usuario', 'AlumnoController@getCrearHistoriaUsuario')->name('alumno.formsAgiles.getCrearHistoriaUsuario');
 Route::post('/alumno/proyectos/{id_proyecto}/forms_agiles/historia_usuario', 'AlumnoController@postCrearHistoriaUsuario')->name('alumno.formsAgiles.postCrearHistoriaUsuario');
-Route::post('/alumno/forms_agiles/crear_fase', 'Alumno\HistoriasController@postCrearFaseAJAX')->name('alumno.formsAgiles.postCrearFase');
+Route::post('/alumno/proyetos/{id_proyecto}/forms_agiles/crear_fase', 'Alumno\HistoriasController@postCrearFaseAJAX')->name('alumno.formsAgiles.postCrearFase');
 Route::post('/alumno/forms_agiles/crear_modulo', 'Alumno\HistoriasController@postCrearModuloAJAX')->name('alumno.formsAgiles.postCrearModulo');
 Route::post('/alumno/forms_agiles/crear_actividad', 'Alumno\HistoriasController@postCrearActividadAJAX')->name('alumno.formsAgiles.postCrearActividad');
 

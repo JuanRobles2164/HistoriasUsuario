@@ -22,6 +22,15 @@
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
       <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+      
+      <link href="<?php echo e(URL::asset('JS/fullcalendar/packages/core/main.css')); ?>" rel='stylesheet' />
+      <link href="<?php echo e(URL::asset('JS/fullcalendar/packages/daygrid/main.css')); ?>" rel='stylesheet' />
+  
+   <script src="<?php echo e(URL::asset('JS/fullcalendar/packages/core/main.js')); ?>"></script>
+   <script src=<?php echo e(URL::asset('JS/fullcalendar/packages/daygrid/main.js')); ?>></script>
+   <script src=<?php echo e(URL::asset('JS/fullcalendar/es.js')); ?>></script>
+
    </head>
    <body>
       <input type="hidden" name="" id="log_out_route" value="<?php echo e(route('getLogin')); ?>">

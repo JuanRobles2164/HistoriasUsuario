@@ -6,6 +6,10 @@
 <h3>Supervisando avances del grupo: {{$id_grupo}}</h3>
 
 <br>
+<h4><a target="_blank" href="{{route('docente.getCronogramaByGrupoId', [
+    'id_proyecto' => $id_proyecto,
+    'id_grupo' => $id_grupo
+])}}">Cronograma del grupo</a></h4>
 <ul class="nav nav-tabs" id="myNavTabs" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" id="fases-tab" data-toggle="tab" href="#fases" role="tab" aria-controls="fases" aria-selected="true">Fases</a>

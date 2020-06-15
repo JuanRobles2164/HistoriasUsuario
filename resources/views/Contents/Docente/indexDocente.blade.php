@@ -1,5 +1,6 @@
 @extends('Templates/Docente/_LayoutDocente')
 @section('contenido')
+
 		<!-- cabecera de pagina -->
 		<div class="full-box page-header">
 			<h3 class="text-left">
