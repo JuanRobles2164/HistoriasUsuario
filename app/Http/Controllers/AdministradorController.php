@@ -131,8 +131,8 @@ class AdministradorController extends Controller
      * @return void
      */
     public function restaurarUsuario(Request $request){
-        AdministradorDao::restaurarUsuario($request->id);
-        return redirect()->route('admin.getListUsuarios');
+        $usuario = AdministradorDao::restaurarUsuario($request->id);
+        return json_encode($usuario);
     }
     public function eliminarUsuario(Request $request){
         $usuario = new usuario();

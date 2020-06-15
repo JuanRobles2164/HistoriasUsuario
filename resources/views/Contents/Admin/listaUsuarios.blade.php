@@ -1,5 +1,6 @@
 @extends('Templates/Admin/_LayoutAdmin')
 @section('contenido')
+<input type="hidden" name="api_route_get_reinicio" id="api_route_get_reinicio" value="{{route('admin.restaurarUsuario')}}">
 <br>
 <div class="d-flex bd-highlight mb-3">
    <div class="p-2 bd-highlight"><h3>Lista de usuarios</h3> </div>     
@@ -15,8 +16,8 @@
            </button>
          </div>
          <div class="toast-body alert-success">
-           El usuario se ha restablecido por defecto.
-        </div>
+           El usuario <input type="text" style="background-color:transparent; border-width: 0;" style="width: fit-content" id="usuario_toast"> se ha restablecido por defecto.
+         </div>
       </div>
    </div>
 </div>
@@ -57,6 +58,9 @@
             <a href="{{route('admin.getEdit', 'id='.$usuario->id)}}" class="btn btn-success btn-sm">
                <i class="fas fa-user-edit"></i>
             </a>
+            <a onclick="mostrarToast({{$usuario->id}})" class="btn btn-warning btn-sm clase_btn_notificacion" style="color: white;">
+               <i class="fas fa-sync-alt"></i>
+            </a>
             <a onclick="mostrarToast()" class="btn btn-warning btn-sm clase_btn_notificacion" style="color: white;">
                <i class="fas fa-sync-alt"></i>
             </a>
@@ -69,11 +73,31 @@
 </footer>
 
 <script>
-   function mostrarToast() {
-    var toast = document.getElementById("mitoast");
-    toast.className = "mostrar";
-    setTimeout(function(){ toast.className = toast.className.replace("mostrar", ""); }, 5000);
-}
+   function mostrarToast(idUsuario) {
+      const ruta = $('#api_route_get_reinicio').val();
+      console.log(idUsuario);
+        $.ajax({
+          url: ruta,
+          type: 'GET',
+          async: true,
+          data: {'id': idUsuario, 'legal':true},
+          success: function(response){
+            console.log(response);
+            let data = JSON.parse(response);
+            console.log(data);
+            $('#usuario_toast').val(data.nombres +' '+data.apellidos);
+            $('#usuario_toast').attr('disabled','disabled');
+            var toast = document.getElementById("mitoast");
+            toast.className = "mostrar";           
+            setTimeout(function(){ toast.className = toast.className.replace("mostrar", ""); }, 5000);
+          },
+          error: function(response){
+            console.log(response);
+            alert("Algo salió mal... vuelve a intentarlo");
+            response = null;
+          }
+        });   
+   }
 
 function cerrarToast() {
     var toast = document.getElementById("mitoast");

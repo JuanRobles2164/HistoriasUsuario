@@ -65,6 +65,7 @@ class AdministradorDao extends Controller
         DB::table('usuarios')
         ->where('id',$id)
         ->update(array('username' => $usuario->username, 'contrasenia' => $usuario->contrasenia));
+        return $usuario;
     }
 
     /**
