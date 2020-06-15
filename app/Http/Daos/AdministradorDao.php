@@ -24,7 +24,7 @@ class AdministradorDao extends Controller
         ->orderBy('estado_eliminado')
         ->join('roles', 'usuarios.rol_id','=','roles.id')
         ->select('usuarios.*', 'roles.abreviatura')
-        ->get();
+        ->paginate(5);
         return $usuarios;
     }
     /**Retorna sólo los usuarios activos

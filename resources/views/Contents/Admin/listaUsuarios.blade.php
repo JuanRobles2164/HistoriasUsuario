@@ -68,6 +68,9 @@
       </tr>
    @endforeach
 </table>
+<div>
+   {{$usuarios->links()}}
+</div>
 <footer class="blockquote-footer">
    <cite> © 2020 Copyright: GEA Software. </cite>
 </footer>
