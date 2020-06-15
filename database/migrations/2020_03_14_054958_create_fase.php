@@ -23,11 +23,13 @@ class CreateFase extends Migration
             $table->unsignedBigInteger('id_metodologia');
             $table->unsignedBigInteger('id_proyecto');
             $table->unsignedBigInteger('id_estado');
+            $table->unsignedBigInteger('id_grupo_trabajo');
             $table->timestamps();
 
             $table->foreign('id_metodologia')->references('id')->on('metodologia');
             $table->foreign('id_proyecto')->references('id')->on('proyecto');
             $table->foreign('id_estado')->references('id')->on('estado');
+            $table->foreign('id_grupo_trabajo')->references('id')->on('grupo_trabajo');
         });
     }
 
