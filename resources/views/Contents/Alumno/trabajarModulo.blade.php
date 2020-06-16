@@ -4,6 +4,11 @@
     <div class="card-header p-3 mb-2 bg-warning text-dark font-weight-bold">
         <h3>Actividades</h3> 
     </div>
+    <a href="{{route('alumno.getTrabajarEnFaseModulos', [
+            'id_proyecto' => $id_proyecto,
+            'id_fase' => $id_fase,
+
+        ])}}" class="btn btn-danger">Volver</a>
     @if ($errors->any())
         @foreach ($errors->all() as $error)
             <div class="alert alert-warning alert-dismissible fade show" role="alert">

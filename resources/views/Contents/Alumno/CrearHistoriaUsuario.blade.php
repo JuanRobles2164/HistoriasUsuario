@@ -12,6 +12,9 @@
             <a class="nav-link disabled text-warning" href="#" tabindex="-1" aria-disabled="true">Historias de usuario</a>
           </li>
           <li class="nav-item">
+            <a href="{{route('alumno.getListaProyectos')}}" class="nav-link">Volver</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link active" id="pills-select-tab" data-toggle="pill" href="#pills-select" role="tab" aria-controls="pills-select" aria-selected="true"><i class="fas fa-user-plus fa-lg"></i></a>
           </li>
           <li class="nav-item">

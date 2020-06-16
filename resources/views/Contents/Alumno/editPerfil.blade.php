@@ -9,6 +9,7 @@
    </p>
 </div>
 <!-- Content -->
+<a href="{{route('alumno.getIndex')}}" class="btn btn-warning">Volver</a>
 <div class="full-box tile-container">
 <form class="form-neon" autocomplete="off" action="{{route('alumno.postSelfEdit')}}" method="POST">
    @csrf

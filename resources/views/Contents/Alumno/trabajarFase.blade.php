@@ -14,6 +14,9 @@
 @endif
 
 <div class="card text-center">
+    <a href="{{route('alumno.getFasesProyecto', [
+        'id_proyecto' => $id_proyecto
+    ])}}" class="btn btn-danger">Volver</a>
     <div class="card-header">
         <h3>Administrando los Módulos</h3>
     </div>

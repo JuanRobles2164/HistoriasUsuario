@@ -2,7 +2,6 @@
 @section('contenido')
     <input type="hidden" value="{{route('alumno.getEditarFase')}}" name="api_route_get_fase" id="api_route_get_fase">
     <br>
-    
     @if ($errors->any())
         @foreach ($errors->all() as $error)
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -17,6 +16,7 @@
     <form action="{{route('alumno.postAgregarFase', $proyecto->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="card text-center">
+            <a href="{{route('alumno.getListaProyectos')}}" class="btn btn-danger">Volver</a>
             <div class="card-header">
                 <h3>Trabajando en las fases del proyecto: {{$proyecto->nombre}}</h3>
             </div>

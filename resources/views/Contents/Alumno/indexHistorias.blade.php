@@ -4,6 +4,14 @@
     <div class="card-header">
       <ul class="nav nav-pills card-header-pills">
           <li class="nav-item">
+            <a href="{{route('alumno.getActividadesByModulo',
+            [
+                'id_proyecto' => $id_proyecto,
+                'id_fase' => $id_fase,
+                'id_modulo' => $id_modulo,
+            ])}}" class="nav-link">Volver</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link disabled text-warning" href="#" tabindex="-1" aria-disabled="true">Historias de usuario</a>
           </li>
           <li class="nav-item">
