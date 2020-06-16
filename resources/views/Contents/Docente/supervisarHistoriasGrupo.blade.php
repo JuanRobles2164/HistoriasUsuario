@@ -139,7 +139,13 @@
                         <td>{{gmdate('d',(strtotime($historia->fecha_fin) - strtotime($historia->fecha_inicio)))}}</td>
                         <td>{{gmdate('d',(strtotime('now') - strtotime($historia->fecha_fin)))}}</td>
                         <td>
-                            <button href="#" onclick="consultarHistoria({{$historia->id}})" type="button" class="btn btn-primary">Ver</button>
+                            <a href="#" onclick="consultarHistoria({{$historia->id}})" type="button" class="btn btn-primary">Ver</a>
+                            <a href="{{route('docente.generarPdf.getHistoriaPdfById',
+                            [
+                                'id_proyecto' => $id_proyecto,
+                                'id_grupo' => $id_grupo,
+                                'id_historia' => $historia->id
+                            ])}}" class="btn btn-success">PDF</a>
                         </td>
                     </tr>
                 @endforeach

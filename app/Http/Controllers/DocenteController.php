@@ -17,9 +17,6 @@ use stdClass;
 use App\grupo;
 use App\Http\Daos\AlumnoDao;
 use App\Http\Util\Utilities;
-use App\Mail\ObservacionesMail;
-use Exception;
-use Illuminate\Support\Facades\Mail;
 
 class DocenteController extends Controller
 {
@@ -28,12 +25,6 @@ class DocenteController extends Controller
 
     }
     public function index(Request $request){
-        $usuario = Utilities::returnDecryptedCookieByName('usuario');
-        try{
-            Mail::to($usuario->email)->send(new ObservacionesMail);
-        }catch(Exception $e){
-            
-        }
         return view($this->ruta.'indexDocente');
     }
     public function getViewListaTemas(){

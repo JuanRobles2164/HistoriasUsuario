@@ -235,15 +235,6 @@ class AlumnoController extends Controller
         foreach(array_combine($request->nombre_evidencia, $request->foto_evidencia) as $nombre => $foto){
             AlumnoDao::crearEvidencia($id_historia, $nombre, $foto);
         }
-
-        /*$objeto_retorno = new stdClass();
-        $objeto_retorno->nombres = array();
-        $objeto_retorno->fotos = array();
-        foreach($arr as $nombre => $foto){
-            array_push($objeto_retorno->nombres,$nombre);
-            array_push($objeto_retorno->fotos,$foto);
-            //$objeto_retorno->fotos = $foto;
-        }*/
         return back();
     }
     public function getListarObservacionesLyS(Request $request){

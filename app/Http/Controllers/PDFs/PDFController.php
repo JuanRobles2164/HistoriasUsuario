@@ -15,7 +15,7 @@ class PDFController extends Controller
         return $pdf->download('pdf_generado.pdf');
     }
     public function getHistoriaPdfById(Request $request){
-        $historia = AlumnoDao::getHistoriaById($request->historia_id);
+        $historia = AlumnoDao::getHistoriaById($request->id_historia);
         $modulo = AlumnoDao::getModuloById($historia->id_modulo);
         //$evaluador = 'Ricardo';
         $evidencias = AlumnoDao::getEvidenciasByHistoriaId($historia->id);

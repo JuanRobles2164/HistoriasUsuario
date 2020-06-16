@@ -66,7 +66,11 @@ class Authenticate extends Middleware
         } else {
             if ($usuario) {
                 $usuario->token = Str::random(80);
-                Cache::put($usuario->nombre, $usuario, $time*60);
+                try{
+                    Cache::put($usuario->id, $usuario, $time*60);
+                }catch(Exception $e2){
+                    
+                }
                 return $next($request)->cookie(cookie('usuario', json_encode($usuario)));
             } else {
                 $response = $next($request);

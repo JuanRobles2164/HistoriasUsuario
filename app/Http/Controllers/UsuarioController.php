@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Funciones;
 use App\Http\Daos\UsuarioDao;
 use App\usuario;
-use Facade\FlareClient\View;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Crypt;
@@ -16,6 +15,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Config;
 use App\Http\Util\Utilities;
+use App\Mail\RegistroExitoso;
+use Exception;
+use Illuminate\Support\Facades\Mail;
 
 class UsuarioController extends Controller
 {
@@ -59,6 +61,11 @@ class UsuarioController extends Controller
         $usuario->estado_eliminado = 0;
         UsuarioDao::registrar($usuario);
         $mensaje = 'Registrado de forma exitosa!';
+        try{
+            Mail::to($usuario->email)->send(new RegistroExitoso($usuario->email));
+        }catch(Exception $e){
+
+        }
         return back()->with(compact('mensaje'));
     }
     /**Recoje todos los datos de un usuario para poder darle

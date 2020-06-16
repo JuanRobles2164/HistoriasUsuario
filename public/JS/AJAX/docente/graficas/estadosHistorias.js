@@ -50,8 +50,7 @@ const updateGraficaEstadoHistorias = () => {
 
 updateGraficaEstadoHistorias();
 
-/*setInterval(() => {
+setInterval(() => {
     updateGraficaEstadoHistorias()
-}, 1000);
+}, 2500);
 
-*/

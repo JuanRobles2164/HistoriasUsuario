@@ -54,7 +54,7 @@
                 <form action="{{route('alumno.postCrearHistoriaUsuario', array('id_modulo' => $id_modulo, 
                     'id_proyecto' => $id_proyecto, 
                     'id_fase' => $id_fase,
-                    'id_actividad' => $id_actividad))}}" method="POST">
+                    'id_actividad' => $id_actividad))}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="id_proyecto" value="{{$id_proyecto}}">
                     <input type="hidden" name="id_modulo" value="{{$id_modulo}}">

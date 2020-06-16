@@ -63,6 +63,7 @@ Route::get('/docente/proyectos/{id_proyecto}/grupos/alternar_estado', 'DocenteCo
 Route::get('/docente/proyectos/{id_proyecto}/grupos/observacion', 'DocenteController@getObservacionAlumnosProyecto')->name('docente.getObservacionAlumnosProyecto');
 Route::post('/docente/proyectos/{id_proyecto}/grupos/observacion', 'DocenteController@postObservacionAlumnosProyecto')->name('docente.postObservacionAlumnosProyecto');
 Route::get('/docente/proyectos/{id_proyecto}/grupos/{id_grupo}/avances', 'DocenteController@getSupervisarGrupo')->name('docente.getSupervisarGrupo');
+Route::get('/docente/proyectos/{id_proyecto}/grupos/{id_grupo}/avances/historias/{id_historia}', 'PDFs\PDFController@getHistoriaPdfById')->name('docente.generarPdf.getHistoriaPdfById');
 Route::get('/docente/proyectos/observacion_grupo','DocenteController@getCrearObservacionGrupo')->name('docente.getCrearObservacionGrupo');
 Route::post('/docente/ObservacionGrupo','DocenteController@postCrearObservacionGrupo')->name('docente.postCrearObservacionGrupo');
 Route::get('/docente/revision/historia_usuario', 'DocenteController@getHistoriaUsuario')->name('docente.getHistoriaUsuario');
@@ -81,7 +82,6 @@ Route::get('', '')->name('');
 Route::get('', '')->name('');*/
 
 Route::get('/alumno', 'AlumnoController@index')->name('alumno.getIndex');
-Route::get('/alumno/generar_pdf/historia_usuario', 'PDFs\PDFController@getHistoriaPdfById')->name('alumno.pdf.getHistoriaPdfById');
 Route::get('/alumno/editar_perfil', 'AlumnoController@getSelfEdit')->name('alumno.getSelfEdit');
 Route::post('/alumno/editar_perfil', 'AlumnoController@postSelfEdit')->name('alumno.postSelfEdit');
 Route::get('/alumno/proyectos', 'AlumnoController@getListaProyectos')->name('alumno.getListaProyectos');
