@@ -124,6 +124,9 @@
                                         <a href="{{route('alumno.getEliminarActividad', 'id='.$actividad->id)}}" class="btn btn-outline-danger">Eliminar</a>
                                     </li>
                                     <li class="list-group-item">
+                                        <a href="{{route('alumno.getListarHistoriasUsuarioByActividad', array('id_modulo' => $id_modulo,'id_proyecto' => $id_proyecto,'id_fase' => $id_fase, 'id_actividad' => $actividad->id))}}" class="btn btn-dark">Historias</a>
+                                    </li>
+                                    <li class="list-group-item">
                                         <a href="{{route('alumno.getEntregarActividad', 'id='.$actividad->id)}}" class="btn btn-outline-primary">Entregar</a>
                                     </li>
                                   </ul>

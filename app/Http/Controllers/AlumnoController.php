@@ -210,6 +210,16 @@ class AlumnoController extends Controller
         AlumnoDao::crearTipoRecurso($tipo_recurso);
         return back();
     }
+    public function getListarHistoriasUsuarioByActividad(Request $request){
+        $historias = AlumnoDao::getHistoriasUsuarioByActividadId($request->id_actividad);
+        foreach($historias as $historia){
+            $historia->id_usuario_entrevistado = AlumnoDao::getUsuarioEntrevistadoById($historia->id_usuario_entrevistado);
+        }
+        return view($this->ruta.'ListarHistoriasUsuario', array('id_modulo' => $request->id_modulo, 
+        'id_proyecto' => $request->id_proyecto, 
+        'id_fase' => $request->id_fase,
+        'id_actividad' => $request->id_actividad))->with(compact('historias'));
+    }
     public function getHistoriasUsuarioByActividadId(Request $request){
         $historias = AlumnoDao::getHistoriasUsuarioByActividadId($request->id_actividad);
         $usuarios_entrevistados = AlumnoDao::getAllUsuariosEntrevistados();

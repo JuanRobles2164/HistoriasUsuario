@@ -35,6 +35,7 @@ Route::get('/administrador/editar', 'AdministradorController@getEditar')->name('
 Route::post('/administrador/editar', 'AdministradorController@postEditar')->name('admin.postEdit');
 Route::get('/administrador/detalles_usuario', 'AdministradorController@detailsUsuario')->name('admin.getUsuarioAJAX');
 Route::get('/administrador/estado_usuario', 'AdministradorController@eliminarUsuario')->name('admin.eliminarUsuario');
+Route::get('/administrador/eliminar_usuario', 'AdministradorController@eliminarUsuarioCascade')->name('admin.eliminarUsuarioCascade');
 
 
 Route::get('/docente', 'DocenteController@index')->name('docente.getIndex');
@@ -112,6 +113,7 @@ Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/
 Route::post('/alumno/recursos/crear_recurso','AlumnoController@postCrearRecurso')->name('alumno.postCrearRecurso');
 Route::post('/alumno/tipo_recurso/crear','AlumnoController@postCrearTipoRecurso')->name('alumno.postCrearTipoRecurso');
 Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades/{id_actividad}/historias','AlumnoController@getHistoriasUsuarioByActividadId')->name('alumno.getHistoriasUsuarioByActividadId');
+Route::get('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades/{id_actividad}/listar_historias','AlumnoController@getListarHistoriasUsuarioByActividad')->name('alumno.getListarHistoriasUsuarioByActividad');
 Route::post('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades/{id_actividad}/historias/crear_usuario_entrevistado','AlumnoController@postCrearUsuarioEntrevistado')->name('alumno.postCrearUsuarioEntrevistado');
 Route::post('/alumno/proyectos/{id_proyecto}/fases/{id_fase}/modulos/{id_modulo}/actividades/{id_actividad}/historias/crear_historia_usuario','AlumnoController@postCrearHistoriaUsuario')->name('alumno.postCrearHistoriaUsuario');
 Route::get('/alumno/notificacion','AlumnoController@getListarObservacionesLyS')->name('alumno.getListarObservacionesLyS');
