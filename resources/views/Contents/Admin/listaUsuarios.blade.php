@@ -61,7 +61,7 @@
             <a onclick="mostrarToast({{$usuario->id}})" class="btn btn-warning btn-sm clase_btn_notificacion" style="color: white;">
                <i class="fas fa-sync-alt"></i>
             </a>
-            <a onclick="mostrarToast()" class="btn btn-warning btn-sm clase_btn_notificacion" style="color: white;">
+            <a href="{{route('admin.eliminarUsuarioCascade', 'id='.$usuario->id)}}" class="btn btn-danger btn-sm" style="color: white;">
                <i class="fas fa-sync-alt"></i>
             </a>
          </td>
