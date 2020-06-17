@@ -17,9 +17,6 @@
         <thead class="bg-dark">
           <tr>
             <th scope="col">
-              <div class="form-check">
-                <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-              </div>
             </th>
             <th scope="col">Nombres</th>
             <th scope="col">Apellidos</th>
