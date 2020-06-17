@@ -2,6 +2,7 @@
 @section('contenido')
 <input type="hidden" name="api_route_get_grupo" id="api_route_get_grupo" value="{{route('docente.getdetallesGrupos')}}">
 <input type="hidden" name="api_route_get_observacion" id="api_route_get_observacion" value="{{route('docente.getCrearObservacionGrupo')}}">
+<input type="hidden" name="api_route_get_notificacion" id="api_route_get_notificacion" value="{{route('docente.getListarObservacionesLyS')}}">
 <br>
 <form>
     <div class="row">
@@ -90,7 +91,7 @@
                         <a href="#" class="btn btn-outline-secondary btn-sm"  data-toggle="modal" data-target="#modalComentario"  onclick="consultaGrupo({{$grupo->id}})">
                             <i class="fas fa-comment-medical"></i>
                         </a>
-                        <a href="#" class="btn btn-danger btn-sm"  data-toggle="modal" data-target=""  onclick="">
+                        <a href="#" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#modalObservacionDocente"  onclick="consultarObs({{$grupo->id}})">
                             <i class="far fa-comments"></i>
                         </a>
                         <a class="btn btn-info btn-sm" style="color: white" onclick="consultandogrupos({{$grupo->id}})">
@@ -162,9 +163,38 @@
         </div>
       </div>
     </div>
+</div>
+
+<div class="modal fade" id="modalObservacionDocente" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Observaciones realizadas al grupo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" onclick="limpiarModal(), window.location.reload()">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <table class="table" id="obser">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col" valign="middle">Observacion</th>
+                <th scope="col" valign="middle">Fecha</th>
+                <th scope="col" valign="middle">Estado</th>
+                <th scope="col" valign="middle">Usuario Visto</th>
+              </tr>
+            </thead>
+            <tbody>
+                                       
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div> 
 </div>    
 @endsection
 
 @section('custom_scripts')
     <script src="{{URL::asset('JS/AJAX/docente/grupos.js')}}"></script>
+    <script src="{{URL::asset('JS/AJAX/docente/observacion.js')}}"></script>
 @endsection

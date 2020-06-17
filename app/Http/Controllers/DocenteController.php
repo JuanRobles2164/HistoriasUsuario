@@ -359,4 +359,17 @@ class DocenteController extends Controller
         $grupo = DocenteDao::getGrupoById($request->id_grupo);
         return response()->json($grupo);  
     }
+    public function getListarObservacionesLyS(Request $request){
+        $obs = new stdClass;
+        $observaciones = DocenteDao::getObservacionesGrupo($request->id_grupo);
+        $obs = $observaciones;
+        foreach($observaciones as $observacion){
+            if($observacion->usuariovisto != null){
+                $usuariov = DocenteDao::getUsuarioVisto($observacion->usuariovisto);
+                $obs = $usuariov;
+            }  
+        }
+        $json_response = array('obs' => $obs);
+        return response()->json($json_response);
+    }
 }

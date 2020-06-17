@@ -255,4 +255,18 @@ class DocenteDao extends Controller
                     ->get();
         return $estados;
     }
+    public static function getObservacionesGrupo($id_grupo){
+        $observaciones = DB::table('comentario')
+        ->select('estado', 'usuariovisto', 'created_at','comentario')
+        ->where('id_grupo',$id_grupo)
+        ->get();
+        return $observaciones;
+    }
+    public static function getUsuarioVisto($usuarioVisto){
+        $usuarioVisto =  DB::table('usuarios')
+        ->select('nombres')
+        ->where('id',$usuarioVisto)
+        ->get();
+        return $usuarioVisto;
+    }
 }
