@@ -117,8 +117,10 @@
                                         @endif
                                     </li>
                                     <li class="list-group-item">
-                                        <a href="{{route('alumno.getRecursosByActividad', array('id_modulo' => $id_modulo,'id_proyecto' => $id_proyecto,'id_fase' => $id_fase, 'id_actividad' => $actividad->id))}}" class="btn btn-outline-info">Recursos</a>
-                                        <a href="{{route('alumno.getHistoriasUsuarioByActividadId', array('id_modulo' => $id_modulo,'id_proyecto' => $id_proyecto,'id_fase' => $id_fase, 'id_actividad' => $actividad->id))}}" class="btn btn-outline-dark">Historias</a>
+                                        @if ($actividad->estado_finalizado == 0)
+                                            <a href="{{route('alumno.getRecursosByActividad', array('id_modulo' => $id_modulo,'id_proyecto' => $id_proyecto,'id_fase' => $id_fase, 'id_actividad' => $actividad->id))}}" class="btn btn-outline-info">Recursos</a>
+                                            <a href="{{route('alumno.getHistoriasUsuarioByActividadId', array('id_modulo' => $id_modulo,'id_proyecto' => $id_proyecto,'id_fase' => $id_fase, 'id_actividad' => $actividad->id))}}" class="btn btn-outline-dark">Historias</a>
+                                        @endif
                                     </li>
                                     <li class="list-group-item">
                                         <a href="{{route('alumno.getEliminarActividad', 'id='.$actividad->id)}}" class="btn btn-outline-danger">Eliminar</a>
@@ -127,7 +129,9 @@
                                         <a href="{{route('alumno.getListarHistoriasUsuarioByActividad', array('id_modulo' => $id_modulo,'id_proyecto' => $id_proyecto,'id_fase' => $id_fase, 'id_actividad' => $actividad->id))}}" class="btn btn-dark">Historias</a>
                                     </li>
                                     <li class="list-group-item">
-                                        <a href="{{route('alumno.getEntregarActividad', 'id='.$actividad->id)}}" class="btn btn-outline-primary">Entregar</a>
+                                        @if ($actividad->estado_finalizado == 0)
+                                            <a href="{{route('alumno.getEntregarActividad', 'id='.$actividad->id)}}" class="btn btn-outline-primary">Entregar</a>
+                                        @endif
                                     </li>
                                   </ul>
                             </div>
