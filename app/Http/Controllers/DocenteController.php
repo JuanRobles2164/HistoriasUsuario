@@ -362,7 +362,7 @@ class DocenteController extends Controller
     public function getListarObservacionesLyS(Request $request){
         $obs = new stdClass;
         $observaciones = DocenteDao::getObservacionesGrupo($request->id_grupo);
-        $obs = $observaciones;
+        $obs = $observaciones;       
         foreach($observaciones as $observacion){
             if($observacion->usuariovisto != null){
                 $usuariov = DocenteDao::getUsuarioVisto($observacion->usuariovisto);

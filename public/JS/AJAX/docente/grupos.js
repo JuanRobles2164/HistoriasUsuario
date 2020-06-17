@@ -39,18 +39,22 @@ consultandogrupos = (Identificador) =>{
       success: function(response){
         //response = $.parseJSON(response);
         console.log(response);
-        Observaciones = response;
+        Observaciones = response.obs;
         var island_serverinfo = '';
         Observaciones.forEach(element => {
             island_serverinfo += '<tr>';
             //island_serverinfo += '<input type="hidden" name="id_observacion" id="id_observacion" value="'+element.id_observacion+'">';
-            island_serverinfo += '<td scope="row">'+element.obs.comentario+'</td>';
-            island_serverinfo += '<td scope="row">'+element.obs.created_at+'</td>';
-            island_serverinfo += '<td scope="row">'+element.obs.estado+'</td>';
-            if(element.usuariovisto == null){
-              island_serverinfo += '<td scope="row">'+element.obs.usuariovisto+'</td>';
+            island_serverinfo += '<td scope="row">'+element.comentario+'</td>';
+            island_serverinfo += '<td scope="row">'+element.created_at+'</td>';
+            if(element.estado == 0){
+              island_serverinfo += '<td scope="row">Sin ver</td>';
             }else{
-              island_serverinfo += '<td scope="row">'+element.obs.usuariov+'</td>';
+              island_serverinfo += '<td scope="row">Vista</td>';
+            }       
+            if(element.usuariovisto == null){
+              island_serverinfo += '<td scope="row"></td>';
+            }else{
+              island_serverinfo += '<td scope="row">'+element.usuariov+'</td>';
             }
             island_serverinfo += '</tr>';
         });

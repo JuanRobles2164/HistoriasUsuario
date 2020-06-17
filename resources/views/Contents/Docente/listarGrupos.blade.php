@@ -171,7 +171,7 @@
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalCenterTitle">Observaciones realizadas al grupo</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true" onclick="limpiarModal(), window.location.reload()">&times;</span>
+            <span aria-hidden="true" onclick="limpiarModal()">&times;</span>
           </button>
         </div>
         <div class="modal-body">
@@ -181,7 +181,7 @@
                 <th scope="col" valign="middle">Observacion</th>
                 <th scope="col" valign="middle">Fecha</th>
                 <th scope="col" valign="middle">Estado</th>
-                <th scope="col" valign="middle">Usuario Visto</th>
+                <th scope="col" valign="middle">Visto por</th>
               </tr>
             </thead>
             <tbody>
