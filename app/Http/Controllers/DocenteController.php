@@ -359,6 +359,19 @@ class DocenteController extends Controller
         $grupo = DocenteDao::getGrupoById($request->id_grupo);
         return response()->json($grupo);  
     }
+    public function geteditarGrupos(Request $request){
+        $grupo = DocenteDao::getGrupoById($request->id_grupo);
+        $integrantes = DocenteDao::getIntegrantesByIdGrupo($request->id_grupo);
+        return response()->json(array('grupo' => $grupo, 'integrantes' => $integrantes));  
+    } 
+    public function posteditarGrupos(Request $request){
+        $grupo = DocenteDao::getGrupoById($request->id_grupo);
+        return response()->json();  
+    }
+    public function geteliminarIntegrante(Request $request){
+        DocenteDao::eliminarIntegrante($request->id_grupo_usuario);
+        return response()->json(true);
+    }
     public function getListarObservacionesLyS(Request $request){
         $obs = new stdClass;
         $observaciones = DocenteDao::getObservacionesGrupo($request->id_grupo);

@@ -179,6 +179,7 @@ class DocenteDao extends Controller
             ->join('grupo_usuario', 'grupo_usuario.id_usuario', '=', 'usuarios.id')
             ->select(DB::raw("CONCAT(usuarios.nombres,' ', usuarios.apellidos) AS nombres"),'grupo_usuario.id_grupo AS grupo')
             ->where('grupo_usuario.id_grupo' ,'=',$id_grupo->id)
+            ->whereNull('grupo_usuario.fecha_fin')
             ->get();
             $integrantes->{$id_grupo->id} = $sub_integrantes;
         }
@@ -281,5 +282,19 @@ class DocenteDao extends Controller
         ->where('id',$usuarioVisto)
         ->get();
         return $usuarioVisto;
+    }
+    public static function getIntegrantesByIdGrupo($idgrupo){
+        $integrantes = DB::table('grupo_usuario')
+        ->join('usuarios','usuarios.id','=','grupo_usuario.id_usuario')
+        ->select('usuarios.nombres AS nombres', 'usuarios.apellidos AS apellidos', 'grupo_usuario.id AS id')
+        ->where('id_grupo', $idgrupo)
+        ->whereNull('grupo_usuario.fecha_fin')
+        ->get();
+        return $integrantes;
+    }
+    public static function eliminarIntegrante($id){
+        DB::table('grupo_usuario')
+        ->where('id', $id)
+        ->update(array('fecha_fin' => Utilities::getCurrentDate()));
     }
 }

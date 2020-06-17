@@ -1,6 +1,8 @@
 @extends('Templates/Docente/_LayoutDocente')
 @section('contenido')
 <input type="hidden" name="api_route_get_grupo" id="api_route_get_grupo" value="{{route('docente.getdetallesGrupos')}}">
+<input type="hidden" name="api_route_get_edit_grupo" id="api_route_get_edit_grupo" value="{{route('docente.geteditarGrupos')}}">
+<input type="hidden" name="api_route_get_delete" id="api_route_get_delete" value="{{route('docente.geteliminarIntegrante')}}">
 <input type="hidden" name="api_route_get_observacion" id="api_route_get_observacion" value="{{route('docente.getCrearObservacionGrupo')}}">
 <input type="hidden" name="api_route_get_notificacion" id="api_route_get_notificacion" value="{{route('docente.getListarObservacionesLyS')}}">
 <br>
@@ -97,7 +99,7 @@
                         <a class="btn btn-info btn-sm" style="color: white" onclick="consultandogrupos({{$grupo->id}})">
                             <i class="fas fa-eye"></i>
                         </a>
-                         <a href="#" class="btn btn-warning  btn-sm">
+                         <a href="#" class="btn btn-warning  btn-sm" data-toggle="modal" data-target="#modaleditargrupos"  onclick="Grupo({{$grupo->id}})">
                             <i class="far fa-edit"></i>
                         </a>
                         <a href="{{route('docente.getAsignarAlumnoGrupo', array('id_proyecto' => $grupo->id_proyecto, 'id_grupo' => $grupo->id) )}}" a class="btn btn-light btn-sm">
@@ -191,6 +193,46 @@
         </div>
       </div>
     </div> 
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="modaleditargrupos">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Grupo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" onclick="limpiarModal()">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" name="id_grupo" id="id_grupo">
+          <form>
+            <div class="form-group">
+              <label for="modal_nombre_grupo" class="col-form-label">Nombre:</label>
+              <input type="text" class="form-control" id="nombre_grupo_editar">
+            </div>
+            <div class="form-group">
+              <label for="descripcion_grupo" class="col-form-label">Descripcion:</label>
+              <textarea class="form-control" id="descripcion_grupo_editar"></textarea>
+            </div>
+            <table class="table" id="integrantes">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col" valign="middle">Integrante</th>
+                <th scope="col" valign="middle"> </th>
+              </tr>
+            </thead>
+            <tbody>
+                                       
+            </tbody>
+          </table>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCierramodal">Cerrar</button>
+          <a type="submit" class="btn btn-primary" onclick="editarGrupo()">Editar</a>
+        </div>
+      </div>
+    </div>
 </div>    
 @endsection
 

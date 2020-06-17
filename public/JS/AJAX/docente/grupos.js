@@ -25,45 +25,62 @@ consultandogrupos = (Identificador) =>{
   
   $('#btnCierramodal').click(function(){
     $('#modalgrupos').toggle();
+    $('#modaleditargrupos').hide();
+    limpiarModal();
+    window.location.reload()
   });
-
-  consultarObs = (Identificador) =>{
-    const ruta = $('#api_route_get_notificacion').val();
-    console.log(ruta);
-    console.log(Identificador);
+  function limpiarModal(){
+    $('#integrantes tbody').empty();
+    $('#nombre_grupo_editar').val('');
+    $('#descripcion_grupo_editar').val('');
+    $('#id_grupo').val('');
+  }
+  Grupo = (Identificador) =>{
+    limpiarModal();
+    const uri = $('#api_route_get_edit_grupo').val();
     $.ajax({
-      url: ruta,
-      type: 'GET',
+      url: uri,
       async: true,
-      data: {'id_grupo':Identificador, 'legal':true},
-      success: function(response){
-        //response = $.parseJSON(response);
+      data: {'id_grupo':Identificador},
+      success:function(response){
         console.log(response);
-        Observaciones = response.obs;
+        $('#id_grupo').val(Identificador);
+        $('#nombre_grupo_editar').val(response.grupo.nombre);
+        $('#descripcion_grupo_editar').val(response.grupo.descripcion);
+        Integrantes = response.integrantes;
         var island_serverinfo = '';
-        Observaciones.forEach(element => {
+        Integrantes.forEach(element => {
             island_serverinfo += '<tr>';
-            //island_serverinfo += '<input type="hidden" name="id_observacion" id="id_observacion" value="'+element.id_observacion+'">';
-            island_serverinfo += '<td scope="row">'+element.comentario+'</td>';
-            island_serverinfo += '<td scope="row">'+element.created_at+'</td>';
-            if(element.estado == 0){
-              island_serverinfo += '<td scope="row">Sin ver</td>';
-            }else{
-              island_serverinfo += '<td scope="row">Vista</td>';
-            }       
-            if(element.usuariovisto == null){
-              island_serverinfo += '<td scope="row"></td>';
-            }else{
-              island_serverinfo += '<td scope="row">'+element.usuariov+'</td>';
-            }
+            island_serverinfo += '<td scope="row">'+element.nombres+' '+ element.apellidos+'</td>';
+            island_serverinfo += '<td scope="row"><a type="submit" class="btn btn-danger" onclick="EliminarIntegrante('+element.id+')"><i class="far fa-trash-alt"></i></a></td>';
             island_serverinfo += '</tr>';
         });
-        $('#obser tbody').append(island_serverinfo);
+        $('#integrantes tbody').append(island_serverinfo);
       },
-      error: function(response){
+      error:function(error){
+        console.log("ERROR:\n");
+        console.log(error);
+        $('#nombre_grupo').val('Error al consultar, intente más tarde');
+      }
+    });
+  }
+  EliminarIntegrante = (Identificador) =>{
+    const uri = $('#api_route_get_delete').val();
+    let id_proyecto = $('#id_grupo').val();
+    $.ajax({
+      url: uri,
+      async: true,
+      data: {'id_grupo_usuario':Identificador},
+      success:function(response){
         console.log(response);
-        alert("Algo salió mal... vuelve a intentarlo");
-        response = null;
+        alert('El integrante se ha eliminado con exito!');
+        limpiarModal();
+        Grupo(id_proyecto);
+      },
+      error:function(error){
+        console.log("ERROR:\n");
+        console.log(error);
+        $('#nombre_grupo').val('Error al consultar, intente más tarde');
       }
     });
   }
