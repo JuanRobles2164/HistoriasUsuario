@@ -69,11 +69,18 @@ class DocenteDao extends Controller
         return $proyectos;
     }
     public static function crearProyecto(proyecto $proyecto){
-        $max_id_proyecto = DB::table('proyecto')->max('id');
-        $max_id_proyecto++;
         DB::table('proyecto')
         ->insert(
-            array('id'=>$max_id_proyecto,'nombre' => $proyecto->nombre,'descripcion' => $proyecto->descripcion,'fecha_limite' => $proyecto->fecha_limite,'fecha_inicial' => $proyecto->fecha_inicial,'id_usuario' => $proyecto->id_usuario,'id_metodologia' => $proyecto->id_metodologia,'id_estado' => $proyecto->id_estado, 'created_at' => Utilities::getCurrentDate())
+            [
+                'nombre' => $proyecto->nombre,
+                'descripcion' => $proyecto->descripcion,
+                'fecha_limite' => $proyecto->fecha_limite,
+                'fecha_inicial' => $proyecto->fecha_inicial,
+                'id_usuario' => $proyecto->id_usuario,
+                'id_metodologia' => $proyecto->id_metodologia,
+                'id_estado' => $proyecto->id_estado,
+                'created_at' => Utilities::getCurrentDate(),
+            ]
         );
     }
     public static function getAllMetodologias(){
@@ -178,8 +185,14 @@ class DocenteDao extends Controller
         return $integrantes;
     }
     public static function crearGrupo(grupo $grupo, $id_proyecto){
-        $id = DB::table('grupo_trabajo')->insertGetId(
-            array('nombre' => $grupo->nombre, 'descripcion' => $grupo->descripcion, 'id_proyecto' => $id_proyecto, 'estado_activo' => 1)
+        return DB::table('grupo_trabajo')->insertGetId(
+            [
+                'nombre' => $grupo->nombre, 
+                'descripcion' => $grupo->descripcion, 
+                'id_proyecto' => $id_proyecto, 
+                'estado_activo' => 1,
+                'created_at' => Utilities::getCurrentDate()
+            ]
         );
     }
     public static function getGrupoById($id_grupo){

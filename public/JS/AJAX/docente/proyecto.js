@@ -17,7 +17,7 @@ agregarMetodologiaRapido = () => {
         },
         success: function(response){
             //response = $.parseJSON(response);
-            $('#validationDefault05').append("<option value='"+response.id+"' selected>"+response.descripcion+"</option>");
+            $('#validationDefault05').append("<option value='"+response.id+"' selected>"+response.nombre+"</option>");
             alert('Creada satisfactoriamente');
             $('#exampleModalCenter').modal('hide');
             $('#nombre_metodologia').val('');

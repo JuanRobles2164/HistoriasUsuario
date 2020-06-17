@@ -224,12 +224,40 @@ class AlumnoController extends Controller
     public function getHistoriasUsuarioByActividadId(Request $request){
         $historias = AlumnoDao::getHistoriasUsuarioByActividadId($request->id_actividad);
         $usuarios_entrevistados = AlumnoDao::getAllUsuariosEntrevistados();
-        return view($this->ruta.'indexHistorias', array('id_modulo' => $request->id_modulo, 
-        'id_proyecto' => $request->id_proyecto, 
-        'id_fase' => $request->id_fase,
-        'id_actividad' => $request->id_actividad))->with(compact('historias', 'usuarios_entrevistados'));
+        $actividad = AlumnoDao::getActividadById($request->id_actividad);
+        return view($this->ruta.'indexHistorias', 
+        array(
+            'id_modulo' => $request->id_modulo, 
+            'id_proyecto' => $request->id_proyecto, 
+            'id_fase' => $request->id_fase,
+            'id_actividad' => $request->id_actividad))
+        ->with(
+            compact(
+                'historias', 
+                'usuarios_entrevistados', 
+                'actividad'
+            )
+        );
+    }
+    public static function actividadValida(Request $request) : bool
+    {
+        $actividad = AlumnoDao::getActividadById($request->id_actividad);
+        if($actividad->estado_finalizado == 0){
+            echo '<script>alert("No puede editar una actividad una vez finalizada")</script>';
+            return false;
+        }
+        return true;
     }
     public function postCrearUsuarioEntrevistado(Request $request){
+        if(!self::actividadValida($request)){
+            return back();
+        }
+        $request->validate([
+            'nombre_usuario_entrevistado' => 'required',
+            'telefono_usuario_entrevistado' => 'required',
+            'email_usuario_entrevistado' => ['required', 'unique:usuario_entrevistado,e_mail'],
+            'cargo_usuario_entrevistado' => 'required'
+        ]);
         AlumnoDao::agregarUsuarioEntrevistado($request);
         return redirect()->route('alumno.getHistoriasUsuarioByActividadId',array('id_modulo' => $request->id_modulo, 
         'id_proyecto' => $request->id_proyecto, 
@@ -237,6 +265,17 @@ class AlumnoController extends Controller
         'id_actividad' => $request->id_actividad));
     }
     public function postCrearHistoriaUsuario(Request $request){
+        if(!self::actividadValida($request)){
+            return back();
+        }
+        $request->validate([
+            'fecha_inicio' => ['required', 'after_or_equal:actividad_fecha_inicio', 'before_or_equal:fecha_fin'],
+            'fecha_fin' => ['required', 'before_or_equal:actividad_fecha_fin', 'after_or_equal:fecha_inicio'],
+            'descripción' => 'required',
+            'secuencia' => 'required',
+            'nombre' => 'required'
+        ]);
+
         $historia_usuario = new stdClass();
         $historia_usuario = $request->except('token');
         $id_historia = AlumnoDao::crearHistoriaUsuarioGetId($historia_usuario);

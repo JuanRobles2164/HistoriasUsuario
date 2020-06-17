@@ -1,6 +1,16 @@
 @extends('/Templates/Alumno/_LayoutAlumno')
 @section('contenido')
 <div class="card text-center shadow-lg p-3 mb-5 bg-white rounded">
+    @if ($errors->any())
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <p>{{$error}}</p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endforeach
+    @endif
     <div class="card-header">
       <ul class="nav nav-pills card-header-pills">
           <li class="nav-item">
@@ -46,11 +56,11 @@
                     <div class="d-flex justify-content-center">
                         <div class="form-group col-md-4">
                             <label for="">Telefono</label>
-                            <input type="text" class="form-control" name="telefono_usuario_entrevistado" id="telefono_usuario_entrevistado">
+                            <input type="text" class="form-control" name="telefono_usuario_entrevistado" id="telefono_usuario_entrevistado" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="">Cargo</label>
-                            <input type="text" class="form-control" name="cargo_usuario_entrevistado" id="cargo_usuario_entrevistado">
+                            <input type="text" class="form-control" name="cargo_usuario_entrevistado" id="cargo_usuario_entrevistado" required>
                         </div>
                     </div>
                     <br>
@@ -69,6 +79,9 @@
                     <input type="hidden" name="id_proyecto" value="{{$id_proyecto}}">
                     <input type="hidden" name="id_fase" value="{{$id_fase}}">
                     <input type="hidden" name="id_actividad" value="{{$id_actividad}}">
+
+                <input type="hidden" name="actividad_fecha_inicio" value="{{$actividad->fecha_inicio}}">
+                <input type="hidden" name="actividad_fecha_limite" value="{{$actividad->fecha_limite}}">
                     <div class="d-flex justify-content-center">
                         <div class="form-group col-md-4">
                             <label for="">Secuencia</label>
@@ -113,10 +126,14 @@
                     <div class="d-flex justify-content-center">
                         <div class="form-group col-md-3">
                             <label for="">Fecha de inicio</label>
+                            <br>
+                            <p>Minima {{date('d-m-Y', strtotime($actividad->fecha_inicio))}}</p>
                             <input type="date" class="form-control" name="fecha_inicio" id="">
                         </div>
                         <div class="from-group col-md-3">
                             <label for="">Fecha de finalización</label>
+                            <br>
+                            <p>Máxima: {{date('d-m-Y', strtotime($actividad->fecha_limite))}}</p>
                             <input type="date" class="form-control" name="fecha_fin" id="">
                         </div>
                     </div>

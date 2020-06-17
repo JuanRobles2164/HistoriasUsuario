@@ -27,7 +27,6 @@ const updateGraficaEstadoHistorias = () => {
         type: 'GET',
         data: null,
         success: function(response){
-            console.log(response);
             const arrayLabels = [];
             const arrayCount = [];
             response.labels.forEach(element => {
@@ -36,7 +35,6 @@ const updateGraficaEstadoHistorias = () => {
             response.contador.forEach(element => {
                 arrayCount.push(element);
             });
-            console.log(arrayCount);
             chart.data.labels = arrayLabels;
             chart.data.datasets[0].data = arrayCount;
             chart.update();

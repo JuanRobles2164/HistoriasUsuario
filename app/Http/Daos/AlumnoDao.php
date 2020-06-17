@@ -15,7 +15,7 @@ class AlumnoDao extends Controller
     private static $LEIDO = true;
     private static $SIN_LEER = false;
     public static function getAllRegisteredProjects($idUsuario){
-        $proyectos = DB::select("SELECT p.*, m.nombre AS metodologia, u.nombres AS docente, gt.id AS id_grupo FROM proyecto p JOIN grupo_trabajo gt ON gt.id_proyecto = p.id JOIN grupo_usuario gu ON gt.id = gu.id_grupo JOIN metodologia m ON p.id_metodologia = m.id JOIN usuarios u ON u.id = p.id_usuario WHERE gu.id_usuario = $idUsuario");
+        $proyectos = DB::select("SELECT p.*, m.nombre AS metodologia, m.id AS id_metodologia, u.nombres AS docente, gt.id AS id_grupo FROM proyecto p JOIN grupo_trabajo gt ON gt.id_proyecto = p.id JOIN grupo_usuario gu ON gt.id = gu.id_grupo JOIN metodologia m ON p.id_metodologia = m.id JOIN usuarios u ON u.id = p.id_usuario WHERE gu.id_usuario = $idUsuario AND p.id_estado = 1");
         return $proyectos;
     }
     public static function getProyectoById($id){
