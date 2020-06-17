@@ -29,9 +29,9 @@
                     <tr>
                         <td>{{$historia->nombre}}</td>
                         <td>{{$historia->prioridad}}</td>
-                        <td>{{$historia->Descripcion}}</td>
+                        <td>{{$historia->descripcion}}</td>
                         <td>{{$historia->fecha_inicio}} - {{$historia->fecha_fin}}</td>
-                        <td>{{$historia->id_usuario_entrevistado}}</td>
+                        <td>{{$usuarios_entrevistados->{$historia->id}->nombre}}</td>
                         <td>
                             <a href="#" class="btn btn-info">
                                 <i class="fas fa-file-signature"></i>

@@ -60,7 +60,11 @@
                     </th>
                     <th style="text-align: center;display: table-cell;vertical-align: middle;"> 
                         <div class="progress">
-                            <div class="progress-bar progress-bar-striped bg-primary" role="progressbar" style="width: 25%;line-height:50px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                        <div class="progress-bar progress-bar-striped bg-primary" role="progressbar" 
+                        style="width: {{ $progreso_grupo->{$grupo->id} }}%; line-height:50px;" aria-valuenow="@php $progreso_grupo->{$grupo->id}@endphp" aria-valuemin="0" aria-valuemax="100">
+                        @php
+                          $progreso_grupo->{$grupo->id}
+                        @endphp %</div>
                         </div>
                     </th>
                     <th style="text-align: center; display: table-cell;vertical-align: middle;">

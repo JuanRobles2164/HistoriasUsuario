@@ -21,6 +21,8 @@ use App\Http\Util\Utilities;
 class DocenteController extends Controller
 {
     private $ruta ='/Contents/Docente/';
+    private static $FINALIZADO = 1;
+    private static $EN_PROCESO = 0;
     public function getEditar(Request $request){
 
     }
@@ -174,6 +176,46 @@ class DocenteController extends Controller
         DocenteDao::editarProyecto($proyecto);
         return redirect()->route('docente.getListaProyectos');
     }
+    protected static function calcularPorcentajeGrupo($id_grupo, $id_proyecto){
+        $acumulado = 0.0;
+        $fases = AlumnoDao::getFasesFromProyectoByGrupoId($id_proyecto, $id_grupo);
+        $peso_fase = (float)(100.0/(float)($fases->count()));
+        $modulos = [];
+        $peso_modulo = new stdClass;
+        $cantidad_modulos_fase = 0;
+        $actividades = [];
+        $peso_actividades_modulo = new stdClass;
+        foreach($fases as $fase){
+            $modulosQuery = AlumnoDao::getModulosByFaseId($fase->id);
+            array_push($modulos, $modulosQuery);
+            $cantidad_modulos = (float)$modulosQuery->count();
+            if($cantidad_modulos == 0){
+                $peso_modulo->{$fase->id} = 0.0;    
+            }else{
+                $peso_modulo->{$fase->id} = (float)($peso_fase / $cantidad_modulos);
+            }
+        }
+        foreach($modulos as $modulos_array){
+            foreach($modulos_array as $modulo){
+                $actividades_modulo = AlumnoDao::getActividadesByModuloId($modulo->id);
+                array_push($actividades, $actividades_modulo);
+                $cantidad_actividades = (float) $actividades_modulo->count();
+                if($cantidad_actividades == 0){
+                    $peso_actividades_modulo->{$modulo->id} = 0.0;
+                }else{
+                    $peso_actividades_modulo->{$modulo->id} = (float) $peso_modulo->{$modulo->id_fase} /(float) $cantidad_actividades;
+                }
+            }
+        }
+        foreach($actividades as $actividades_array){
+            foreach($actividades_array as $actividad){
+                if($actividad->estado_finalizado == self::$FINALIZADO){
+                    $acumulado = $acumulado + $peso_actividades_modulo->{$actividad->id_modulo};
+                }
+            }
+        }
+        return $acumulado;
+    }
     /**
      * Esta función deberá devolverle a la vista:
      * - Los alumnos que no estén ligados a un proyecto
@@ -183,7 +225,7 @@ class DocenteController extends Controller
      * - La última fase trabajada por ese grupo
      * - La última actividad trabajada por el grupo
      * @param Request $request
-     * @return void
+     * @return mixed
      */
 
      //Funciones del controlador para los grupos de los proyectos
@@ -192,8 +234,12 @@ class DocenteController extends Controller
         $grupos = DocenteDao::getAllGrupos($request->id_proyecto);
         $integrantes = DocenteDao::getIntegrantesGrupos($grupos);
         $variables = array('proyecto','grupos', 'integrantes');
+        $progreso_grupo = new stdClass;
+        foreach($grupos as $grupo){
+            $progreso_grupo->{$grupo->id} = self::calcularPorcentajeGrupo($grupo->id, $request->id_proyecto);
+        }
         //return json_encode($integrantes);
-        return view($this->ruta.'listarGrupos')->with(compact(array('proyecto','grupos', 'integrantes')));
+        return view($this->ruta.'listarGrupos')->with(compact(array('proyecto','grupos', 'integrantes', 'progreso_grupo')));
     }
     public function getCrearGrupo(Request $request){
         $proyecto = DocenteDao::getProyectoById($request->id_proyecto);

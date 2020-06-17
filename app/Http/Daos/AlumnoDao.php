@@ -412,11 +412,9 @@ class AlumnoDao extends Controller
         ->where('id_historia_usuario', $id_historia_usuario)
         ->get();
     }
-    public static function getUsuarioEntrevistadoById($id_historia_usuario){
+    public static function getUsuarioEntrevistadoById($id){
         return DB::table('usuario_entrevistado')
-        ->join('historia_usuario','historia_usuario.id_usuario_entrevistado','=','usuario_entrevistado.id')
-        ->select('usuario_entrevistado.nombre')
-        ->where('historia_usuario.id', $id_historia_usuario)
-        ->get();
+        ->where('id', $id)
+        ->first();
     }
 }
