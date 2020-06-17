@@ -179,7 +179,12 @@ class DocenteController extends Controller
     protected static function calcularPorcentajeGrupo($id_grupo, $id_proyecto){
         $acumulado = 0.0;
         $fases = AlumnoDao::getFasesFromProyectoByGrupoId($id_proyecto, $id_grupo);
-        $peso_fase = (float)(100.0/(float)($fases->count()));
+        $cantidad_fases = $fases->count();
+        if($cantidad_fases == 0){
+            $peso_fase = 0;
+        }else{
+            $peso_fase = (float)(100.0/(float)($fases->count()));   
+        }
         $modulos = [];
         $peso_modulo = new stdClass;
         $cantidad_modulos_fase = 0;
