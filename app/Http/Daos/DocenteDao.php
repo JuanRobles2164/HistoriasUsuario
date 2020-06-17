@@ -297,4 +297,9 @@ class DocenteDao extends Controller
         ->where('id', $id)
         ->update(array('fecha_fin' => Utilities::getCurrentDate()));
     }
+    public static function updateGrupo($request){
+        DB::table('grupo_trabajo')
+        ->where('id', $request->id_grupo)
+        ->update(array('nombre' => $request->nombre, 'descripcion' => $request->descripcion));
+    }
 }

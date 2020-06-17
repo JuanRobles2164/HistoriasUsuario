@@ -194,6 +194,7 @@
       </div>
     </div> 
 </div>
+<input type="hidden" name="web_editar_grupos" id="web_editar_grupos" value="{{route('docente.posteditarGrupos')}}">
 <div class="modal fade" tabindex="-1" role="dialog" id="modaleditargrupos">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -229,7 +230,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCierramodal">Cerrar</button>
-          <a type="submit" class="btn btn-primary" onclick="editarGrupo()">Editar</a>
+          <a type="submit" class="btn btn-primary" onclick="EditarGrupo()">Editar</a>
         </div>
       </div>
     </div>

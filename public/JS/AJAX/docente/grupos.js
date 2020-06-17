@@ -27,7 +27,7 @@ consultandogrupos = (Identificador) =>{
     $('#modalgrupos').toggle();
     $('#modaleditargrupos').hide();
     limpiarModal();
-    window.location.reload()
+    window.location.reload();
   });
   function limpiarModal(){
     $('#integrantes tbody').empty();
@@ -81,6 +81,35 @@ consultandogrupos = (Identificador) =>{
         console.log("ERROR:\n");
         console.log(error);
         $('#nombre_grupo').val('Error al consultar, intente más tarde');
+      }
+    });
+  }
+  EditarGrupo = () =>{
+    let nombre = $('#nombre_grupo_editar').val();
+    let descripcion = $('#descripcion_grupo_editar').val();
+    let grupo =  $('#id_grupo').val();
+    $.ajax({
+      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+      type: 'POST',
+      url: ruta,
+      async: true,
+      data:{
+        'id_grupo': grupo,
+        'nombre':nombre,
+        'descripcion':descripcion
+      },
+      success: function(response){
+        console.log(response);
+        alert('Actualización Existosa');
+        limpiarModal();
+        $('#modaleditargrupos').hide();
+        window.location.reload();
+        response = null;
+      },
+      error: function(response){
+        alert('Algo salió mal... comuníquese con soporte');
+        console.log(response);
+        response = null;
       }
     });
   }

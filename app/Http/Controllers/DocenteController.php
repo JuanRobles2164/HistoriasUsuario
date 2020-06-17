@@ -365,8 +365,8 @@ class DocenteController extends Controller
         return response()->json(array('grupo' => $grupo, 'integrantes' => $integrantes));  
     } 
     public function posteditarGrupos(Request $request){
-        $grupo = DocenteDao::getGrupoById($request->id_grupo);
-        return response()->json();  
+        DocenteDao::updateGrupo($request);
+        return response()->json(true);  
     }
     public function geteliminarIntegrante(Request $request){
         DocenteDao::eliminarIntegrante($request->id_grupo_usuario);
