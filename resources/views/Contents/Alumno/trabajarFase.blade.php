@@ -111,13 +111,25 @@
                                     <p class="font-weight-bold text-danger">Fecha límite (AAAA/MM/dd): {{$modulo->fecha_limite}}</p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="#" class="btn btn-primary">Entregar</a>
+
+                                    @if ($modulo->estado == "En desarrollo")
+                                    <a href="{{route('alumno.getEntregarModulo',
+                                    [
+                                        'id_modulo' => $modulo->id
+                                    ]
+                                    )}}" class="btn btn-primary">Entregar</a>
+
                                     <a class="btn btn-warning btn_editar_modal"
                                     data-toggle="modal" 
                                     data-target="#modalmodulo"  
                                     onclick="consultarModulo({{$modulo->id}})"> Editar</a>
                                     <a href="{{route('alumno.getActividadesByModulo', array('id_modulo' => $modulo->id, 'id_proyecto' => $id_proyecto, 'id_fase' => $id_fase) )}}" class="btn btn-info">Trabajar</a>
-                                    <a href="#" class="btn btn-danger">Eliminar</a>
+                                    <a href="{{route('getEliminarModulo', [
+                                        'id_modulo' => $modulo->id
+                                    ])}}" class="btn btn-danger">Eliminar</a>
+                                    @else
+                                        <a href="#" class="btn btn-primary">Modulo concluído</a>
+                                    @endif
                                 </li>
                             </ul>
                             </div>

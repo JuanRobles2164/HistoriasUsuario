@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Daos\UsuarioDao;
 use App\Http\Util\Utilities;
 use App\usuario;
+use Exception;
 use stdClass;
 
 class AlumnoController extends Controller
@@ -118,6 +119,18 @@ class AlumnoController extends Controller
         ]);
         $modulo = $request->except('_token');
         AlumnoDao::agregarModulo($modulo);
+        return back();
+    }
+    public function getEntregarModulo(Request $request){
+        AlumnoDao::concluirModulo($request->id_modulo);
+        return back();
+    }
+    public function getEliminarModulo(Request $request){
+        try{
+            AlumnoDao::EliminarModulo($request->id_modulo);
+        }catch(Exception $e){
+
+        }
         return back();
     }
     public function getEditarModulo(Request $request){

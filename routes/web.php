@@ -93,6 +93,8 @@ Route::post('/alumno/proyectos/{id_proyecto}/forms_agiles/crear_historia', 'Alum
 Route::post('/alumno/forms_agiles/crear_usuario', 'AlumnoController@postCrearUsuarioEntrevistadoAJAX')->name('alumno.formsAgiles.postCrearUsuarioEntrevistadoAJAX');
 
 Route::get('/alumno/get_editar_fase','AlumnoController@getEditarFase')->name('alumno.getEditarFase');
+Route::get('/alumno/entregar_modulo', 'AlumnoController@getEntregarModulo')->name('alumno.getEntregarModulo');
+Route::get('/alumno/eliminar_modulo', 'AlumnoController@getEliminarModulo')->name('alumno.getEliminarModulo');
 Route::post('/alumno/proyectos/{id_proyecto}/post_editar_fase','AlumnoController@postEditarFase')->name('alumno.postEditarFase');
 
 Route::post('/alumno/fases/editar_crear_objetivo','AlumnoController@postEditarCrearObjetivo')->name('alumno.postEditarCrearObjetivo');

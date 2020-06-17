@@ -120,6 +120,18 @@ class AlumnoDao extends Controller
             'created_at' => Utilities::getCurrentDate()
         ]);
     }
+    public static function concluirModulo($id_modulo){
+        DB::table('modulo')
+        ->where('id', $id_modulo)
+        ->update([
+            'estado' => 'Concluido'
+        ]);
+    }
+    public static function eliminarModulo($id_modulo){
+        DB::table('modulo')
+        ->where('id', $id_modulo)
+        ->delete();
+    }
     public static function editarModulo(array $modulo){
         DB::table('modulo')
         ->where('id', $modulo['id'])
