@@ -26,3 +26,40 @@ consultandogrupos = (Identificador) =>{
   $('#btnCierramodal').click(function(){
     $('#modalgrupos').toggle();
   });
+
+  consultarObs = (Identificador) =>{
+    const ruta = $('#api_route_get_notificacion').val();
+    console.log(ruta);
+    console.log(Identificador);
+    $.ajax({
+      url: ruta,
+      type: 'GET',
+      async: true,
+      data: {'id_grupo':Identificador, 'legal':true},
+      success: function(response){
+        //response = $.parseJSON(response);
+        console.log(response);
+        Observaciones = response;
+        var island_serverinfo = '';
+        Observaciones.forEach(element => {
+            island_serverinfo += '<tr>';
+            //island_serverinfo += '<input type="hidden" name="id_observacion" id="id_observacion" value="'+element.id_observacion+'">';
+            island_serverinfo += '<td scope="row">'+element.obs.comentario+'</td>';
+            island_serverinfo += '<td scope="row">'+element.obs.created_at+'</td>';
+            island_serverinfo += '<td scope="row">'+element.obs.estado+'</td>';
+            if(element.usuariovisto == null){
+              island_serverinfo += '<td scope="row">'+element.obs.usuariovisto+'</td>';
+            }else{
+              island_serverinfo += '<td scope="row">'+element.obs.usuariov+'</td>';
+            }
+            island_serverinfo += '</tr>';
+        });
+        $('#obser tbody').append(island_serverinfo);
+      },
+      error: function(response){
+        console.log(response);
+        alert("Algo salió mal... vuelve a intentarlo");
+        response = null;
+      }
+    });
+  }

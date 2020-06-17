@@ -76,6 +76,7 @@ Route::get('/docente/proyectos/{id_proyecto}/grupos/{id_grupo}/avances/cronogram
 Route::get('/docente/proyectos/{id_proyecto}/grupos/{id_grupo}/avances/cronograma/llenar', 'CronogramaController@getDataCronogramaByGrupoId')->name('docente.getDataCronogramaByGrupoId');
 
 Route::post('/docente/forms_agiles/crear_metodologia', 'Docente\MetodologiaController@postCrearMetodologiaAJAX')->name('docente.formsAgiles.postCrearMetodologia');
+Route::get('/docente/notificacion','DocenteController@getListarObservacionesLyS')->name('docente.getListarObservacionesLyS');
 /*
 
 
