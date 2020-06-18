@@ -51,6 +51,10 @@
                </figure>
                <div class="full-box nav-lateral-bar"></div>
                <nav class="full-box nav-lateral-menu">
+                  <script>
+                     const valo = "<?php echo e(json_decode(Crypt::decrypt((Cookie::get('usuario'))))->id); ?>";
+                     console.log(valo);
+                  </script>
                   <ul>
                      <li>
                         <a href="<?php echo e(route('docente.getIndex')); ?>"><i class="fas fa-store-alt"></i> &nbsp; Inicio</a>
