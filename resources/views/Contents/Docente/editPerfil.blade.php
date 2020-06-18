@@ -10,7 +10,7 @@
 </div>
 <!-- Content -->
 <div class="full-box tile-container">
-<form class="form-neon" autocomplete="off" action="{{route('admin.postSelfEdit')}}" method="POST">
+<form class="form-neon" autocomplete="off" action="{{route('docente.postSelfEdit')}}" method="POST">
    @csrf
    <input type="hidden" value="{{$usuario->id}}" name="id">
       <fieldset>
