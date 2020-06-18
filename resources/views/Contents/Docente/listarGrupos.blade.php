@@ -222,7 +222,7 @@
                 <th scope="col" valign="middle"> </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="lista-integrantes">
                                        
             </tbody>
           </table>
@@ -230,7 +230,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCierramodal">Cerrar</button>
-          <a type="submit" class="btn btn-primary" onclick="EditarGrupo()">Editar</a>
+          <button type="submit" class="btn btn-primary" onclick="EditarGrupo()">Editar</button>
         </div>
       </div>
     </div>
