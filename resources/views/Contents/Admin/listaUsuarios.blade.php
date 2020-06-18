@@ -40,6 +40,7 @@
 <table class="table" id="tabla">
    <thead class="thead-dark">
       <tr>
+         <th scope="col" valign="middle" style="text-align: center"></th> 
          <th scope="col" valign="middle" style="text-align: center">Nombre completo</th>
          <th scope="col" valign="middle" style="text-align: center">Identificacion</th>
          <th scope="col" valign="middle" style="text-align: center">Correo</th>
@@ -50,6 +51,11 @@
    </thead>
    @foreach ($usuarios as $usuario)
       <tr style="border-color: black; border-radius: 1px; vertical-align:middle; height:100%">
+         <td style="text-align: center" scope="row" valign="middle">
+            <a href="{{route('admin.eliminarUsuarioCascade', 'id='.$usuario->id)}}" class="btn btn-danger btn-sm" style="color: white;">
+               <i class="far fa-trash-alt"></i>
+            </a>
+         </td>
          <td style="text-align: center" scope="row" valign="middle">{{$usuario->nombres.' '.$usuario->apellidos}}</td>
          <td style="text-align: center" scope="row" valign="middle">{{$usuario->identificacion}}</td>
          <td style="text-align: center" scope="row" valign="middle">{{$usuario->e_mail}}</td>
@@ -75,9 +81,6 @@
                <i class="fas fa-user-edit"></i>
             </a>
             <a onclick="mostrarToast({{$usuario->id}})" class="btn btn-warning btn-sm clase_btn_notificacion" style="color: white;">
-               <i class="fas fa-sync-alt"></i>
-            </a>
-            <a href="{{route('admin.eliminarUsuarioCascade', 'id='.$usuario->id)}}" class="btn btn-danger btn-sm" style="color: white;">
                <i class="fas fa-sync-alt"></i>
             </a>
          </td>
