@@ -42,19 +42,19 @@
                             @endif
                         </td>
                         <td>
-                            <a href="{{route('alumno.getFasesProyecto', $proyecto->id)}}" class="btn btn-info">
+                            <a href="{{route('alumno.getFasesProyecto', $proyecto->id)}}" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Trabajar">
                                 <i class="fas fa-file-signature"></i>
                             </a>
-                            <a href="{{route('alumno.formsAgiles.getCrearHistoriaUsuario', $proyecto->id)}}" class="btn btn-primary">
+                            <a href="{{route('alumno.formsAgiles.getCrearHistoriaUsuario', $proyecto->id)}}" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Historia Agil">
                                 <i class="fas fa-file-signature"></i>
                             </a>
                             @foreach ($notificaciones->{$proyecto->id} as $notificacion)
                                 @if ( $notificacion->estado  == 0)
-                                    <a href="#" class="btn btn-outline-dark" data-toggle="modal" data-target="#modalObservacionDocente"  onclick="consultarObservaciones({{$proyecto->id}}),limpiarModal()">
+                                    <a href="#" class="btn btn-outline-dark" data-toggle="modal" data-target="#modalObservacionDocente"  onclick="consultarObservaciones({{$proyecto->id}}),limpiarModal()" data-toggle="tooltip" data-placement="bottom" title="Comentarios">
                                         <i class="fas fa-box-open"></i>
                                     </a>
                                 @else
-                                    <a href="#" class="btn btn-outline-danger" data-toggle="modal" data-target="#modalObservacionDocente" onclick="consultarObservaciones({{$proyecto->id}}),limpiarModal()">
+                                    <a href="#" class="btn btn-outline-danger" data-toggle="modal" data-target="#modalObservacionDocente" onclick="consultarObservaciones({{$proyecto->id}}),limpiarModal()" data-toggle="tooltip" data-placement="bottom" title="Observaciones">
                                         <i class="fas fa-parachute-box"></i>
                                     </a>
                                 @endif
