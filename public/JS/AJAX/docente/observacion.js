@@ -1,6 +1,10 @@
 limpiarModal = () => {
     $('#observacion_grupo').val('');
     $('#id_grupo_observacion').val('');
+      $('#obser tbody').empty();
+      $('#nombre_grupo_editar').val('');
+      $('#descripcion_grupo_editar').val('');
+      $('#id_grupo').val('');
   }
   
   $('#btnCierraModal').click(function(){

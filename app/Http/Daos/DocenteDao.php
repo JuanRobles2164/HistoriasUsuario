@@ -276,6 +276,13 @@ class DocenteDao extends Controller
         ->get();
         return $observaciones;
     }
+    public static function getObservacionesProyectos($id_proyecto){
+        $observaciones = DB::table('usuario_proyecto_union')
+        ->select('observacion', 'id_usuario','created_at')
+        ->where('id_proyecto',$id_proyecto)
+        ->get();
+        return $observaciones;
+    }
     public static function getUsuarioVisto($usuarioVisto){
         $usuarioVisto =  DB::table('usuarios')
         ->select('nombres')

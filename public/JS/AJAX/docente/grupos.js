@@ -32,6 +32,7 @@ consultandogrupos = (Identificador) =>{
 
   function limpiarModal(){
     $('#integrantes tbody').empty();
+    $('#obser tbody').empty();
     $('#nombre_grupo_editar').val('');
     $('#descripcion_grupo_editar').val('');
     $('#id_grupo').val('');

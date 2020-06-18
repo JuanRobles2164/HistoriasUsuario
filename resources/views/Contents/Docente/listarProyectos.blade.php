@@ -1,5 +1,6 @@
 @extends('Templates/Docente/_LayoutDocente')
 @section('contenido')
+<input type="hidden" name="api_route_get_observacion" id="api_route_get_observacion" value="{{route('docente.getObservacionesProyectos')}}">
 <br>
 <h3>Proyectos</h3>
 <br>
@@ -34,6 +35,9 @@
                         <!-- Propongo que en el botón de "detalles" salgan reportes del proyecto-->
                         <!-- Por ejemplo: Cantidad de grupos en el proyecto... numero de alumnos por grupo-->
                         <!-- Y cosas así XD -->
+                        <a href="#" class="btn btn-secondary"  data-toggle="modal" data-target="#modalObservacionDocente"  onclick="consultarObs({{$proyecto->id}})">
+                          Observaciones
+                        </a>
                         <a class="btn btn-success" onclick="consultandoproyectos({{$proyecto->id}})">
                             Detalles
                         </a>
@@ -88,8 +92,35 @@
       </div>
     </div>
 </div>
+<div class="modal fade" id="modalObservacionDocente" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Observaciones realizadas al grupo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" onclick="limpiarModal()">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table" id="obser">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col" valign="middle">Observacion</th>
+              <th scope="col" valign="middle">Fecha</th>
+              <th scope="col" valign="middle">Usuario observado</th>
+            </tr>
+          </thead>
+          <tbody>
+                                     
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div> 
+</div>
 @endsection
 
 @section('custom_scripts')
    <script src="{{URL::asset('JS/AJAX/docente/historiasListaAJAX.js')}}"></script>
+   <script src="{{URL::asset('JS/AJAX/docente/proyecto.js')}}"></script>
 @endsection

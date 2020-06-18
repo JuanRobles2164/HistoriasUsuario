@@ -385,4 +385,15 @@ class DocenteController extends Controller
         $json_response = array('obs' => $obs);
         return response()->json($json_response);
     }
+    public function getObservacionesProyectos(Request $request){
+        $obs = new stdClass;
+        $observaciones = DocenteDao::getObservacionesProyectos($request->id_proyecto);
+        $obs = $observaciones;       
+        foreach($observaciones as $observacion){
+            $usuariov = DocenteDao::getUsuarioVisto($observacion->id_usuario);
+            $obs->{$usuariov} = $usuariov;
+        }
+        $json_response = array('obs' => $obs);
+        return response()->json($json_response);
+    }
 }
