@@ -29,7 +29,7 @@ class AlumnoController extends Controller
         return view($this->ruta.'editPerfil')->with(compact('usuario'));
     }
     public function postSelfEdit(Request $request){
-        
+
         $usuario = new usuario();
         $usuario->id = $request->id;
         $usuario->nombres = $request->nombres;
@@ -54,7 +54,7 @@ class AlumnoController extends Controller
         $proyecto = AlumnoDao::getProyectoById($request->id_proyecto);
         $usuario = Utilities::returnDecryptedCookieByName('usuario');
         $grupo_trabajo = GrupoTrabajoDao::getGrupoTrabajo($proyecto->id, $usuario->id);
-        $fases = AlumnoDao::getFasesFromProyecto($proyecto->id);  
+        $fases = AlumnoDao::getFasesFromProyecto($proyecto->id);
         $fases = $fases->where('id_grupo_trabajo', $grupo_trabajo->id);
         //return json_encode($fases);
         return view($this->ruta.'fasesProyecto')->with(compact(array('proyecto', 'fases')));
@@ -145,24 +145,24 @@ class AlumnoController extends Controller
         ]);
         $modulo = $request->except('_token', 'id_proyecto', 'id_fase');
         AlumnoDao::editarModulo($modulo);
-        
+
         return response()->json(self::$json_result);
     }
     public function getActividadesByModulo(Request $request){
         $actividades = AlumnoDao::getActividadesByModuloId($request->id_modulo);
         $modulo = AlumnoDao::getModuloById($request->id_modulo);
-        return view($this->ruta.'trabajarModulo',  
-        array('id_modulo' => $request->id_modulo, 
-        'id_proyecto' => $request->id_proyecto, 
+        return view($this->ruta.'trabajarModulo',
+        array('id_modulo' => $request->id_modulo,
+        'id_proyecto' => $request->id_proyecto,
         'id_fase' => $request->id_fase))
         ->with(compact('actividades', 'modulo'));
     }
     public function getRecursosByActividad(Request $request){
         $recursos = AlumnoDao::getAllRecursosFromActividad($request->id_actividad);
         $tipos_recurso = AlumnoDao::getTipoRecursoByRecursoId();
-        return view($this->ruta.'indexRecursos', 
-        array('id_modulo' => $request->id_modulo, 
-        'id_proyecto' => $request->id_proyecto, 
+        return view($this->ruta.'indexRecursos',
+        array('id_modulo' => $request->id_modulo,
+        'id_proyecto' => $request->id_proyecto,
         'id_fase' => $request->id_fase,
         'id_actividad' => $request->id_actividad))
         ->with(compact('recursos', 'tipos_recurso'));
@@ -206,9 +206,9 @@ class AlumnoController extends Controller
     }
     public function getCrearRecurso(Request $request){
         $tipos_recurso = AlumnoDao::getTipoRecursoByRecursoId();
-        return view($this->ruta.'crearRecurso', 
-        array('id_modulo' => $request->id_modulo, 
-        'id_proyecto' => $request->id_proyecto, 
+        return view($this->ruta.'crearRecurso',
+        array('id_modulo' => $request->id_modulo,
+        'id_proyecto' => $request->id_proyecto,
         'id_fase' => $request->id_fase,
         'id_actividad' => $request->id_actividad,
         'id_recurso' => $request->id_recurso))->with(compact('tipos_recurso'));
@@ -229,8 +229,8 @@ class AlumnoController extends Controller
         foreach($historias as $historia){
             $usuarios_entrevistados->{$historia->id} = AlumnoDao::getUsuarioEntrevistadoById($historia->id_usuario_entrevistado);
         }
-        return view($this->ruta.'ListarHistoriasUsuario', array('id_modulo' => $request->id_modulo, 
-        'id_proyecto' => $request->id_proyecto, 
+        return view($this->ruta.'ListarHistoriasUsuario', array('id_modulo' => $request->id_modulo,
+        'id_proyecto' => $request->id_proyecto,
         'id_fase' => $request->id_fase,
         'id_actividad' => $request->id_actividad))->with(compact('historias', 'usuarios_entrevistados'));
     }
@@ -238,16 +238,16 @@ class AlumnoController extends Controller
         $historias = AlumnoDao::getHistoriasUsuarioByActividadId($request->id_actividad);
         $usuarios_entrevistados = AlumnoDao::getAllUsuariosEntrevistados();
         $actividad = AlumnoDao::getActividadById($request->id_actividad);
-        return view($this->ruta.'indexHistorias', 
+        return view($this->ruta.'indexHistorias',
         array(
-            'id_modulo' => $request->id_modulo, 
-            'id_proyecto' => $request->id_proyecto, 
+            'id_modulo' => $request->id_modulo,
+            'id_proyecto' => $request->id_proyecto,
             'id_fase' => $request->id_fase,
             'id_actividad' => $request->id_actividad))
         ->with(
             compact(
-                'historias', 
-                'usuarios_entrevistados', 
+                'historias',
+                'usuarios_entrevistados',
                 'actividad'
             )
         );
@@ -270,15 +270,15 @@ class AlumnoController extends Controller
             'cargo_usuario_entrevistado' => 'required'
         ]);
         AlumnoDao::agregarUsuarioEntrevistado($request);
-        return redirect()->route('alumno.getHistoriasUsuarioByActividadId',array('id_modulo' => $request->id_modulo, 
-        'id_proyecto' => $request->id_proyecto, 
+        return redirect()->route('alumno.getHistoriasUsuarioByActividadId',array('id_modulo' => $request->id_modulo,
+        'id_proyecto' => $request->id_proyecto,
         'id_fase' => $request->id_fase,
         'id_actividad' => $request->id_actividad));
     }
     public function postCrearHistoriaUsuario(Request $request){
         $request->validate([
             'fecha_inicio' => ['required', 'after_or_equal:actividad_fecha_inicio', 'before_or_equal:fecha_fin'],
-            'fecha_fin' => ['required', 'before_or_equal:actividad_fecha_fin', 'after_or_equal:fecha_inicio'],
+            'fecha_fin' => ['required', 'before_or_equal:actividad_fecha_limite', 'after_or_equal:fecha_inicio'],
             'descripcion' => 'required',
             'secuencia' => 'required',
             'nombre' => 'required',
