@@ -17,6 +17,7 @@ use stdClass;
 use App\grupo;
 use App\Http\Daos\AlumnoDao;
 use App\Http\Util\Utilities;
+use Exception;
 
 class DocenteController extends Controller
 {
