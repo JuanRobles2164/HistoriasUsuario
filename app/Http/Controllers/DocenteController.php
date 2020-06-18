@@ -134,7 +134,7 @@ class DocenteController extends Controller
     public function postCrearProyecto(Request $request){
         $request->validate([
             'nombre' => 'required',
-            'fecha_inicial' => ['required', 'before_or_equal:fecha_limite', 'after_or_equal:now'],
+            'fecha_inicial' => ['required', 'before_or_equal:fecha_limite', 'after_or_equal:'.date('d-m-Y')],
             'fecha_limite' => ['required', 'after_or_equal:fecha_inicial']
         ]);
         $cookie_docente = Utilities::returnDecryptedCookieByName('usuario');
