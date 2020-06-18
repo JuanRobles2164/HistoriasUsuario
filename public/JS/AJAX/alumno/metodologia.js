@@ -10,7 +10,7 @@ metodologiaData = (identificador) => {
             'legal': true
         },
         success: function(response){
-            console.log(response);
+            $('#metodologia_fuentes').empty();
             response.forEach(element => {
             let cadena = "<tr>";
                 cadena += "<td>";
