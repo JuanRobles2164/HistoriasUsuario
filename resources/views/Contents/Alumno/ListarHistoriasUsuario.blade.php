@@ -45,4 +45,7 @@
             @endif
         </tbody>
     </table>
+    <div>
+        {{$historias->links()}}
+     </div>
 @endsection

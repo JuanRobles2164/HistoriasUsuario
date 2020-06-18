@@ -274,7 +274,7 @@ class AlumnoDao extends Controller
     public static function getHistoriasUsuarioByActividadId($id_actividad){
         $historias = DB::table('historia_usuario')
         ->where('id_actividad', $id_actividad)
-        ->get();
+        ->paginate(5);
         return $historias;
     }
     public static function agregarUsuarioEntrevistado($usuario_entrevistado){
