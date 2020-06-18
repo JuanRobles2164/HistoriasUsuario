@@ -44,7 +44,7 @@
    @foreach ($usuarios as $usuario)
       <tr style="border-color: black; border-radius: 1px; vertical-align:middle; height:100%">
          <td style="text-align: center" scope="row" valign="middle">
-            <a href="{{route('admin.eliminarUsuarioCascade', 'id='.$usuario->id)}}" class="btn btn-danger btn-sm" style="color: white;">
+            <a href="{{route('admin.eliminarUsuarioCascade', 'id='.$usuario->id)}}" class="btn btn-danger btn-sm" style="color: white;" data-toggle="tooltip" data-placement="bottom" title="Eliminar">
                <i class="far fa-trash-alt"></i>
             </a>
          </td>
@@ -54,25 +54,25 @@
          <td style="text-align: center" scope="row" valign="middle">{{$usuario->abreviatura}}</td>
          @if($usuario->estado_eliminado == 0)
             <td scope="row" style="text-align: center" valign="middle">
-               <a class="btn btn-success" href="{{route('admin.eliminarUsuario', 'id='.$usuario->id.'&eliminado='.$usuario->estado_eliminado)}}">
+               <a class="btn btn-success" href="{{route('admin.eliminarUsuario', 'id='.$usuario->id.'&eliminado='.$usuario->estado_eliminado)}}"data-toggle="tooltip" data-placement="bottom" title="Cambiar estado">
                   Activos 
                </a>                     
             </td>
          @else
             <td scope="row" style="text-align: center" valign="middle">
-               <a class="btn btn-danger" href="{{route('admin.eliminarUsuario', 'id='.$usuario->id.'&eliminado='.$usuario->estado_eliminado)}}">
+               <a class="btn btn-danger" href="{{route('admin.eliminarUsuario', 'id='.$usuario->id.'&eliminado='.$usuario->estado_eliminado)}}" data-toggle="tooltip" data-placement="bottom" title="Cambiar estado">
                   Inactivo
                </a>
             </td>
          @endif
          <td href="#" scope="row" style="text-align: center" valign="middle">      
-            <a class="btn btn-info btn-sm" style="color: white;"  onclick="detallesUsuario({{$usuario->id}})">
+            <a class="btn btn-info btn-sm" style="color: white;"  onclick="detallesUsuario({{$usuario->id}})" data-toggle="tooltip" data-placement="bottom" title="Detalles">
                <i class="fas fa-eye"></i>
             </a>
-            <a href="{{route('admin.getEdit', 'id='.$usuario->id)}}" class="btn btn-success btn-sm">
+            <a href="{{route('admin.getEdit', 'id='.$usuario->id)}}" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Editar">
                <i class="fas fa-user-edit"></i>
             </a>
-            <a onclick="mostrarToast({{$usuario->id}})" class="btn btn-warning btn-sm clase_btn_notificacion" style="color: white;">
+            <a onclick="mostrarToast({{$usuario->id}})" class="btn btn-warning btn-sm clase_btn_notificacion" style="color: white;" data-toggle="tooltip" data-placement="bottom" title="Restaurar">
                <i class="fas fa-sync-alt"></i>
             </a>
          </td>
