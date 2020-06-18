@@ -83,21 +83,19 @@
             <input type="hidden" name="id_usuario" id="id_usuario">
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade" id="nav-gabito" role="tabpanel" aria-labelledby="nav-gabito-tab">
-                    <div class="jumbotron">
-                        <br>
-                            <div id="listado_fuentes">
-                                <table class="table" id="leidas">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th scope="col" valign="middle">Observacion</th>
-                                            <th scope="col" valign="middle">Fecha</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                       
-                                    </tbody>
-                                </table>
-                            </div>
+                    <br>
+                    <div id="listado_fuentes">
+                        <table class="table" id="leidas">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col" valign="middle">Observacion</th>
+                                    <th scope="col" valign="middle">Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="tab-pane fade show active" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">

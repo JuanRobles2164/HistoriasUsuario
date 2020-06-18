@@ -50,6 +50,10 @@
                </figure>
                <div class="full-box nav-lateral-bar"></div>
                <nav class="full-box nav-lateral-menu">
+                  <script>
+                     const valo = "{{json_decode(Crypt::decrypt((Cookie::get('usuario'))))->id}}";
+                     console.log(valo);
+                  </script>
                   <ul>
                      <li>
                         <a href="{{route('docente.getIndex')}}"><i class="fas fa-store-alt"></i> &nbsp; Inicio</a>
