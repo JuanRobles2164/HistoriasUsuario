@@ -1,5 +1,21 @@
 @extends('Templates/Admin/_LayoutAdmin')
 @section('contenido')
+@error('Yes')
+   <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>¡Eliminado!,</strong> el usuario se elimino con exito
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+@enderror
+@error('No')
+   <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>¡No se pudo eliminar!,</strong> el usuario tiene elementos asociados
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+@enderror
 <input type="hidden" name="api_route_get_reinicio" id="api_route_get_reinicio" value="{{route('admin.restaurarUsuario')}}">
 <br>
 <div class="d-flex bd-highlight mb-3">

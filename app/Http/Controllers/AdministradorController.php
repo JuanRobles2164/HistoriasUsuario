@@ -141,4 +141,14 @@ class AdministradorController extends Controller
         AdministradorDao::eliminarUsuario($usuario);
         return redirect()->route('admin.getListUsuarios');
     }
+    public function eliminarUsuarioCascade(Request $request){
+        $Have = AdministradorDao::eliminarUsuarioCascade($request->id);
+        if($Have == true){
+            $Yes = $Have;
+            return back()->with('Yes');
+        }elseif($Have == false){
+            $No = $Have;
+            return back()->with('No');
+        }
+    }
 }
