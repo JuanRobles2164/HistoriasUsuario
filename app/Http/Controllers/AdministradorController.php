@@ -13,7 +13,9 @@ use App\usuario;
 use App\Http\Daos\UsuarioDao;
 use App\Http\Controllers\Funciones;
 use App\Http\Util\Utilities;
+use App\Mail\RegistroExitoso;
 use Exception;
+use Illuminate\Support\Facades\Mail;
 
 class AdministradorController extends Controller
 {
@@ -69,6 +71,11 @@ class AdministradorController extends Controller
         $usuario->usuario_modifica = 0;
         $usuario->estado_eliminado = 0;
         UsuarioDao::registrar($usuario);
+        try{
+            Mail::to($usuario->email)->send(new RegistroExitoso($usuario->email));
+        }catch(Exception $e){
+            
+        }
         return redirect()->route('admin.getListUsuarios');
     }
     /**

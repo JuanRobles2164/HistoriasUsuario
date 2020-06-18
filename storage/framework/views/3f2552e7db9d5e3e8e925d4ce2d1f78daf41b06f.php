@@ -48,6 +48,7 @@ unset($__errorArgs, $__bag); ?>
 <table class="table" id="tabla">
    <thead class="thead-dark">
       <tr>
+         <th scope="col" valign="middle" style="text-align: center"></th> 
          <th scope="col" valign="middle" style="text-align: center">Nombre completo</th>
          <th scope="col" valign="middle" style="text-align: center">Identificacion</th>
          <th scope="col" valign="middle" style="text-align: center">Correo</th>
@@ -58,6 +59,11 @@ unset($__errorArgs, $__bag); ?>
    </thead>
    <?php $__currentLoopData = $usuarios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $usuario): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
       <tr style="border-color: black; border-radius: 1px; vertical-align:middle; height:100%">
+         <td style="text-align: center" scope="row" valign="middle">
+            <a href="<?php echo e(route('admin.eliminarUsuarioCascade', 'id='.$usuario->id)); ?>" class="btn btn-danger btn-sm" style="color: white;">
+               <i class="far fa-trash-alt"></i>
+            </a>
+         </td>
          <td style="text-align: center" scope="row" valign="middle"><?php echo e($usuario->nombres.' '.$usuario->apellidos); ?></td>
          <td style="text-align: center" scope="row" valign="middle"><?php echo e($usuario->identificacion); ?></td>
          <td style="text-align: center" scope="row" valign="middle"><?php echo e($usuario->e_mail); ?></td>
@@ -83,9 +89,6 @@ unset($__errorArgs, $__bag); ?>
                <i class="fas fa-user-edit"></i>
             </a>
             <a onclick="mostrarToast(<?php echo e($usuario->id); ?>)" class="btn btn-warning btn-sm clase_btn_notificacion" style="color: white;">
-               <i class="fas fa-sync-alt"></i>
-            </a>
-            <a href="<?php echo e(route('admin.eliminarUsuarioCascade', 'id='.$usuario->id)); ?>" class="btn btn-danger btn-sm" style="color: white;">
                <i class="fas fa-sync-alt"></i>
             </a>
          </td>
