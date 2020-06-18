@@ -46,9 +46,9 @@
                                     @endforeach
                                 </select>
                                 <div class="col-auto">
-                                    <a class="btn btn-info" data-toggle="modal" data-target="#modalfases">
+                                    <a class="btn btn-info" data-toggle="modal" data-target="#modalfases" data-toggle="tooltip" data-placement="bottom" title="Agregar">
                                         <i class="fas fa-plus"></i>
-                                     </a>
+                                    </a>
                                 </div>
                             </div>                     
                         </div>
@@ -59,7 +59,7 @@
                                     <option value="0" selected> Seleccione</option>
                                 </select>
                                 <div class="col-auto">
-                                     <a class="btn btn-info" data-toggle="modal" data-target="#modalmodulos">
+                                     <a class="btn btn-info" data-toggle="modal" data-target="#modalmodulos" data-toggle="tooltip" data-placement="bottom" title="Agregar">
                                         <i class="fas fa-plus"></i>
                                      </a>
                                 </div>
@@ -72,7 +72,7 @@
                                     <option value="0" selected> Seleccione</option>
                                 </select>
                                 <div class="col-auto">
-                                    <a class="btn btn-info" data-toggle="modal" data-target="#modalactividades">
+                                    <a class="btn btn-info" data-toggle="modal" data-target="#modalactividades" data-toggle="tooltip" data-placement="bottom" title="Agregar">
                                         <i class="fas fa-plus"></i>
                                      </a>
                                 </div>
@@ -140,11 +140,11 @@
                 <div class="d-flex justify-content-around">
                     <div class="form-group">
                         <label for="" class="text-info font-weight-bold">Compromisos </label>
-                        <a class="btn btn-info btn-lg" id="btnAgregarCompromiso"><i class="fas fa-plus"></i></a>
+                        <a class="btn btn-info btn-lg" id="btnAgregarCompromiso" data-toggle="tooltip" data-placement="bottom" title="Agregar"><i class="fas fa-plus"></i></a>
                     </div>
                     <div class="form-group">
                         <label for="" class="text-info font-weight-bold">Evidencias </label>
-                        <a class="btn btn-info btn-lg" id="btn_agregar_evidencia"><i class="fas fa-plus"></i></a>
+                        <a class="btn btn-info btn-lg" id="btn_agregar_evidencia" data-toggle="tooltip" data-placement="bottom" title="Agregar"><i class="fas fa-plus"></i></a>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">
@@ -188,7 +188,7 @@
                 <div class="d-flex justify-content-around">
                     <div class="form-group">
                         <label for="" class="text-info font-weight-bold">Criterios de aceptacion</label>
-                        <a class="btn btn-info btn-lg" id="btnAgregarCriterio"><i class="fas fa-plus"></i></a>
+                        <a class="btn btn-info btn-lg" id="btnAgregarCriterio"><i class="fas fa-plus" data-toggle="tooltip" data-placement="bottom" title="Agregar"></i></a>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">
