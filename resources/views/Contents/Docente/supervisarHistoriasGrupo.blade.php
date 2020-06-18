@@ -124,6 +124,7 @@
                     <td>Inicio</td>
                     <td>Finaliza</td>
                     <td>Días</td>
+                    <td>Costo</td>
                     <td>Estado</td>
                 </tr>
             </thead>
@@ -135,6 +136,9 @@
                         <td>{{ $actividad->created_at}}</td>
                         <td>{{ $actividad->fecha_limite}}</td>
                         <td>{{ gmdate('d',(strtotime($actividad->created_at) - strtotime($actividad->fecha_limite)))}}</td>
+                        <td>
+                            {{ $costo_actividad->{$actividad->id} }}
+                        </td>
                         <td>
                             @if ($actividad->estado_finalizado == 1)
                                 <a href="{{route('docente.getAlternarEstadoActividad',[
@@ -158,6 +162,7 @@
                 @endforeach
             </tbody>
         </table>
+        <label for="">Costo total hasta el momento: {{$costo_total}}</label>
     </div>
     <div class="tab-pane fade show" id="historias" role="tabpanel" aria-labelledby="historias-tab">
         <table class="table">
@@ -182,7 +187,6 @@
                             {{$historia->estado}}
                         </td>
                         <td>
-                            <a href="#" onclick="consultarHistoria({{$historia->id}})" type="button" class="btn btn-primary">Ver</a>
                             <a href="{{route('docente.generarPdf.getHistoriaPdfById',
                             [
                                 'id_proyecto' => $id_proyecto,
