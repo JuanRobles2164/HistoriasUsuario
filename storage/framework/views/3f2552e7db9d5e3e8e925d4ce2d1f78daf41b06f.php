@@ -1,21 +1,5 @@
 
 <?php $__env->startSection('contenido'); ?>
-<?php $__errorArgs = ['Yes'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-   <div class="alert alert-success alert-dismissible fade show" role="alert">
-      <strong>¡Eliminado!,</strong> el usuario se elimino con exito
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-         <span aria-hidden="true">&times;</span>
-      </button>
-   </div>
-<?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-
 <?php if(isset($msj)): ?>
    <div class="alert alert-danger alert-dismissible fade show" role="alert">
    <strong>¡<?php echo e($msj); ?>!</strong>
@@ -60,7 +44,7 @@ unset($__errorArgs, $__bag); ?>
    <?php $__currentLoopData = $usuarios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $usuario): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
       <tr style="border-color: black; border-radius: 1px; vertical-align:middle; height:100%">
          <td style="text-align: center" scope="row" valign="middle">
-            <a href="<?php echo e(route('admin.eliminarUsuarioCascade', 'id='.$usuario->id)); ?>" class="btn btn-danger btn-sm" style="color: white;">
+            <a href="<?php echo e(route('admin.eliminarUsuarioCascade', 'id='.$usuario->id)); ?>" class="btn btn-danger btn-sm" style="color: white;" data-toggle="tooltip" data-placement="bottom" title="Eliminar">
                <i class="far fa-trash-alt"></i>
             </a>
          </td>
@@ -70,25 +54,25 @@ unset($__errorArgs, $__bag); ?>
          <td style="text-align: center" scope="row" valign="middle"><?php echo e($usuario->abreviatura); ?></td>
          <?php if($usuario->estado_eliminado == 0): ?>
             <td scope="row" style="text-align: center" valign="middle">
-               <a class="btn btn-success" href="<?php echo e(route('admin.eliminarUsuario', 'id='.$usuario->id.'&eliminado='.$usuario->estado_eliminado)); ?>">
+               <a class="btn btn-success" href="<?php echo e(route('admin.eliminarUsuario', 'id='.$usuario->id.'&eliminado='.$usuario->estado_eliminado)); ?>"data-toggle="tooltip" data-placement="bottom" title="Cambiar estado">
                   Activos 
                </a>                     
             </td>
          <?php else: ?>
             <td scope="row" style="text-align: center" valign="middle">
-               <a class="btn btn-danger" href="<?php echo e(route('admin.eliminarUsuario', 'id='.$usuario->id.'&eliminado='.$usuario->estado_eliminado)); ?>">
+               <a class="btn btn-danger" href="<?php echo e(route('admin.eliminarUsuario', 'id='.$usuario->id.'&eliminado='.$usuario->estado_eliminado)); ?>" data-toggle="tooltip" data-placement="bottom" title="Cambiar estado">
                   Inactivo
                </a>
             </td>
          <?php endif; ?>
          <td href="#" scope="row" style="text-align: center" valign="middle">      
-            <a class="btn btn-info btn-sm" style="color: white;"  onclick="detallesUsuario(<?php echo e($usuario->id); ?>)">
+            <a class="btn btn-info btn-sm" style="color: white;"  onclick="detallesUsuario(<?php echo e($usuario->id); ?>)" data-toggle="tooltip" data-placement="bottom" title="Detalles">
                <i class="fas fa-eye"></i>
             </a>
-            <a href="<?php echo e(route('admin.getEdit', 'id='.$usuario->id)); ?>" class="btn btn-success btn-sm">
+            <a href="<?php echo e(route('admin.getEdit', 'id='.$usuario->id)); ?>" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Editar">
                <i class="fas fa-user-edit"></i>
             </a>
-            <a onclick="mostrarToast(<?php echo e($usuario->id); ?>)" class="btn btn-warning btn-sm clase_btn_notificacion" style="color: white;">
+            <a onclick="mostrarToast(<?php echo e($usuario->id); ?>)" class="btn btn-warning btn-sm clase_btn_notificacion" style="color: white;" data-toggle="tooltip" data-placement="bottom" title="Restaurar">
                <i class="fas fa-sync-alt"></i>
             </a>
          </td>
