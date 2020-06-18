@@ -1,5 +1,13 @@
 @extends('Templates/Docente/_LayoutDocente')
 @section('contenido')
+@if(isset($msj))
+   <div class="alert alert-danger alert-dismissible fade show" role="alert">
+   <strong>¡{{$msj}}!</strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+@endif
 <br>
 <h3>Lista de metodologías</h3>
 <br>
@@ -30,7 +38,7 @@
                   <a href="{{route('docente.getEditarMetodologia', 'id='.$metodologia->id)}}" a class="btn btn-success btn-sm">
                      <i class="far fa-edit"></i>
                   </a>
-                  <a href="#" class="btn btn-danger btn-sm">
+                  <a href="{{route('docente.getEliminarMetodologia', 'id='.$metodologia->id)}}" class="btn btn-danger btn-sm">
                      <i class="far fa-trash-alt"></i>
                   </a>
                </td>

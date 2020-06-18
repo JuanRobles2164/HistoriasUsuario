@@ -76,8 +76,12 @@ class DocenteController extends Controller
         DocenteDao::crearMetodologia($metodologia);
         return redirect()->route('docente.getListaMetodologias');
     }
-    public function getListaMetodologias(){
+    public function getListaMetodologias(Request $request){
         $metodologias = DocenteDao::getAllMetodologias();
+        if(isset($request->msj)){
+            $msj = $request->msj;
+            return view($this->ruta.'listaMetodologias')->with(compact('metodologias', 'msj'));
+        }
         return view($this->ruta.'listaMetodologias')->with(compact('metodologias'));
     }
     public function getEditarMetodologia(Request $request){
@@ -418,6 +422,16 @@ class DocenteController extends Controller
                 'msj' => 'Este grupo tiene otros valores asociados, no se puede eliminar',
                 'id_grupo' => $request->id_grupo,
                 'id_proyecto' => $request->id_proyecto,
+            ]);
+        }
+    }
+    public function getEliminarMetodologia(Request $request){
+        try{
+            DocenteDao::eliminarMetodologiaV($request->id);
+            return back();
+        }catch(Exception $e){
+            return redirect()->route('docente.getListaMetodologias', [
+                'msj' => 'Esta metodologia tiene otros valores asociados, no se puede eliminar'
             ]);
         }
     }

@@ -312,4 +312,7 @@ class DocenteDao extends Controller
     public static function eliminarGrupo($id_grupo){
         DB::table('grupo_trabajo')->where('id', $id_grupo)->delete();
     }
+    public static function eliminarMetodologiaV($id){
+        DB::table('metodologia')->where('id', $id)->delete();
+    }
 }
