@@ -309,4 +309,7 @@ class DocenteDao extends Controller
         ->where('id', $request->id_grupo)
         ->update(array('nombre' => $request->nombre, 'descripcion' => $request->descripcion));
     }
+    public static function eliminarGrupo($id_grupo){
+        DB::table('grupo_trabajo')->where('id', $id_grupo)->delete();
+    }
 }

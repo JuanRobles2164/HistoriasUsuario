@@ -396,4 +396,14 @@ class DocenteController extends Controller
         $json_response = array('obs' => $obs);
         return response()->json($json_response);
     }
+    public function eliminarGrupoProyecto(Request $request){
+        try{
+            DocenteDao::eliminarGrupo($request->id_grupo);
+        }catch(Exception $e){
+            return redirect()->route('docente.getListaGrupos', [
+                'msj' => 'Este grupo tiene otros valores asociados, no se puede eliminar'
+            ]);
+        }
+        return back();
+    }
 }
