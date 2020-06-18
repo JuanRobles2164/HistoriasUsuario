@@ -141,6 +141,7 @@ Route::post('/alumno/proyectos/{id_proyecto}/forms_agiles/historia_usuario', 'Al
 Route::post('/alumno/proyetos/{id_proyecto}/forms_agiles/crear_fase', 'Alumno\HistoriasController@postCrearFaseAJAX')->name('alumno.formsAgiles.postCrearFase');
 Route::post('/alumno/forms_agiles/crear_modulo', 'Alumno\HistoriasController@postCrearModuloAJAX')->name('alumno.formsAgiles.postCrearModulo');
 Route::post('/alumno/forms_agiles/crear_actividad', 'Alumno\HistoriasController@postCrearActividadAJAX')->name('alumno.formsAgiles.postCrearActividad');
+Route::get('/alumno/historias/{id_historia}', 'PDFs\PDFController@getHistoriaPdfById')->name('alumno.generarPdf.getHistoriaPdfById');
 
 Route::get('/test', function(){
 

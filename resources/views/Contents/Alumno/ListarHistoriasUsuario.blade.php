@@ -33,11 +33,11 @@
                         <td>{{$historia->fecha_inicio}} - {{$historia->fecha_fin}}</td>
                         <td>{{$usuarios_entrevistados->{$historia->id}->nombre}}</td>
                         <td>
-                            <a href="#" class="btn btn-info">
-                                <i class="fas fa-file-signature"></i>
-                            </a>
-                            <a href="#" class="btn btn-primary">
-                                <i class="fas fa-file-signature"></i>
+                            <a href="{{route('alumno.generarPdf.getHistoriaPdfById',
+                            [
+                                'id_historia' => $historia->id
+                            ])}}" class="btn btn-info">
+                                Generar PDF
                             </a>
                         </td>
                     </tr>
