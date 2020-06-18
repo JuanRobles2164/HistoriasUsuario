@@ -17,6 +17,7 @@ use stdClass;
 use App\grupo;
 use App\Http\Daos\AlumnoDao;
 use App\Http\Util\Utilities;
+use Exception;
 
 class DocenteController extends Controller
 {
@@ -244,7 +245,12 @@ class DocenteController extends Controller
             $progreso_grupo->{$grupo->id} = self::calcularPorcentajeGrupo($grupo->id, $request->id_proyecto);
         }
         //return json_encode($integrantes);
+        if(isset($request->msj)){
+            $msj = $request->msj;
+            return view($this->ruta.'listarGrupos')->with(compact(array('proyecto','grupos', 'integrantes', 'progreso_grupo', 'msj')));
+        }
         return view($this->ruta.'listarGrupos')->with(compact(array('proyecto','grupos', 'integrantes', 'progreso_grupo')));
+        
     }
     public function getCrearGrupo(Request $request){
         $proyecto = DocenteDao::getProyectoById($request->id_proyecto);
@@ -401,7 +407,9 @@ class DocenteController extends Controller
             DocenteDao::eliminarGrupo($request->id_grupo);
         }catch(Exception $e){
             return redirect()->route('docente.getListaGrupos', [
-                'msj' => 'Este grupo tiene otros valores asociados, no se puede eliminar'
+                'msj' => 'Este grupo tiene otros valores asociados, no se puede eliminar',
+                'id_grupo' => $request->id_grupo,
+                'id_proyecto' => $request->id_proyecto,
             ]);
         }
         return back();
