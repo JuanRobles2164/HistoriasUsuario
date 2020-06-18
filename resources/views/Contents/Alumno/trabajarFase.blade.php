@@ -29,26 +29,26 @@
             <input type="hidden" name="fase_fecha_limite" value="{{$fase->fecha_limite}}">
             <div class="d-flex justify-content-center">
                 <div class="form-group row">
-                    <label for="nombre" class="col-sm-4 col-form-label">Nombre:</label>
-                    <div class="col-sm-10">
+                    <label for="nombre" class="col-sm-4 col-form-label">Nombre</label>
+                    <div class="col-sm-11">
                         <input type="text" class="form-control" name="nombre" id="nombre" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="descripcion" class="col-sm-5 col-form-label">Descripción</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-12">
                         <textarea type="text" class="form-control" name="descripcion" id="descripcion"></textarea>
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group">
                     <label for="fecha_inicio" class="col-sm-8 col-form-label">Fecha inicio: (Mínima // {{date('d-m-Y', strtotime($fase->fecha_inicio))}})</label>
-                    <div class="col-sm-10">
+                    <div class="col-auto">
                         <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" required>
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group">
                     <label for="fecha_limite" class="col-sm-8 col-form-label">Fecha limite: (Máxima // {{date('d-m-Y', strtotime($fase->fecha_limite))}})</label>
-                    <div class="col-sm-10">
+                    <div class="col-auto">
                         <input type="date" class="form-control" name="fecha_limite" id="fecha_limite" required>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                                     data-target="#modalmodulo"  
                                     onclick="consultarModulo({{$modulo->id}})"> Editar</a>
                                     <a href="{{route('alumno.getActividadesByModulo', array('id_modulo' => $modulo->id, 'id_proyecto' => $id_proyecto, 'id_fase' => $id_fase) )}}" class="btn btn-info">Trabajar</a>
-                                    <a href="{{route('getEliminarModulo', [
+                                    <a href="{{route('alumno.getEliminarModulo', [
                                         'id_modulo' => $modulo->id
                                     ])}}" class="btn btn-danger">Eliminar</a>
                                     @else
