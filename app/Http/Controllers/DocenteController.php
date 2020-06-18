@@ -183,7 +183,7 @@ class DocenteController extends Controller
         if($cantidad_fases == 0){
             $peso_fase = 0;
         }else{
-            $peso_fase = (float)(100.0/(float)($fases->count()));   
+            $peso_fase = (float)(100.0/(float)($fases->count()));
         }
         $modulos = [];
         $peso_modulo = new stdClass;
@@ -195,7 +195,7 @@ class DocenteController extends Controller
             array_push($modulos, $modulosQuery);
             $cantidad_modulos = (float)$modulosQuery->count();
             if($cantidad_modulos == 0){
-                $peso_modulo->{$fase->id} = 0.0;    
+                $peso_modulo->{$fase->id} = 0.0;
             }else{
                 $peso_modulo->{$fase->id} = (float)($peso_fase / $cantidad_modulos);
             }
@@ -357,16 +357,16 @@ class DocenteController extends Controller
     }
     public function detallesGrupos(Request $request){
         $grupo = DocenteDao::getGrupoById($request->id_grupo);
-        return response()->json($grupo);  
+        return response()->json($grupo);
     }
     public function geteditarGrupos(Request $request){
         $grupo = DocenteDao::getGrupoById($request->id_grupo);
         $integrantes = DocenteDao::getIntegrantesByIdGrupo($request->id_grupo);
-        return response()->json(array('grupo' => $grupo, 'integrantes' => $integrantes));  
-    } 
+        return response()->json(array('grupo' => $grupo, 'integrantes' => $integrantes));
+    }
     public function posteditarGrupos(Request $request){
         DocenteDao::updateGrupo($request);
-        return response()->json(true);  
+        return response()->json(true);
     }
     public function geteliminarIntegrante(Request $request){
         DocenteDao::eliminarIntegrante($request->id_grupo_usuario);
@@ -375,15 +375,36 @@ class DocenteController extends Controller
     public function getListarObservacionesLyS(Request $request){
         $obs = new stdClass;
         $observaciones = DocenteDao::getObservacionesGrupo($request->id_grupo);
-        $obs = $observaciones;       
+        $obs = $observaciones;
         foreach($observaciones as $observacion){
             if($observacion->usuariovisto != null){
                 $usuariov = DocenteDao::getUsuarioVisto($observacion->usuariovisto);
                 $obs = $usuariov;
-            }  
+            }
         }
         $json_response = array('obs' => $obs);
         return response()->json($json_response);
+    }
+    public function getObservacionesProyectos(Request $request){
+
+        $obs = new stdClass;
+        $observaciones = DocenteDao::getObservacionesProyectos($request->id_proyecto);
+        $obs = $observaciones;
+        foreach($observaciones as $observacion){
+            $usuariov = DocenteDao::getUsuarioVisto($observacion->id_usuario);
+            $obs->{$usuariov} = $usuariov;
+        }
+        $json_response = array('obs' => $obs);
+        return response()->json($json_response);
+    }
+    public function eliminarGrupoProyecto(Request $request){
+        try{
+            DocenteDao::eliminarGrupo($request->id_grupo);
+        }catch(Exception $e){
+            return redirect()->route('docente.getListaGrupos', [
+                'msj' => 'Este grupo tiene otros valores asociados, no se puede eliminar'
+            ]);
+        }
     }
     public function getAlternarEstadoFase(Request $request){
         $data = new stdClass;

@@ -49,6 +49,7 @@ Route::post('/docente/editar_metodologia', 'DocenteController@postEditarMetodolo
 Route::get('/docente/agregar_fuente_metodologia', 'DocenteController@agregarFuenteMetodologiaAJAX')->name('docente.agregarFuenteMetodologiaAJAX');
 Route::get('/docente/eliminar_fuente', 'DocenteController@eliminarFuenteMetodologia')->name('docente.eliminarFuenteMetodologia');
 Route::get('/docente/proyectos', 'DocenteController@getListaProyectos')->name('docente.getListaProyectos');
+Route::get('/docente/proyectos/observaciones', 'DocenteController@getObservacionesProyectos')->name('docente.getObservacionesProyectos');
 Route::get('/docente/proyectos/crear_proyecto', 'DocenteController@getCrearProyecto')->name('docente.getCrearProyecto');
 Route::post('/docente/proyectos/crear_proyecto', 'DocenteController@postCrearProyecto')->name('docente.postCrearProyecto');
 Route::get('/docente/proyectos/alternar_estado', 'DocenteController@getAlternarEstadoProyecto')->name('docente.getAlternarEstadoProyecto');
@@ -59,6 +60,7 @@ Route::get('/docente/alternar_estado/modulo', 'DocenteController@getAlternarEsta
 Route::get('/docente/alternar_estado/actividad', 'DocenteController@getAlternarEstadoActividad')->name('docente.getAlternarEstadoActividad');
 //Route::get('/docente/proyectos/{id_proyecto}', 'DocenteController@getSupervisarProyecto')->name('docente.getSupervisarProyecto');
 Route::get('/docente/proyectos/{id_proyecto}/grupos', 'DocenteController@getListaGrupos')->name('docente.getListaGrupos');
+Route::get('/docente/proyectos/{id_proyecto}/grupos/eliminar', 'DocenteController@eliminarGrupoProyecto')->name('docente.getEliminarGrupo');
 Route::get('/docente/proyectos/{id_proyecto}/grupos/crear_grupo', 'DocenteController@getCrearGrupo')->name('docente.getCrearGrupo');
 Route::post('/docente/proyectos/{id_proyecto}/grupos/crear_grupo', 'DocenteController@postCrearGrupo')->name('docente.postCrearGrupo');
 Route::get('/docente/proyectos/{id_proyecto}/grupos/{id_grupo}/asignar_alumno', 'DocenteController@getAsignarAlumnoGrupo')->name('docente.getAsignarAlumnoGrupo');

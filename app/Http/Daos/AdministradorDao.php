@@ -81,35 +81,5 @@ class AdministradorDao extends Controller
     }
     public static function eliminarUsuarioCascade($id){
         DB::table('usuarios')->where('id', $id)->delete();
-        /*$users = DB::table('usuarios')
-        ->join('roles', 'usuarios.rol_id', '=','roles.id')
-        ->select('roles.nombre')
-        ->where('usuarios.id',$id)
-        ->first();
-        if($users->nombre == "DOCENTE"){
-            $tiene = DB::table('proyecto')
-            ->where('id_usuario',$id)
-            ->get();
-            if($tiene->count == 0){
-                DB::table('usuarios')->where('id', $id)->delete();
-                return true;
-            } 
-            return false;        
-        }
-        if($users->nombre == "ALUMNO"){
-            $tiene = DB::table('grupo_usuario')
-            ->where('id_usuario',$id)
-            ->get();
-            if($tiene->count == 0){
-                
-                return true;
-            } 
-            return false;
-        }
-        if($users->nombre == "ADMIN"){
-            DB::table('usuarios')->where('id', $id)->delete();
-            return true;
-        }
-        return false;*/
     }
 }

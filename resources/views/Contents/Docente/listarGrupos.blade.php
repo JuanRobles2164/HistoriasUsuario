@@ -1,5 +1,13 @@
 @extends('Templates/Docente/_LayoutDocente')
 @section('contenido')
+@if(isset($msj))
+   <div class="alert alert-danger alert-dismissible fade show" role="alert">
+   <strong>¡{{$msj}}!</strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+@endif
 <input type="hidden" name="api_route_get_grupo" id="api_route_get_grupo" value="{{route('docente.getdetallesGrupos')}}">
 <input type="hidden" name="api_route_get_edit_grupo" id="api_route_get_edit_grupo" value="{{route('docente.geteditarGrupos')}}">
 <input type="hidden" name="api_route_get_delete" id="api_route_get_delete" value="{{route('docente.geteliminarIntegrante')}}">
@@ -54,7 +62,7 @@
             @foreach ($grupos as $grupo)
                 <tr style="line-height:50px;">
                     <th style="text-align: center;">
-                        <a href="#" class="btn btn-danger btn-sm">
+                        <a href="{{route('docente.getEliminarGrupo', array('id_proyecto' => $grupo->id_proyecto, 'id_grupo' => $grupo->id) )}}" class="btn btn-danger btn-sm">
                             <i class="far fa-trash-alt"></i>
                         </a>
                     </th>
