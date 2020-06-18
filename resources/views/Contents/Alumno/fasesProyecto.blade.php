@@ -28,22 +28,19 @@
                 <input type="hidden" name="id_proyecto" value="{{$proyecto->id}}">
                 <div class="row justify-content-center">
                     <div class="form-row">
-                        <div class="col">
+                        <div class="col-auto">
+                            <br>
                             <label for="nombre">Nombre</label>
+                            <br>
                             <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" required>
                         </div>
-    
-                        <div class="col">
-                            <label for="descripcion_fase">Descripcion</label>
-                            <input type="text" class="form-control" name="descripcion" id="descripcion_fase" placeholder="Descripcion" value="{{Request::old('descripcion')}}">
-                        </div>
-                        <div class="col">
+                        <div class="col-auto">
                             <label for="fecha_inicio">Fecha inicio </label>
                             <br>
                             <span>(Mínimo: {{$proyecto->fecha_inicial}})</span>
                             <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" placeholder="Fecha inicio" required>
                         </div>
-                        <div class="col">
+                        <div class="col-auto">
                             <label for="fecha_limite">Fecha limite</label>
                             <br>
                             <span>(Máximo: {{$proyecto->fecha_limite}})</span>
@@ -52,13 +49,13 @@
                     </div>
                 </div>
                 <br>
-                <div class="form-row">
-                    <div class="col">
-                        <label for="miniatura_fase">Imagen...</label>
-                        <input type="file" name="miniatura_fase" id="miniatura_fase">
+                <div class="mx-auto" style="width: 645px;">
+                    <div class="form-group">
+                        <label for="descripcion_fase">Descripcion</label>
+                        <textarea type="text" class="form-control" name="descripcion" id="descripcion_fase" placeholder="Descripcion" value="{{Request::old('descripcion')}}"></textarea>
                     </div>
                 </div>
-              </p>
+                <input type="hidden" name="miniatura_fase" id="miniatura_fase">
               <button type="submit" class="btn btn-success btn-lg"><i class="fas fa-plus"></i></button>
             </div>
             <div class="card-footer text-muted"><br></div>
