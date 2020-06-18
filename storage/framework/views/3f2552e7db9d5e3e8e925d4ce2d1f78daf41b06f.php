@@ -1,5 +1,29 @@
 
 <?php $__env->startSection('contenido'); ?>
+<?php $__errorArgs = ['Yes'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+   <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>¡Eliminado!,</strong> el usuario se elimino con exito
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+<?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+
+<?php if(isset($msj)): ?>
+   <div class="alert alert-danger alert-dismissible fade show" role="alert">
+   <strong>¡<?php echo e($msj); ?>!</strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+<?php endif; ?>
 <input type="hidden" name="api_route_get_reinicio" id="api_route_get_reinicio" value="<?php echo e(route('admin.restaurarUsuario')); ?>">
 <br>
 <div class="d-flex bd-highlight mb-3">
@@ -61,7 +85,7 @@
             <a onclick="mostrarToast(<?php echo e($usuario->id); ?>)" class="btn btn-warning btn-sm clase_btn_notificacion" style="color: white;">
                <i class="fas fa-sync-alt"></i>
             </a>
-            <a onclick="mostrarToast()" class="btn btn-warning btn-sm clase_btn_notificacion" style="color: white;">
+            <a href="<?php echo e(route('admin.eliminarUsuarioCascade', 'id='.$usuario->id)); ?>" class="btn btn-danger btn-sm" style="color: white;">
                <i class="fas fa-sync-alt"></i>
             </a>
          </td>

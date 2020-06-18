@@ -8,14 +8,15 @@
       </button>
    </div>
 @enderror
-@error('No')
+
+@if(isset($msj))
    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      <strong>¡No se pudo eliminar!,</strong> el usuario tiene elementos asociados
+   <strong>¡{{$msj}}!</strong>
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
          <span aria-hidden="true">&times;</span>
       </button>
    </div>
-@enderror
+@endif
 <input type="hidden" name="api_route_get_reinicio" id="api_route_get_reinicio" value="{{route('admin.restaurarUsuario')}}">
 <br>
 <div class="d-flex bd-highlight mb-3">
