@@ -288,12 +288,6 @@ class DocenteController extends Controller
         DocenteDao::asignarObservacionAAlumnos($request);
         return redirect()->route('docente.getListaGrupos', $request->id_proyecto);
     }
-    public function getDetallesHistoria(Request $request){
-        $historia = DocenteDao::getHistoriaById($request->id_historia);
-        $evidencias = DocenteDao::getEvidenciasByHistoriaId($historia->id);
-        $compromisos = DocenteDao::getCompromisosByHistoriaId($historia->id);
-        return view($this->ruta.'supervisarHistoriasGrupo');
-    }
     public function getCrearObservacionGrupo(Request $request){
         $grupo = DocenteDao::getGrupoById($request->id_grupo);
         return response()->json($grupo);
@@ -312,16 +306,28 @@ class DocenteController extends Controller
             array_push($modulos, AlumnoDao::getModulosByFaseId($fase->id));
         }
         $actividades = [];
+        $costo_actividad = new stdClass;
+        $costo_total = 0.0;
         foreach($modulos as $moduloSingleArray){
             foreach($moduloSingleArray as $modulo){
-                array_push($actividades, AlumnoDao::getActividadesByModuloId($modulo->id));
+                $actividadesQuery = AlumnoDao::getActividadesByModuloId($modulo->id);
+                array_push($actividades, $actividadesQuery);
+                foreach($actividadesQuery as $aq){
+                    $res = AlumnoDao::getAllRecursosFromActividad($aq->id);
+                    $valor = 0.0;
+                    foreach($res as $r){
+                        $valor += ($r->valor_unitario) * ($r->cantidad);
+                    }
+                    $costo_actividad->{$aq->id} = $valor;
+                    $costo_total += $valor;
+                }
             }
         }
         $historias = DocenteDao::getAllHistoriasFromGrupoById($request->id_grupo);
         return view($this->ruta.'supervisarHistoriasGrupo',
         array('id_proyecto' => $request->id_proyecto,
         'id_grupo' => $request->id_grupo))
-        ->with(compact('historias', 'fases', 'modulos', 'actividades'));
+        ->with(compact('historias', 'fases', 'modulos', 'actividades', 'costo_actividad', 'costo_total'));
     }
     public function getHistoriaUsuario(Request $request){
         $historia = AlumnoDao::getHistoriaById($request->id_historia);
@@ -401,6 +407,7 @@ class DocenteController extends Controller
     public function eliminarGrupoProyecto(Request $request){
         try{
             DocenteDao::eliminarGrupo($request->id_grupo);
+            return back();
         }catch(Exception $e){
             return redirect()->route('docente.getListaGrupos', [
                 'msj' => 'Este grupo tiene otros valores asociados, no se puede eliminar'
