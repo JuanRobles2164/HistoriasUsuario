@@ -385,4 +385,45 @@ class DocenteController extends Controller
         $json_response = array('obs' => $obs);
         return response()->json($json_response);
     }
+    public function getAlternarEstadoFase(Request $request){
+        $data = new stdClass;
+        $data->id = $request->id_fase;
+        if($request->id_estado == 1){
+            $data->estado = 2;
+            $data->estado_child = "Concluido";
+        }else{
+            $data->estado = 1;
+            $data->estado_child = "En desarrollo";
+        }
+        AlumnoDao::alternarEstadoFase($data);
+        AlumnoDao::alternarEstadoModulos($data);
+        return back();
+    }
+    public function getAlternarEstadoModulo(Request $request){
+        $data = new stdClass;
+        $data->id = $request->id_modulo;
+        $data->estado = "";
+        if($request->estado == "En desarrollo"){
+            $data->estado = "Concluido";
+            $data->estado_child = 1;
+        }else{
+            $data->estado = "En desarrollo";
+            $data->estado_child = 0;
+        }
+        AlumnoDao::alternarEstadoModulo($data);
+        AlumnoDao::alternarEstadoActividades($data);
+        return back();
+    }
+    public function getAlternarEstadoActividad(Request $request){
+        $data = new stdClass;
+        $data->id = $request->id_actividad;
+        $data->estado = 0;
+        if($request->estado_finalizado == 0){
+            $data->estado = 1;
+        }else{
+            $data->estado = 0;
+        }
+        AlumnoDao::alternarEstadoActividad($data);
+        return back();
+    }
 }

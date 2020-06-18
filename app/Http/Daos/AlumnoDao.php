@@ -79,6 +79,41 @@ class AlumnoDao extends Controller
             'updated_at' => Utilities::getCurrentDate()
         ]);
     }
+    public static function alternarEstadoFase($data){
+        DB::table('fase')
+        ->where('id', $data->id)
+        ->update([
+            'id_estado' => $data->estado
+        ]);
+    }
+    public static function alternarEstadoModulos($data){
+        DB::table('modulo')
+        ->where('id_fase', $data->id)
+        ->update([
+            'estado' => $data->estado_child
+        ]);
+    }
+    public static function alternarEstadoModulo($data){
+        DB::table('modulo')
+        ->where('id', $data->id)
+        ->update([
+            'estado' => $data->estado
+        ]);
+    }
+    public static function alternarEstadoActividad($data){
+        DB::table('actividad')
+        ->where('id', $data->id)
+        ->update([
+            'estado_finalizado' => $data->estado
+        ]);
+    }
+    public static function alternarEstadoActividades($data){
+        DB::table('actividad')
+        ->where('id_modulo', $data->id)
+        ->update([
+            'estado_finalizado' => $data->estado_child
+        ]);
+    }
     public static function agregarEditarObjetivo(array $objetivo){
         DB::table('objetivo')
         ->updateOrInsert([

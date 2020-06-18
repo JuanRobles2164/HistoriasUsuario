@@ -54,6 +54,9 @@ Route::post('/docente/proyectos/crear_proyecto', 'DocenteController@postCrearPro
 Route::get('/docente/proyectos/alternar_estado', 'DocenteController@getAlternarEstadoProyecto')->name('docente.getAlternarEstadoProyecto');
 Route::get('/docente/proyectos/editar', 'DocenteController@getEditarProyecto')->name('docente.getEditarProyecto');
 Route::post('/docente/proyectos/editar', 'DocenteController@postEditarProyecto')->name('docente.postEditarProyecto');
+Route::get('/docente/alternar_estado/fase', 'DocenteController@getAlternarEstadoFase')->name('docente.getAlternarEstadoFase');
+Route::get('/docente/alternar_estado/modulo', 'DocenteController@getAlternarEstadoModulo')->name('docente.getAlternarEstadoModulo');
+Route::get('/docente/alternar_estado/actividad', 'DocenteController@getAlternarEstadoActividad')->name('docente.getAlternarEstadoActividad');
 //Route::get('/docente/proyectos/{id_proyecto}', 'DocenteController@getSupervisarProyecto')->name('docente.getSupervisarProyecto');
 Route::get('/docente/proyectos/{id_proyecto}/grupos', 'DocenteController@getListaGrupos')->name('docente.getListaGrupos');
 Route::get('/docente/proyectos/{id_proyecto}/grupos/crear_grupo', 'DocenteController@getCrearGrupo')->name('docente.getCrearGrupo');
