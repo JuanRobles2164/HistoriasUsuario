@@ -62,7 +62,7 @@
             @foreach ($grupos as $grupo)
                 <tr style="line-height:50px;">
                     <th style="text-align: center;">
-                        <a href="{{route('docente.getEliminarGrupo', array('id_proyecto' => $grupo->id_proyecto, 'id_grupo' => $grupo->id) )}}" class="btn btn-danger btn-sm">
+                        <a href="{{route('docente.getEliminarGrupo', array('id_proyecto' => $grupo->id_proyecto, 'id_grupo' => $grupo->id) )}}" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Eliminar">
                             <i class="far fa-trash-alt"></i>
                         </a>
                     </th>
@@ -87,30 +87,30 @@
                     </th>
                     @if ($grupo->estado_activo == 1)
                         <th style="text-align: center;">
-                            <a href="{{route('docente.getAlternarEstadoGrupo',  array('id_proyecto' => $grupo->id_proyecto, 'id' => $grupo->id, 'id_estado' => $grupo->estado_activo))}}" class="btn btn-success">Activo</a>
+                            <a href="{{route('docente.getAlternarEstadoGrupo',  array('id_proyecto' => $grupo->id_proyecto, 'id' => $grupo->id, 'id_estado' => $grupo->estado_activo))}}" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Cambiar estado">Activo</a>
                         </th>
                     @else
                         <th style="text-align: center;">
-                            <a href="{{route('docente.getAlternarEstadoGrupo',  array('id_proyecto' => $grupo->id_proyecto, 'id' => $grupo->id, 'id_estado' => $grupo->estado_activo))}}" class="btn btn-danger">Inactivo</a>
+                            <a href="{{route('docente.getAlternarEstadoGrupo',  array('id_proyecto' => $grupo->id_proyecto, 'id' => $grupo->id, 'id_estado' => $grupo->estado_activo))}}" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Cambiar estado">Inactivo</a>
                         </th>
                     @endif
                     <th style="text-align: center;">
-                        <a href="{{route('docente.getSupervisarGrupo', array('id_proyecto' => $grupo->id_proyecto, 'id_grupo' => $grupo->id))}}" class="btn btn-dark btn-sm">
+                        <a href="{{route('docente.getSupervisarGrupo', array('id_proyecto' => $grupo->id_proyecto, 'id_grupo' => $grupo->id))}}" class="btn btn-dark btn-sm" data-toggle="tooltip" data-placement="bottom" title="Supervisar">
                             <i class="fas fa-clipboard"></i>
                         </a>
-                        <a href="#" class="btn btn-outline-secondary btn-sm"  data-toggle="modal" data-target="#modalComentario"  onclick="consultaGrupo({{$grupo->id}})">
+                        <a href="#" class="btn btn-outline-secondary btn-sm"  data-toggle="modal" data-target="#modalComentario"  onclick="consultaGrupo({{$grupo->id}})" data-toggle="tooltip" data-placement="bottom" title="Agregar comentario">
                             <i class="fas fa-comment-medical"></i>
                         </a>
-                        <a href="#" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#modalObservacionDocente"  onclick="consultarObs({{$grupo->id}})">
+                        <a href="#" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#modalObservacionDocente"  onclick="consultarObs({{$grupo->id}})" data-toggle="tooltip" data-placement="bottom" title="Ver comentarios">
                             <i class="far fa-comments"></i>
                         </a>
-                        <a class="btn btn-info btn-sm" style="color: white" onclick="consultandogrupos({{$grupo->id}})">
+                        <a class="btn btn-info btn-sm" style="color: white" onclick="consultandogrupos({{$grupo->id}})" data-toggle="tooltip" data-placement="bottom" title="Detalles">
                             <i class="fas fa-eye"></i>
                         </a>
-                         <a href="#" class="btn btn-warning  btn-sm" data-toggle="modal" data-target="#modaleditargrupos"  onclick="Grupo({{$grupo->id}})">
+                         <a href="#" class="btn btn-warning  btn-sm" data-toggle="modal" data-target="#modaleditargrupos"  onclick="Grupo({{$grupo->id}})" data-toggle="tooltip" data-placement="bottom" title="Editar">
                             <i class="far fa-edit"></i>
                         </a>
-                        <a href="{{route('docente.getAsignarAlumnoGrupo', array('id_proyecto' => $grupo->id_proyecto, 'id_grupo' => $grupo->id) )}}" a class="btn btn-light btn-sm">
+                        <a href="{{route('docente.getAsignarAlumnoGrupo', array('id_proyecto' => $grupo->id_proyecto, 'id_grupo' => $grupo->id) )}}" a class="btn btn-light btn-sm" data-toggle="tooltip" data-placement="bottom" title="Agregar integrantes">
                             <i class="fas fa-user-plus"></i>
                         </a>
                     </th>
