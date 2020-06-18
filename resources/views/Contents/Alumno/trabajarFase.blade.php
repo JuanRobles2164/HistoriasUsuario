@@ -25,8 +25,8 @@
         <form action="{{route('alumno.postCrearModulo')}}" method="POST">
             @csrf
             <input type="hidden" name="id_fase" value="{{$id_fase}}">
-            <input type="hidden" name="fase_fecha_inicio" value="{{$fase->fecha_inicio}}">
-            <input type="hidden" name="fase_fecha_limite" value="{{$fase->fecha_limite}}">
+            <input type="hidden" name="fase_fecha_inicio" id="fase_fecha_inicio_modal" value="{{$fase->fecha_inicio}}">
+            <input type="hidden" name="fase_fecha_limite" id="fase_fecha_limite_modal" value="{{$fase->fecha_limite}}">
             <div class="d-flex justify-content-center">
                 <div class="form-group row">
                     <label for="nombre" class="col-sm-4 col-form-label">Nombre</label>

@@ -55,17 +55,22 @@ limpiarModal = () => {
     let descripcion_modulo = $('#descripcion_modulo_modal').val();
     let fecha_limite = $('#fecha_limite_modulo_modal').val();
     let fecha_inicio = $('#fecha_inicio_modulo_modal').val();
+    let fase_fecha_limite = $('#fase_fecha_limite_modal').val();
+    let fase_fecha_inicio = $('#fase_fecha_inicio_modal').val();
+    console.log(fase_fecha_inicio, fase_fecha_limite);
     $.ajax({
-      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-      type: 'POST',
       url: ruta,
+      type: 'POST',
+      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
       async: true,
       data:{
         'id':id_modulo,
         'nombre':nombre_modulo,
         'descripcion':descripcion_modulo,
         'fecha_inicio': fecha_inicio,
-        'fecha_limite':fecha_limite
+        'fecha_limite':fecha_limite,
+        'fase_fecha_inicio' : fase_fecha_inicio,
+        'fase_fecha_limite' : fase_fecha_limite
       },
       success: function(response){
         console.log(response);
