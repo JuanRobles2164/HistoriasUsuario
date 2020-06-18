@@ -262,9 +262,6 @@ class AlumnoController extends Controller
         return true;
     }
     public function postCrearUsuarioEntrevistado(Request $request){
-        if(!self::actividadValida($request)){
-            return back();
-        }
         $request->validate([
             'nombre_usuario_entrevistado' => 'required',
             'telefono_usuario_entrevistado' => 'required',
@@ -278,13 +275,10 @@ class AlumnoController extends Controller
         'id_actividad' => $request->id_actividad));
     }
     public function postCrearHistoriaUsuario(Request $request){
-        if(!self::actividadValida($request)){
-            return back();
-        }
         $request->validate([
             'fecha_inicio' => ['required', 'after_or_equal:actividad_fecha_inicio', 'before_or_equal:fecha_fin'],
-            'fecha_fin' => ['required', 'before_or_equal:actividad_fecha_fin', 'after_or_equal:fecha_inicio'],
-            'descripción' => 'required',
+            'fecha_fin' => ['required', 'before_or_equal:actividad_fecha_limite', 'after_or_equal:fecha_inicio'],
+            'descripcion' => 'required',
             'secuencia' => 'required',
             'nombre' => 'required'
         ]);
