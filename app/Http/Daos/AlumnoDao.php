@@ -114,6 +114,11 @@ class AlumnoDao extends Controller
             'estado_finalizado' => $data->estado_child
         ]);
     }
+    public static function getFuenteByMetodologiaId($id_metodologia){
+        return DB::table('fuente')
+        ->where('id_metodologia', $id_metodologia)
+        ->get();
+    }
     public static function agregarEditarObjetivo(array $objetivo){
         DB::table('objetivo')
         ->updateOrInsert([

@@ -335,4 +335,8 @@ class AlumnoController extends Controller
         $data->id = AlumnoDao::agregarUsuarioEntrevistado($data);
         return response()->json($data);
     }
+    public function getFuentes(Request $request){
+        $fuentes = AlumnoDao::getFuenteByMetodologiaId($request->id_metodologia);
+        return response()->json($fuentes);
+    }
 }

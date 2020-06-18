@@ -28,7 +28,12 @@
                     <tr>
                         <td>{{$proyecto->nombre}}</td>
                         <td>{{$proyecto->docente}}</td>
-                        <td>{{$proyecto->metodologia}}</td>
+                        <td>
+                            <a class="btn btn-primary" 
+                            onclick="metodologiaData({{$proyecto->id_metodologia}})">
+                                {{$proyecto->metodologia}}
+                            </a>
+                        </td>
                         <td>
                             @if ($proyecto->id_estado == 1)
                                 <a class="btn btn-success">Activo</a>
@@ -118,8 +123,40 @@
         </div>
     </div>
 </div>
+</div>
+<input type="hidden" name="api_route_get_fuentes" id="api_route_get_fuentes" value="{{route('alumno.getFuentes')}}">
+<div class="modal fade" id="modalMetodologia" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">metodologia</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <label for="">Fuentes</label>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>Url</td>
+                            <td>Nombre</td>
+                        </tr>
+                    </thead>
+                    <tbody id="metodologia_fuentes">
+
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
 @endsection
 
 @section('custom_scripts')
     <script src="{{URL::asset('JS/AJAX/alumno/NotificacionObservacion.js')}}"></script>
+    <script src="{{URL::asset('JS/AJAX/alumno/metodologia.js')}}"></script>
 @endsection

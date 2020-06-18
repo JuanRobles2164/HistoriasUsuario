@@ -50,7 +50,7 @@
                     <textarea class="form-control" aria-label="With textarea" id="descripcion_fuente" required></textarea>
                 </div>
                 <hr class="my-4">
-                <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="agregarFuenteMetodologia()" id="btn_agregar_fuente">
+                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="agregarFuenteMetodologia()" id="btn_agregar_fuente">
                     Agregar
                 </button>
             </form>
