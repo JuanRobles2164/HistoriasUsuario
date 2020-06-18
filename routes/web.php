@@ -94,6 +94,7 @@ Route::get('', '')->name('');
 Route::get('', '')->name('');*/
 
 Route::get('/alumno', 'AlumnoController@index')->name('alumno.getIndex');
+Route::get('/alumno/fuentes', 'AlumnoController@getFuentes')->name('alumno.getFuentes');
 Route::get('/alumno/editar_perfil', 'AlumnoController@getSelfEdit')->name('alumno.getSelfEdit');
 Route::post('/alumno/editar_perfil', 'AlumnoController@postSelfEdit')->name('alumno.postSelfEdit');
 Route::get('/alumno/proyectos', 'AlumnoController@getListaProyectos')->name('alumno.getListaProyectos');
