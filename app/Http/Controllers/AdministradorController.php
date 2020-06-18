@@ -12,6 +12,8 @@ use Illuminate\Contracts\Encryption\Encrypter;
 use App\usuario;
 use App\Http\Daos\UsuarioDao;
 use App\Http\Controllers\Funciones;
+use App\Http\Util\Utilities;
+use Exception;
 
 class AdministradorController extends Controller
 {
@@ -74,8 +76,12 @@ class AdministradorController extends Controller
      *
      * @return view
      */
-    public function getListUsuarios(){
+    public function getListUsuarios(Request $request){
         $usuarios = AdministradorDao::getAllUsers();
+        if(isset($request->msj)){
+            $msj = $request->msj;
+            return view('Contents/Admin/listaUsuarios')->with(compact('usuarios', 'msj'));
+        }
         return view('Contents/Admin/listaUsuarios')->with(compact('usuarios'));
     }
     /**
@@ -142,13 +148,19 @@ class AdministradorController extends Controller
         return redirect()->route('admin.getListUsuarios');
     }
     public function eliminarUsuarioCascade(Request $request){
-        $Have = AdministradorDao::eliminarUsuarioCascade($request->id);
-        if($Have == true){
-            $Yes = $Have;
-            return back()->with('Yes');
-        }elseif($Have == false){
-            $No = $Have;
-            return back()->with('No');
+        $usuario = Utilities::returnDecryptedCookieByName('usuario');
+        if($usuario->id == $request->id){
+            return redirect()->route('admin.getListUsuarios', [
+                'msj' => 'No se puede eliminar a usted mismo'
+            ]);
         }
+        try{
+            AdministradorDao::eliminarUsuarioCascade($request->id);
+        }catch(Exception $e){
+            return redirect()->route('admin.getListUsuarios', [
+                'msj' => 'Este usuario tiene otros valores asociados, no se puede eliminar'
+            ]);
+        }
+        return back();
     }
 }

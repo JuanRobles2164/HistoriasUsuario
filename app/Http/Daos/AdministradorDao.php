@@ -80,12 +80,13 @@ class AdministradorDao extends Controller
         ->update(array('eliminado_en' => Utilities::getCurrentDate(), 'estado_eliminado' => $usuario->estado_eliminado));
     }
     public static function eliminarUsuarioCascade($id){
-        $users = DB::table('usuarios')
+        DB::table('usuarios')->where('id', $id)->delete();
+        /*$users = DB::table('usuarios')
         ->join('roles', 'usuarios.rol_id', '=','roles.id')
         ->select('roles.nombre')
         ->where('usuarios.id',$id)
-        ->get();
-        if($users == "DOCENTE"){
+        ->first();
+        if($users->nombre == "DOCENTE"){
             $tiene = DB::table('proyecto')
             ->where('id_usuario',$id)
             ->get();
@@ -94,18 +95,21 @@ class AdministradorDao extends Controller
                 return true;
             } 
             return false;        
-        }elseif($users == "ALUMNO"){
+        }
+        if($users->nombre == "ALUMNO"){
             $tiene = DB::table('grupo_usuario')
             ->where('id_usuario',$id)
             ->get();
             if($tiene->count == 0){
-                DB::table('usuarios')->where('id', $id)->delete();
+                
                 return true;
             } 
             return false;
-        }elseif($users == "ADMIN"){
-            DB::table('usuarios')->where('id', $id)->delete();
-            return false;
         }
+        if($users->nombre == "ADMIN"){
+            DB::table('usuarios')->where('id', $id)->delete();
+            return true;
+        }
+        return false;*/
     }
 }
