@@ -14,7 +14,7 @@
     <li class="nav-item">
       <a class="nav-link active" id="fases-tab" data-toggle="tab" href="#fases" role="tab" aria-controls="fases" aria-selected="true">Fases</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item"> 
         <a class="nav-link" id="modulos-tab" data-toggle="tab" href="#modulos" role="tab" aria-controls="modulos" aria-selected="true">Módulos</a>
     </li>
     <li class="nav-item">
@@ -44,9 +44,26 @@
                     <td>{{$fase->created_at}}</td>
                     <td>{{$fase->fecha_limite}}</td>
                     <td>
-                        {{ gmdate('d',(strtotime($fase->created_at) - strtotime($fase->fecha_limite))) }}
+                        {{ gmdate('d',(strtotime($fase->fecha_inicio) - strtotime($fase->fecha_limite))) }}
                     </td>
-                    <td>{{ gmdate('d', strtotime('now') - strtotime($fase->created_at)) }}</td>
+                    <td>
+                        @if ($fase->id_estado == 1)
+                        <a href="{{route('docente.getAlternarEstadoFase',[
+                            'id_fase' => $fase->id,
+                            'id_estado' => $fase->id_estado
+                        ])}}" class="btn btn-dark">
+                            Activo
+                        </a>
+                        @else
+                        <a href="{{route('docente.getAlternarEstadoFase',[
+                            'id_fase' => $fase->id,
+                            'id_estado' => $fase->id_estado
+                        ])}}" class="btn btn-light">
+                            Inactivo
+                        </a>
+                        @endif
+                        
+                    </td>
                     <td>
                         <button href="#" onclick="consultarFase({{$fase->id}})" type="button" data-toggle="modal" data-target="#modalFasesDetalles" class="btn btn-primary">
                             Ver
@@ -66,7 +83,6 @@
                     <td>Fin</td>
                     <td>Días</td>
                     <td>Estado</td>
-                    <td>Detalles</td>
                 </tr>
             </thead>
             <tbody>
@@ -76,10 +92,23 @@
                         <td>{{$modulo->nombre}}</td>
                         <td>{{$modulo->created_at}}</td>
                         <td>{{$modulo->fecha_limite}}</td>
-                        <td>{{ gmdate('d',(strtotime($modulo->created_at) - strtotime($modulo->fecha_limite))) }}</td>
-                        <td>{{ gmdate('d', strtotime('now') - strtotime($fase->created_at)) }}</td>
+                        <td>{{ gmdate('d',(strtotime($modulo->fecha_inicio) - strtotime($modulo->fecha_limite))) }}</td>
                         <td>
-                            <button type="button" data-toggle="modal" data-target="#" class="btn btn-primary">Ver</button>
+                            @if ($modulo->estado == "En desarrollo")
+                            <a href="{{route('docente.getAlternarEstadoModulo',[
+                                'id_modulo' => $modulo->id,
+                                'estado' => $modulo->estado
+                            ])}}" class="btn btn-dark">
+                                    En desarrollo
+                                </a>
+                            @else
+                                <a href="{{route('docente.getAlternarEstadoModulo',[
+                                    'id_modulo' => $modulo->id,
+                                    'estado' => $modulo->estado
+                                ])}}" class="btn btn-light">
+                                    Concluido
+                                </a>
+                            @endif
                         </td>
                     </tr>
                     @endforeach
@@ -96,22 +125,34 @@
                     <td>Finaliza</td>
                     <td>Días</td>
                     <td>Estado</td>
-                    <td>Detalles</td>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($actividades as $actividadesStack)
                         @foreach ($actividadesStack as $actividad)
-                        <td>{{ $actividad->nombre}}</td>
+                        <tr>
+                            <td>{{ $actividad->nombre}}</td>
                         <td>{{ $actividad->created_at}}</td>
                         <td>{{ $actividad->fecha_limite}}</td>
                         <td>{{ gmdate('d',(strtotime($actividad->created_at) - strtotime($actividad->fecha_limite)))}}</td>
-                        <td>{{ gmdate('d',(strtotime('now') - strtotime($actividad->fecha_limite)))}}</td>
                         <td>
-                            <a href="#">
-                                Ver
-                            </a>
+                            @if ($actividad->estado_finalizado == 1)
+                                <a href="{{route('docente.getAlternarEstadoActividad',[
+                                    'id_actividad' => $actividad->id,
+                                    'estado_finalizado' => $actividad->estado_finalizado
+                                ])}}" class="btn btn-light">
+                                    Finalizada
+                                </a>
+                            @else
+                                <a href="{{route('docente.getAlternarEstadoActividad',[
+                                    'id_actividad' => $actividad->id,
+                                    'estado_finalizado' => $actividad->estado_finalizado
+                                ])}}" class="btn btn-dark">
+                                    Activa
+                                </a>
+                            @endif    
                         </td>
+                        </tr>
                         
                     @endforeach
                 @endforeach
@@ -137,7 +178,9 @@
                         <td>{{$historia->fecha_inicio}}</td>
                         <td>{{$historia->fecha_fin}}</td>
                         <td>{{gmdate('d',(strtotime($historia->fecha_fin) - strtotime($historia->fecha_inicio)))}}</td>
-                        <td>{{gmdate('d',(strtotime('now') - strtotime($historia->fecha_fin)))}}</td>
+                        <td>
+                            {{$historia->estado}}
+                        </td>
                         <td>
                             <a href="#" onclick="consultarHistoria({{$historia->id}})" type="button" class="btn btn-primary">Ver</a>
                             <a href="{{route('docente.generarPdf.getHistoriaPdfById',

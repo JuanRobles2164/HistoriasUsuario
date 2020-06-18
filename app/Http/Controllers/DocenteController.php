@@ -184,7 +184,7 @@ class DocenteController extends Controller
         if($cantidad_fases == 0){
             $peso_fase = 0;
         }else{
-            $peso_fase = (float)(100.0/(float)($fases->count()));   
+            $peso_fase = (float)(100.0/(float)($fases->count()));
         }
         $modulos = [];
         $peso_modulo = new stdClass;
@@ -196,7 +196,7 @@ class DocenteController extends Controller
             array_push($modulos, $modulosQuery);
             $cantidad_modulos = (float)$modulosQuery->count();
             if($cantidad_modulos == 0){
-                $peso_modulo->{$fase->id} = 0.0;    
+                $peso_modulo->{$fase->id} = 0.0;
             }else{
                 $peso_modulo->{$fase->id} = (float)($peso_fase / $cantidad_modulos);
             }
@@ -363,16 +363,16 @@ class DocenteController extends Controller
     }
     public function detallesGrupos(Request $request){
         $grupo = DocenteDao::getGrupoById($request->id_grupo);
-        return response()->json($grupo);  
+        return response()->json($grupo);
     }
     public function geteditarGrupos(Request $request){
         $grupo = DocenteDao::getGrupoById($request->id_grupo);
         $integrantes = DocenteDao::getIntegrantesByIdGrupo($request->id_grupo);
-        return response()->json(array('grupo' => $grupo, 'integrantes' => $integrantes));  
-    } 
+        return response()->json(array('grupo' => $grupo, 'integrantes' => $integrantes));
+    }
     public function posteditarGrupos(Request $request){
         DocenteDao::updateGrupo($request);
-        return response()->json(true);  
+        return response()->json(true);
     }
     public function geteliminarIntegrante(Request $request){
         DocenteDao::eliminarIntegrante($request->id_grupo_usuario);
@@ -381,20 +381,21 @@ class DocenteController extends Controller
     public function getListarObservacionesLyS(Request $request){
         $obs = new stdClass;
         $observaciones = DocenteDao::getObservacionesGrupo($request->id_grupo);
-        $obs = $observaciones;       
+        $obs = $observaciones;
         foreach($observaciones as $observacion){
             if($observacion->usuariovisto != null){
                 $usuariov = DocenteDao::getUsuarioVisto($observacion->usuariovisto);
                 $obs = $usuariov;
-            }  
+            }
         }
         $json_response = array('obs' => $obs);
         return response()->json($json_response);
     }
     public function getObservacionesProyectos(Request $request){
+
         $obs = new stdClass;
         $observaciones = DocenteDao::getObservacionesProyectos($request->id_proyecto);
-        $obs = $observaciones;       
+        $obs = $observaciones;
         foreach($observaciones as $observacion){
             $usuariov = DocenteDao::getUsuarioVisto($observacion->id_usuario);
             $obs->{$usuariov} = $usuariov;
@@ -412,6 +413,46 @@ class DocenteController extends Controller
                 'id_proyecto' => $request->id_proyecto,
             ]);
         }
+    }
+    public function getAlternarEstadoFase(Request $request){
+        $data = new stdClass;
+        $data->id = $request->id_fase;
+        if($request->id_estado == 1){
+            $data->estado = 2;
+            $data->estado_child = "Concluido";
+        }else{
+            $data->estado = 1;
+            $data->estado_child = "En desarrollo";
+        }
+        AlumnoDao::alternarEstadoFase($data);
+        AlumnoDao::alternarEstadoModulos($data);
+        return back();
+    }
+    public function getAlternarEstadoModulo(Request $request){
+        $data = new stdClass;
+        $data->id = $request->id_modulo;
+        $data->estado = "";
+        if($request->estado == "En desarrollo"){
+            $data->estado = "Concluido";
+            $data->estado_child = 1;
+        }else{
+            $data->estado = "En desarrollo";
+            $data->estado_child = 0;
+        }
+        AlumnoDao::alternarEstadoModulo($data);
+        AlumnoDao::alternarEstadoActividades($data);
+        return back();
+    }
+    public function getAlternarEstadoActividad(Request $request){
+        $data = new stdClass;
+        $data->id = $request->id_actividad;
+        $data->estado = 0;
+        if($request->estado_finalizado == 0){
+            $data->estado = 1;
+        }else{
+            $data->estado = 0;
+        }
+        AlumnoDao::alternarEstadoActividad($data);
         return back();
     }
 }
