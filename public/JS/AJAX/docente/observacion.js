@@ -73,8 +73,8 @@ crearObservacion = () => {
       data: {'id_grupo':Identificador, 'legal':true},
       success: function(response){
         //response = $.parseJSON(response);
-        console.log(response);
         Observaciones = response.obs;
+        //console.log(Observaciones);
         var island_serverinfo = '';
         Observaciones.forEach(element => {
             island_serverinfo += '<tr>';
@@ -86,10 +86,11 @@ crearObservacion = () => {
             }else{
               island_serverinfo += '<td scope="row">Vista</td>';
             }       
-            if(element.usuariovisto == null){
+            if(element == null){
               island_serverinfo += '<td scope="row"></td>';
             }else{
-              island_serverinfo += '<td scope="row">'+element.usuariov+'</td>';
+
+              island_serverinfo += '<td scope="row">'+element.nombres+'</td>';
             }
             island_serverinfo += '</tr>';
         });
